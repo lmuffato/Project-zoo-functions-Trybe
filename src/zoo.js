@@ -76,9 +76,20 @@ function animalCount(species = undefined) {
   return arr.residents.length;
 }
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+function entryCalculator(visitors) {
+  const { prices } = data;
+  if (visitors === undefined) {
+    return 0;
+  }
+  let sum = 0;
+  const arr = Object.keys(visitors);
+  arr.forEach((item) => {
+    let price = (prices[item] * visitors[item]);
+    price = Number(price.toPrecision(4));
+    sum += price;
+  });
+  return sum;
+}
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -101,7 +112,7 @@ function animalCount(species = undefined) {
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
