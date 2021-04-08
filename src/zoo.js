@@ -65,8 +65,43 @@ function entryCalculator(entrants = 0) {
     .reduce((acc, cur) => acc + prices[cur] * entrants[cur], 0);
 }
 
+const getByInfo = (residents, [gend, includ]) => {
+  if (isXYZ('female', gend, 'male')) {
+    return residents.filter(({ sex }) => sex === gend).map(({ name }) => name);
+  }
+  if (includ) return residents.map(({ name }) => name);
+};
+
+const getMap = (acc, animal, infos) => {
+  const { location, name, residents } = animal;
+  const map = acc;
+
+  if (!map[location]) map[location] = [];
+
+  if (infos) {
+    const objAnimal = {};
+    objAnimal[name] = getByInfo(residents, infos);
+    map[location].push(objAnimal);
+  } else map[location].push(name);
+
+  return map;
+};
+
+const getSorted = (locals, zooMap) => {
+  locals.forEach((local) => zooMap[local]
+    .forEach((animal) => animal[Object.keys(animal)[0]].sort()));
+};
+
 function animalMap(options = 0) {
-  // seu código aqui
+  const { includeNames, sex, sorted } = options;
+  if (!includeNames) return animals.reduce((map, anm) => getMap(map, anm), {});
+
+  const infos = [sex, includeNames];
+  const zooMap = animals.reduce((map, animal) => getMap(map, animal, infos), {});
+
+  if (sorted) getSorted(Object.keys(zooMap), zooMap);
+
+  return zooMap;
 }
 
 function schedule(dayName) {
