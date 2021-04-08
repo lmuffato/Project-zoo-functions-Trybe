@@ -12,15 +12,15 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 const { employees } = data;
+const { animals } = data;
 
 function animalsByIds(...ids) {
-  return data.animals.filter((animal, index) => animal.id === ids[index]);
+  return animals.filter((animal, index) => animal.id === ids[index]);
 }
 
 const filterAnimals = (animal) => {
-  const animalsContent = data.animals;
   return [
-    animalsContent.find((eachAnimal) => eachAnimal.name === animal),
+    animals.find((eachAnimal) => eachAnimal.name === animal),
   ];
 };
 
@@ -48,8 +48,7 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const newObjectEmployees = data.employees;
-  return newObjectEmployees.push({
+  return employees.push({
     id,
     firstName,
     lastName,
@@ -59,7 +58,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 // function animalCount(species) {
-//   // seu código aqui
+//   if (!species) {
+//     return {[animals].name}
+//   }
 // }
 
 // function entryCalculator(entrants) {
