@@ -29,11 +29,16 @@ function employeeByName(employeeName = false) {
     : {};
 }
 
-/*
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+function createEmployee({ id, firstName, lastName } = {}, { managers, responsibleFor } = {}) {
+  employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
+  return employeeByName(firstName);
 }
-*/
 
 function isManager(id) {
   return employees.some((employee) => employee.managers.some((emp) => emp === id));
@@ -92,5 +97,5 @@ module.exports = {
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
