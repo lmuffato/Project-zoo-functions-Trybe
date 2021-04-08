@@ -66,7 +66,7 @@ function entryCalculator({ Adult = 0, Child = 0, Senior = 0 } = 0) {
 
 // }
 
-const hour = (value) => (value <= 12 ? `${value}am` : `${24 - value}pm`);
+const hour = (value) => (value <= 12 ? `${value}am` : `${value - 12}pm`);
 
 function schedule(dayName) {
   const obj = {};
@@ -85,9 +85,14 @@ function schedule(dayName) {
 // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-// seu código aqui
-// }
+function increasePrices(percentage) {
+  const { Adult, Senior, Child } = data.prices;
+  return { 
+    Adult: (Adult * (percentage / 100)).toFixed(2),
+    Senior: (Senior * (percentage / 100)).toFixed(2),
+    Child: (Child * (percentage / 100)).toFixed(2),
+  };
+}
 
 // function employeeCoverage(idOrName) {
 // seu código aqui
@@ -105,6 +110,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
