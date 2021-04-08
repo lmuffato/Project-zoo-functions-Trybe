@@ -75,17 +75,17 @@ console.log(animalsOlderThan('lions', 7));
 // }
 
 module.exports = {
-  entryCalculator,
-  schedule,
-  animalCount,
-  animalMap,
+  // entryCalculator,
+  // schedule,
+  // animalCount,
+  // animalMap,
   animalsByIds,
-  employeeByName,
-  employeeCoverage,
-  addEmployee,
-  isManager,
+  // employeeByName,
+  // employeeCoverage,
+  // addEmployee,
+  // isManager,
   animalsOlderThan,
-  oldestFromFirstSpecies,
-  increasePrices,
-  createEmployee,
+  // oldestFromFirstSpecies,
+  // increasePrices,
+  // createEmployee,
 };
