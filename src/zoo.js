@@ -9,23 +9,23 @@ eslint no-unused-vars: [
 ]
 */
 
-const functionsAnimalsByIds = require('./helper/animalsByIds');
+const functionsAnimals = require('./functions/animals');
 
 function animalsByIds(...ids) {
   const emptyParams = ids.length === 0;
   const justOneId = ids.length === 1;
 
-  const { findByOne, findByMultiple } = functionsAnimalsByIds;
+  const { find } = functionsAnimals;
 
   if (emptyParams) return [];
 
   if (justOneId) {
     const id = ids[0];
-    const foundAnimal = findByOne(id);
+    const foundAnimal = find.byOneId(id);
     return [foundAnimal];
   }
 
-  const foundAnimals = findByMultiple(ids);
+  const foundAnimals = find.byMultipleIds(ids);
   return foundAnimals;
 }
 
