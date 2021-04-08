@@ -27,12 +27,13 @@ function employeeByName(employeeName = '') {
   if (employeeName === '') {
     return {};
   }
-  return data.employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
+  return data.employees.find((employee) => employee.firstName === employeeName
+  || employee.lastName === employeeName);
 }
 
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
+function createEmployee(personalInfo, associatedWith) {
+  return Object.assign(personalInfo, associatedWith);
+}
 
 // function isManager(id) {
 //   // seu código aqui
@@ -81,7 +82,7 @@ module.exports = {
   //   addEmployee,
   //   isManager,
   animalsOlderThan,
-//   oldestFromFirstSpecies,
-//   increasePrices,
-//   createEmployee,
+  //   oldestFromFirstSpecies,
+  //   increasePrices,
+  createEmployee,
 };
