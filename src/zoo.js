@@ -29,8 +29,9 @@ function employeeByName(employeeName) {
     firstName === employeeName || lastName === employeeName);
 }
 
-// function createEmployee(personalInfo, associatedWith) {
-// }
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
+}
 
 function isManager(id) {
   return employees.some((employee) => employee.managers.includes(id) === true);
@@ -47,7 +48,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 // function animalCount(species) {
-//   // seu código aqui
 // }
 
 // function entryCalculator(entrants) {
@@ -87,5 +87,5 @@ module.exports = {
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
