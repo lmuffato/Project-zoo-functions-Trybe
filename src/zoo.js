@@ -10,17 +10,25 @@ eslint no-unused-vars: [
 */
 
 const { animals } = require('./data');
-// const data = require('./data');
+const data = require('./data');
 
+// Feito colaborativamente com as colegas: Nathi Zebral, Thalita Cecilier, Debora PAssos, Djaniza Vasques Ferreira e Bia Zidioti. <3
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.includes(animal.id));
 }
 
-/* function animalsOlderThan(animal, age) {
-  // seu código aqui
+// Inspirado na resolução do NilsonRCS > https://github.com/tryber/sd-010-a-project-zoo-functions/pull/80/files
+/* Entende-se que o primeiro passo é criar uma constante que busque
+qual dos animais dentro de .data, que tenham seu name igual ao parametro passado.
+A segunda etapa, retorna true (every), quando a idade de todos os animais, dos passados como parametro
+sejam maior ou igual do que a idade passada como parametro. */
+
+function animalsOlderThan(animal, age) {
+  const animalName = data.animals.find((bixo) => bixo.name === animal);
+  return animalName.residents.every((idadeAnimal) => idadeAnimal.age >= age);
 }
 
-function employeeByName(employeeName) {
+/* function employeeByName(employeeName) {
   // seu código aqui
 }
 
@@ -74,7 +82,7 @@ module.exports = {
   // employeeCoverage,
   // addEmployee,
   // isManager,
-  // animalsOlderThan,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
