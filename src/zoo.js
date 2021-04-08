@@ -22,10 +22,13 @@ function animalsOlderThan(animal, age) {
   // seu código aqui
 }
 */
-/*
+
 function employeeByName(employeeName) {
-  // seu código aqui
-} */
+  if (employeeName === undefined) return {};
+  const searchEmployee = employees
+    .find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
+  return searchEmployee;
+}
 
 function createEmployee(personalInfo, associatedWith) {
   const { id, firstName, lastName } = personalInfo;
@@ -94,8 +97,8 @@ module.exports = {
 //  animalCount,
 //  animalMap,
 //  animalsByIds,
-/* employeeByName,
-  employeeCoverage, */
+  employeeByName,
+  /* employeeCoverage, */
   addEmployee, /* isManager,
 //  animalsOlderThan, //  oldestFromFirstSpecies, */
   increasePrices,
