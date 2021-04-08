@@ -19,7 +19,7 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(animal, age) {
   const animalsAge = animals.filter((elem) => animal === elem.name)
-    .forEach((elem2) => elem2.residents.every((elem3) => elem3.age >= age));
+    .some((elem2) => elem2.residents.every((elem3) => elem3.age >= age));
   return animalsAge;
 }
 
@@ -39,7 +39,7 @@ function isManager(id) {
   return employees.some((elem) => elem.managers.some((elem2) => elem2 === id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   employees.push({
     id,
     firstName,
@@ -47,6 +47,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     managers,
     responsibleFor,
   });
+  return employees;
 }
 
 function animalCount(species) {
@@ -61,7 +62,7 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   if (!entrants || Object.keys(entrants).length === 0) return 0;
-  const { Adult, Child, Senior } = entrants;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   return Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
 }
 
