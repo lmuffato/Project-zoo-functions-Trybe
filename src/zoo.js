@@ -18,14 +18,9 @@ function animalsByIds(...ids) {
   return filterId(ids);
 }
 
-function animalsOlderThan(animal, ageInput) {
-  const animalFind = animals.find(({ name }) => animal === name);
-  const { residents } = animalFind;
-  const youngerThan = residents.filter(({ age }) => age < ageInput);
-  return youngerThan.length === 0;
+function animalsOlderThan(animal, age) {
+  // seu código aqui
 }
-
-console.log(animalsOlderThan('penguins', 10));
 
 function employeeByName(employeeName) {
   // seu código aqui
