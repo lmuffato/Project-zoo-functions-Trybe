@@ -45,8 +45,6 @@ function isManager(id) {
   return data.employees.some((employee, index) => employee.managers[index] === id);
 }
 
-//console.log(isManager();
-
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
 // }
