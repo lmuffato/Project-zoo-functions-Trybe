@@ -17,6 +17,7 @@ function animalsByIds(...ids) {
   if (ids === null || ids === undefined) return [];
   return animals.filter((animal, index) => animal.id === ids[index]);
 }
+
 // Com a ajuda do plantão do instrutor Eliezer Queiroz e sugestão da colega Carolina Vasconcellos.
 
 /*
@@ -43,12 +44,17 @@ function createEmployee(personalInfo, associatedWith) {
     responsibleFor,
   };
 }
-/*
+
 function isManager(id) {
-  employees
-    .some((employee) => employee.managers === id || employee.managers.indexOf() !== -1);
+  let trueOrFalse;
+  const soughtEmployee = employees.find((employee) => employee.id === id);
+  if (soughtEmployee.managers.length === 1 || soughtEmployee.managers.length === 0) {
+    trueOrFalse = true;
+  } else {
+    trueOrFalse = false;
+  }
+  return trueOrFalse;
 }
-*/
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const newEmployee = {
@@ -72,19 +78,27 @@ function entryCalculator(entrants = {}) {
   const totalAdult = Adult * parseFloat(prices.Adult);
   const totalChild = Child * parseFloat(prices.Child);
   const totalSenior = Senior * parseFloat(prices.Senior);
-  return totalAdult + totalChild + totalSenior;
+  return parseFloat((totalAdult + totalChild + totalSenior).toPrecision(5));
 }
+
 /*
 function animalMap(options) {
   // seu código aqui
 }
-
+*/
 function schedule(dayName) {
-  // seu código aqui
+  if (dayName === undefined);
 }
-
+/*
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const { responsibleFor } = employees;
+  employees.filter((employee, index) => {
+    if (employee.id === id) {
+      responsibleFor.find(animal => {
+
+      });
+    }
+  });
 }
 */
 const calculateIncrease = (percent) => 1 + (percent / 100) + 0.00001;
@@ -95,24 +109,28 @@ function increasePrices(percentage) {
   prices.Senior = parseFloat((prices.Senior * increasePrice).toPrecision(4));
   prices.Child = parseFloat((prices.Child * increasePrice).toPrecision(4));
 }
-
 /*
 function employeeCoverage(idOrName) {
-  // seu código aqui
-} */
+  if (idOrName === undefined) {
+    employees.reduce((previousValue, value) => {});
+  }
+}
+ */
+// Referências:
+// http://www.macoratti.net/18/09/js_marr2.htm
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   //  animalCount,
   //  animalMap,
   animalsByIds,
   employeeByName,
-  /* employeeCoverage, */
+  // employeeCoverage,
   addEmployee,
-  // isManager,
-  /* animalsOlderThan,
-// oldestFromFirstSpecies, */
+  isManager,
+  /* animalsOlderThan, */
+  /*  oldestFromFirstSpecies, */
   increasePrices,
   createEmployee,
 };
