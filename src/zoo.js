@@ -25,9 +25,11 @@ function animalsOlderThan(animal, age) {
 
 // requisito feito com lucas Muniz e Rafael Medeiros
 
-// function employeeByName(employeeName) {
-//   // seu código aqui
-// }
+function employeeByName(employeeName) {
+  if (employeeName === undefined) return {};
+  return data.employees.find(({ firstName, lastName }) =>
+    firstName === employeeName || lastName === employeeName);
+}
 
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
@@ -75,7 +77,7 @@ module.exports = {
 //   animalCount,
 //   animalMap,
   animalsByIds,
-  //  employeeByName,
+  employeeByName,
   //  employeeCoverage,
   //  ddEmployee,
   //  isManager,
