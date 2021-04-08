@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { animals } = require('./data');
+const { employees } = require('./data');
 const data = require('./data');
 
 // Feito colaborativamente com as colegas: Nathi Zebral, Thalita Cecilier, Debora PAssos, Djaniza Vasques Ferreira e Bia Zidioti. <3
@@ -22,17 +23,22 @@ function animalsByIds(...ids) {
 qual dos animais dentro de .data, que tenham seu name igual ao parametro passado.
 A segunda etapa, retorna true (every), quando a idade de todos os animais, dos passados como parametro
 sejam maior ou igual do que a idade passada como parametro. */
+// Feito colaborativamente com as colegas: Nathi Zebral, Thalita Cecilier, Debora PAssos. <3
 
 function animalsOlderThan(animal, age) {
   const animalName = data.animals.find((bixo) => bixo.name === animal);
   return animalName.residents.every((idadeAnimal) => idadeAnimal.age >= age);
 }
 
-/* function employeeByName(employeeName) {
-  // seu código aqui
+function employeeByName(employeeName) {
+  if (!employeeName) {
+    return {};
+  }
+  return employees.find((elem) =>
+    elem.lastName === employeeName || elem.firstName === employeeName);
 }
 
-function createEmployee(personalInfo, associatedWith) {
+/* function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
 
@@ -78,7 +84,7 @@ module.exports = {
   // animalCount,
   // animalMap,
   animalsByIds,
-  // employeeByName,
+  employeeByName,
   // employeeCoverage,
   // addEmployee,
   // isManager,
