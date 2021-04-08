@@ -12,6 +12,7 @@ eslint no-unused-vars: [
 
 const { animals } = require('./data');
 const data = require('./data');
+const { employees } = require('./data');
 
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.includes(animal.id));
@@ -22,11 +23,15 @@ function animalsOlderThan(animal, age) {
   return ages.residents.every((resident) => (resident.age >= age));
 }
 
-/* function employeeByName(employeeName) {
-  // seu código aqui
+function employeeByName(employeeName) {
+  if (!employeeName) {
+    return {};
+  }
+  return employees.find((nome) =>
+    nome.firstName === employeeName || nome.lastName === employeeName);
 }
 
-function createEmployee(personalInfo, associatedWith) {
+/* function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
 
@@ -72,7 +77,7 @@ module.exports = {
   // animalCount,
   // animalMap,
   animalsByIds,
-  // employeeByName,
+  employeeByName,
   // employeeCoverage,
   // addEmployee,
   // isManager,
