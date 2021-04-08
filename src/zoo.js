@@ -11,17 +11,17 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-// function animalsByIds(...ids) {
-//   return data.animals.filter(({ id }) => ids.includes(id));
-// }
+function animalsByIds(...ids) {
+  return data.animals.filter(({ id }) => ids.includes(id));
+}
 
-// animalsByIds();
+animalsByIds();
 
-// function animalsOlderThan(animal, animalAge) {
-//   const especie = data.animals.find(({ name }) => name === animal);
-//   return especie.residents.every(({ age }) => age > animalAge);
-// }
-// console.log(animalsOlderThan('penguins', 10));
+function animalsOlderThan(animal, animalAge) {
+  const especie = data.animals.find(({ name }) => name === animal);
+  return especie.residents.every(({ age }) => age > animalAge);
+}
+console.log(animalsOlderThan('penguins', 10));
 
 function employeeByName(employeeName) {
   if (!employeeName) return {};
@@ -29,9 +29,16 @@ function employeeByName(employeeName) {
   || lastName === employeeName);
 }
 
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
+function createEmployee(personalInfo, associatedWith) {
+  const employee = {
+    id: personalInfo.id,
+    firstName: personalInfo.firstName,
+    lastName: personalInfo.lastName,
+    managers: associatedWith.managers,
+    responsibleFor: associatedWith.responsibleFor,
+  };
+  return employee;
+}
 
 // function isManager(id) {
 //   // seu código aqui
@@ -70,17 +77,17 @@ function employeeByName(employeeName) {
 // }
 
 module.exports = {
-//   entryCalculator,
-//   schedule,
-//   animalCount,
-//   animalMap,
-//   animalsByIds,
+  // entryCalculator,
+  // schedule,
+  // animalCount,
+  // animalMap,
+  animalsByIds,
   employeeByName,
-//   employeeCoverage,
-//   addEmployee,
-//   isManager,
-//   animalsOlderThan,
-//   oldestFromFirstSpecies,
-//   increasePrices,
-//   createEmployee,
+  // employeeCoverage,
+  // addEmployee,
+  // isManager,
+  animalsOlderThan,
+  // oldestFromFirstSpecies,
+  // increasePrices,
+  createEmployee,
 };
