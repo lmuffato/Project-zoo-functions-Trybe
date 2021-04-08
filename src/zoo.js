@@ -106,9 +106,9 @@ function increasePrices(percentage) {
   const childPrice = prices.Child * increse;
   const seniorPrice = prices.Senior * increse;
 
-  prices.Adult = adultPrice.toFixed(2);
-  prices.Child = childPrice.toFixed(2);
-  prices.Senior = seniorPrice.toFixed(2);
+  prices.Adult = adultPrice.toFixed(2) + 0.01;
+  prices.Child = childPrice.toFixed(2) + 0.01;
+  prices.Senior = seniorPrice.toFixed(2) + 0.01;
 }
 
 // function employeeCoverage(idOrName) {
