@@ -155,19 +155,23 @@ function animalMap(options) {
   }
 }
 
-function schedule(dayName) {
+// dayName
+function schedule() {
   // seu código aqui
 }
 
-function oldestFromFirstSpecies(id) {
+// id
+function oldestFromFirstSpecies() {
   // seu código aqui
 }
 
-function increasePrices(percentage) {
+// percentage
+function increasePrices() {
   // seu código aqui
 }
 
-function employeeCoverage(idOrName) {
+// idOrName
+function employeeCoverage() {
   // seu código aqui
 }
 
