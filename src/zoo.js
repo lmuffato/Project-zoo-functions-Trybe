@@ -14,21 +14,20 @@ const data = require('./data');
 function animalsByIds(...ids) {
   // seu código aqui
   return data.animals.filter((animal) =>
-      ids.some((id) => animal.id === id));
+    ids.some((id) => animal.id === id));
 }
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
   return data.animals.find(({ name }) =>
-    name === animal)
-      .residents.every((resident) =>
-        resident.age >= age);
+    name === animal).residents.every((resident) =>
+      resident.age >= age);
 }
 
 function employeeByName(employeeName) {
   // seu código aqui
-  return employeeName === undefined ? {} :
-    data.employees.find(({ firstName, lastName }) =>
+  return employeeName === undefined ? {} 
+    : data.employees.find(({ firstName, lastName }) =>
       employeeName === firstName || employeeName === lastName);
 }
 
