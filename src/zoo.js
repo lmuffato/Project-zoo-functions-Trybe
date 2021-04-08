@@ -87,11 +87,14 @@ function schedule(dayName) {
   return scheduleList;
 }
 
-/*
+/* Source: https://github.com/tryber/sd-08-project-zoo-function/tree/5e99ab4c1f0b23aab684f400dcf5dcfb3f69e506*/
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const employeeId = employees.find((item) => item.id === id);
+  const animal = animals.find((item) => employeeId.responsibleFor[0] === item.id);
+  const oldest = animal.residents.map((item) => item.age).sort((a, b) => a - b);
+
+  return Object.values(animal.residents.find((item) => item.age === oldest[0]));
 }
-*/
 
 /* Source; https://github.com/tryber/sd-08-project-zoo-function/blob/624454bd864d9badf6bdaeabfc2c929e8103720a/src/zoo.js */
 function increasePrices(percentage) {
@@ -124,14 +127,11 @@ module.exports = {
   /*
   employeeCoverage,
   */
+
   addEmployee,
   isManager,
   animalsOlderThan,
-
-  /*
   oldestFromFirstSpecies,
-  */
-
   increasePrices,
   createEmployee,
 };
