@@ -13,20 +13,18 @@ const { animals, employees } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
-  if (ids.length >= 1) {
-    return animals.filter((animal) => ids.some((id) => animal.id === id));
-  }
-  return [];
+  return animals.filter((animal) => ids.some((id) => animal.id === id));
 }
 
-// function animalsOlderThan(animalName, age) {
-//   animals.every((animal) => )
-// }
+function animalsOlderThan(animalName, age) {
+  const animalsFiltered = animals.find((animal) => animal.name === animalName).residents;
+  return animalsFiltered.every((animal) => animal.age >= age);
+}
 
 function employeeByName(employeeName) {
   if (employeeName !== undefined) {
-    return employees.find((name) => name.firstName === employeeName
-    || name.lastName === employeeName);
+    return employees
+      .find((name) => name.firstName === employeeName || name.lastName === employeeName);
   }
   return {};
 }
@@ -89,7 +87,7 @@ module.exports = {
   // employeeCoverage,
   // addEmployee,
   // isManager,
-  // animalsOlderThan,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
