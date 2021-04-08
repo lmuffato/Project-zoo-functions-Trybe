@@ -13,6 +13,7 @@ const data = require('./data');
 
 const { animals } = data;
 const { employees } = data;
+const { prices } = data;
 
 function animalsByIds(...ids) {
   return ids.map((id) => animals.find(({ id: idAnimal }) => idAnimal === id));
@@ -67,11 +68,14 @@ function animalCount(species = false) {
   return obj;
 }
 
-/*
-function entryCalculator(entrants) {
-  // seu código aqui
+function entryCalculator(entrant = false) {
+  const { Adult = 0, Child = 0, Senior = 0 } = entrant;
+  return !entrant || entrant === {}
+    ? 0
+    : (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
+/*
 function animalMap(options) {
   // seu código aqui
 }
@@ -94,7 +98,7 @@ function employeeCoverage(idOrName) {
 */
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
