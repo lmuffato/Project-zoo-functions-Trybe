@@ -59,27 +59,27 @@ function animalCount(species) {
 }
 
 function entryCalculator(...entrants) {
-  
+  return entrants
 }
 
 function animalMap(options) {
-  // seu código aqui
+  return options
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  return dayName
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  return id
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  return percentage
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  return idOrName
 }
 
 module.exports = {
