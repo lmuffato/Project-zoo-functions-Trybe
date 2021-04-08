@@ -19,7 +19,7 @@ function animalsByIds(...ids) {
 function animalsOlderThan(animal, age) {
   return data.animals
     .find((specie) => specie.name === animal)
-    .residents.every((ageSpecie) => ageSpecie.age > age)
+    .residents.every((ageSpecie) => ageSpecie.age > age);
 }
 console.log(animalsOlderThan('otters', 7));
 
@@ -27,7 +27,7 @@ function employeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-  return data.employees.find((managers) => managers.firstName === employeeName || managers.lastName === employeeName);
+  return employees.find((managers) => managers.firstName === employeeName || managers.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -54,7 +54,7 @@ function animalCount(species) {
   return animalPop[species]
 }
 
-function entryCalculator(...entrants = 0) {
+function entryCalculator(...entrants) {
   
 }
 
