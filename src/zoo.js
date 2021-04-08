@@ -128,8 +128,19 @@ function schedule(dayName) {
   return getDate({}, Object.entries(hours)[day]);
 }
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
+const getOldestSpecie = (acc, anm) => {
+  let result = acc;
+  result = anm.age > acc.age ? anm : acc;
+  return result;
+};
+
+function oldestFromFirstSpecies(idE) {
+  const firstId = employees.find(({ id }) => id === idE).responsibleFor[0];
+  const { name, sex, age } = animals
+    .find(({ id }) => id === firstId).residents
+    .reduce(getOldestSpecie);
+
+  return [name, sex, age];
 }
 
 function increasePrices(percentage) {
