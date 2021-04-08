@@ -40,7 +40,7 @@ function employeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  let expected = {
+  const expected = {
     ...personalInfo,
     ...associatedWith,
   }
