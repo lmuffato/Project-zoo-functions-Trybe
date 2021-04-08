@@ -14,7 +14,7 @@ const { animals, employees, prices, hours } = require('./data');
 const isXYZ = (x, y, z) => x === y || y === z;
 
 function animalsByIds(...ids) {
-  return animals.filter((animal) => ids.includes(animal.id));
+  return animals.filter(({ id }) => ids.includes(id));
 }
 
 function animalsOlderThan(animal, age) {
