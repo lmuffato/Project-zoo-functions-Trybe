@@ -9,15 +9,13 @@ eslint no-unused-vars: [
 ]
 */
 
-// const assert = require('assert');
 const { animals } = require('./data.js');
 const { employees } = require('./data.js');
 
 function animalsByIds(...ids) {
+  // seu código aqui
   return animals.filter((animal) => ids.includes(animal.id));
 }
-
-console.log(animalsByIds());
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
@@ -35,10 +33,11 @@ function employeeByName(employeeName) {
   return employees
     .find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
 }
-console.log(employeeByName('Wishart'));
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  const employee = { ...personalInfo, ...associatedWith };
+  return employee;
 }
 
 function isManager(id) {
