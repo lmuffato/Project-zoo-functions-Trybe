@@ -11,6 +11,8 @@ eslint no-unused-vars: [
 
 const { animals, employees, prices, hours } = require('./data');
 
+const isXYZ = (x, y, z) => x === y || y === z;
+
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.includes(animal.id));
 }
@@ -22,7 +24,8 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  return !employeeName ? {} : employees
+    .find(({ firstName, lastName }) => isXYZ(firstName, employeeName, lastName));
 }
 
 function createEmployee(personalInfo, associatedWith) {
