@@ -15,7 +15,6 @@ function animalsByIds(...ids) {
   return data.animals.filter(({ id }) => ids.includes(id));
 }
 
-
 // function animalsOlderThan(animal, age) {
 //   // seu código aqui
 // }
