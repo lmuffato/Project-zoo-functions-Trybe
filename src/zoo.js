@@ -60,7 +60,7 @@ function animalCount(species) {
     .find(({ name }) => name === species).residents.length;
 }
 
-function entryCalculator(entrants) {
+function entryCalculator(entrants = 0) {
   return Object.keys(entrants)
     .reduce((acc, cur) => acc + prices[cur] * entrants[cur], 0);
 }
