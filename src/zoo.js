@@ -14,7 +14,7 @@ const data = require('./data');
 
 let lalala = data;
 if (lalala = 1) {
-  return 2;
+  lalala += 1;
 };
 
 function animalsByIds(id) {
