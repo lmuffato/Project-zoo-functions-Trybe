@@ -27,7 +27,8 @@ function employeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-  return employees.find((managers) => managers.firstName === employeeName || managers.lastName === employeeName);
+  return employees.find((managers) => managers.firstName === employeeName
+  || managers.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -35,22 +36,25 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.some((isManager) => isManager.managers.some((manager) => manager === id));
+  return data.employees
+    .some((isManager) => isManager.managers
+        .some((manager) => manager === id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {;
   const array = []
   array.id = id;
   array.firstName = firstName;
   array.lastName = lastName;
-  array.manager = [...managers]
-  array.responsibleFor = [...responsibleFor]
+  array.manager = [...managers];
+  array.responsibleFor = [...responsibleFor];
+  employees.push(array)
 }
 
 function animalCount(species) {
-  const animalPop = {}
-  data.animals.forEach((animal) => animalPop[animal.name] = animal.residents.length)
-  if (species === undefined) return animalPop
+  const animalPop = {};
+  data.animals.forEach((animal) => animalPop[animal.name] = animal.residents.length);
+  if (species === undefined) return animalPop;
   return animalPop[species]
 }
 
