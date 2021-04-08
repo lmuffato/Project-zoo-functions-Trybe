@@ -8,7 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
-
+const { animals, hours, prices } = require('./data')
 const { employees } = require('./data');
 const data = require('./data');
 
@@ -52,10 +52,16 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
-  const animalPop = {};
-  data.animals.forEach((animal) => animalPop[animal.name] = animal.residents.length);
-  if (species === undefined) return animalPop;
-  return animalPop[species];
+  const objChange = {};
+  if (species) {
+    return animals.find((specie) => specie.name === species).residents
+      .reduce((acumulator) => acumulator + 1, 0);
+  }
+  animals.forEach((animal) => {
+    const animalsN = animal.residents.reduce((acc) => acc + 1, 0);
+    objChange[animal.name] = animalsN;
+  });
+  return objChange;
 }
 
 function entryCalculator(...entrants) {
