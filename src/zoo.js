@@ -14,8 +14,9 @@ const { animals } = require('./data');
 
 function animalsByIds(...ids) {
   if (ids.length >= 1) {
-    return animals.filter((element) => element === ids);
-  } return {};
+    return animals.filter((animal) => ids.some((id) => animal.id === id));
+  }
+  return [];
 }
 
 // function animalsOlderThan(animal, age) {
