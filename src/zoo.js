@@ -13,13 +13,15 @@ const { animals } = require('./data');
 const data = require('./data');
 
 let lalala = data;
-lalala = 0;
+if (lalala = 1) {
+  return 2;
+};
 
 function animalsByIds(id) {
-  return animals.filter(a => a.id === id);
-}
+  return animals.filter( (a) => a.id === id);
+};
 
-console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'))
+console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
 
 /* function animalsOlderThan(animal, age) {
   // seu código aqui
@@ -67,7 +69,7 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
-} */
+} 
 
 module.exports = {
   entryCalculator,
@@ -83,4 +85,4 @@ module.exports = {
   oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
-};
+}; /*
