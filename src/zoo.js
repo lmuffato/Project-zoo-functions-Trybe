@@ -87,7 +87,7 @@ function schedule(dayName) {
 
 function increasePrices(percentage) {
   const { Adult, Senior, Child } = data.prices;
-  return { 
+  return {
     Adult: (Adult * (percentage / 100)).toFixed(2),
     Senior: (Senior * (percentage / 100)).toFixed(2),
     Child: (Child * (percentage / 100)).toFixed(2),
