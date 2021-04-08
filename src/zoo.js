@@ -8,13 +8,13 @@ eslint no-unused-vars: [
   }
 ]
 */
-/*
-const data = require('./data');
 
-function animalsByIds(ids) {
-  // seu código aqui
+const { animals } = require('./data');
+
+function animalsByIds(...ids) {
+  return ids.filter((idAnimal) => animals.id === idAnimal.ids);
 }
-
+/*
 function animalsOlderThan(animal, age) {
   // seu código aqui
 }
@@ -68,7 +68,7 @@ module.exports = {
   // schedule,
   // animalCount,
   // animalMap,
-  // animalsByIds,
+  animalsByIds,
   // employeeByName,
   // employeeCoverage,
   // addEmployee,
