@@ -12,8 +12,8 @@ eslint no-unused-vars: [
 const { employees } = require('./data');
 const data = require('./data');
 
-function animalsByIds(ids = []) {
-  // seu código aqui
+function animalsByIds(...ids) {
+  return data.animals.filter((specie, index) => specie.id === ids[index]);
 }
 
 function animalsOlderThan(animal, age) {
@@ -21,33 +21,41 @@ function animalsOlderThan(animal, age) {
     .find((specie) => specie.name === animal)
     .residents.every((ageSpecie) => ageSpecie.age > age)
 }
-console.log(animalsOlderThan('otters', 7))
+console.log(animalsOlderThan('otters', 7));
 
 function employeeByName(employeeName) {
   if (employeeName === undefined) {
-    return {}
+    return {};
   }
-  return data.employees.find((managers) => managers.firstName === employeeName || managers.lastName === employeeName)
+  return data.employees.find((managers) => managers.firstName === employeeName || managers.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some((isManager) => isManager.managers.some((manager) => manager === id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  const array = []
+  array.id = id;
+  array.firstName = firstName;
+  array.lastName = lastName;
+  array.manager = [...managers]
+  array.responsibleFor = [...responsibleFor]
 }
 
 function animalCount(species) {
-  // seu código aqui
+  const animalPop = {}
+  data.animals.forEach((animal) => animalPop[animal.name] = animal.residents.length)
+  if (species === undefined) return animalPop
+  return animalPop[species]
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
+function entryCalculator(...entrants = 0) {
+  
 }
 
 function animalMap(options) {
