@@ -16,7 +16,9 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  return animals.find((specie) => specie.name === animal).residents.every((specie) => specie.age > age);
+  return animals
+    .find((specie) => specie.name === animal)
+      .residents.every((specie) => specie.age > age);
 }
 
 function employeeByName(employeeName) {
@@ -30,7 +32,9 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return employees.some((employee) => employee.managers.some((gerente) => gerente === id));
+  return employees
+    .some((employee) => employee.managers
+      .some((gerente) => gerente === id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -78,9 +82,13 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  const firstAnimalId = employees.find((employee) => employee.id === id).responsibleFor[0];
-  const residents = animals.find((animal) => animal.id === firstAnimalId).residents;
-  const oldestAnimal = residents.reduce((older, resident) => (older.age < resident.age ? resident : older));
+  const firstAnimalId = employees.find((employee) => employee.id === id)
+    .responsibleFor[0];
+  const residents = animals.find((animal) => animal.id === firstAnimalId)
+    .residents;
+  const oldestAnimal = residents.reduce((older, resident) =>
+    older.age < resident.age ? resident : older
+  );
   return Object.values(oldestAnimal);
 }
 
