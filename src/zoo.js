@@ -37,13 +37,18 @@ function employeeByName(employeeName) {
   }
   return obj;
 }
-console.log(employeeByName());
 
-/*
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  let obj = {};
+  obj = personalInfo;
+  const key1 = associatedWith.managers;
+  const key2 = associatedWith.responsibleFor;
+  obj.managers = key1;
+  obj.responsibleFor = key2;
+  return obj;
 }
 
+/*
 function isManager(id) {
   // seu código aqui
 }
@@ -100,4 +105,5 @@ module.exports = {
   animalsByIds,
   animalsOlderThan,
   employeeByName,
+  createEmployee,
 };
