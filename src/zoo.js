@@ -79,7 +79,7 @@ function oldestFromFirstSpecies(id) {
 }
 */
 
-/* Source; https://github.com/tryber/sd-08-project-zoo-function/blob/624454bd864d9badf6bdaeabfc2c929e8103720a/src/zoo.js*/
+/* Source; https://github.com/tryber/sd-08-project-zoo-function/blob/624454bd864d9badf6bdaeabfc2c929e8103720a/src/zoo.js */
 function increasePrices(percentage) {
   Object.keys(prices).forEach((element) => {
     prices[element] = Math.round(prices[element] * (1 + (percentage / 100)) * 100) / 100;
