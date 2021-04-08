@@ -16,12 +16,15 @@ function animalsByIds(...ids) {
   return data.animals.filter(({ id }) => ids.includes(id));
 }
 
-function animalsOlderThan(animal, age) {
-  // seu código aqui
+function animalsOlderThan(animalSelect, ageSelect) {
+  return data.animals
+    .find(({ name }) => name === animalSelect)
+    .residents
+    .every(({ age }) => age >= ageSelect);
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  
 }
 
 function createEmployee(personalInfo, associatedWith) {
