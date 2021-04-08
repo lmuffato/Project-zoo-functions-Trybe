@@ -41,7 +41,7 @@ function createEmployee(personalInfo, associatedWith) {
     lastName,
     managers,
     responsibleFor,
-  }
+  };
 }
 
 function isManager(id) {
@@ -56,7 +56,7 @@ function isManager(id) {
   return data.employees.some((employee) =>
     employee.id === id && (managerList.some((idTeste) => idTeste === employee.id)));
 }
-
+/* 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
@@ -87,7 +87,7 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
-}
+} */
 
 module.exports = {
   /* entryCalculator,
