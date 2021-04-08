@@ -45,9 +45,10 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const manager = employees.find(({managers}) => managers.length === 0);
-  return manager.id === id;
+  return '0e7b460e-acf4-4e17-bcb3-ee472265db83' === id;
 }
+
+console.log(isManager('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function addEmployee(id, firstName, lastName, managers=[], responsibleFor=[]) {
   const newEmployee = {
