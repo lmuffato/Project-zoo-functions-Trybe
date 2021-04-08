@@ -18,9 +18,9 @@ animalsByIds()
 
 // requisito feito com a ajuda de Murilo Gonçalves, Lucas Pedroso e Nilson Ribeiro
 
-// function animalsOlderThan(animal, age) {
-//   // seu código aqui
-// }
+ function animalsOlderThan(animal, age) {
+
+}
 
 // function employeeByName(employeeName) {
 //   // seu código aqui
