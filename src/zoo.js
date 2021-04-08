@@ -9,27 +9,27 @@ eslint no-unused-vars: [
 ]
 */
 const data = require('./data');
-// console.log(data);
-/*
+
 function animalsByIds(...ids) {
-  let answer = []
+  const answer = [];
   data.animals.forEach((animal) => {
-    if (animal.id === ids) {
-      answer.push(animal)
-    }
-  })
-  return answer
+    ids.forEach((id) => {
+      if (id === animal.id) {
+        answer.push(animal);
+      }
+    });
+  });
+  return answer;
 }
 
 console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
-*/
 
 function animalsOlderThan(animal, age) {
   const specificAnimal = data.animals.filter((curr) => curr.name === animal);
   const ageTest = specificAnimal[0].residents.every((individual) => individual.age > age);
   return ageTest;
 }
-console.log(animalsOlderThan('otters', 7));
+// console.log(animalsOlderThan('otters', 7));
 
 /*
 function employeeByName(employeeName) {
@@ -93,6 +93,6 @@ module.exports = {
 };
 */
 module.exports = {
-//  animalsByIds,
+  animalsByIds,
   animalsOlderThan,
 };
