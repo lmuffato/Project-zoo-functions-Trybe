@@ -3,7 +3,7 @@ eslint no-unused-vars: [
   "error",
   {
     "args": "none",
-    "vars": "local",
+    "vars": "local"
     "varsIgnorePattern": "data"
   }
 ]
