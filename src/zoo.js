@@ -22,15 +22,23 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) {
+    return {};
+  }
+  const selectedEmployee = data.employees.find(({ firstName, lastName }) => firstName === employeeName
+  || lastName === employeeName);
+  return selectedEmployee
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+ const {id, firstName, lastName} = personalInfo;
+ const {managers, responsibleFor} = associatedWith;
+ return { id, firstName, lastName, managers, responsibleFor };
 }
 
+// referência https://www.w3schools.com/jsref/jsref_includes.asp#:~:text=The%20includes()%20method%20determines,()%20method%20is%20case%20sensitive.
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some((item) => item.managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -64,6 +72,7 @@ function increasePrices(percentage) {
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
+
 
 module.exports = {
   entryCalculator,
