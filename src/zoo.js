@@ -30,12 +30,12 @@ function employeeByName(employeeName) {
 } // realizado em conjunto (Deh, Nathi, Djaniza, Thalita e Heloisa)
 
 // function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
+
 // }
 
-// function isManager(id) {
-//   // seu código aqui
-// }
+function isManager(id) {
+  return employees.some((employee) => employee.managers.some((employee2) => employee2 === id));
+} // auxilio e explicação do colega Wanderson erealizado em conjunto (Deh, Nathi, Djaniza, Thalita e Heloisa)
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
@@ -76,11 +76,11 @@ module.exports = {
 //   animalMap,
 //   employeeCoverage,
 //   addEmployee,
-//   isManager,
+  isManager,
   animalsOlderThan,
   animalsByIds,
   employeeByName,
+//  createEmployee,
 //   oldestFromFirstSpecies,
 //   increasePrices,
-//   createEmployee,
 };
