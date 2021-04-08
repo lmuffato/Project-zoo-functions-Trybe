@@ -52,11 +52,18 @@ function addEmployee(id = 0, firstName = 'None', lastName = 'None',
   return employees;
 }
 
-// console.log(addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe'));
-
-// function animalCount(species) {
-//   // seu código aqui
-// }
+function animalCount(species) {
+  // seu código aqui
+  if (species === undefined) {
+    const animalsObject = animals.reduce((acc, curr) => {
+      acc[curr.name] = curr.residents.length;
+      return acc;
+    }, {});
+    return animalsObject;
+  }
+  const specie = animals.find((animal) => animal.name === species);
+  return specie.residents.length;
+}
 
 // function entryCalculator(entrants) {
 //   // seu código aqui
@@ -85,7 +92,7 @@ function addEmployee(id = 0, firstName = 'None', lastName = 'None',
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
