@@ -13,13 +13,11 @@ const { animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  data.animals.reduce((acc, animal) => {
-    if (ids === animal.name) return acc + animal.name;
-  });
+  return data.animals.filter((animal, index) => animal.id === ids[index]);
 }
 
 // function animalsOlderThan(animal, age) {
-//   // seu código aqui
+//   // .every
 // }
 
 // function employeeByName(employeeName) {
@@ -66,7 +64,7 @@ function animalsByIds(...ids) {
 //   // seu código aqui
 // }
 
- module.exports = {
+module.exports = {
 //   entryCalculator,
 //   schedule,
 //   animalCount,
@@ -80,4 +78,4 @@ function animalsByIds(...ids) {
 //   oldestFromFirstSpecies,
 //   increasePrices,
 //   createEmployee,
- };
+};
