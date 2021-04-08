@@ -22,17 +22,17 @@ function animalsByIds(...ids) {
 
   if (justOneId) {
     const id = ids[0];
-    const foundAnimal = find.byOneId(id);
+    const foundAnimal = find.byId.oneId(id);
     return [foundAnimal];
   }
 
-  const foundAnimals = find.byMultipleIds(ids);
+  const foundAnimals = find.byId.multipleIds(ids);
   return foundAnimals;
 }
 
 function animalsOlderThan(animal, age) {
   const { verify } = functionsAnimals;
-  const haveMinimumAge = verify.age(animal, age);
+  const haveMinimumAge = verify.age.minimumAge(animal, age);
   if (haveMinimumAge) return true;
   return false;
 }
