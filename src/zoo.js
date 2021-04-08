@@ -25,17 +25,20 @@ const employeeByName = (employeeName) => {
 
 const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 
-function isManager(id) {
-  // seu código aqui
-}
+const isManager = (id) => {
+};
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {
+};
 
-function animalCount(species) {
-  // seu código aqui
-}
+const animalCount = (species) => {
+  if (species) return animals.find(({ name }) => name === species).residents.length;
+  const res = {};
+  animals.map(({ name, residents }) => ({ [name]: residents.length })).forEach((obj) => {
+    Object.assign(res, obj);
+  });
+  return res;
+};
 
 function entryCalculator(entrants) {
   // seu código aqui
