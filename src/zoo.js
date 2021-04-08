@@ -8,17 +8,30 @@ eslint no-unused-vars: [
   }
 ]
 */
-
 const data = require('./data');
-
-function animalsByIds(ids) {
-  // seu código aqui
+// console.log(data);
+/*
+function animalsByIds(...ids) {
+  let answer = []
+  data.animals.forEach((animal) => {
+    if (animal.id === ids) {
+      answer.push(animal)
+    }
+  })
+  return answer
 }
+
+console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
+*/
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  const specificAnimal = data.animals.filter((curr) => curr.name === animal);
+  const ageTest = specificAnimal[0].residents.every((individual) => individual.age > age);
+  return ageTest;
 }
+console.log(animalsOlderThan('otters', 7));
 
+/*
 function employeeByName(employeeName) {
   // seu código aqui
 }
@@ -77,4 +90,9 @@ module.exports = {
   oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
+};
+*/
+module.exports = {
+//  animalsByIds,
+  animalsOlderThan,
 };
