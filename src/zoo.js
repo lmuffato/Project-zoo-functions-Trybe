@@ -12,9 +12,9 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(ids) {
-  // seu código aqui
+  const inicializing = 'hello cypress';
+  return inicializing;
 }
-
 function animalsOlderThan(animal, age) {
   // seu código aqui
 }
