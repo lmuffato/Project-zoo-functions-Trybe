@@ -40,13 +40,18 @@ function employeeByName(employeeName) {
 
 /* function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-}
+} */
+
+// Inspiração na resolução do Renzo: https://github.com/tryber/sd-010-a-project-zoo-functions/pull/12/commits/1a3a8c3aba8cb38e7d0b28654181a325743eb124
+/* Entende-se aqui que o primeiro some passa pelo array de empregados,
+acessando cada um deles, no caso o "empregado da vez", nestes, é acessada
+a chave managers, e se nesta esta inclusa o id, usado como parametro. */
 
 function isManager(id) {
-  // seu código aqui
+  return employees.some((empregadoDaVez) => empregadoDaVez.managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
@@ -87,7 +92,7 @@ module.exports = {
   employeeByName,
   // employeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
