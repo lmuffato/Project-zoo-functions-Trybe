@@ -43,7 +43,7 @@ function createEmployee(personalInfo, associatedWith) {
   const expected = {
     ...personalInfo,
     ...associatedWith,
-  }
+  };
 
   return expected;
 }
