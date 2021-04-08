@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { animals, employees } = require('./data');
-const data = require('./data');
+// const data = require('./data');
 
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.some((id) => animal.id === id));
@@ -57,13 +57,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-const allSpeciesCount = () => {
-  const speciesCount = {};
-  animals.forEach((animal) => {
-    speciesCount.animal.name = animal.residents.length;
-  });
-  return speciesCount;
-};
+// const allSpeciesCount = () => {
+//   const speciesCount = {};
+//   animals.forEach((animal) => {
+//     speciesCount.animal.name = animal.residents.length;
+//   });
+//   return speciesCount;
+// };
 
 // function animalCount(species = allSpeciesCount) {
 //   if (species !== undefined) {
@@ -101,7 +101,7 @@ const allSpeciesCount = () => {
 module.exports = {
   // entryCalculator,
   // schedule,
-  animalCount,
+  // animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
