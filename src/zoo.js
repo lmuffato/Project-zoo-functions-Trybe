@@ -15,9 +15,9 @@ function animalsByIds(...ids) {
   return data.animals.filter(({ id }) => ids.includes((id)));
 }
 
-function animalsOlderThan(animal, animalAge) {
+function animalsOlderThan(animal, minimumAge) {
   const animalName = data.animals.find(({ name }) => name === animal);
-  return animalName.residents.every(({ age }) => age > animalAge);
+  return animalName.residents.every(({ age }) => age >= minimumAge);
 }
 
 function employeeByName(employeeName) {
@@ -37,7 +37,7 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
 }
 
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some(({ managers }) => managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
