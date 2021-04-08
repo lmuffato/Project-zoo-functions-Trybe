@@ -74,11 +74,11 @@ function schedule(dayName) {
   const values = Object.values(data.hours);
   for (let index = 0; index < keys.length - 1; index += 1) {
     const day = keys[index];
-    Object.assign(obj, { [day]: `Open from ${hour(values[index].open)} 
-    until ${hour(values[index].close)}` });
+    const hours = values[index];
+    Object.assign(obj, { [day]: `Open from ${hour(hours.open)} until ${hour(hours.close)}` });
   }
   Object.assign(obj, { Monday: 'CLOSED' });
-  return (dayName !== undefined ? obj[dayName] : obj);
+  return (dayName !== undefined ? { [dayName]: obj[dayName] } : obj);
 }
 
 // function oldestFromFirstSpecies(id) {
@@ -86,11 +86,12 @@ function schedule(dayName) {
 // }
 
 function increasePrices(percentage) {
+  const increase = (1 + (percentage / 100));
   const { Adult, Senior, Child } = data.prices;
   return {
-    Adult: (Adult * (percentage / 100)).toFixed(2),
-    Senior: (Senior * (percentage / 100)).toFixed(2),
-    Child: (Child * (percentage / 100)).toFixed(2),
+    Adult: (Adult * increase).toFixed(2),
+    Senior: (Senior * increase).toFixed(2),
+    Child: (Child * increase).toFixed(2),
   };
 }
 
