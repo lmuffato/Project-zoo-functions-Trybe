@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { animals, employees, prices, hours } = require('./data');
-const data = require('./data');
+// const data = require('./data');
 
 function animalsByIds(...ids) {
   const animalsSpecies = ids.map((elem) => animals.find((elem2) => elem === elem2.id));
@@ -102,9 +102,13 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   const increse = (percentage / 100) + 1;
-  prices.Adult *= increse;
-  prices.Child *= increse;
-  prices.Senior *= increse;
+  const adultPrice = prices.Adult * increse;
+  const childPrice = prices.Child * increse;
+  const seniorPrice = prices.Senior * increse;
+
+  prices.Adult *= adultPrice.toFixed(2);
+  prices.Child *= childPrice.toFixed(2);
+  prices.Senior *= seniorPrice.toFixed(2);
 }
 
 // function employeeCoverage(idOrName) {
@@ -123,6 +127,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
