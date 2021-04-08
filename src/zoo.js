@@ -9,11 +9,25 @@ eslint no-unused-vars: [
 ]
 */
 
-// const data = require('./data');
+const functionsAnimalsByIds = require('./helper/animalsByIds');
 
-// function animalsByIds(ids) {
-//   // seu código aqui
-// }
+function animalsByIds(...ids) {
+  const emptyParams = ids.length === 0;
+  const justOneId = ids.length === 1;
+
+  const { findByOne, findByMultiple } = functionsAnimalsByIds;
+
+  if (emptyParams) return [];
+
+  if (justOneId) {
+    const id = ids[0];
+    const foundAnimal = findByOne(id);
+    return [foundAnimal];
+  }
+
+  const foundAnimals = findByMultiple(ids);
+  return foundAnimals;
+}
 
 // function animalsOlderThan(animal, age) {
 //   // seu código aqui
@@ -63,18 +77,18 @@ eslint no-unused-vars: [
 //   // seu código aqui
 // }
 
-// module.exports = {
-//   entryCalculator,
-//   schedule,
-//   animalCount,
-//   animalMap,
-//   animalsByIds,
-//   employeeByName,
-//   employeeCoverage,
-//   addEmployee,
-//   isManager,
-//   animalsOlderThan,
-//   oldestFromFirstSpecies,
-//   increasePrices,
-//   createEmployee,
-// };
+module.exports = {
+  // entryCalculator,
+  // schedule,
+  // animalCount,
+  // animalMap,
+  animalsByIds,
+  // employeeByName,
+  // employeeCoverage,
+  // addEmployee,
+  // isManager,
+  // animalsOlderThan,
+  // oldestFromFirstSpecies,
+  // increasePrices,
+  // createEmployee,
+};
