@@ -69,18 +69,18 @@ function animalsOlderThan(animal, age) {
 // seu código aqui
 // }
 
- module.exports = {
+module.exports = {
 //   entryCalculator,
 //   schedule,
 //   animalCount,
 //   animalMap,
-   animalsByIds,
-//   employeeByName,
-//   employeeCoverage,
-//   addEmployee,
-//   isManager,
-   animalsOlderThan,
-//   oldestFromFirstSpecies,
-//   increasePrices,
-//   createEmployee,
+  animalsByIds,
+  //  employeeByName,
+  //  employeeCoverage,
+  //  ddEmployee,
+  //  isManager,
+  animalsOlderThan,
+//  oldestFromFirstSpecies,
+//  increasePrices,
+//  createEmployee,
 };
