@@ -18,7 +18,6 @@ function animalsByIds(...ids) {
 }
 
 /* Source: https://github.com/tryber/sd-08-project-zoo-function/tree/e59c4d832c334495d2e92b9a128eb8a97dbe70d6 */
-
 function animalsOlderThan(animal, age) {
   return animals
     .find((item) => item.name === animal)
@@ -51,15 +50,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-/* Source: https://github.com/tryber/sd-08-project-zoo-function/blob/2f757e2a18cf749b0c9944025daf4350de77cd80/src/zoo.js */
+/* Source: https://github.com/tryber/sd-08-project-zoo-function/tree/c464723d68232d5a56b2db03b1c8488aec652c62 */
 function animalCount(species) {
-  if (!species) {
-    return animals.reduce((acc, cur) => {
-      acc[cur.name] = cur.residents.length;
-      return acc;
-    });
-  }
-  return animals.find((item) => item.name === species);
+  const animalEmpty = {};
+
+  if (!species) return animalEmpty;
+
+  animals.forEach((element) => {
+    animalEmpty[element.name] = element.residents.name;
+  });
+
+  return animalEmpty[species];
 }
 
 /*
