@@ -1,7 +1,6 @@
 const assert = require('assert');
 const zoo = require('../src/zoo');
 const data = require('../src/data');
-var 1x = 1;
 
 describe('Implemente a função addEmployee', () => {
   it('Adiciona um funcionário no fim da lista', () => {
