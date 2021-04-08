@@ -104,8 +104,28 @@ function animalMap(options = 0) {
   return zooMap;
 }
 
+const getDate = (acc, arr) => {
+  const [week, time] = arr;
+  const { open, close } = time;
+  const obj = acc;
+  obj[week] = open === 0 ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
+  return obj;
+};
+
+const getWeek = () => ({
+  Tuesday: 0,
+  Wednesday: 1,
+  Thursday: 2,
+  Friday: 3,
+  Saturday: 4,
+  Sunday: 5,
+  Monday: 6,
+});
+
 function schedule(dayName) {
-  // seu código aqui
+  if (!dayName) return Object.entries(hours).reduce(getDate, {});
+  const day = getWeek()[dayName];
+  return getDate({}, Object.entries(hours)[day]);
 }
 
 function oldestFromFirstSpecies(id) {
