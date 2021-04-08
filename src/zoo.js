@@ -24,10 +24,17 @@ function animalsOlderThan(animal, age) {
 
 function employeeByName(employeeName) {
   // seu código aqui
+  /* 'Sem parâmetros, retorna um objeto vazio', */
+  if (!employeeName) return {}; 
+  /* 'Quando provido o primeiro nome do funcionário, retorna o objeto do funcionário', */
+  /* 'Quando provido o último nome do funcionário, retorna o objeto do funcionário' */
+  return data.employees.find(({firstName, lastName }) => 
+  firstName === employeeName || lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  
 }
 
 function isManager(id) {
