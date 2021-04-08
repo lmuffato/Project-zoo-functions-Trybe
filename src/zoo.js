@@ -67,10 +67,18 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalCount(species) {
-  // seu código aqui
+  const searchSpecie = data.animals.find((animal) => animal.name === species);
+  if (searchSpecie !== undefined) {
+    return searchSpecie.residents.length;
+  }
+  const quantAnimais = {};
+
+  data.animals.forEach((item) => quantAnimais[item.name] = item.residents.length );
+  
+  return quantAnimais;
 }
 
-console.log(animalCount());
+console.log(animalCount('cobra'));
 
 // function entryCalculator(entrants) {
 //   // seu código aqui
