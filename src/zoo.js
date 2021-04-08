@@ -29,9 +29,12 @@ function animalsByIds(...ids) {
   return foundAnimals;
 }
 
-// function animalsOlderThan(animal, age) {
-//   // seu código aqui
-// }
+function animalsOlderThan(animal, age) {
+  const { verify } = functionsAnimals;
+  const haveMinimumAge = verify.age(animal, age);
+  if (haveMinimumAge) return true;
+  return false;
+}
 
 // function employeeByName(employeeName) {
 //   // seu código aqui
@@ -87,7 +90,7 @@ module.exports = {
   // employeeCoverage,
   // addEmployee,
   // isManager,
-  // animalsOlderThan,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
