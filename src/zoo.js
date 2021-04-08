@@ -12,17 +12,17 @@ eslint no-unused-vars: [
 // const { animals } = require('./data');
 const data = require('./data');
 
-function animalsByIds(...ids) {
-  const animalsReturned = data.animals.filter((animal, index) => animal.id === ids[index]);
+function animalsByIds(...ids) { // Utilizamos o rest para a função podere receber mais de um parâmetro.
+  const animalsReturned = data.animals.filter((animal, index) => animal.id === ids[index]); // Filtramos os animais pelo id, percorrendo suas posições.
   return animalsReturned;
 }
 
-// function animalsOlderThan(animal, age) {
-//   // seu código aqui
-// }
+function animalsOlderThan(animal, age) {
+  const animalToCheck = data.animals.find((resident) => resident.name === animal).residents; // Achamos os animais residentes pelo nome. Aplicamos o every para verificar se todos os elementos do array satisfazem a condição.
+  return animalToCheck.every((animalName) => animalName.age > age);
+}
 
 // function employeeByName(employeeName) {
-//   // seu código aqui
 // }
 
 // function createEmployee(personalInfo, associatedWith) {
@@ -75,7 +75,7 @@ module.exports = {
   // employeeCoverage,
   // addEmployee,
   // isManager,
-  // animalsOlderThan,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
