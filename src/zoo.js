@@ -8,18 +8,21 @@ eslint no-unused-vars: [
   }
 ]
 */
+// Desenvolvido junto com Nathi Zebral, Thalita Cecilier, Heloísa Hackenhaar
 
 const { animals } = require('./data');
-// const data = require('./data');
+const data = require('./data');
 
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.includes(animal.id));
 }
 
-/* function animalsOlderThan(animal, age) {
+function animalsOlderThan(animal, age) {
+  const ages = data.animals.find((anima) => anima.name === animal);
+  return ages.residents.every((resident) => (resident.age >= age));
 }
 
-function employeeByName(employeeName) {
+/* function employeeByName(employeeName) {
   // seu código aqui
 }
 
@@ -73,7 +76,7 @@ module.exports = {
   // employeeCoverage,
   // addEmployee,
   // isManager,
-  // animalsOlderThan,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
