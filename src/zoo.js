@@ -22,20 +22,24 @@ function animalsByIds(...ids) {
   return answer;
 }
 
-console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
-
 function animalsOlderThan(animal, age) {
   const specificAnimal = data.animals.filter((curr) => curr.name === animal);
   const ageTest = specificAnimal[0].residents.every((individual) => individual.age > age);
   return ageTest;
 }
-// console.log(animalsOlderThan('otters', 7));
+
+function employeeByName(employeeName) {
+  const arr = data.employees.filter((person) => person.firstName === employeeName
+  || person.lastName === employeeName);
+  let obj = arr[0];
+  if (typeof obj === 'undefined') {
+    obj = {};
+  }
+  return obj;
+}
+console.log(employeeByName());
 
 /*
-function employeeByName(employeeName) {
-  // seu código aqui
-}
-
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
@@ -95,4 +99,5 @@ module.exports = {
 module.exports = {
   animalsByIds,
   animalsOlderThan,
+  employeeByName,
 };
