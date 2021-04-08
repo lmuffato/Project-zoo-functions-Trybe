@@ -37,10 +37,23 @@ function employeeByName(empName) {
 }
 
 console.log(employeeByName());
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
 
+function createEmployee(personalInfo, associatedWith) {
+  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
+}
+const infoPer = {
+  id: '56d43ba3-a5a7-40f6-8dd7-cbb05082383f',
+  firstName: 'Wilburn',
+  lastName: 'Wishart',
+
+};
+const assoc = {
+  managers: ['burlId', 'olaId'],
+  responsibleFor: ['snakesId', 'elephantsId'],
+};
+
+console.log(createEmployee(infoPer, assoc));
 // function isManager(id) {
 //   // seu código aqui
 // }
