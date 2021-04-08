@@ -44,7 +44,7 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  return employees.push({
+  employees.push({
     id,
     firstName,
     lastName,
@@ -53,11 +53,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-/*
+/* Source: https://github.com/tryber/sd-08-project-zoo-function/blob/2f757e2a18cf749b0c9944025daf4350de77cd80/src/zoo.js */
 function animalCount(species) {
-  // seu código aqui
+  if (!species) {
+    return animals.reduce((acc, cur) => {
+      acc[cur.name] = cur.residents.length;
+      return acc;
+    });
+  }
+  return animals.find((item) => item.name === species);
 }
 
+/*
 function entryCalculator(entrants) {
   // seu código aqui
 }
@@ -87,7 +94,11 @@ module.exports = {
   /*
   entryCalculator,
   schedule,
+  */
+
   animalCount,
+
+  /*
   animalMap,
   */
 
