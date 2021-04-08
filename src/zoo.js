@@ -23,9 +23,12 @@ function animalsOlderThan(animal, age) {
   return theAnimal.residents.every((resident) => resident.age >= age);
 }
 
-// function employeeByName(employeeName) {
-//   // seu código aqui
-// }
+function employeeByName(employeeName = '') {
+  if (employeeName === '') {
+    return {};
+  }
+  return data.employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
+}
 
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
@@ -73,7 +76,7 @@ module.exports = {
 //   animalCount,
 //   animalMap,
   animalsByIds,
-  //   employeeByName,
+  employeeByName,
   //   employeeCoverage,
   //   addEmployee,
   //   isManager,
