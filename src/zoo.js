@@ -11,13 +11,15 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { employees, prices } = data;
+const { animals, employees, prices } = data;
+
+function animalsByIds(...ids) {
+  if (ids === null || ids === undefined) return [];
+  return animals.filter((animal, index) => animal.id === ids[index]);
+}
+// Com a ajuda do plantão do instrutor Eliezer Queiroz e sugestão da colega Carolina Vasconcellos.
 
 /*
-function animalsByIds(ids) {
-  // seu código aqui
-}
-
 function animalsOlderThan(animal, age) {
   // seu código aqui
 }
@@ -43,9 +45,11 @@ function createEmployee(personalInfo, associatedWith) {
 }
 /*
 function isManager(id) {
-  // seu código aqui
+  employees
+    .some((employee) => employee.managers === id || employee.managers.indexOf() !== -1);
 }
 */
+
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const newEmployee = {
     id,
@@ -60,11 +64,14 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 /* function animalCount(species) {
   // seu código aqui
 }
-
+*/
+/*
 function entryCalculator(entrants) {
-  // seu código aqui
+  const { Adult, Child, Senior } = entrants;
+  if (entrants === null || entrants === undefined) return 0;
 }
-
+*/
+/*
 function animalMap(options) {
   // seu código aqui
 }
@@ -92,15 +99,17 @@ function employeeCoverage(idOrName) {
 } */
 
 module.exports = {
-// entryCalculator,
-// schedule,
-//  animalCount,
-//  animalMap,
-//  animalsByIds,
+  // entryCalculator,
+  // schedule,
+  //  animalCount,
+  //  animalMap,
+  animalsByIds,
   employeeByName,
   /* employeeCoverage, */
-  addEmployee, /* isManager,
-//  animalsOlderThan, //  oldestFromFirstSpecies, */
+  addEmployee,
+  // isManager,
+  /* animalsOlderThan,
+// oldestFromFirstSpecies, */
   increasePrices,
   createEmployee,
 };
