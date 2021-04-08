@@ -153,8 +153,27 @@ function increasePrices(percentage) {
   return arrPrices.forEach((info) => getPrice(info, percentage));
 }
 
+const getEmplos = (acc, emplo) => {
+  const { firstName, lastName, responsibleFor } = emplo;
+  const full = `${firstName} ${lastName}`;
+  const obj = acc;
+
+  obj[full] = responsibleFor
+    .map((idA) => animals.find(({ id }) => id === idA).name);
+
+  return obj;
+};
+
+const getEmplo = (emplo, check, idOrName) => {
+  const { firstName, lastName, id } = emplo;
+  return check ? isXYZ(firstName, idOrName, lastName) : id === idOrName;
+};
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) return employees.reduce(getEmplos, {});
+
+  const isName = idOrName.split('').every((carac) => Number.isNaN(Number(carac)));
+  return getEmplos({}, employees.find((emplo) => getEmplo(emplo, isName, idOrName)));
 }
 
 module.exports = {
