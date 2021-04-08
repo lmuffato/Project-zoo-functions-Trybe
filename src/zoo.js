@@ -86,19 +86,73 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  const employee = { id, firstName, lastName, managers, responsibleFor };
+
+  data.employees.push(employee);
 }
 
-function animalCount(species) {
-  // seu código aqui
+function animalCount(specieName) {
+  let animalsSize = 0;
+
+  if (!specieName) {
+    const animals = {};
+    data.animals.forEach((animal) => {
+      animals[animal.name] = animal.residents.length;
+    });
+
+    return animals;
+  }
+
+  data.animals.forEach((animal) => {
+    if (animal.name === specieName) {
+      animalsSize = animal.residents.length;
+    }
+  });
+
+  return animalsSize;
 }
+
+const getTotalValue = (totalAdults = 0, totalChilds = 0, totalSenior = 0) => {
+  const adultPrize = data.prices.Adult;
+  const childsPrize = data.prices.Child;
+  const seniorPrize = data.prices.Senior;
+
+  let total = (totalAdults * adultPrize);
+  total += (totalChilds * childsPrize);
+  total += (totalSenior * seniorPrize);
+
+  return total;
+};
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (!entrants) return 0;
+
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+
+  const totalValue = getTotalValue(Adult, Child, Senior);
+
+  return totalValue;
 }
 
+const getAnimalsByLocation = (location) => {
+  const animals = data.animals.filter((animal) => animal.location === location);
+
+  console.log(animals);
+
+  return animals;
+};
+
 function animalMap(options) {
-  // seu código aqui
+  if (!options) {
+    const animalsOrderly = {
+      NE: getAnimalsByLocation('NE'),
+      NW: getAnimalsByLocation('NW'),
+      SE: getAnimalsByLocation('SE'),
+      SW: getAnimalsByLocation('SW'),
+    };
+
+    return animalsOrderly;
+  }
 }
 
 function schedule(dayName) {
