@@ -12,13 +12,17 @@ eslint no-unused-vars: [
 const { animals } = require('./data');
 // const data = require('./data');
 
+// found about .includes at https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
+// Desenvolvido com ajuda das alunas Nathalia Zerbal, Debora Passos, Heloisa Hackenhaar, Djaniza Vasques e Bia Zidioti
+
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.includes(animal.id));
 }
 
-// function animalsOlderThan(animal, age) {
-//   // seu código aqui
-// }
+function animalsOlderThan(animal, age) {
+  return animals.find((elAnimal) => elAnimal.name === animal)
+    .residents.every((res) => (res.age >= age));
+}
 
 // function employeeByName(employeeName) {
 //   // seu código aqui
@@ -74,7 +78,7 @@ module.exports = {
   // employeeCoverage,
   // addEmployee,
   // isManager,
-  // animalsOlderThan,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
