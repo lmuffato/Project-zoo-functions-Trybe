@@ -11,56 +11,77 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
+const { animals } = data;
+
 function animalsByIds(ids) {
-  // seu código aqui
+  const animalSearch = animals.find((animal) => animal.id === ids);
+  return animalSearch;
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  const anima = animal;
+  const ag = age;
+  console.log(anima + ag); // seu código aqui
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  const employ = employeeName;
+  console.log(employ);
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const employ = personalInfo;
+  const b = associatedWith;
+  console.log(employ + b);
 }
 
 function isManager(id) {
-  // seu código aqui
+  const employ = id;
+  console.log(employ);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  const employ = id;
+  const b = firstName;
+  const c = lastName;
+  const d = managers;
+  const e = responsibleFor;
+  console.log(employ + b + c + d + e);
 }
 
 function animalCount(species) {
-  // seu código aqui
+  const employ = species;
+  console.log(employ);
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  const employ = entrants;
+  console.log(employ);
 }
 
 function animalMap(options) {
-  // seu código aqui
+  const employ = options;
+  console.log(employ);
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  const employ = dayName;
+  console.log(employ);
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const employ = id;
+  console.log(employ);
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const employ = percentage;
+  console.log(employ);
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const employ = idOrName;
+  console.log(employ);
 }
 
 module.exports = {
