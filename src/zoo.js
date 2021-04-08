@@ -32,11 +32,9 @@ function employeeByName(employeeName) {
     .find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
 }
 
-/*
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
-*/
 
 /* Source: https://github.com/tryber/sd-010-a-project-zoo-functions/blob/e77b3c388c20903360c859b9cc026659e4efa3ff/src/zoo.js */
 function isManager(id) {
@@ -115,6 +113,7 @@ module.exports = {
   /*
   oldestFromFirstSpecies,
   increasePrices,
-  createEmployee,
   */
+
+  createEmployee,
 };
