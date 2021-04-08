@@ -13,20 +13,23 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   if (ids.length === 0) return ids;
-  if (ids.length === 1) return data.animals.find((el) => ids[0] === el.id);
+  if (ids.length === 1) return [data.animals.find((el) => ids[0] === el.id)];
   return data.animals.filter((el) => ids.includes(el.id));
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  return data.animals.find(({ name }) => name === animal)
+    .residents.every(({ age: ageAnimal }) => ageAnimal >= age);
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) return {};
+  return data.employees.find(({ firstName, lastName }) =>
+    firstName === employeeName || lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
