@@ -29,11 +29,14 @@ function employeeByName(employeeName) {
   if (empByFirstName) return empByFirstName;
   if (empByLastName) return empByLastName;
 }
-/*
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
 
+function createEmployee(personalInfo, associatedWith) {
+  return {
+    ...personalInfo,
+    ...associatedWith,
+  };
+}
+/*
 function isManager(id) {
   // seu código aqui
 }
@@ -83,5 +86,5 @@ module.exports = {
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
