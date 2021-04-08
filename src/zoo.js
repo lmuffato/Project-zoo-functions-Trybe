@@ -69,11 +69,25 @@ function entryCalculator(entrants) {
 function animalMap(options) {
   // seu código aqui
 }
+*/
 
+/* Source: https://github.com/tryber/sd-08-project-zoo-function/tree/6ba553f978bbba190e79284981a064395c610d15 */
 function schedule(dayName) {
-  // seu código aqui
+  const scheduleList = {
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED',
+  };
+
+  if (typeof dayName === 'string') return { [dayName]: scheduleList[dayName] };
+  return scheduleList;
 }
 
+/*
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
@@ -95,9 +109,9 @@ function employeeCoverage(idOrName) {
 module.exports = {
   /*
   entryCalculator,
-  schedule,
   */
 
+  schedule,
   animalCount,
 
   /*
