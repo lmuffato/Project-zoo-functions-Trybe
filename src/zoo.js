@@ -14,15 +14,18 @@ const { animals } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
-  if (!ids) return [];
   return animals.filter((animal) => ids.includes(animal));
 }
 
-/*
+/* Source: https://github.com/tryber/sd-08-project-zoo-function/tree/e59c4d832c334495d2e92b9a128eb8a97dbe70d6 */
+
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  return animals
+    .find((item) => item.name === animal)
+    .residents.every((some) => some.age > age);
 }
 
+/*
 function employeeByName(employeeName) {
   // seu código aqui
 }
@@ -83,7 +86,11 @@ module.exports = {
   employeeCoverage,
   addEmployee,
   isManager,
+  */
+
   animalsOlderThan,
+
+  /*
   oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
