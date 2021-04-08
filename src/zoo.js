@@ -6,7 +6,7 @@ eslint no-unused-vars: [
     "vars": "local",
     "varsIgnorePattern": "data"
   }
-]
+] commit
 */
 
 const data = require('./data');
