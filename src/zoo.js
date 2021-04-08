@@ -8,7 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
-const { animals } = require('./data');
+const { animals, employees } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -37,8 +37,14 @@ function isManager(id) {
   .some(gerente => gerente === id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const array = [];
+  array.id = id;
+  array.firstName = firstName;
+  array.lastName = lastName;
+  array.managers = [...managers];
+  array.responsibleFor = [...responsibleFor];
+  data.employees.push(array)
 }
 
 function animalCount(species) {
