@@ -36,8 +36,7 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  const employee = { ...personalInfo, ...associatedWith };
-  data.employees.push(employee);
+  return { ...personalInfo, ...associatedWith };
 }
 
 // function isManager(id) {
