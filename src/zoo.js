@@ -41,12 +41,11 @@ function createEmployee(personalInfo, associatedWith) {
   };
 }
 
-// function isManager(id) {
-//   const employeeId = employees.find((employee) => employee.id === id);
-//   console.log(employeeId);
-//   return employeeId.managers !== [];
-// }
-// console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+function isManager(id) {
+  const employeeById = employees.find((employee) => employee.id === id);
+  return employees.some((employee) => employee.managers
+    .includes(employeeById.name || employeeById.id));
+}
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   return employees.push({
@@ -58,9 +57,30 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-// function animalCount(species) {
-//   // seu código aqui
-// }
+const allSpeciesCount = () => {
+  const speciesCount = {};
+  animals.forEach((animal) => {
+    speciesCount.animal.name = animal.residents.length;
+  });
+  return speciesCount;
+};
+
+function animalCount(species = allSpeciesCount) {
+  if (species !== undefined) {
+    const animalsSpecies = animals.filter((animal) => animal.name === species);
+    console.log(animalsSpecies);
+    let sum = 0;
+    animalsSpecies.forEach((animal) => {
+      sum += 1;
+    });
+    return sum;
+  }
+  const speciesCount = {};
+  animals.forEach((animal) => {
+    speciesCount.animal.name = animal.residents.length;
+  });
+  return speciesCount;
+}
 
 // function entryCalculator(entrants) {
 //   // seu código aqui
@@ -89,13 +109,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
   addEmployee,
-  //isManager,
+  isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
