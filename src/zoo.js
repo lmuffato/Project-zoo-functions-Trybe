@@ -26,11 +26,12 @@ function animalsByIds(...ids) {
   if (ids.length === 0) return [];
   return ids.map((id) => data.animals.find((animal) => animal.id === id));
 }
-// console.log(animalsByIds(lionId, frogsId, tigersId, snakesId));
 
-// function animalsOlderThan(animal, age) {
-//   // seu código aqui
-// }
+function animalsOlderThan(animalName, age) {
+  return data.animals.find((animal) =>// Encontra o objeto do animal com o nome animalName
+    animal.name === animalName).residents.map((resident) =>// Acessa a propriedade residents e cria um array com as idades
+    resident.age).every((howOld) => howOld > age);// Por fim verifica se cada uma dessas idades são maiores que age
+}
 
 // function employeeByName(employeeName) {
 //   // seu código aqui
@@ -86,7 +87,7 @@ module.exports = {
   // employeeCoverage,
   // addEmployee,
   // isManager,
-  // animalsOlderThan,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
