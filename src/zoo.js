@@ -26,19 +26,26 @@ const employeeByName = (employeeName) => {
 const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 
 const isManager = (id) => {
+  const managersIds = employees.map(({ managers }) => managers);
+  const ids = [];
+  managersIds.forEach((d) => {
+    ids.push(...d);
+  });
+  return ids.some((manager) => manager === id);
 };
 
-const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {
-};
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+  // seu código aqui
+}
 
-const animalCount = (species) => {
+function animalCount(species) {
   if (species) return animals.find(({ name }) => name === species).residents.length;
   const res = {};
   animals.map(({ name, residents }) => ({ [name]: residents.length })).forEach((obj) => {
     Object.assign(res, obj);
   });
   return res;
-};
+}
 
 function entryCalculator(entrants) {
   // seu código aqui
