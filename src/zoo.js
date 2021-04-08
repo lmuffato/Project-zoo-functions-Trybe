@@ -58,13 +58,25 @@ function createEmployee(personalInfo, associatedWith) {
   };
 }
 
-// function isManager(id) {
-//   // seu código aqui
-// }
+function isManager(id) {
+  const objetoFuncionario = employees.find((item) => item.id === id);
+  if (objetoFuncionario.managers === []) {
+    return true;
+  }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+  return false;
+}
+
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+// coloco managers = [], pois esses dois parametros precisam ser arrays
+  employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
+}
 
 // function animalCount(species) {
 //   // seu código aqui
@@ -102,8 +114,8 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
-  // isManager,
+  addEmployee,
+  isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
