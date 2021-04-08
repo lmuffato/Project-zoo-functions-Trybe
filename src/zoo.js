@@ -134,9 +134,21 @@ function oldestFromFirstSpecies(id) {
   arr.push(oldest.age);
   return arr;
 }
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+
+function increasePrices(percentage) {
+  const Realpercent = percentage / 100;
+  const { prices } = data;
+  const { Adult } = prices;
+  const { Senior } = prices;
+  const { Child } = prices;
+  const newAdult = Number((Adult + Number((Adult * Realpercent).toPrecision(4))).toPrecision(4));
+  // as equações seguintes foram baseadas em: https://medium.com/swlh/how-to-round-to-a-certain-number-of-decimal-places-in-javascript-ed74c471c1b8
+  const newSenior = Math.round((Senior + (Senior * Realpercent)) * 100) / 100;
+  const newChild = Math.round((Child + (Child * Realpercent)) * 100) / 100;
+  prices.Adult = newAdult;
+  prices.Child = newChild;
+  prices.Senior = newSenior;
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -154,6 +166,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
