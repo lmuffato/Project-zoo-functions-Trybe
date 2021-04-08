@@ -11,16 +11,28 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function animalsByIds(ids) {
-  // seu código aqui
+function animalsByIds(...listOfIdsToSearch) {
+  // This guard clause is not necessary, but imo it makes the code prettier
+  if (listOfIdsToSearch.length === 0) return [];
+  const { animals } = data;
+  const animalsList = [];
+  listOfIdsToSearch.forEach((idToSearchFor) => {
+    animalsList.push(animals.find((animal) => animal.id === idToSearchFor));
+  });
+  return animalsList;
 }
 
-function animalsOlderThan(animal, age) {
-  // seu código aqui
+function animalsOlderThan(animalName, age) {
+  const { animals } = data;
+  const animalMatch = animals.find((animal) => animal.name === animalName);
+  return animalMatch.residents.every((resident) => resident.age >= age);
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (typeof employeeName === 'undefined') return ({});
+  const { employees } = data;
+  return employees.find((employee) => employee.firstName === employeeName
+    || employee.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
