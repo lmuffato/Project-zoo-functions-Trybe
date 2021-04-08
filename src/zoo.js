@@ -13,6 +13,7 @@ const data = require('./data');
 
 const { employees, prices } = data;
 
+/*
 function animalsByIds(ids) {
   // seu código aqui
 }
@@ -32,7 +33,7 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   // seu código aqui
 }
-
+*/
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const newEmployee = {
     id,
@@ -44,7 +45,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return employees.push(newEmployee);
 }
 
-function animalCount(species) {
+/* function animalCount(species) {
   // seu código aqui
 }
 
@@ -63,7 +64,7 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
-
+*/
 const calculateIncrease = (percent) => 1 + (percent / 100) + 0.00001;
 
 function increasePrices(percentage) {
@@ -73,22 +74,21 @@ function increasePrices(percentage) {
   prices.Child = parseFloat((prices.Child * increasePrice).toPrecision(4));
 }
 
+/*
 function employeeCoverage(idOrName) {
   // seu código aqui
-}
+} */
 
 module.exports = {
-  entryCalculator,
-  schedule,
-  animalCount,
-  animalMap,
-  animalsByIds,
-  employeeByName,
-  employeeCoverage,
-  addEmployee,
-  isManager,
-  animalsOlderThan,
-  oldestFromFirstSpecies,
+// entryCalculator,
+// schedule,
+//  animalCount,
+//  animalMap,
+//  animalsByIds,
+//  employeeByName,
+//  employeeCoverage,
+  addEmployee, /* isManager,
+//  animalsOlderThan, //  oldestFromFirstSpecies, */
   increasePrices,
-  createEmployee,
+//  createEmployee,
 };
