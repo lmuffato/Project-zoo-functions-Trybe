@@ -58,15 +58,38 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  return `${entrants}`;
+  return entrants;
 }
 
 function animalMap(options) {
   return `${options}`;
 }
 
+function convertHourToAmPm(hour) {
+  return hour > 12 ? `${hour - 12}pm` : `${hour}am`;
+}
+
+function formatMessageOpenClose(openHour, closedHour) {
+  if (openHour === 0 && closedHour === 0) return 'CLOSED';
+
+  const open = convertHourToAmPm(openHour);
+  const close = convertHourToAmPm(closedHour);
+  return `Open from ${open} until ${close}`;
+}
+
 function schedule(dayName) {
-  return `${dayName}`;
+  if (dayName === undefined) {
+    const hourskeys = Object.keys(data.hours).sort();
+    const weekSchedule = {};
+    hourskeys
+      .forEach((day) => {
+        weekSchedule[day] = formatMessageOpenClose(data.hours[day].open, data.hours[day].close);
+      });
+    return weekSchedule;
+  }
+  const day = {};
+  day[dayName] = formatMessageOpenClose(data.hours[dayName].open, data.hours[dayName].close);
+  return day;
 }
 
 function oldestFromFirstSpecies(id) {
