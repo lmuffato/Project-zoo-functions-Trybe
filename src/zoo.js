@@ -42,52 +42,55 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
+  return employees.some(({ managers }) => managers.indexOf(id) !== -1);
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+// console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
-function animalCount(species) {
-  // seu código aqui
-}
+// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+//   // seu código aqui
+// }
 
-function entryCalculator(entrants) {
-  // seu código aqui
-}
+// function animalCount(species) {
+//   // seu código aqui
+// }
 
-function animalMap(options) {
-  // seu código aqui
-}
+// function entryCalculator(entrants) {
+//   // seu código aqui
+// }
 
-function schedule(dayName) {
-  // seu código aqui
-}
+// function animalMap(options) {
+//   // seu código aqui
+// }
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// function schedule(dayName) {
+//   // seu código aqui
+// }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function oldestFromFirstSpecies(id) {
+//   // seu código aqui
+// }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function increasePrices(percentage) {
+//   // seu código aqui
+// }
+
+// function employeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
-  entryCalculator,
-  schedule,
-  animalCount,
-  animalMap,
+  // entryCalculator,
+  // schedule,
+  // animalCount,
+  // animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
-  addEmployee,
+  // employeeCoverage,
+  // addEmployee,
   isManager,
   animalsOlderThan,
-  oldestFromFirstSpecies,
-  increasePrices,
+  // oldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
