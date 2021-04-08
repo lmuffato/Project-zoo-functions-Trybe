@@ -63,11 +63,23 @@ function animalCount(species) {
   return data.animals.find((animal) => animal.name === species).residents.length;
 }
 
-console.log(animalCount());
-
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+function entryCalculator(entrants) {
+  if (typeof entrants === 'undefined') {
+    return 0;
+  }
+  const { Adult, Child, Senior } = entrants;
+  let totalPrice = 0;
+  if (typeof Adult === 'number') {
+    totalPrice += Adult * data.prices.Adult;
+  }
+  if (typeof Child === 'number') {
+    totalPrice += Child * data.prices.Child;
+  }
+  if (typeof Senior === 'number') {
+    totalPrice += Senior * data.prices.Senior;
+  }
+  return totalPrice;
+}
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -90,8 +102,8 @@ console.log(animalCount());
 // }
 
 module.exports = {
-//   entryCalculator,
-//   schedule,
+  entryCalculator,
+  //   schedule,
   animalCount,
   //  animalMap,
   animalsByIds,
