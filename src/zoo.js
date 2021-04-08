@@ -12,14 +12,12 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  // seu código aqui
   return (ids !== []) ? ids.map((id) => data.animals.find((animal) => animal.id === id)) : ids;
 }
 
 const isOlder = (res, age) => !res.reduce((test, re) => (!test ? re.age < age : test), false);
 
 function animalsOlderThan(nAnimal, age) {
-  // seu código aqui
   const animalsChoiced = data.animals.find((animal) => animal.name === nAnimal);
   let result = false;
   if (animalsChoiced !== undefined) {
@@ -31,7 +29,6 @@ function animalsOlderThan(nAnimal, age) {
 console.log(animalsOlderThan('lions', 7));
 
 function employeeByName(empName) {
-  // seu código aqui
   const empS = data.employees.find((emp) => emp.firstName === empName || emp.lastName === empName);
   return empS !== undefined ? empS : {};
 }
@@ -39,7 +36,6 @@ function employeeByName(empName) {
 console.log(employeeByName());
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
   return { ...personalInfo, ...associatedWith };
 }
 
@@ -57,16 +53,17 @@ const assoc = {
 console.log(createEmployee(infoPer, assoc));
 
 function isManager(id) {
-  // seu código aqui
   const managers = [];
   data.employees.forEach((emp) => managers.push(...emp.managers));
   return managers.find((idMan) => idMan === id) !== undefined;
 }
 
 console.log(isManager('b0dc644a-5335-489b-8a2c-4e086c7819a2'));
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+
+function addEmployee(id, firstN, lastN, managers, responsibleFor) {
+  const newEmp = createEmployee({ ...id, ...firstN, ...lastN }, { ...managers, ...responsibleFor });
+  data.employees.push(newEmp);
+}
 
 // function animalCount(species) {
 //   // seu código aqui
@@ -104,10 +101,10 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
