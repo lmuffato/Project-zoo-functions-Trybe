@@ -36,7 +36,6 @@ function employeeByName(employeeName) {
 
   return employeeObject || {};
 }
-console.log(employeeByName());
 
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
