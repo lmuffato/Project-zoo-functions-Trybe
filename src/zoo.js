@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { animals, employees, prices, hours } = require('./data');
-// const data = require('./data');
+const data = require('./data');
 
 function animalsByIds(...ids) {
   const animalsSpecies = ids.map((elem) => animals.find((elem2) => elem === elem2.id));
@@ -100,9 +100,12 @@ function oldestFromFirstSpecies(id) {
   return array;
 }
 
-// function increasePrices(percentage) {
-// seu código aqui
-// }
+function increasePrices(percentage) {
+  const increse = (percentage / 100) + 1;
+  prices.Adult *= increse;
+  prices.Child *= increse;
+  prices.Senior *= increse;
+}
 
 // function employeeCoverage(idOrName) {
 // seu código aqui
