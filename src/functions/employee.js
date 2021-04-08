@@ -21,6 +21,29 @@ const find = {
   },
 };
 
+const verify = {
+  byId: {
+    oneId: {
+      ifIsManager(id) {
+        const results = [];
+
+        data.employees.forEach((employee) => {
+          const { managers } = employee;
+          const isManager = managers.some((manager) => manager === id);
+          results.push(isManager);
+        });
+
+        const hasEmployees = results.some((result) => result === true);
+
+        if (hasEmployees) return true;
+
+        return false;
+      },
+    },
+  },
+};
+
 module.exports = {
   find,
+  verify,
 };
