@@ -36,8 +36,10 @@ function employeeByName(employeeName) {
   return searchEmployee;
 }
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+function createEmployee({ id, firstName, lastName }, { managers, responsibleFor }) {
+  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
+  employees.push(newEmployee);
+  return newEmployee;
 }
 
 function isManager(id) {
