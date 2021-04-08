@@ -65,12 +65,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   // seu código aqui
 }
 */
-/*
-function entryCalculator(entrants) {
-  const { Adult, Child, Senior } = entrants;
-  if (entrants === null || entrants === undefined) return 0;
+
+function entryCalculator(entrants = {}) {
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  if (entrants === undefined) return 0;
+  const totalAdult = Adult * parseFloat(prices.Adult);
+  const totalChild = Child * parseFloat(prices.Child);
+  const totalSenior = Senior * parseFloat(prices.Senior);
+  return totalAdult + totalChild + totalSenior;
 }
-*/
 /*
 function animalMap(options) {
   // seu código aqui
@@ -99,7 +102,7 @@ function employeeCoverage(idOrName) {
 } */
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   //  animalCount,
   //  animalMap,
