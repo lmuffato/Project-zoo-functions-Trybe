@@ -28,43 +28,43 @@ function employeeByName(...args) {
 }
 console.log(employeeByName('Nigel'));
 
-function createEmployee() {
+function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
 
-function isManager() {
+function isManager(id) {
   // seu código aqui
 }
 
-function addEmployee() {
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function animalCount() {
+function animalCount(species) {
   // seu código aqui
 }
 
-function entryCalculator() {
+function entryCalculator(entrants) {
   // seu código aqui
 }
 
-function animalMap() {
+function animalMap(options) {
   // seu código aqui
 }
 
-function schedule() {
+function schedule(dayName) {
   // seu código aqui
 }
 
-function oldestFromFirstSpecies() {
+function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
-function increasePrices() {
+function increasePrices(percentage) {
   // seu código aqui
 }
 
-function employeeCoverage() {
+function employeeCoverage(idOrName) {
   // seu código aqui
 }
 
