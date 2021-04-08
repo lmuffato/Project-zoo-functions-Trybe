@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { animals } = require('./data');
-const data = require('./data');
+//const data = require('./data');
 
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.includes(animal.id));
@@ -64,18 +64,18 @@ function animalsByIds(...ids) {
 //   // seu código aqui
 // }
 
-module.exports = {
-  entryCalculator,
-  schedule,
-  animalCount,
-  animalMap,
-  animalsByIds,
-  employeeByName,
-  employeeCoverage,
-  addEmployee,
-  isManager,
-  animalsOlderThan,
-  oldestFromFirstSpecies,
-  increasePrices,
-  createEmployee,
-};
+// module.exports = {
+//   entryCalculator,
+//   schedule,
+//   animalCount,
+//   animalMap,
+//   animalsByIds,
+//   employeeByName,
+//   employeeCoverage,
+//   addEmployee,
+//   isManager,
+//   animalsOlderThan,
+//   oldestFromFirstSpecies,
+//   increasePrices,
+//   createEmployee,
+// };
