@@ -11,20 +11,31 @@ eslint no-unused-vars: [
 
 // const assert = require('assert');
 const { animals } = require('./data.js');
+const { employees } = require('./data.js');
 
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.includes(animal.id));
 }
 
-console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
+console.log(animalsByIds());
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
+  return animals
+    .find((specimen) => specimen.name === animal).residents
+    .every((specimen) => specimen.age >= age);
 }
 
 function employeeByName(employeeName) {
   // seu código aqui
+  if (employeeName === undefined) {
+    return {};
+  }
+
+  return employees
+    .find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
 }
+console.log(employeeByName('Wishart'));
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
