@@ -13,14 +13,13 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   // seu código aqui
-  const arr = [];
-  ids.forEach((element) => {
-    arr.push(data.animals.find((animal) => element === animal.id));
-  });
-  return arr;
+  if (ids === []) {
+    return [];
+  }
+  return ids.map((id) => data.animals.find((animal) => animal.id === id));
 }
 
-function animalsOlderThan(animal, age) {
+/* function animalsOlderThan(animal, age) {
   // seu código aqui
 }
 
@@ -67,19 +66,19 @@ function increasePrices(percentage) {
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
-
+*/
 module.exports = {
-  entryCalculator,
+/*  entryCalculator,
   schedule,
   animalCount,
-  animalMap,
+  animalMap, */
   animalsByIds,
-  employeeByName,
+/*  employeeByName,
   employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
   increasePrices,
-  createEmployee,
+  createEmployee, */
 };
