@@ -8,7 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
-
+/*
 const data = require('./data');
 
 function animalsByIds(ids) {
@@ -62,7 +62,7 @@ function increasePrices(percentage) {
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
-
+*/
 module.exports = {
   entryCalculator,
   schedule,
