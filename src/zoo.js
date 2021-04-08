@@ -18,7 +18,7 @@ function animalsByIds(...ids) {
 function animalsOlderThan(animal, age) {
   return animals
     .find((specie) => specie.name === animal)
-      .residents.every((specie) => specie.age > age);
+    .residents.every((specie) => specie.age > age);
 }
 
 function employeeByName(employeeName) {
@@ -87,8 +87,7 @@ function oldestFromFirstSpecies(id) {
   const residents = animals.find((animal) => animal.id === firstAnimalId)
     .residents;
   const oldestAnimal = residents.reduce((older, resident) =>
-    older.age < resident.age ? resident : older
-  );
+    older.age < resident.age ? resident : older);
   return Object.values(oldestAnimal);
 }
 
