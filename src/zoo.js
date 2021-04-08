@@ -88,7 +88,7 @@ function schedule(dayName) {
 function increasePrices(percentage) {
   const increase = (1 + (percentage / 100));
   const { Adult, Senior, Child } = data.prices;
-  return {
+  data.prices = {
     Adult: Math.round(100 * (Adult * increase)) / 100,
     Senior: Math.round(100 * (Senior * increase)) / 100,
     Child: Math.round(100 * (Child * increase)) / 100,
