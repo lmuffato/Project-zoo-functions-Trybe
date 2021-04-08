@@ -21,12 +21,12 @@ function animalsOlderThan(animal, age) {
   // seu código aqui
   return data.animals.find(({ name }) =>
     name === animal).residents.every((resident) =>
-      resident.age >= age);
+    resident.age >= age);
 }
 
 function employeeByName(employeeName) {
   // seu código aqui
-  return employeeName === undefined ? {} 
+  return employeeName === undefined ? {}
     : data.employees.find(({ firstName, lastName }) =>
       employeeName === firstName || employeeName === lastName);
 }
@@ -46,6 +46,15 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
+  const managerList = [];
+  data.employees.forEach(({ managers }) => {
+    if (managerList.every((manager) => managers.every((managerTest) => manager !== managerTest))) {
+      managerList.push(...managers);
+    }
+  });
+
+  return data.employees.some((employee) =>
+    employee.id === id && (managerList.some((idTeste) => idTeste === employee.id)));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -87,9 +96,9 @@ module.exports = {
   animalMap, */
   animalsByIds,
   employeeByName,
-/*   employeeCoverage,
-  addEmployee,
-  isManager, */
+  // employeeCoverage,
+  // addEmployee,
+  isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
