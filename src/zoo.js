@@ -15,9 +15,11 @@ const data = require('./data');
 //   // seu código aqui
 // }
 
-// function animalsOlderThan(animal, age) {
-//   // seu código aqui
-// }
+function animalsOlderThan(animal, age) {
+  // seu código aqui
+  const animalVerify = data.animals.find((animalName) => animalName.name === animal);
+  return animalVerify.residents.every((resident) => resident.age > age);
+}
 
 function employeeByName(employeeName) {
   // seu código aqui
@@ -77,7 +79,7 @@ module.exports = {
   // employeeCoverage,
   // addEmployee,
   // isManager,
-  // animalsOlderThan,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
