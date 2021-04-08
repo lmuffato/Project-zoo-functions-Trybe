@@ -15,6 +15,7 @@ function animalsByIds(...ids) {
   const { animals } = data;
   return animals.filter(({ id }) => ids.includes(id));
 }
+
 // console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce',
 //   'e8481c1d-42ea-4610-8e11-1752cfc05a46'));
 // console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
@@ -32,9 +33,16 @@ function animalsOlderThan(animal, age) {
 // console.log(animalsOlderThan('penguins', 10));
 // console.log(animalsOlderThan('otters', 7));
 
-// function employeeByName(employeeName) {
-//   // seu código aqui
-// }
+function employeeByName(employeeName) {
+  const { employees } = data;
+  return (!employeeName) ? {} : employees.find(({ firstName, lastName }) =>
+    firstName === employeeName || lastName === employeeName);
+}
+// console.log(data.employees[0].firstName);
+// console.log(data.employees[0].lastName);
+// console.log(employeeByName('Emery'));
+// console.log(employeeByName('Wishart'));
+// console.log(employeeByName());
 
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
@@ -82,7 +90,7 @@ module.exports = {
   // animalCount,
   // animalMap,
   animalsByIds,
-  // employeeByName,
+  employeeByName,
   // employeeCoverage,
   // addEmployee,
   // isManager,
