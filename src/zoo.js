@@ -65,7 +65,7 @@ function animalCount(species) {
 }
 
 function entryCalculator(...entrants) {
-  return entrants
+  return entrants;
 }
 
 function animalMap(options) {
