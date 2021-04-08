@@ -38,24 +38,24 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   return data.employees
     .some((isManager) => isManager.managers
-        .some((manager) => manager === id));
+      .some((manager) => manager === id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {;
-  const array = []
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+  const array = [];
   array.id = id;
   array.firstName = firstName;
   array.lastName = lastName;
   array.manager = [...managers];
   array.responsibleFor = [...responsibleFor];
-  employees.push(array)
+  employees.push(array);
 }
 
 function animalCount(species) {
   const animalPop = {};
   data.animals.forEach((animal) => animalPop[animal.name] = animal.residents.length);
   if (species === undefined) return animalPop;
-  return animalPop[species]
+  return animalPop[species];
 }
 
 function entryCalculator(...entrants) {
