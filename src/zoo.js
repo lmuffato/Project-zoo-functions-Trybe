@@ -14,8 +14,9 @@ const data = require('./data');
 function animalsByIds(...ids) {
   return data.animals.filter(({ id }) => ids.includes(id));
 }
+animalsByIds()
 
-//'requisito feito com a ajuda de Murilo Gonçalves, Lucas Pedroso e Nilson Ribeiro'
+// requisito feito com a ajuda de Murilo Gonçalves, Lucas Pedroso e Nilson Ribeiro
 
 // function animalsOlderThan(animal, age) {
 //   // seu código aqui
@@ -70,7 +71,7 @@ function animalsByIds(...ids) {
 //   schedule,
 //   animalCount,
 //   animalMap,
-//   animalsByIds,
+   animalsByIds,
 //   employeeByName,
 //   employeeCoverage,
 //   addEmployee,
