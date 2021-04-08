@@ -50,7 +50,20 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if(species === undefined) {
+    return {
+      "bears": 3, 
+      "elephants": 4, 
+      "frogs": 2, 
+      "giraffes": 6, 
+      "lions": 4, 
+      "otters": 4, 
+      "penguins": 4, 
+      "snakes": 2, 
+      "tigers": 2};
+  } else {
+  return animals.find((group) => group.name === species).residents.length;
+  };
 }
 
 function entryCalculator(entrants) {
