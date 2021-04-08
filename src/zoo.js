@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees } = require('./data');
+const { animals, employees, prices } = require('./data');
 
 // const data = require('./data');
 
@@ -77,11 +77,16 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
+*/
 
+/* Source; https://github.com/tryber/sd-08-project-zoo-function/blob/624454bd864d9badf6bdaeabfc2c929e8103720a/src/zoo.js*/
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.keys(prices).forEach((element) => {
+    prices[element] = Math.round(prices[element] * (1 + (percentage / 100)) * 100) / 100;
+  });
 }
 
+/*
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
@@ -111,8 +116,8 @@ module.exports = {
 
   /*
   oldestFromFirstSpecies,
-  increasePrices,
   */
 
+  increasePrices,
   createEmployee,
 };
