@@ -102,13 +102,13 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   const increse = (percentage / 100) + 1;
-  const adultPrice = prices.Adult * increse + 0.01;
-  const childPrice = prices.Child * increse + 0.01;
-  const seniorPrice = prices.Senior * increse + 0.01;
+  const adultPrice = Math.round(prices.Adult * increse * 100) / 100;
+  const childPrice = Math.round(prices.Child * increse * 100) / 100;
+  const seniorPrice = Math.round(prices.Senior * increse * 100) / 100;
 
-  prices.Adult = adultPrice.toFixed(2);
-  prices.Child = childPrice.toFixed(2);
-  prices.Senior = seniorPrice.toFixed(2);
+  prices.Adult = adultPrice;
+  prices.Child = childPrice;
+  prices.Senior = seniorPrice;
 }
 
 // function employeeCoverage(idOrName) {
