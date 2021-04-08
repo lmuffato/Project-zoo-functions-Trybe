@@ -14,9 +14,9 @@ const data = require('./data');
 function animalsByIds(...ids) {
   return data.animals.filter(({ id }) => ids.includes(id));
 }
+
 //requisito feito com a ajuda de Murilo Gonçalves, Lucas Pedroso e Nilson Ribeiro
  
-
 function animalsOlderThan(animal, age) {
   // seu código aqui
 }
