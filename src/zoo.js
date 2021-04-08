@@ -14,8 +14,7 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   data.animals.reduce((acc, animal) => {
-    if (ids === animal.name)
-      return acc + animal.name;
+    if (ids === animal.name) return acc + animal.name;
   });
 }
 
