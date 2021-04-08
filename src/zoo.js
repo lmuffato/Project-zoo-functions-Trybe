@@ -9,73 +9,49 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require('./data');
+const { animals } = require('./data');
+// const data = require('./data');
 
-function animalsByIds(ids) {
-  // seu código aqui
+function animalsByIds(...ids) {
+  return animals.filter((animal) => ids.includes(animal.id));
 }
 
-function animalsOlderThan(animal, age) {
-  // seu código aqui
-}
+// function animalsOlderThan(animal, age) {}
 
-function employeeByName(employeeName) {
-  // seu código aqui
-}
+// function employeeByName(employeeName) {}
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
+// function createEmployee(personalInfo, associatedWith) {}
 
-function isManager(id) {
-  // seu código aqui
-}
+// function isManager(id) {}
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+// function addEmployee(id, firstName, lastName, managers, responsibleFor) {}
 
-function animalCount(species) {
-  // seu código aqui
-}
+// function animalCount(species) {}
 
-function entryCalculator(entrants) {
-  // seu código aqui
-}
+// function entryCalculator(entrants) {}
 
-function animalMap(options) {
-  // seu código aqui
-}
+// function animalMap(options) {}
 
-function schedule(dayName) {
-  // seu código aqui
-}
+// function schedule(dayName) {}
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// function oldestFromFirstSpecies(id) {}
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function increasePrices(percentage) {}
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function employeeCoverage(idOrName) {}
 
 module.exports = {
-  entryCalculator,
-  schedule,
-  animalCount,
-  animalMap,
+  // entryCalculator,
+  // schedule,
+  // animalCount,
+  // animalMap,
   animalsByIds,
-  employeeByName,
-  employeeCoverage,
-  addEmployee,
-  isManager,
-  animalsOlderThan,
-  oldestFromFirstSpecies,
-  increasePrices,
-  createEmployee,
+  // employeeByName,
+  // employeeCoverage,
+  // addEmployee,
+  // isManager,
+  // animalsOlderThan,
+  // oldestFromFirstSpecies,
+  // increasePrices,
+  // createEmployee,
 };
-

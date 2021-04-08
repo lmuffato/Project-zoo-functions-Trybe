@@ -5,6 +5,7 @@ const snakesId = '78460a91-f4da-4dea-a469-86fd2b8ccc84';
 const frogsId = '89be95b3-47e4-4c5b-b687-1fabf2afa274';
 const bearsId = 'baa6e93a-f295-44e7-8f70-2bcdc6f6948d';
 const tigersId = 'e8481c1d-42ea-4610-8e11-1752cfc05a46';
+const penguinsId = 'ef3778eb-2844-4c7c-b66c-f432073e1c6b';
 
 const stephanieId = '9e7d4524-363c-416a-8759-8aa7e50c0992';
 const olaId = 'fdb2543b-5662-46a7-badc-93d960fdc0a8';
@@ -82,7 +83,7 @@ module.exports = {
       ],
     },
     {
-      id: 'ef3778eb-2844-4c7c-b66c-f432073e1c6b',
+      id: penguinsId,
       name: 'penguins',
       popularity: 4,
       location: 'SE',
