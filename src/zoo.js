@@ -65,9 +65,9 @@ function entryCalculator(entrants) {
   return Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
 }
 
-function animalMap(options) {
-  // seu código aqui
-}
+// function animalMap(options) {
+// seu código aqui
+// }
 
 function schedule(dayName) {
   const obj = {};
@@ -98,26 +98,26 @@ function oldestFromFirstSpecies(id) {
   return array;
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function increasePrices(percentage) {
+// seu código aqui
+// }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function employeeCoverage(idOrName) {
+// seu código aqui
+// }
 
 module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  // employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  increasePrices,
+  // increasePrices,
   createEmployee,
 };
