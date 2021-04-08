@@ -11,7 +11,8 @@ eslint no-unused-vars: [
 // os requisitos foram feitos colaborativamente com as colegas  , Heloisa , Thalia Cecillier, Débora Passos, Djaniza e Bia
 
 const { animals } = require('./data');
-// const data = require('./data');
+const { employees } = require('./data');
+const data = require('./data');
 
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.includes(animal.id));
@@ -22,10 +23,13 @@ function animalsOlderThan(animal, age) {
     .residents.every((res) => res.age >= age);
 }
 
-// function employeeByName(employeeName) {
-// seu código aqui
-// }
-
+function employeeByName(employeeName) {
+  if (!employeeName) {
+    return {};
+  }
+  return employees.find((employee) =>
+    employees.firstName === employeeName || employee.lastName === employeeName);
+}
 // function createEmployee(personalInfo, associatedWith) {
 // seu código aqui
 // }
@@ -72,7 +76,7 @@ module.exports = {
   // animalCount,
   // animalMap,
   animalsByIds,
-  // employeeByName,
+  employeeByName,
   // employeeCoverage,
   // addEmployee,
   // isManager,
