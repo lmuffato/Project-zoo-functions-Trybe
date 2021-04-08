@@ -43,7 +43,14 @@ const verify = {
   },
 };
 
+const get = {
+  employees() {
+    return data.employees;
+  },
+};
+
 module.exports = {
   find,
   verify,
+  get,
 };

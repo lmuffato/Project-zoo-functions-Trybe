@@ -49,7 +49,10 @@ function employeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   const { id, firstName, lastName } = personalInfo;
-  const { managers, responsibleFor } = associatedWith;
+  let { managers, responsibleFor } = associatedWith;
+
+  if (managers === undefined) managers = [];
+  if (responsibleFor === undefined) responsibleFor = [];
 
   const newEmployee = {
     id,
@@ -67,9 +70,15 @@ function isManager(id) {
   return verify.byId.oneId.ifIsManager(id);
 }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+  const { get } = functionsEmployee;
+
+  const employees = get.employees();
+
+  const newEmployee = createEmployee({ id, firstName, lastName }, { managers, responsibleFor });
+
+  employees.push(newEmployee);
+}
 
 // function animalCount(species) {
 //   // seu código aqui
@@ -107,7 +116,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
