@@ -17,7 +17,9 @@ function animalsByIds(...ids) {
   if (ids.length === 0) {
     return [];
   }
-  return animals.filter((animal) => ids.some((id) => animal.id === id));
+  return animals
+    .filter((animal) => ids
+      .some((id) => animal.id === id));
 }
 
 function animalsOlderThan(animalName, age) {
@@ -49,6 +51,8 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
+  return employees
+    .some(({ managers }) => managers.indexOf(id) !== -1);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
