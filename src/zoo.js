@@ -29,11 +29,10 @@ const employeeByName = (employeeName) => {
   return employeeObj === undefined ? {} : employeeObj;
 };
 
-console.log(employeeByName());
-
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
+const createEmployee = (
+  { id, firstName, lastName },
+  { managers, responsibleFor },
+) => ({ id, firstName, lastName, managers, responsibleFor });
 
 // function isManager(id) {
 //   // seu código aqui
@@ -84,5 +83,5 @@ module.exports = {
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
