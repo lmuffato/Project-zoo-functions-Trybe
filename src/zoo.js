@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { employees } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -42,9 +43,11 @@ function createEmployee(personalInfo, associatedWith) {
   return newEmployee;
 }
 
-// function isManager(id) {
-//   // seu código aqui
-// }
+function isManager(id) {
+  return data.employees.some(({ managers}) => managers.includes(id));
+}
+
+//requisito feito com a ajuda de Thiago Souza e Rafael Medeiros
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
@@ -87,7 +90,7 @@ module.exports = {
   employeeByName,
   //  employeeCoverage,
   //  ddEmployee,
-  //  isManager,
+  isManager,
   animalsOlderThan,
   //  oldestFromFirstSpecies,
   //  increasePrices,
