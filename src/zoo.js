@@ -38,11 +38,17 @@ eslint no-unused-vars: [
 
 // Requisito 4
 
-const data = require('./data');
-
 // function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
+//   const newColaboration = {
+//     ...personalInfo,
+//     ...associatedWith,
+//   };
+//   return newColaboration;
 // }
+
+// Requisito 5
+
+const data = require('./data');
 
 // function isManager(id) {
 //   // seu código aqui
