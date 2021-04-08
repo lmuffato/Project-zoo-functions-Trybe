@@ -22,14 +22,7 @@ function animalsByIds(...ids) {
 // function animalsOlderThan(animalName, age) {
 //   animals.every((animal) => )
 // }
-// employees: [
-//   {
-//     id: 'c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1',
-//     firstName: 'Nigel',
-//     lastName: 'Nelson',
-//     managers: [burlId, olaId],
-//     responsibleFor: [lionId, tigersId],
-//   },
+
 function employeeByName(employeeName) {
   if (employeeName !== undefined) {
     return employees.find((name) => name.firstName === employeeName
@@ -38,9 +31,17 @@ function employeeByName(employeeName) {
   return {};
 }
 
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
+function createEmployee(personalInfo, associatedWith) {
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+}
 
 // function isManager(id) {
 //   // seu código aqui
@@ -91,5 +92,5 @@ module.exports = {
   // animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
