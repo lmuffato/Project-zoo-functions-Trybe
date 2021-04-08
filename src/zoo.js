@@ -50,17 +50,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-/* Source: https://github.com/tryber/sd-08-project-zoo-function/tree/c464723d68232d5a56b2db03b1c8488aec652c62 */
+/* Source: https://github.com/tryber/sd-08-project-zoo-function/blob/624454bd864d9badf6bdaeabfc2c929e8103720a/src/zoo.js */
 function animalCount(species) {
-  const animalEmpty = {};
-
-  if (!species) return animalEmpty;
-
-  animals.forEach((element) => {
-    animalEmpty[element.name] = element.residents.name;
+  const allAnimals = animals.reduce((acc, cur) => {
+    acc[cur.name] = cur.residents.length;
+    return acc;
   });
 
-  return animalEmpty[species];
+  if (species) return allAnimals[species];
+  return allAnimals;
 }
 
 /*
