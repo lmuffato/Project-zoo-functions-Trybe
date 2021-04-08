@@ -3,3 +3,6 @@
 # VSCode repo settings
 .vscode
 node_modules/
+
+# WebStorm repo settings
+.idea
