@@ -64,6 +64,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function animalCount(species = undefined) {
   const { animals } = data;
   if (species === undefined) {
+    // o codigo da função seguinte foi baseado em: https://github.com/eslint/eslint/issues/8581
     const obj = animals.reduce((acumulat, animal) => {
       const acumulator = { ...acumulat };
       acumulator[animal.name] = animal.residents.length;
