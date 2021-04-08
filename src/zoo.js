@@ -8,8 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
-const { animals } = require('./data');
-const { employees } = require('./data');
+const { animals, employees } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -41,12 +40,12 @@ function isManager(id) {
       .some((manager) => manager === id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const array = [];
   array.id = id;
   array.firstName = firstName;
   array.lastName = lastName;
-  array.manager = [...managers];
+  array.managers = [...managers];
   array.responsibleFor = [...responsibleFor];
   employees.push(array);
 }
@@ -64,8 +63,8 @@ function animalCount(species) {
   return objChange;
 }
 
-function entryCalculator(...entrants) {
-  return entrants;
+function entryCalculator(entrants) {
+  return entrantrs;
 }
 
 function animalMap(options) {
