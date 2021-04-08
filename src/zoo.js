@@ -9,12 +9,14 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(species, age) {
-  const animals = data.animals.find((animal) => species === animal.name).residents;
-  return animals.every((animal) => animal.age > age);
+  const { residents } = data.animals.find((animal) => species === animal.name);
+  return residents.every((animal) => animal.age > age);
 }
 
 function employeeByName(employeeName) {
-  return `${employeeName}`;
+  if (!employeeName) return {};
+  return data.employees
+    .find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
