@@ -9,9 +9,9 @@ eslint no-unused-vars: [
 ]
 */
 
-// const data = require('./data');
+const data = require('./data');
 
-// function animalsByIds(ids) {
+// function animalsByIds() {
 //   // seu código aqui
 // }
 
@@ -19,9 +19,13 @@ eslint no-unused-vars: [
 //   // seu código aqui
 // }
 
-// function employeeByName(employeeName) {
-//   // seu código aqui
-// }
+function employeeByName(employeeName) {
+  // seu código aqui
+  const employeeObj = data.employees.filter((employee) =>
+    employee.firstName === employeeName || employee.lastName === employeeName);
+  const toObject = employeeObj.reduce((obj, item) => Object.assign(obj, item), {});
+  return toObject;
+}
 
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
@@ -63,18 +67,21 @@ eslint no-unused-vars: [
 //   // seu código aqui
 // }
 
-// module.exports = {
-//   entryCalculator,
-//   schedule,
-//   animalCount,
-//   animalMap,
-//   animalsByIds,
-//   employeeByName,
-//   employeeCoverage,
-//   addEmployee,
-//   isManager,
-//   animalsOlderThan,
-//   oldestFromFirstSpecies,
-//   increasePrices,
-//   createEmployee,
-// };
+module.exports = {
+  // entryCalculator,
+  // schedule,
+  // animalCount,
+  // animalMap,
+  // animalsByIds,
+  employeeByName,
+  // employeeCoverage,
+  // addEmployee,
+  // isManager,
+  // animalsOlderThan,
+  // oldestFromFirstSpecies,
+  // increasePrices,
+  // createEmployee,
+};
+
+// Conteúdo utilizado para consulta na resolução de alguns exercícios.:
+// https://stackoverflow.com/questions/19874555/how-do-i-convert-array-of-objects-into-one-object-in-javascript
