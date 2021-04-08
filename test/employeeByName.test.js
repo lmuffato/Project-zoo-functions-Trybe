@@ -1,5 +1,5 @@
 const assert = require('assert');
-const zoo = require('../src/zoo');
+const zoo = require('../src/zoo')
 
 describe('Implemente a função employeeByName', () => {
   it('Sem parâmetros, retorna um objeto vazio', () => {

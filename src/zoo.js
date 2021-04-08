@@ -9,20 +9,22 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require('./data');
 const { animals } = require('./data');
+const { employees } = require('./data');
 
 function animalsByIds(...ids) {
-  if (typeof (ids) === 'undefined') return [];
   return animals.filter((animal) => ids.some((id) => id === animal.id));
 }
-
+// Lógica que o Rodrigo Luiz apresentou no plantão.
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  return animals.find((getAnimal) => getAnimal.name === animal)
+    .residents.every(((animalAge) => animalAge.age >= age));
 }
-
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (typeof (employeeName) === 'undefined') return {};
+  const employeeFilter = employees.filter((employee) =>
+    employee.firstName === employeeName || employee.lastName === employeeName);
+  return employeeFilter.shift();
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -81,4 +83,5 @@ module.exports = {
   createEmployee,
 };
 
-console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'))
+// console.log(employeeByName('Wishart'));
+
