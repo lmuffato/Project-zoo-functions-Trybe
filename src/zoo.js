@@ -12,7 +12,8 @@ const { animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(ids) {
-  // seu código aqui
+  if (ids === undefined) return []
+  
 }
 
 function animalsOlderThan(animal, age) {
@@ -22,7 +23,9 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) return {}
+  return data.employees
+  .find(employee => employee.firstName === employeeName || employee.lastName === employeeName)
 }
 
 function createEmployee(personalInfo, associatedWith) {
