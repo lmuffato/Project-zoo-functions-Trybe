@@ -14,7 +14,7 @@ const { animals } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
-  return animals.filter((animal) => ids.includes(animal));
+  return ids.map((animal) => animals.find((item) => item.id === animal));
 }
 
 /* Source: https://github.com/tryber/sd-08-project-zoo-function/tree/e59c4d832c334495d2e92b9a128eb8a97dbe70d6 */
