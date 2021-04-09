@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+const { animals, employees, hours, prices } = data; // Ideia retirada do código do Murilo Gonçalves (Turma 10-A)
 
 function animalsByIds(...ids) {
   // seu código aqui
@@ -94,11 +95,48 @@ function entryCalculator(entrants) {
     totalPrice + entrants[keyPerson] * data.prices[keyPerson], 0);
 }
 
-/* function animalMap(options) {
+function animalMap(options) {
   // seu código aqui
+
+  const locations = {};
+  animals.forEach(({ location }) => {
+    if (!Object.keys(locations).includes(location)) {
+      locations[location] = [];
+    }
+  });
+
+  if (options === undefined || !options.includeNames) {
+    animals.forEach(({ name, location }) => {
+      locations[location].push(name);
+    });
+    return locations;
+  }
+
+  if (options.includeNames) {
+
+    animals.forEach((animal) => {
+      const nameResidents = () => {
+
+        if (options.sex !== undefined) {
+          return animal.residents.filter((resident) =>
+            resident.sex === options.sex).map((animalOfSex) => animalOfSex.name);
+
+        } else {
+          return animal.residents.map((resident) => resident.name);
+        }
+      }
+
+      if (options.sorted) {
+        locations[animal.location].push({ [animal.name]: nameResidents().sort() });
+      } else {
+        locations[animal.location].push({ [animal.name]: nameResidents() })
+      }
+    });
+    return locations;
+  }
 }
 
-function schedule(dayName) {
+/* function schedule(dayName) {
   // seu código aqui
 }
 
@@ -118,7 +156,7 @@ module.exports = {
   entryCalculator,
   // schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
