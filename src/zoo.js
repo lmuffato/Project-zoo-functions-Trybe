@@ -9,14 +9,21 @@ eslint no-unused-vars: [
 ]
 */
 
+const { animals } = require('./data');
 const data = require('./data');
 
-function animalsByIds(ids) {
-  // seu código aqui
+function animalsByIds(...args) {
+    if (args.length === 0) {
+      return args = [];
+    }
+    if (args.length === 1) {
+      const animalOne = data.animals.filter((animal) => animal.id === args[0]);
+      return animalOne;
+    }
+  return data.animals.filter((index) => args.includes(index.id));
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
 }
 
 function employeeByName(employeeName) {
@@ -62,6 +69,8 @@ function increasePrices(percentage) {
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
+
+console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce', 'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5'))
 
 module.exports = {
   entryCalculator,
