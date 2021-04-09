@@ -14,19 +14,19 @@ const { animals, employees } = require('./data');
 
 function animalsByIds(...ids) {
   return animals.filter(({ id }) => ids.includes(id));
-};
+}
 
 function animalsOlderThan(animal, animalsAge) {
   return animals
     .find(({ name }) => name === animal)
     .residents.every(({ age }) => age >= animalsAge);
-};
+}
 
 function employeeByName(employeeName) {
-  if (!employeeName) {return {}}
+  if (!employeeName) { return {} };
   return employees
     .find(({ firstName, lastName }) => [firstName, lastName].includes(employeeName));
-};
+}
 
 console.log(employeeByName('Nelson'));
 
