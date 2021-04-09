@@ -78,9 +78,15 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  const multiply = (percentage / 100) + 1;
+  let currKeyValue = 0;
+  Object.entries(data.prices).forEach(([key, value]) => {
+    currKeyValue = value * multiply;
+    data.prices[key] = Math.round(currKeyValue * 100) / 100;
+  });
+  return data.prices;
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -98,6 +104,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
