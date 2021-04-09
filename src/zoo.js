@@ -36,11 +36,12 @@ function employeeByName(employeeName) {
       .firstName === employeeName || employee.lastName === employeeName);
   return employees !== undefined ? employees : {};
 }
-/*
+
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
-
+/*
 function isManager(id) {
   // seu código aqui
 }
@@ -88,7 +89,7 @@ module.exports = {
   addEmployee,
   isManager, */
   animalsOlderThan,
-/*  oldestFromFirstSpecies,
-  increasePrices,
-  createEmployee, */
+  /*  oldestFromFirstSpecies,
+  increasePrices, */
+  createEmployee,
 };
