@@ -25,8 +25,8 @@ function employeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-  const selectedEmployee = data.employees.find(({ firstName, lastName }) => firstName === employeeName
-  || lastName === employeeName);
+  const selectedEmployee = data.employees.find((employee) => employee.firstName === employeeName
+  || employee.lastName === employeeName);
   return selectedEmployee
 }
 
@@ -41,8 +41,15 @@ function isManager(id) {
   return data.employees.some((item) => item.managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+    const employee = {
+      id,
+      firstName,
+      lastName,
+      managers,
+      responsibleFor,
+    };
+    data.employees.push(employee);
 }
 
 function animalCount(species) {
