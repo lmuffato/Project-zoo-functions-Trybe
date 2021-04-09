@@ -52,22 +52,43 @@ function isManager(id) {
   return employees.some(({ managers }) => managers.includes(id));
 }
 // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/some
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  const obj = {
+const createObj = (id, firstName, lastName, managers, responsibleFor) => {
+  return {
     id,
     firstName,
     lastName,
     managers,
     responsibleFor,
   };
-  if (!managers) obj.managers = [];
-  if (!responsibleFor) obj.responsibleFor = [];
+}
+
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const obj = createObj(id, firstName, lastName, managers, responsibleFor);
+  // if (!managers) obj.managers = [];
+  // if (!responsibleFor) obj.responsibleFor = [];
   employees.push(obj);
 }
 
-// function animalCount(species) {
-//   // seu código aqui
-// }
+const isSpecie = (specie) => specie === animals.name;
+
+function animalCount(species) {
+  let count = 0;
+  
+  // for (let i = 0; i <= animals.length; i += 1) {
+  //   // console.log(animals[0].name);
+  //   if (animals[i].name === species) {
+  //     count += 1
+  //   };
+  // }
+  animals.forEach((animal) => {
+    if(animal.name === species) {
+      count += 1;
+    }
+  });
+  console.log(count);
+  return count;
+}
+animalCount('lions');
 
 // function entryCalculator(entrants) {
 //   // seu código aqui
@@ -96,7 +117,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
