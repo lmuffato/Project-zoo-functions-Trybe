@@ -16,7 +16,6 @@ describe('Implemente a função animalCount', () => {
       'giraffes': 6
     };
     const actual = zoo.animalCount();
-
     assert.deepStrictEqual(actual, expected);
   });
 
