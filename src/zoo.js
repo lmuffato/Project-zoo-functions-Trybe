@@ -16,7 +16,18 @@ function animalsByIds(...ids) {
   return animals.filter((animal) => ids.includes(animal.id));
 }
 
-// function animalsOlderThan(animal, age) {}
+/*
+function animalsOlderThan(animal, age) {
+const obj = animals.find((anim) => anim.name === animal); // nesse caso, o find sozinho retorna um obj, mas depois do .residents, ele vira array
+return obj.residents.every((anim2) => anim2.age > age);
+}
+*/
+
+function animalsOlderThan(animal, ageA) {
+  return animals
+    .find(({ name }) => name === animal).residents
+    .every(({ age }) => age > ageA);
+}
 
 // function employeeByName(employeeName) {}
 
@@ -50,7 +61,7 @@ module.exports = {
   // employeeCoverage,
   // addEmployee,
   // isManager,
-  // animalsOlderThan,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
