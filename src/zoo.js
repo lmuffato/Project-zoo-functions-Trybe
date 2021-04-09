@@ -30,8 +30,9 @@ function animalsOlderThan(animalName, age) {
 // console.log(animalsOlderThan('lions'));
 
 function employeeByName(employeeName) {
-  const objectWithName = employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
-  if(!objectWithName) {
+  const objectWithName = employees
+    .find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
+  if (!objectWithName) {
     return {};
   }
   return objectWithName;
