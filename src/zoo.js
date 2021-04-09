@@ -13,6 +13,7 @@ const data = require('./data');
 
 const { employees } = data;
 const { animals } = data;
+const { prices } = data;
 
 function animalsByIds(...ids) {
   return animals.filter((animal, index) => animal.id === ids[index]);
@@ -68,9 +69,17 @@ function animalCount(specie) {
   return animals.find((animal) => animal.name === specie).residents.length;
 }
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+// Alguém me ajuda a refatorar esse código, não gostei! Hahaha'
+function entryCalculator(entrants) {
+  if (entrants === undefined) {
+    return 0;
+  }
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const totalAdultPrice = Adult * prices.Adult;
+  const totalChildPrice = Child * prices.Child;
+  const totalSeniorPrice = Senior * prices.Senior;
+  return totalAdultPrice + totalChildPrice + totalSeniorPrice;
+}
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -93,7 +102,7 @@ function animalCount(specie) {
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
