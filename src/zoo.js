@@ -45,11 +45,16 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   };
   employees.push(employee);
 }
-/*
-function animalCount(species) {
-  // seu código aqui
-}
 
+function animalCount(species) {
+  if (species === undefined) {
+    return animals.reduce((acc, animal) => (
+      { ...acc, [animal.name]: animal.residents.length }
+    ), {});
+  }
+  return animals.find((animal) => animal.name === species).residents.length;
+}
+/*
 function entryCalculator(entrants) {
   // seu código aqui
 }
@@ -77,7 +82,7 @@ function employeeCoverage(idOrName) {
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
