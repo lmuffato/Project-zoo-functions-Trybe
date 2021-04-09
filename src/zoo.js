@@ -14,6 +14,7 @@ const data = require('./data');
 const { employees } = data;
 const { animals } = data;
 const { prices } = data;
+const { hours } = data;
 
 function animalsByIds(...ids) {
   return animals.filter((animal, index) => animal.id === ids[index]);
@@ -81,13 +82,69 @@ function entryCalculator(entrants) {
   return totalAdultPrice + totalChildPrice + totalSeniorPrice;
 }
 
-// function animalMap(options) {
-//   // seu código aqui
+// const locationsNE = animals.filter((animal) => animal.location === 'NE');
+// const locationsNW = animals.filter((animal) => animal.location === 'NW');
+// const locationsSE = animals.filter((animal) => animal.location === 'SE');
+// const locationsSW = animals.filter((animal) => animal.location === 'SW');
+
+// function optionsEmpty(){
+//   return {
+//       NE: locationsNE.map((eachAnimal) => eachAnimal.name),
+//       NW: locationsNW.map((eachAnimal) => eachAnimal.name),
+//       SE: locationsSE.map((eachAnimal) => eachAnimal.name),
+//       SW: locationsSW.map((eachAnimal) => eachAnimal.name),
+//     }
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
+// function includeNamesOption(){
+//   const [{ residents }] = locationsNE;
+//   let includeNE;
+//   locationsNE.forEach((animal) => {
+//     includeNE = {
+//       [animal.name]: residents.map((resident) => resident.name),
+//     }
+//   })
+//   return includeNE;
 // }
+// console.log(includeNamesOption());
+
+// function animalMap(options) {
+//   if (!options) {
+//     return optionsEmpty();
+//   }
+//   if (options === { includeNames: true }) {
+
+//   }
+// }
+function withoutDay() {
+  return {
+    Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
+    Wednesday: `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
+    Thursday: `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
+    Friday: `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
+    Saturday: `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
+    Sunday: `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
+    Monday: 'CLOSED',
+  };
+}
+
+function getZooHour(day) {
+  const openTime = hours[day].open;
+  const closeTime = hours[day].close - 12;
+  if (!openTime || !closeTime) {
+    return 'CLOSED';
+  }
+  return `Open from ${openTime}am until ${closeTime}pm`;
+}
+
+function schedule(dayName) {
+  if (!dayName) {
+    return withoutDay();
+  }
+  return {
+    [dayName]: getZooHour(dayName),
+  };
+}
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -103,7 +160,7 @@ function entryCalculator(entrants) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
