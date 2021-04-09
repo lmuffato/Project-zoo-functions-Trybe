@@ -184,13 +184,8 @@ function increasePrices(percentage) {
   };
 }
 
-const idToSpecie = (array) => {
-  const arr = [];
-  array.forEach((element) => {
-    arr.push(data.animals.find((animal) => animal.id === element).name);
-  });
-  return arr;
-};
+const idToSpecie = (array) =>
+  array.map((element) => data.animals.find((animal) => animal.id === element).name);
 
 const employeeAnimals = () => {
   const obj = {};
