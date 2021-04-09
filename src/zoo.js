@@ -46,6 +46,8 @@ function addEmployee(id, firstN, lastN, managers, responsibleFor) {
   data.employees.push(newEmp);
 }
 
+// addEmployee({},{},{},{})
+
 const generateAnimalsList = () => {
   const listOfAnimals = {};
   data.animals.forEach((animal) => {
@@ -69,8 +71,6 @@ function animalCount(species) {
 function entryCalculator({ Adult = 0, Child = 0, Senior = 0 } = 0) {
   return Adult * data.prices.Adult + Child * data.prices.Child + Senior * data.prices.Senior;
 }
-
-const entries = { Adult: 1, Child: undefined, Senior: 2 };
 
 const listByRegion = () => {
   const animalList = {
@@ -107,16 +107,16 @@ const listWithNames = (sex, sorted) => {
 };
 
 function animalMap(options = {}) {
-  const { includesNames = false, sorted = false, sex = false } = options;
+  const { includeNames = false, sorted = false, sex = false } = options;
   let result;
-  if (!includesNames) {
+  if (!includeNames) {
     result = listByRegion();
   } else {
     result = listWithNames(sex, sorted);
   }
   return result;
 }
-// console.log(animalMap({ includesNames: true, sex: 'male', sorted: true }));
+// console.log(animalMap({ includeNames: true }));
 
 // function schedule(dayName) {
 //   // seu código aqui
