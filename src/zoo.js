@@ -1,5 +1,65 @@
 const data = require('./data');
 
+function convertHourToAmPm(hour) {
+  return hour > 12 ? `${hour - 12}pm` : `${hour}am`;
+}
+
+function formatMessageOpenClose(openHour, closedHour) {
+  if (openHour === 0 && closedHour === 0) return 'CLOSED';
+
+  const open = convertHourToAmPm(openHour);
+  const close = convertHourToAmPm(closedHour);
+  return `Open from ${open} until ${close}`;
+}
+
+function getAllEmployees() {
+  return data.employees;
+}
+
+function getEmployeeById(id) {
+  return data.employees.find((employee) => employee.id === id);
+}
+
+function getEmployee(idOrFirstOrLastName) {
+  const idNameExists = data.employees.some((employee) => employee.id === idOrFirstOrLastName);
+  const firstNameExists = data.employees
+    .some((employee) => employee.firstName === idOrFirstOrLastName);
+  const lastNameExists = data.employees
+    .some((employee) => employee.lastName === idOrFirstOrLastName);
+
+  if (idNameExists) {
+    return data.employees.find((employee) => employee.id === idOrFirstOrLastName);
+  }
+  if (firstNameExists) {
+    return data.employees.find((employee) => employee.firstName === idOrFirstOrLastName);
+  }
+  if (lastNameExists) {
+    return data.employees.find((employee) => employee.lastName === idOrFirstOrLastName);
+  }
+  return {};
+}
+
+function employeeExists(idOrName) {
+  return data.employees
+    .some((employee) => employee.id === idOrName
+      || employee.firstName === idOrName
+      || employee.lastName === idOrName);
+}
+
+function getAnimalById(id) {
+  return data.animals.find((animal) => animal.id === id);
+}
+
+function getAllAnimalsNameByEmployee(id) {
+  const animalsNames = [];
+  getEmployeeById(id)
+    .responsibleFor
+    .forEach((animalId) => {
+      animalsNames.push(getAnimalById(animalId).name);
+    });
+  return animalsNames;
+}
+
 function animalsByIds(...ids) {
   const animals = [];
   ids.forEach((id) => {
@@ -65,21 +125,10 @@ function animalMap(options) {
   return `${options}`;
 }
 
-function convertHourToAmPm(hour) {
-  return hour > 12 ? `${hour - 12}pm` : `${hour}am`;
-}
-
-function formatMessageOpenClose(openHour, closedHour) {
-  if (openHour === 0 && closedHour === 0) return 'CLOSED';
-
-  const open = convertHourToAmPm(openHour);
-  const close = convertHourToAmPm(closedHour);
-  return `Open from ${open} until ${close}`;
-}
-
 function schedule(dayName) {
   if (dayName === undefined) {
-    const hourskeys = Object.keys(data.hours).sort();
+    const hourskeys = Object.keys(data.hours)
+      .sort();
     const weekSchedule = {};
     hourskeys
       .forEach((day) => {
@@ -101,7 +150,21 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  return `${idOrName}`;
+  const employeesObj = {};
+  if (idOrName === undefined) {
+    getAllEmployees()
+      .forEach((employee) => {
+        const key = `${employee.firstName} ${employee.lastName}`;
+        employeesObj[key] = getAllAnimalsNameByEmployee(employee.id);
+      });
+    return employeesObj;
+  }
+  if (employeeExists(idOrName)) {
+    const employee = getEmployee(idOrName);
+    const key = `${employee.firstName} ${employee.lastName}`;
+    employeesObj[key] = getAllAnimalsNameByEmployee(employee.id);
+    return employeesObj;
+  }
 }
 
 module.exports = {
