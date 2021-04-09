@@ -25,7 +25,7 @@ function employeeByName(employeeName) {
     return {};
   }
   return employees.find((employee) => employeeName === employee.firstName
-  || employeeName === employee.lastName);
+    || employeeName === employee.lastName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -123,11 +123,17 @@ function oldestFromFirstSpecies(id) {
   const { name, sex, age } = resident;
   return [name, sex, age];
 }
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  const increase = (percentage / 100) + 1;
+  const keys = Object.keys(prices);
+  keys.forEach((key) => {
+    const number = prices[key] * increase;
+    const result = Math.round(number * 100) / 100;
+    prices[key] = result;
+  });
+  return prices;
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -145,6 +151,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
