@@ -50,26 +50,42 @@ const entryCalculator = (entrants) => {
   return totalPrice;
 };
 
-function animalMap(options) {
-  const mapZones = ['NE', 'NW', 'SE', 'SW'];
+const getAnimalsByZone = (zones) => zones
+  .map((zone) => ({ [zone]: animals
+    .filter(({ location }) => location === zone)
+    .map(({ name }) => name) }))
+  .reduce((obj, current) => Object.assign(obj, current), {});
 
-  if (!options) {
-    const map = {};
-    mapZones.forEach((zone) => {
-      Object.assign(map, { [zone]: animals
-        .filter(({ location }) => location === zone)
-        .map(({ name }) => name) });
-    });
-    return map;
-  }
-  const map = {};
-  mapZones.forEach((zone) => {
-    Object.assign(map, { [zone]: animals
-      .filter(({ location }) => location === zone)
-      .map(({ name }) => name) });
+const getAnimalsByOption = (sorted, sexo, zones) => {
+  const animalsMap = getAnimalsByZone(zones);
+
+  Object.keys(animalsMap).forEach((key) => {
+    const names = Object.values(animalsMap[key])
+      .map((specie) => {
+        const petNames = animals
+          .find(({ name }) => name === specie).residents
+          .filter(({ sex }) => (sexo ? sex === sexo : sex))
+          .map(({ name }) => name);
+
+        if (sorted) petNames.sort();
+        return { [specie]: petNames };
+      });
+
+    Object.assign(animalsMap, { [key]: names });
   });
-  return map;
-} // ver
+  return animalsMap;
+};
+
+const animalMap = (options) => {
+  // Retirar elementos repetidos, referencia :https://dicasdejavascript.com.br/javascript-como-remover-valores-repetidos-de-um-array/
+  const zones = [...new Set(animals.map(({ location }) => location))];
+  if (!options) return getAnimalsByZone(zones);
+
+  const { includeNames, sorted, sex } = options;
+  if (includeNames) return getAnimalsByOption(sorted, sex, zones);
+
+  return getAnimalsByZone(zones);
+};
 
 const scheduleCheck = (open, close) => (!open
   ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`);
@@ -78,9 +94,9 @@ const schedule = (dayName) => {
   if (!dayName) {
     const res = {};
 
-    Object.keys(hours).forEach((key) => {
-      const { open, close } = hours[key];
-      res[key] = scheduleCheck(open, close);
+    Object.keys(hours).forEach((day) => {
+      const { open, close } = hours[day];
+      res[day] = scheduleCheck(open, close);
     });
 
     return res;
@@ -100,7 +116,7 @@ const oldestFromFirstSpecies = (employeeId) => {
 };
 
 const increasePrices = (percentage) => {
-  const increase = (price) => (price + ((price * percentage) / 100)).toFixed(2);
+  const increase = (price) => (Math.round(price * percentage) + price * 100) / 100;
   const { Adult, Child, Senior } = prices;
   Object.assign(prices, {
     Adult: increase(Adult),
