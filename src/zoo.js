@@ -96,17 +96,19 @@ function animalCount(species) {
   return residents.length;
 }
 
+const calculateTotal = (entrants) => {
+  return Object.keys(entrants)
+    .map((key) => entrants[key] * prices[key])
+    .reduce((acc, next) => acc + next, 0);
+};
+
 function entryCalculator(entrants) {
   if (entrants === undefined || entrants === {}) {
     return 0;
   }
 
-  return Object.keys(entrants)
-    .map((key) => entrants[key] * prices[key])
-    .reduce((acc, next) => acc + next, 0);
+  return calculateTotal(entrants);
 }
-
-console.log(entryCalculator({ Adult: 2, Child: 3, Senior: 1 }));
 
 function animalMap(options) {
   // seu código aqui
