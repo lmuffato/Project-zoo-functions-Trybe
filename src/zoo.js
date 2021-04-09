@@ -121,11 +121,27 @@ function schedule(dayName) {
 
 console.log(schedule());
 */
-/*
+
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  let age = 0;
+  const employee = data.employees;
+  const specificEmployee = employee.filter((curr) => curr.id === id);
+  // console.log(specificEmployee);
+  const animal = specificEmployee[0].responsibleFor[0];
+  const specificAnimal = data.animals.filter((curr) => curr.id === animal);
+  // console.log(animal);
+  const arrayOfAnimals = specificAnimal[0].residents;
+  arrayOfAnimals.forEach((curr) => {
+    if (curr.age > age) {
+      age = curr.age;
+    }
+  });
+  const olderAnimal = arrayOfAnimals.find((curr) => curr.age === age);
+  return Object.values(olderAnimal);
 }
 
+console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
+/*
 function increasePrices(percentage) {
   // seu código aqui
 }
@@ -160,4 +176,5 @@ module.exports = {
   animalCount,
   entryCalculator,
   // schedule,
+  oldestFromFirstSpecies,
 };
