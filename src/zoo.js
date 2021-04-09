@@ -49,9 +49,20 @@ function isManager(id) {
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // 6 - Seu cógigo aqui
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
-  employees.push({ id, firstName, lastName, managers, responsibleFor });
+  employees.push(newEmployee);
   return employees;
 }
+
+// console.log(addEmployee('4141da1c-a6ed-4cf7-90c4-99c657ba4ef3', 'Jane', 'Doe',
+// [
+//   '546fe3d4-2d81-4bb4-83a7-92d5b7048d17',
+//   'a67a36ee-3765-4c74-8e0f-13f881f6588a',
+// ],
+// [
+//   'ee6139bf-b526-4653-9e1e-1ca128d0ad2e',
+//   '210fcd23-aa7b-4975-91b7-0230ebb27b99',
+// ]));
+
 // function animalCount(species) {
 //   // seu código aqui
 // }
