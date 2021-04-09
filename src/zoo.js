@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /*
 eslint no-unused-vars: [
   "error",
@@ -9,7 +10,9 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices } = require('./data.js');
+const assert = require('assert');
+
+const { animals, employees, hours, prices } = require('./data.js');
 
 function animalsByIds(...ids) {
   // seu código aqui
@@ -75,13 +78,51 @@ function entryCalculator(entrants) {
   return totalPrice;
 }
 
-// function animalMap(options) {
-//   // seu código aqui
-// }
+function getLocation(params) {
+  const newObjt = {};
+  const animalsLocation = animals
+    .map((animal) => animal.location)
+    .forEach((region) => {
+      newObjt[region] = animals.filter((specimen) => specimen.location === region)
+        .map((animal) => animal.name);
+    });
+  return newObjt;
+}
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+function addNames(params) { }
+
+function animalMap(options) {
+  // Com funcionalidades sugeridas por Wanderson Sales
+  // seu código aqui
+  if (options === undefined) return getLocation();
+  if (options.valueOf('includeNames') === true) return addNames();
+}
+
+// console.log(animalMap());
+
+function returnDays(day) {
+  const openHour = hours[day].open;
+  const closeHour = hours[day].close;
+
+  if (openHour === 0 && closeHour === 0) return 'CLOSED';
+  return `Open from ${openHour}am until ${closeHour - 12}pm`;
+}
+
+function schedule(dayName) {
+  // seu código aqui
+  // Com alterações sugeridas por Orlando Flores
+  const newObjt = {};
+  const days = Object.keys(hours);
+  if (dayName === undefined) {
+    days.forEach((day) => newObjt[day] = returnDays(day));
+    return newObjt;
+  }
+  if (dayName !== undefined) {
+    newObjt[dayName] = returnDays(dayName);
+    return newObjt;
+  }
+}
+console.log(schedule('Monday'));
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -99,7 +140,7 @@ module.exports = {
   entryCalculator,
   // schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
