@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -57,38 +57,63 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-// function animalCount(species) {
-//   if (species !== undefined) {
-//     const animalsSpecies = animals.find((animal) => animal.name === species);
-//     return animalsSpecies.residents.length;
-//   }
+function animalCount(species) {
+  if (species !== undefined) {
+    const animalsSpecies = animals.find((animal) => animal.name === species);
+    return animalsSpecies.residents.length;
+  }
 
-//   return animals.reduce((obj, animal) => {
-//     obj = {};
-//     obj[animal.name] = animal.residents.length
-//   }, {});
-
-// }
-// animalCount();
-
-function entryCalculator(entryPeople) {
-  if (entryPeople !== undefined) {
-    const { Adult = 0, Child = 0, Senior = 0 } = entryPeople;
-    const sum = Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
-    return sum;
-  } return 0;
+  return animals.reduce((obj, animal) => {
+    obj[animal.name] = animal.residents.length;
+    return obj;
+  }, {});
 }
 
-// function animalMap(options) {
-//   // seu código aqui
+// function entryCalculator(entryPeople) {
+//   if (entryPeople !== undefined) {
+//     const { Adult = 0, Child = 0, Senior = 0 } = entryPeople;
+//     const sum = Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
+//     return sum;
+//   } return 0;
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
+// function animalMap(map) {
+//   if (map === undefined) {
+//     const sortedAnimals = animals.sort((a, b) => (a.location - b.location));
+//     return sortedAnimals.map((animal) => {
+//       const mapAnimalsByRegion = {};
+//       mapAnimalsByRegion[animal.location] = animal.name;
+//       return mapAnimalsByRegion;
+//     });
+//   }
+//   const { includeNames = false, sex = 0, sorted = false } = map;
+// if () {
+
+// }
 // }
 
+const hoursOpen = ({ open, close }) => {
+  if (open === 0 || close === 0) {
+    return 'CLOSED';
+  } return (`Open from ${open}am until ${close - 12}pm`);
+};
+
+function schedule(dayName) {
+  const dayObj = {};
+  if (dayName !== undefined) {
+    dayObj[dayName] = hoursOpen(hours[dayName]);
+  } else {
+    for (let day in hours) {
+      dayObj[day] = hoursOpen(hours[day]);
+    }
+  }
+  return dayObj;
+}
+console.log(schedule());
 // function oldestFromFirstSpecies(id) {
-//   // seu código aqui
+//   const animalManagedById = employees.find((employee) => employee.id === id).responsibleFor[0];
+//   const animalArray = animals.filter((animal) => (animal.id === animalManagedById));
+//   animalArray.forEach(())
 // }
 
 // function increasePrices(percentage) {
@@ -100,9 +125,9 @@ function entryCalculator(entryPeople) {
 // }
 
 module.exports = {
-  entryCalculator,
-  // schedule,
-  // animalCount,
+  // entryCalculator,
+  schedule,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
