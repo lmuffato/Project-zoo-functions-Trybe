@@ -83,9 +83,9 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-function increasePrices(percentage) {
+// function increasePrices(percentage) {
 
-}
+// }
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -103,6 +103,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  increasePrices,
+  // increasePrices,
   createEmployee,
 };
