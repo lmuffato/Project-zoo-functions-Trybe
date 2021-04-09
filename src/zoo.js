@@ -52,9 +52,18 @@ function isManager(id) {
   return employees.some(({ managers }) => managers.includes(id));
 }
 // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/some
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+  const obj = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  if (!managers) obj.managers = [];
+  if (!responsibleFor) obj.responsibleFor = [];
+  employees.push(obj);
+}
 
 // function animalCount(species) {
 //   // seu código aqui
@@ -92,7 +101,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
