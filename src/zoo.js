@@ -74,14 +74,14 @@ module.exports = {
   animalsByIds,
   animalsOlderThan,
   employeeByName,
-  createEmployee, 
+  createEmployee,
   /* entryCalculator,
+  isManager,
   schedule,
   animalCount,
   animalMap,
   employeeCoverage,
   addEmployee,
-  isManager,
   oldestFromFirstSpecies,
-  increasePrices,*/
+  increasePrices, */
 };
