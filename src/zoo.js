@@ -96,7 +96,7 @@ function entryCalculator(entrants) {
 // }
 // console.log(animalMap());
 
-function  getScheduleDay(day) {
+const getScheduleDay = (day) => {
   const openTime = hours[day].open;
   const closingTime = hours[day].close;
   if (openTime === 0 && closingTime === 0) return `CLOSED`;
@@ -113,9 +113,13 @@ function schedule(dayName) {
   }
   return result;
 }
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  const firstSpecie = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const resident = animals.find((animal) => animal.id === firstSpecie).residents.sort((a,b) => (b.age) - (a.age))[0];
+  const { name, sex, age } = resident;
+  return [ name, sex, age];
+}
+console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -136,7 +140,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
