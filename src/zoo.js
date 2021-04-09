@@ -24,16 +24,21 @@ function animalsOlderThan(animal, age) {
 
 // function employeeByName(employeeName) {
 //   // seu código aqui
+//   if (employeeByName === undefined) return ;
+//   return data.employees.filter((employee) => employeeName === employee.firstName ||
+//       employee.lastName === employeeName);
 // }
 
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
 // }
 
-// function isManager(id) {
-//   // seu código aqui
-// }
-
+function isManager(id) {
+  // seu código aqui
+  return data.employees.some((employee) => employee.managers.includes(id));
+}
+// console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83')); // true
+// console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1')); // false
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
 // }
@@ -75,7 +80,7 @@ module.exports = {
   // employeeByName,
   //   employeeCoverage,
   //   addEmployee,
-  //  isManager,
+  isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
