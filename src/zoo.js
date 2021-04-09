@@ -97,15 +97,29 @@ function schedule(dayName) {
   return dayName ? { [dayName]: obj[dayName] } : obj;
 }
 
-// const { animals, employees, prices, hours } = require('./data');
-
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const selected = employees.find((value) => value.id === id).responsibleFor[0];
+  const selectedAnimal = animals.find((value) => value.id === selected).residents;
+  let ageOfOldest = 0;
+  selectedAnimal.forEach((value) => {
+    if (value.age > ageOfOldest) {
+      ageOfOldest = value.age;
+    }
+  });
+  const oldestAnimal = selectedAnimal.find((value) => value.age === ageOfOldest);
+  return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
 
+// const { animals, employees, prices, hours } = require('./data');
 function increasePrices(percentage) {
-  // seu código aqui
+  const percent = ((100 + percentage) / 100) + 0.000000001;
+  prices.Adult = parseFloat((prices.Adult * percent).toFixed(2));
+  prices.Child = parseFloat((prices.Child * percent).toFixed(2));
+  prices.Senior = parseFloat((prices.Senior * percent).toFixed(2));
 }
+
+// increasePrices(50);
+// console.log(prices.Adult, prices.Child, prices.Senior);
 
 function employeeCoverage(idOrName) {
   // seu código aqui
