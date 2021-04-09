@@ -36,11 +36,17 @@ function createEmployee(personalInfo, associatedWith) {
     ...associatedWith,
   };
 }
-/*
+
 function isManager(id) {
-  // seu código aqui
+  let manager = false;
+  data.employees.forEach((employee) => {
+    if (employee.managers.includes(id)) manager = true;
+  });
+
+  return manager;
 }
 
+/*
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
@@ -82,7 +88,7 @@ module.exports = {
   employeeByName,
   // employeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
