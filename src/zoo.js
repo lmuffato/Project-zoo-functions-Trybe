@@ -33,9 +33,11 @@ function animalsOlderThan(animalName, age) {
     resident.age).every((howOld) => howOld > age);// Por fim verifica se cada uma dessas idades são maiores que age
 }
 
-// function employeeByName(employeeName) {
-//   // seu código aqui
-// }
+// Pega todos os objetos dentro de data.employees, obtem os valores das chaves e verifica se está incluído employeeName
+function employeeByName(employeeName) {
+  if (employeeName === undefined) return {};
+  return data.employees.find((employee) => Object.values(employee).includes(employeeName));
+}
 
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
@@ -83,7 +85,7 @@ module.exports = {
   // animalCount,
   // animalMap,
   animalsByIds,
-  // employeeByName,
+  employeeByName,
   // employeeCoverage,
   // addEmployee,
   // isManager,
