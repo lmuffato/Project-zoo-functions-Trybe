@@ -79,7 +79,6 @@ function schedule(dayName) {
   if (dayName === undefined) {
     return Object.entries(hours);
   }
-
 }
 
 function oldestFromFirstSpecies(id) {
