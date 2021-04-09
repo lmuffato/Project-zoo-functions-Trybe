@@ -140,12 +140,14 @@ function oldestFromFirstSpecies(id) {
   return Object.values(olderAnimal);
 }
 
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-/*
 function increasePrices(percentage) {
-  // seu código aqui
+  const price = data.prices;
+  price.Adult = Math.ceil((price.Adult * (1 + percentage / 100)) * 100) / 100;
+  price.Senior = Math.ceil((price.Senior * (1 + percentage / 100)) * 100) / 100;
+  price.Child = Math.ceil((price.Child * (1 + percentage / 100)) * 100) / 100;
 }
 
+/*
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
@@ -177,4 +179,5 @@ module.exports = {
   entryCalculator,
   // schedule,
   oldestFromFirstSpecies,
+  increasePrices,
 };
