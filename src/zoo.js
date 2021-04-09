@@ -61,7 +61,6 @@ function addEmployee(id, firstName, lastName, managers=[], responsibleFor=[]) {
 
 function animalCount(species) {
   if (!species) {
-    animals.sort();
     return animals.reduce((acc, {name, residents}) => {
       acc[name] = residents.length;
       return acc;
