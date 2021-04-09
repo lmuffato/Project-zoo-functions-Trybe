@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const assert = require('assert');
+// const assert = require('assert');
 
 const { animals, employees, hours, prices } = require('./data.js');
 
@@ -78,10 +78,10 @@ function entryCalculator(entrants) {
   return totalPrice;
 }
 
-function getLocation(params) {
+function getLocation() {
   const newObjt = {};
-  const animalsLocation = animals
-    .map((animal) => animal.location)
+  // const animalsLocation = animals
+  animals.map((animal) => animal.location)
     .forEach((region) => {
       newObjt[region] = animals.filter((specimen) => specimen.location === region)
         .map((animal) => animal.name);
@@ -89,7 +89,7 @@ function getLocation(params) {
   return newObjt;
 }
 
-function addNames(params) { }
+function addNames() { }
 
 function animalMap(options) {
   // Com funcionalidades sugeridas por Wanderson Sales
@@ -114,7 +114,7 @@ function schedule(dayName) {
   const newObjt = {};
   const days = Object.keys(hours);
   if (dayName === undefined) {
-    days.forEach((day) => newObjt[day] = returnDays(day));
+    days.forEach((day) => { newObjt[day] = returnDays(day); });
     return newObjt;
   }
   if (dayName !== undefined) {
@@ -122,11 +122,24 @@ function schedule(dayName) {
     return newObjt;
   }
 }
-console.log(schedule('Monday'));
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  // seu código aqui
+  let oldest = [];
+  const specie = employees.find((employee) => employee.id === id).responsibleFor[0];
+  animals.find((animal) => animal.id === specie).residents
+    .forEach((spec, index) => {
+      if (index === 0) {
+        oldest = [spec.name, spec.sex, spec.age];
+      }
+      if (spec.age > oldest[2]) {
+        oldest = [spec.name, spec.sex, spec.age];
+      }
+    });
+  return oldest;
+}
+
+console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -138,7 +151,7 @@ console.log(schedule('Monday'));
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   animalMap,
   animalsByIds,
@@ -147,7 +160,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
