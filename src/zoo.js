@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -85,19 +86,39 @@ function entryCalculator(entrants) {
   /* 'Retorna 0 se um objeto vazio for passado' */
   if (typeof entrants === 'undefined' || entrants === {}) return 0;
   const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+  const { Adult: guy, Senior: idoso, Child: crianca } = data.prices
   /* Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos */
-  return (data.prices.Adult * Adult) + (data.prices.Senior * Senior) + (data.prices.Child * Child);
+  return (guy * Adult) + (idoso * Senior) + (crianca * Child);
 }
 
 function animalMap(options) {
   // seu código aqui
 }
 
+/* const getScheduleDay = (day) => {
+  const openTime = hours[day].open;
+  const closingTime = hours[day].close;
+  if (openTime === 0 && closingTime === 0) return 'CLOSED';
+  return `Open from ${openTime}am until ${closingTime}pm`;
+};
+
 function schedule(dayName) {
   // seu código aqui
-}
+  if (dayName === undefined) {
+    const result = {};
+    const days = Object.keys(hours);
+    if (dayName === undefined) {
+      days.forEach((day) => {
+        result[day] = getScheduleDay(day);
+      });
+    } else {
+      result[dayName] = getScheduleDay(dayName);
+    }
+    return result;
+  }
+} */
 
-function oldestFromFirstSpecies(id) {
+/* function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
@@ -107,20 +128,20 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
-}
+} */
 
 module.exports = {
   entryCalculator,
-  schedule,
+  //schedule,
   animalCount,
   animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  //employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
-  oldestFromFirstSpecies,
-  increasePrices,
+  //oldestFromFirstSpecies,
+  //increasePrices,
   createEmployee,
 };
