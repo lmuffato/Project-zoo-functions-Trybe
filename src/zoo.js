@@ -91,16 +91,34 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  const added = (1 + (percentage / 100)).toFixed(2);
-  for (let key in prices) {
-    prices[key] = (prices[key] * added).toFixed(2);
-  }
+  const added = (1 + (percentage / 100));
+  const values = Object.values(prices);
+  const keys = Object.keys(prices);
+  values.forEach((value, index) => {
+    const newPrice = parseFloat(value * added).toFixed(3);
+    const integer = Math.floor(newPrice);
+    const decimal = Math.ceil((newPrice - integer) * 100) / 100;
+    prices[keys[index]] = integer + decimal;
+  });
 }
 
-increasePrices(30);
-
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const objSaida = {};
+  employees.forEach((employee) => {
+    objSaida[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor.map((animalId) => (
+      animals.find((animal) => animal.id === animalId).name
+    ))
+  })
+  if (!idOrName) {
+    return objSaida;
+  } else {
+    const findEmployee = employees.find((employee) => (
+      employee.firstName === idOrName || employee.lastName === idOrName || employee.id === idOrName)
+    );
+    const fullName = `${findEmployee.firstName} ${findEmployee.lastName}`;
+    
+    return { [fullName]: objSaida[fullName] };
+  }
 }
 
 module.exports = {
