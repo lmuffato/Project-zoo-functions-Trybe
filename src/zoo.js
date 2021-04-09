@@ -47,10 +47,9 @@ function addEmployee(id, firstN, lastN, managers, responsibleFor) {
 }
 
 const generateAnimalsList = () => {
-  const listOfAnimals = data.animals.map((animal) => {
-    const newAnimal = {};
-    newAnimal[animal.name] = animal.residents.length;
-    return newAnimal;
+  const listOfAnimals = {};
+  data.animals.forEach((animal) => {
+    listOfAnimals[animal.name] = animal.residents.length;
   });
   return listOfAnimals;
 };
