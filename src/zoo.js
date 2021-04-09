@@ -75,7 +75,8 @@ function entryCalculator(entrants) {
   // seu código aqui
   if (typeof entrants === 'undefined' || entrants === {}) return 0;
   const { Adult = 0, Senior = 0, Child = 0 } = entrants;
-  return (data.prices.Adult * Adult) + (data.prices.Senior * Senior) + (data.prices.Child * Child);
+  const { Adult: adulto, Senior: idosos, Child: criança } = data.prices;
+  return (adulto * Adult) + (idosos * Senior) + (criança * Child);
 }
 
 // function animalMap(options) {
