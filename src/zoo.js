@@ -104,12 +104,21 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
-}
+} */
 
+// Inspirada na resolução desenvolvida pela Marília, https://github.com/tryber/sd-010-a-project-zoo-functions/pull/109/files
+/* Entende-se que esta função inicia com a definição de uma variavel que armazena o calculo de porcentagem.
+Na sequencia, uma nova variavel é definida para armazenar as chaves de prices.
+Posteriormente, nesta variavel é aplicado um forEach, em que, para cada chave de price (no caso os grupos etarios)
+e aplica a cada um deles o calculo. */
 function increasePrices(percentage) {
-  // seu código aqui
+  const percent = (1 + (percentage / 100));
+  const keys = Object.keys(prices);
+  keys.forEach((key) => {
+    prices[key] = (Math.round(prices[key] * percent * 100) / 100);
+  });
 }
-
+/*
 function employeeCoverage(idOrName) {
   // seu código aqui
 } */
@@ -126,6 +135,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
