@@ -52,8 +52,8 @@ const addEmployee = (
 
 const animalCount = (species) => {
   const ret = {};
-  animals.forEach((animal) => {
-    ret[animal.name] = animal.residents.length;
+  animals.forEach(({ name, residents }) => {
+    ret[name] = residents.length;
   });
   return species === undefined
     ? ret
