@@ -9,12 +9,12 @@ eslint no-unused-vars: [
 ]
 */
 
-const { prices, employees } = require('./data');
+const { prices, employees, animals } = require('./data');
 // const data = require('./data');
 
-// function animalsByIds(ids) {
-// seu código aqui
-// }
+function animalsByIds(...ids) {
+  return animals.filter(({ id }) => ids.includes(id));
+}
 
 // function animalsOlderThan(animal, age) {
 // seu código aqui
@@ -82,7 +82,7 @@ module.exports = {
   // schedule,
   // animalCount,
   // animalMap,
-  // animalsByIds,
+  animalsByIds,
   // employeeByName,
   // employeeCoverage,
   addEmployee,
