@@ -137,7 +137,7 @@ function entryCalculator(entrants) {
 // }
 
 function increasePrices(percentage) {
-  const { Adult, Child, Senior} = prices;
+  const { Adult, Child, Senior } = prices;
   const porcetagem = (1 + (percentage / 100));
   prices.Adult = Math.round((Adult * porcetagem) * 100) / 100;
   prices.Child = Math.round((Child * porcetagem) * 100) / 100;
