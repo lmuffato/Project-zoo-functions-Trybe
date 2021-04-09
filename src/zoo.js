@@ -9,92 +9,126 @@ eslint no-unused-vars: [
 ]
 */
 
-
+const { prices } = require('./data');
 const data = require('./data');
+
 const { animals, employees } = data;
 
 function animalsByIds(...ids) {
   const animalsArray = [];
-  ids.forEach((idParam, index) => (animals[index].id === idParam ? animalsArray.push(animals[index]):animalsArray))
+  ids.forEach((idParam, index) =>
+    (animals[index].id === idParam ? animalsArray.push(animals[index]) : animalsArray));
   return animalsArray;
 }
 
 function animalsOlderThan(name, age) {
   const objAnimal = animals.find((animal) => animal.name === name);
-  return result = objAnimal.residents.every((animal) => animal.age >= age ? true:false);
+  const result = objAnimal.residents.every((animal2) => animal2.age >= age);
+  return result;
 }
 
 function employeeByName(employeeName) {
   if (!employeeName) return {};
-  return employees.find((emp) => (emp.firstName === employeeName || emp.lastName === employeeName))
+  return employees.find((emp) => (emp.firstName === employeeName || emp.lastName === employeeName));
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  const {id, firstName, lastName} = personalInfo;
-  const {managers, responsibleFor} = associatedWith;
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
 
-  const obj = {id,firstName,lastName,managers,responsibleFor};
+  const obj = { id, firstName, lastName, managers, responsibleFor };
   return obj;
 }
 
 function isManager(id) {
   const managerList = [];
-  employees.forEach((emp) => (emp.managers.length > 0 ? managerList.push(...emp.managers):emp.managers))
-  const check = managerList.find((gerenteId) => gerenteId === id)
-  return check ? true:false;
+  employees.forEach((emp) => (
+    emp.managers.length > 0 ? managerList.push(...emp.managers) : emp.managers
+  ));
+  const check = managerList.find((gerenteId) => gerenteId === id);
+  const bool = check !== undefined;
+  return bool;
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  return employees.push({id, firstName, lastName, managers, responsibleFor})
+  return employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
   const listAnimals = {};
-  data.animals.forEach((animal) => Object.assign(listAnimals, {[animal.name]:animal.residents.length}));
-  if (!species) {return listAnimals}
-  return listAnimals[species]
+  animals.forEach((animal) =>
+    Object.assign(listAnimals, {
+      [animal.name]: animal.residents.length,
+    }));
+  if (!species) { return listAnimals; }
+  return listAnimals[species];
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
-  if (!entrants || entrants.length === 0 || entrants.length === undefined) {return 0} 
-  return 'test'
-  
-}
-console.log(entryCalculator({}));
+  if (!entrants) { return 0; }
 
-function animalMap(options) {
-  // seu código aqui
+  const keys = Object.keys(entrants);
+  const value = Object.values(entrants);
+  let total = 0;
+
+  keys.forEach((key, index) => {
+    if (key === 'Adult') {
+      total += value[index] * prices.Adult;
+    } else if (key === 'Senior') {
+      total += value[index] * prices.Senior;
+    } else if (key === 'Child') { total += value[index] * prices.Child; }
+  });
+  return total;
 }
 
-function schedule(dayName) {
-  // seu código aqui
-}
+//  function animalMap(options) {
+//   const obj = {}
+//   if (!options) {
+//     animals.forEach((animal) => {
+//       if (animal.location === 'NE') {
+//         Object.assign(obj, {NE:[animal.name]})
+//       } else if (animal.location === 'NW') {
+//         Object.assign(obj, {NW:[animal.name]})
+//       }
+//     })
+//   }
+//   return obj;
+//  }
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+//  function schedule(dayName) {
+//  seu código aqui
+//  }
+
+//  function oldestFromFirstSpecies(id) {
+//  seu código aqui
+//  }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const keyPrices = Object.keys(prices);
+  keyPrices.forEach((key) => {
+    const increased = (prices[key] + (prices[key] * percentage) / 100);
+    const finalPrice = Math.floor(increased)
+    + Math.ceil((increased - Math.floor(increased)) * 100) / 100;
+    prices[key] = finalPrice;
+  });
 }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+//  function employeeCoverage(idOrName) {
+//  seu código aqui
+//  }
 
 module.exports = {
   entryCalculator,
-  schedule,
+  //  schedule,
   animalCount,
-  animalMap,
+  //  animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  //  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
-  oldestFromFirstSpecies,
+  //  oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
