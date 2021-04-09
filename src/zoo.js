@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees } = require('./data');
+const { animals, employees } = require("./data");
 // const data = require('./data');
 
 const animalsByIds = (...ids) =>
@@ -23,7 +23,7 @@ const animalsOlderThan = (animal, age) =>
 const employeeByName = (employeeName) => {
   const employeeObj = employees.find(
     (employee) =>
-      employeeName === employee.firstName || employeeName === employee.lastName,
+      employeeName === employee.firstName || employeeName === employee.lastName
   );
 
   return employeeObj === undefined ? {} : employeeObj;
@@ -31,21 +31,34 @@ const employeeByName = (employeeName) => {
 
 const createEmployee = (
   { id, firstName, lastName },
-  { managers, responsibleFor },
+  { managers, responsibleFor }
 ) => ({ id, firstName, lastName, managers, responsibleFor });
 
 const isManager = (id) =>
   employees.some((employee) =>
-    employee.managers.some((idManager) => idManager === id));
+    employee.managers.some((idManager) => idManager === id)
+  );
 
-const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => {
+const addEmployee = (
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = []
+) => {
   const newObj = { id, firstName, lastName, managers, responsibleFor };
   employees.push(newObj);
 };
 
-// function animalCount(species) {
-//   // seu código aqui
-// }
+const animalCount = (species) => {
+  const ret = {};
+  animals.forEach((animal) => {
+    ret[animal.name] = animal.residents.length;
+  });
+  return species === undefined
+    ? ret
+    : animals.find((animal) => animal.name === species).residents.length;
+};
 
 // function entryCalculator(entrants) {
 //   // seu código aqui
@@ -74,7 +87,7 @@ const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
