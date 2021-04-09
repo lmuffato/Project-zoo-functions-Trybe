@@ -9,7 +9,6 @@ eslint no-unused-vars: [
 ]
 */
 
-// const { animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) { // Utilizamos o rest para a função podere receber mais de um parâmetro.
@@ -97,10 +96,9 @@ function entryCalculator(entrants) {
 
 function oldestFromFirstSpecies(id) {
   const firstSpecie = data.employees.find((employee) => employee.id === id).responsibleFor[0];
-  const resident = data.animals.find((animal) => animal.id === firstSpecie).residents
-    .sort((a, b) => (b.age) - (a.age));
-  const { name, sex, age } = resident;
-  return [name, sex, age];
+  const { residents } = data.animals.find((animal) => animal.id === firstSpecie);
+  const oldest = Object.values(residents.sort((a, b) => b.age - a.age)[0]);
+  return oldest;
 }
 
 // function increasePrices(percentage) {
