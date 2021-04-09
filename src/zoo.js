@@ -20,21 +20,28 @@ function animalsOlderThan(animal, old) {
   return animals.find(({ name }) => name === animal).residents
     .every(({ age }) => age >= old);
 }
-console.log(animalsOlderThan('lions', 2));
+// console.log(animalsOlderThan('lions', 2));
 
 function employeeByName(...args) {
   // seu código aqui
-  return employees.find(({ firstName, lastName }) => args.includes(firstName) || args.includes(lastName));
+  return employees.find(({ firstName, lastName }) =>
+    args.includes(firstName) || args.includes(lastName));
 }
-console.log(employeeByName('Nigel'));
+// console.log(employeeByName('Nigel'));
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
+createEmployee();
 
-function isManager(id) {
+function isManager(ids) {
+  const result = employees.find(({ id }) => id === ids).managers;
+  if (result.length === 0 || result.length === 1) {
+    return true;
+  } return false;
   // seu código aqui
 }
+console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
