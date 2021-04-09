@@ -12,8 +12,6 @@ eslint no-unused-vars: [
 // const { animals } = require('./data');
 const data = require('./data');
 
-console.log(data.employees);
-
 function animalsByIds(...ids) { // Utilizamos o rest para a função podere receber mais de um parâmetro.
   const animalsReturned = data.animals.filter((animal, index) => animal.id === ids[index]); // Filtramos os animais pelo id, percorrendo suas posições.
   return animalsReturned;
@@ -39,13 +37,11 @@ function createEmployee(personalInfo, associatedWith) {
   return newEmployee;
 }
 
-// function isManager(id) {
-//   const managersList = data.employees.forEach((employee) => {
-//     return employee.managers;
-//   });
-//   return managersList;
-// }
-// console.log(isManager());
+function isManager(id) {
+  const emp = data.employees;
+  return emp.find((employee) => employee.managers.includes(id)) !== undefined;
+}
+// console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   data.employees.push({
@@ -104,7 +100,7 @@ module.exports = {
   employeeByName,
   // employeeCoverage,
   addEmployee,
-  // isManager,
+  isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
