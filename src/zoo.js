@@ -12,6 +12,7 @@ eslint no-unused-vars: [
 
 // const assert = require('assert');
 
+const data = require('./data.js');
 const { animals, employees, hours, prices } = require('./data.js');
 
 function animalsByIds(...ids) {
@@ -139,11 +140,17 @@ function oldestFromFirstSpecies(id) {
   return oldest;
 }
 
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  // seu código aqui
+  // Com modificação sugerida pro Lucas Pedroso
+  const increase = (percentage / 100) + 1;
+  let increased = 0;
+  Object.entries(data.prices).forEach(([key, value]) => {
+    increased = value * increase;
+    data.prices[key] = Math.round(increased * 100) / 100;
+  });
+  return data.prices;
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -161,6 +168,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
