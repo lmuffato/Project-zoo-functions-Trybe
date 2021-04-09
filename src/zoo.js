@@ -11,7 +11,8 @@ eslint no-unused-vars: [
 
 const { animals, employees } = require('./data');
 
-const filterId = (value) => value.map((id) => animals.find((el) => el.id === id));
+const filterId = (value) =>
+  value.map((id) => animals.find((el) => el.id === id));
 
 function animalsByIds(...ids) {
   if (ids === undefined) return [];
@@ -25,8 +26,9 @@ function animalsOlderThan(animal, ageInput) {
   return youngerThan.length === 0;
 }
 
-const findName = (name) => employees.find((el, { firstName }, { lastName }) =>
-  (el.firstName === name || el.lastName === name ? el : ''));
+const findName = (name) =>
+  employees.find((el, { firstName }, { lastName }) =>
+    (el.firstName === name || el.lastName === name ? el : ''));
 
 function employeeByName(employeeName) {
   if (employeeName === undefined) return {};
@@ -34,7 +36,11 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const { managers, responsibleFor } = associatedWith;
+  const employee = { ...personalInfo };
+  employee.managers = managers.map((manager) => manager);
+  employee.responsibleFor = responsibleFor.map((responsible) => responsible);
+  return employee;
 }
 
 function isManager(id) {
