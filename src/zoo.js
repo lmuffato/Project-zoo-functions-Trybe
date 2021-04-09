@@ -12,7 +12,7 @@ eslint no-unused-vars: [
 const { animals } = require('./data');
 const { employees } = require('./data');
 const { prices } = require('./data');
-const { hours } = require('./data');
+// const { hours } = require('./data');
 
 // const data = require('./data');
 
@@ -63,7 +63,7 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   const objetoFuncionario = employees.find((item) => item.id === id);
-  if (objetoFuncionario.managers === []) {
+  if (objetoFuncionario.managers.length === 1 || objetoFuncionario.managers.length === 0) {
     return true;
   }
 
@@ -115,49 +115,62 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-function schedule(dayName) {
-  if (dayName === undefined) {
-  // const todosDias = Object.entries(hours).map((item) => `${item[0]}: Open from ${item[1]}am until ${item[2]}pm`);
-  }
+// function schedule(dayName) {
+//   const dias = Object.entries(hours).map((item) => `${item[0]}: Open from ${item[1].open}am until ${item[1].close}pm`);
 
-  const dia = hours.find((item) => item === dayName);
-  return dia;
-}
+//   if (dayName === undefined) {
+//     return dias;
+//   }
+
+//   const dia = Object.entries(hours).find((item) => item[0] === dayName);
+//   return `${dia[0]}: Open from ${dia[1].open}am until ${dia[1].close}pm`;
+// }
 
 // function oldestFromFirstSpecies(id) {
-//   // seu código aqui
+//   const objFuncionario = employees.find((item) => item.id === id);
+//   const arrayAnimais = objFuncionario.responsibleFor;
+
+//   const objAnimais = animals.filter((item) => item.id === id);
+
+//   const maiorIdade = animals.every((residente) => residente.age < );
+//   return idadeMinima;
 // }
 
 // function increasePrices(percentage) {
-//   // seu código aqui
+//   const porcetagem = porcentage / 100;
+//   return prices = {
+//     Adult: 49.99,
+//     Senior: 24.99,
+//     Child: 20.99,
+//   }
 // }
 
-function employeeCoverage(idOrName) {
-  const objAnimaisFuncionario = employees.reduce((acc, item) => {
-    acc[item.firstName] = item.rresponsibleFor; // adiciono uma chave e um valor ao objeto
-    return acc;
-  }, {});
+// function employeeCoverage(idOrName) {
+//   // caso não tenha parametro
+//   const objAnimaisFuncionario = employees.reduce((acc, item) => {
+//     acc[`${item.firstName} ${item.lastName}`] = item.responsibleFor; // adiciono uma chave e um valor ao objeto
+//     return acc;
+//   }, {});
 
-  if (idOrName === undefined) {
-    return objAnimaisFuncionario;
-  }
+//   if (idOrName === undefined) {
+//     return objAnimaisFuncionario;
+//   }
 
-  // const funcionario = employees
-  //   .find((item) => item.firstName === idOrName || item.lastName === idOrName || item.id === idOrName);
+//   // caso não tenha parametro
+//   const funcionario = employees
+//     .find((item) => item.firstName === idOrName || item.lastName === idOrName || item.id === idOrName);
 
-  // return { funcionario["firstName"]: funcionario["responsibleFor"]};
-
-  return {};
-}
+//   return { [`${funcionario.firstName} ${funcionario.lastName}`]: funcionario.responsibleFor };
+// }
 
 module.exports = {
   entryCalculator,
-  schedule,
+  // schedule,
   animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  // employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
