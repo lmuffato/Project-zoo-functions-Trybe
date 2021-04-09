@@ -104,6 +104,7 @@ const operatingHours = (open, close) => {
 
 function schedule(dayName) {
   const diasSemanas = Object.keys(hours);
+
   // const horario = diasSemanas
   //   .reduce((acc, curr) => { acc[curr] = operatingHours(hours[curr].open, hours[curr].close); }, {});
   const horario = {};
@@ -136,11 +137,25 @@ function schedule(dayName) {
 
 // Requisito 13
 
+const animaisResponsaveis = (animalApelido) => {
+  const animais = [...animalApelido];
+  return animais;
+};
+
+const fullName = (first, last) => {
+  return ``
+};
+
 function employeeCoverage(idOrName) {
-  if (idOrName === undefined) return 0;
+  // if (idOrName === undefined) return 0;
+  const obj = {};
+  employees
+    .forEach(({ lastName, firstName, responsibleFor }) => { obj[`${firstName} ${lastName}`] = animaisResponsaveis(responsibleFor); });
+
+  return obj;
 }
 
-console.log(employeeCoverage());
+console.log(employeeCoverage('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 module.exports = {
   entryCalculator,
@@ -149,7 +164,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  // employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
