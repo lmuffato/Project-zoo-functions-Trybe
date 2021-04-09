@@ -204,7 +204,7 @@ function increasePrices(percentage) {
   data.prices.Senior = seniorPrize;
 }
 
-function employeeCoverage(idOrName) {
+function employeeCoverage() {
 
 }
 
