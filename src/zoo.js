@@ -16,11 +16,25 @@ function animalsByIds(ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
-}
+ //   const animalSearch = data.animals.forEach(thisAnimal => {
+   //   if (thisAnimal.name === animal ) {
+     //   const ageVerification = (thisAge) => {
+       //   Object.values(thisAge).every((thisAnimal) => thisAge > age);
+       // };
+      //  return ageVerification;
+     // };
+   // });
+};
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) {
+    return {};
+  } else {
+  return foundEmployee = data.employees.find((employee) => {
+     if (employee.firstName === employeeName || employee.lastName === employeeName)
+      return employee;
+    });
+  }
 }
 
 function createEmployee(personalInfo, associatedWith) {
