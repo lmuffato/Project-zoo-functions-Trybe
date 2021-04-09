@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { animals, employees, prices } = require('./data');
-const data = require('./data');
+// const data = require('./data');
 
 function animalsByIds(...ids) {
   return animals.filter(({ id }) => ids.includes(id));
@@ -58,7 +58,7 @@ function entryCalculator(entrants) {
 
   const people = Object.entries(entrants);
   return people.map(([chave, valor]) => valor * prices[chave]).reduce((acc, curr) => acc + curr);
-} // Obtive ajuda do Luan Ramalho
+} // Obtive ajuda do Luan Ramalho neste código.
 
 // function animalMap(options) {
 //   // seu código aqui
