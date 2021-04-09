@@ -48,30 +48,28 @@ function createEmployee(personalInfo, associatedWith) {
   return obj;
 }
 
-/*
 function isManager(id) {
-  const answer = data.employees.forEach((employee) => {
-    return employee.managers.some((manager) => manager === id)
-  })
+  let answer = false;
+  data.employees.forEach((employee) => {
+    employee.managers.forEach((manager) => {
+      if (manager === id) {
+        answer = true;
+      }
+    });
+  });
   return answer;
 }
 
-// console.log(isManager('burlId'));
-// console.log(data.employees);
-
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  return data.employees.push({
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const obj = {
     id,
     firstName,
     lastName,
     managers,
     responsibleFor,
-  })
-  return data.employees;
+  };
+  data.employees.push(obj);
 }
-
-console.log(addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe'));
-*/
 
 function animalCount(species) {
   const obj = {};
@@ -97,18 +95,33 @@ function entryCalculator(entrants) {
   return price;
 }
 
-console.log(entryCalculator({}));
-
-// (people.Adult * entrants.Adult) + (people.Child * entrants.Child) + (people.Senior * entrants.Senior);
 /*
 function animalMap(options) {
-  // seu código aqui
+  const animal = data.animals;
+  if (true) {
+    const obj = animal.forEach((curr) => {
+      {curr.location}
+    })
+    return obj;
+  }
 }
 
+console.log(animalMap());
+*/
+
+/*
 function schedule(dayName) {
-  // seu código aqui
+  const days = data.hours
+  if (!dayName) {
+    const day = Object.entries(days);
+    day.forEach()
+  }
+  return days
 }
 
+console.log(schedule());
+*/
+/*
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
@@ -142,8 +155,9 @@ module.exports = {
   animalsOlderThan,
   employeeByName,
   createEmployee,
-  //  isManager,
-  //  addEmployee,
+  isManager,
+  addEmployee,
   animalCount,
   entryCalculator,
+  // schedule,
 };
