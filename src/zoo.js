@@ -14,11 +14,13 @@ const { animals } = require('./data');
 function animalsByIds(...ids) {
   return ids.map((idAnimal) => animals.find((animal) => animal.id === idAnimal));
 }
-/*
-function animalsOlderThan(animal, age) {
-  // seu código aqui
-}
 
+function animalsOlderThan(animal, age) {
+  return animals.find((nomeAnimal) =>
+    nomeAnimal.name === animal).residents.every((idade) =>
+    idade.age > age);
+}
+/*
 function employeeByName(employeeName) {
   // seu código aqui
 }
@@ -73,7 +75,7 @@ module.exports = {
   // employeeCoverage,
   // addEmployee,
   // isManager,
-  // animalsOlderThan,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
