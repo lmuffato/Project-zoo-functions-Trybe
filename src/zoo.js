@@ -100,9 +100,12 @@ function entryCalculator(entrants) {
   return result;
 }
 
-// function animalMap(options) {
-//   // seu código aqui
-// }
+function animalMap(options) {
+  const { get } = functionsAnimals;
+  if (!options || !options.includeNames) return get.all.location();
+
+  return get.all.locations.includeNames(options);
+}
 
 // function schedule(dayName) {
 //   // seu código aqui
@@ -124,7 +127,7 @@ module.exports = {
   entryCalculator,
   // schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,

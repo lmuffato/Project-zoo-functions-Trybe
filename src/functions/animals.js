@@ -59,8 +59,77 @@ const count = {
   },
 };
 
+const get = {
+  locations: ['NE', 'NW', 'SE', 'SW'],
+  all: {
+    location() {
+      const { locations } = get;
+      let locationsAndItsAnimals = {};
+      locations.forEach((location) => {
+        let animals = data.animals.filter((animal) => animal.location === location);
+        animals = animals.map((animal) => animal.name);
+        locationsAndItsAnimals = { ...locationsAndItsAnimals, [location]: animals };
+      });
+
+      return locationsAndItsAnimals;
+    },
+    locations: {
+      locationWithNames(options) {
+        const { locations } = get;
+        let locationsAndItsAnimals = {};
+        locations.forEach((location) => {
+          let animals = data.animals.filter((animal) => animal.location === location);
+          animals = animals.map((animal) => {
+            const speciesName = animal.name;
+            const residentNames = animal.residents.map((resident) => resident.name);
+            if (options && options.sorted) return { [speciesName]: residentNames.sort() };
+            return { [speciesName]: residentNames };
+          });
+          locationsAndItsAnimals = { ...locationsAndItsAnimals, [location]: animals };
+        });
+        return locationsAndItsAnimals;
+      },
+      locationWithNamesBySex(options) {
+        const { sex, sorted } = options;
+
+        const { locations } = get;
+        let locationsAndItsAnimals = {};
+        locations.forEach((location) => {
+          let animals = data.animals.filter((animal) => animal.location === location);
+          animals = animals.map((animal) => {
+            const speciesName = animal.name;
+            const residentsBySex = animal.residents.filter((resident) => resident.sex === sex);
+            const residentsNames = residentsBySex.map((resident) => resident.name);
+            if (sorted) return { [speciesName]: residentsNames.sort() };
+            return { [speciesName]: residentsNames };
+          });
+          locationsAndItsAnimals = { ...locationsAndItsAnimals, [location]: animals };
+        });
+        return locationsAndItsAnimals;
+      },
+      includeNames(options) {
+        const { sex, sorted } = options;
+
+        if (sex) {
+          if (sorted) {
+            return get.all.locations.locationWithNamesBySex({ sex, sorted: true });
+          }
+          return get.all.locations.locationWithNamesBySex({ sex });
+        }
+
+        if (sorted) {
+          return get.all.locations.locationWithNames({ sorted: true });
+        }
+
+        return get.all.locations.locationWithNames();
+      },
+    },
+  },
+};
+
 module.exports = {
   find,
   verify,
   count,
+  get,
 };
