@@ -49,9 +49,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push(newPeople);
 }
 
-// function animalCount(species) {
-//   // seu código aqui
-// }
+function animalCount(species) {
+  if (species === undefined) {
+    return {};
+  }
+  return animals.find((aa) => aa.name === species).residents.length;
+}
+console.log(animalCount('penguins'));
 
 // function entryCalculator(entrants) {
 //   // seu código aqui
@@ -80,7 +84,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
