@@ -34,11 +34,18 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   return employees.some((employee) => employee.managers.some((empregado) => empregado === id));
 }
-/*
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
 
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const employee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  employees.push(employee);
+}
+/*
 function animalCount(species) {
   // seu código aqui
 }
@@ -75,7 +82,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
