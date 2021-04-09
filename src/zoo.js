@@ -137,25 +137,27 @@ function schedule(dayName) {
 
 // Requisito 13
 
-const animaisResponsaveis = (animalApelido) => {
-  const animais = [...animalApelido];
-  return animais;
-};
+// const animaisResponsaveis = (animalApelido, id) => {
+//   const animais = [...animalApelido];
+//   const searchAnimals = animals.find((animal) => animal.id === id);
+//   animais.map((e) => e === );
+//   return animais;
+// };
 
-const fullName = (first, last) => {
-  return ``
-};
+// const fullName = (first, last) => {
+//   return ``
+// };
 
-function employeeCoverage(idOrName) {
-  // if (idOrName === undefined) return 0;
-  const obj = {};
-  employees
-    .forEach(({ lastName, firstName, responsibleFor }) => { obj[`${firstName} ${lastName}`] = animaisResponsaveis(responsibleFor); });
+// function employeeCoverage(idOrName) {
+//   // if (idOrName === undefined) return 0;
+//   const obj = {};
+//   employees
+//     .forEach(({ lastName, firstName, responsibleFor }) => { obj[`${firstName} ${lastName}`] = animaisResponsaveis(responsibleFor); });
 
-  return obj;
-}
+//   return obj;
+// }
 
-console.log(employeeCoverage('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+// console.log(employeeCoverage('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 module.exports = {
   entryCalculator,
