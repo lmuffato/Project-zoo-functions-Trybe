@@ -102,9 +102,10 @@ function schedule(dayName) {
   }
   return result;
 }
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+
+// function oldestFromFirstSpecies(id) {
+//   // seu código aqui
+// }
 
 function increasePrices(percentage) {
   // feito com auxilio de: Iago Ferreira, Lucas Pedroso, Murilo Gonsalves e Rafael Medeiros
@@ -134,7 +135,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  oldestFromFirstSpecies,
+  // oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
