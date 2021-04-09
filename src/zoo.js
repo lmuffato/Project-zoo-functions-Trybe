@@ -82,9 +82,21 @@ function animalCount(species) {
 // console.log(animalCount('snakes'));
 // console.log(animalCount());
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+// function entryCalculator({ Adult: AdultQut = 0, Chid: ChildQut = 0, Senior: SeniorQut = 0 }) {
+function entryCalculator(entrants) {
+  if (entrants === undefined || entrants === {}) {
+    return 0;
+  }
+  const { prices } = data;
+  const { Adult, Child, Senior } = prices;
+  const { Adult: AdultQut = 0, Child: ChildQut = 0, Senior: SeniorQut = 0 } = entrants;
+  let total = 0;
+  total += (AdultQut * Adult) + (ChildQut * Child) + (SeniorQut * Senior);
+  return total;
+}
+// console.log(entryCalculator());
+// console.log(entryCalculator({ Child: 1, Senior: 1 }));
+// console.log(entryCalculator({}));
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -107,7 +119,7 @@ function animalCount(species) {
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
