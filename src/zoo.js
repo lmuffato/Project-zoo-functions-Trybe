@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 // os requisitos foram feitos colaborativamente com as colegas  , Heloisa , Thalia Cecillier, Débora Passos, Djaniza e Bia Zidioti, Ana Ventura, Marília,
 
-const { animals } = require('./data');
+const { animals, prices } = require('./data');
 const { employees } = require('./data');
 // const data = require('./data');
 
@@ -66,9 +66,16 @@ function animalCount(species) {
   return arrayOfResidents;
 }
 
-// function entryCalculator(entrants) {
-// seu código aqui
-// }
+function entryCalculator(entrants) {
+  if (entrants === undefined || entrants === {}) {
+    return 0;
+  }
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const adultsPrice = Adult * prices.Adult;
+  const childPrice = Child * prices.Child;
+  const seniorPrice = Senior * prices.Senior;
+  return parseFloat((adultsPrice + seniorPrice + childPrice).toFixed(2));
+}
 
 // function animalMap(options) {
 // seu código aqui
@@ -92,7 +99,7 @@ function animalCount(species) {
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
