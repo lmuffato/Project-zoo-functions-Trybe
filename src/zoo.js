@@ -136,14 +136,15 @@ function entryCalculator(entrants) {
 //   return idadeMinima;
 // }
 
-// function increasePrices(percentage) {
-//   const porcetagem = porcentage / 100;
-//   return prices = {
-//     Adult: 49.99,
-//     Senior: 24.99,
-//     Child: 20.99,
-//   }
-// }
+function increasePrices(percentage) {
+  const { Adult, Child, Senior} = prices;
+  const porcetagem = (1 + (percentage / 100));
+  prices.Adult = Math.round((Adult * porcetagem) * 100) / 100;
+  prices.Child = Math.round((Child * porcetagem) * 100) / 100;
+  prices.Senior = Math.round((Senior * porcetagem) * 100) / 100;
+}
+// como arredondar 2 casas decimais https://metring.com.br/arredondar-numero-em-javascript
+// fiz o caulculo de porcentagem a partir desse site https://www.estrategiaconcursos.com.br/blog/como-calcular-porcentagem/#:~:text=Exemplo%3A%20Uma%20mercadoria%20custava%20R,o%20valor%20final%20da%20mercadoria.&text=A%20taxa%20de%20aumento%20%C3%A9,%2C30%20%3D%201%2C30.
 
 // function employeeCoverage(idOrName) {
 //   // caso não tenha parametro
@@ -175,6 +176,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
