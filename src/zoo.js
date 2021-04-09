@@ -9,8 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals } = require('./data');
-const { employees } = require('./data');
+const { animals, employees, prices } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -44,13 +43,31 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return employees.push(addNewEmp);
 }
 
-// function animalCount(species) {
-//   // seu código aqui
-// }
+function animalCount(species) {
+  const objtoAnimal = animals.reduce((acc, item) => {
+    acc[item.name] = item.residents.length;
+    return acc;
+  }, {});
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+  if (!species) {
+    return objtoAnimal;
+  }
+
+  const objEspecies = animals.find((item) => item.name === species);
+  const ArrayEspecies = objEspecies.residents.length;
+  return ArrayEspecies;
+} // Estudado e realizado em grupo com as meninas do Mulheres Tribo A.
+
+function entryCalculator(entrants) {
+  if (entrants === undefined || entrants === {}) {
+    return 0;
+  }
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const adultsPrice = Adult * prices.Adult;
+  const childsPrice = Child * prices.Child;
+  const seniorsPrice = Senior * prices.Senior;
+  return parseFloat((seniorsPrice + adultsPrice + childsPrice).toFixed(2));
+} // Estudado e realizado em grupo com as meninas do Mulheres Tribo A.
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -69,15 +86,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // }
 
 // function employeeCoverage(idOrName) {
-//   // seu código aqui
+//   if (!idOrName) {
+//   return
+// }
 // }
 
 module.exports = {
-//   entryCalculator,
 //   schedule,
-//   animalCount,
 //   animalMap,
-//   employeeCoverage,
+//  employeeCoverage,
+  entryCalculator,
+  animalCount,
   addEmployee,
   isManager,
   animalsOlderThan,
