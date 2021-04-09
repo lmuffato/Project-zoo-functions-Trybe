@@ -8,7 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
-// os requisitos foram feitos colaborativamente com as colegas  , Heloisa , Thalia Cecillier, Débora Passos, Djaniza e Bia
+// os requisitos foram feitos colaborativamente com as colegas  , Heloisa , Thalia Cecillier, Débora Passos, Djaniza e Bia Zidioti, Ana Ventura, Marília,
 
 const { animals } = require('./data');
 const { employees } = require('./data');
@@ -52,9 +52,19 @@ function isManager(id) {
 // seu código aqui
 // }
 
-// function animalCount(species) {
-// seu código aqui
-// }
+function animalCount(species) {
+  const quantityOFAnimals = animals.reduce((acc, animales) => {
+    acc[animales.name] = animales.residents.length;
+    return acc;
+  }, {});
+
+  if (!species) {
+    return quantityOFAnimals;
+  }
+  const quantityOfResidents = animals.find((animales) => animales.name === species);
+  const arrayOfResidents = quantityOfResidents.residents.length;
+  return arrayOfResidents;
+}
 
 // function entryCalculator(entrants) {
 // seu código aqui
@@ -73,7 +83,8 @@ function isManager(id) {
 // }
 
 // function increasePrices(percentage) {
-// seu código aqui
+// const percent = (1 + (percentage / 100));
+// const keys = objects.keys(prices);
 // }
 
 // function employeeCoverage(idOrName) {
@@ -83,7 +94,7 @@ function isManager(id) {
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
