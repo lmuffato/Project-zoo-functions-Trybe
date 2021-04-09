@@ -34,9 +34,9 @@ const isManager = (id) => {
   return ids.some((manager) => manager === id);
 };
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => {
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
+};
 
 const animalCount = (species) => {
   if (species) return animals.find(({ name }) => name === species).residents.length;
@@ -57,55 +57,55 @@ const entryCalculator = (entrants) => {
   return totalPrice;
 };
 
-function animalMap(options) {
-  // if (!options) {
-  //   const map = {};
-  //   const mapZones = ['NE', 'NW', 'SE', 'SW'];
-  //   mapZones.forEach((zone) => {
-  //     Object.assign(map, { [zone]: animals
-  //       .filter(({ location }) => location === zone)
-  //       .map(({ name }) => name) });
-  //   });
-  //   return map;
-  // }
-  // const map = {};
-  // const mapZones = ['NE', 'NW', 'SE', 'SW'];
-  // mapZones.forEach((zone) => {
-  //   Object.assign(map, { [zone]: animals
-  //     .filter(({ location }) => location === zone)
-  //     .map(({ name }) => name) });
-  // });
-  // return map;
-}
+// function animalMap(options) {
+//   if (!options) {
+//     const map = {};
+//     const mapZones = ['NE', 'NW', 'SE', 'SW'];
+//     mapZones.forEach((zone) => {
+//       Object.assign(map, { [zone]: animals
+//         .filter(({ location }) => location === zone)
+//         .map(({ name }) => name) });
+//     });
+//     return map;
+//   }
+//   const map = {};
+//   const mapZones = ['NE', 'NW', 'SE', 'SW'];
+//   mapZones.forEach((zone) => {
+//     Object.assign(map, { [zone]: animals
+//       .filter(({ location }) => location === zone)
+//       .map(({ name }) => name) });
+//   });
+//   return map;
+// }
 
-function schedule(dayName) {
-  // seu código aqui
-}
+// function schedule(dayName) {
+//   // seu código aqui
+// }
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// function oldestFromFirstSpecies(id) {
+//   // seu código aqui
+// }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function increasePrices(percentage) {
+//   // seu código aqui
+// }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function employeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
   entryCalculator,
-  schedule,
+  // schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  // employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
-  oldestFromFirstSpecies,
-  increasePrices,
+  // oldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
