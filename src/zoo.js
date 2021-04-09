@@ -31,8 +31,10 @@ function employeeByName(employeeName) {
   // 3 - seu código aqui
   const resposta = data.employees.filter((valor) =>
     valor.firstName === employeeName || valor.lastName === employeeName);
-  return resposta;
+  return resposta[0];
 }
+
+// console.log(employeeByName('Wishart'));
 
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
