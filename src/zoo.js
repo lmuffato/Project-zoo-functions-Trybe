@@ -66,10 +66,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push(employee);
 }
 
-// function animalCount(species) {
-// seu código aqui
-// }
-
+// if (species === undefined) return { };
+// parâm: data.animals.name
+// entrar no data.animals.residents
+function animalCount(species) {
+  if (!species) {
+    const animalObj = data.animals.reduce((acc, animal) => {
+      acc[animal.name] = animal.residents.length; return acc;
+    }, {});
+    return animalObj;
+  }
+  return data.animals.find((animal) => animal.name === species).residents.length;
+}
 // function entryCalculator(entrants) {
 // seu código aqui
 // }
@@ -91,13 +99,21 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // }
 
 // function employeeCoverage(idOrName) {
-// seu código aqui
+//   const funcionario = '${data.employees.firstName}: ${data.employee.responsibleFor}';
+//   // const employee = data.employee
+//  if (idOrName === undefined) {
+//    for (let i =0; i<= employee.lenght === 0; i + 1 ); {
+//    const objetoFunc = employees.reduce((cont, funcionario) => {
+//    cont[cont.name] = cont.employee.lenght;
+//    return cont;
+//   }, {});
+//  }
 // }
-
+// }
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
