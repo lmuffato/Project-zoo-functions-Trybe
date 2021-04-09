@@ -70,9 +70,12 @@ function entryCalculator(entrants) {
   // 8 - seu código aqui
   if (typeof (entrants) === 'undefined' || Object.keys(entrants).length === 0) { return 0; }
   let total = 0;
-  total += (data.prices.Adult * entrants.Adult)
-  + (data.prices.Child * entrants.Child) + data.prices.Senior * entrants.Senior;
-  return total;
+  
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+
+  total += Adult * data.prices.Adult;
+  total += Child * data.prices.Child;
+  total += Senior * data.prices.Senior;
 }
 
 // function animalMap(options) {
