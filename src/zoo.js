@@ -18,7 +18,6 @@ function animalsByIds(...ids) {
   }
   return ids.map((id) => animals.find((animal) => animal.id === id));
 }
-
 function animalsOlderThan(animal, age) {
   const { animals } = data;
   const obj = animals.find((animal2) => animal2.name === animal);
@@ -26,9 +25,10 @@ function animalsOlderThan(animal, age) {
 }
 
 // console.log(animalsOlderThan('otters', 7));
-// function employeeByName(employeeName) {
-//   // seu código aqui
-// }
+function employeeByName(employeeName) {
+  const { employees } = data;
+  return employees.filter((employee) => employee.firstname === employeeName || employee.lastName === employee);
+}
 
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
@@ -43,11 +43,10 @@ function animalsOlderThan(animal, age) {
 // }
 
 // function animalCount(species) {
-//   // seu código aqui
 // }
 
 // function entryCalculator(entrants) {
-//   // seu código aqui
+
 // }
 
 // function animalMap(options) {
@@ -76,7 +75,7 @@ module.exports = {
   //   animalCount,
   //   animalMap,
   animalsByIds,
-  //   employeeByName,
+  employeeByName,
   //   employeeCoverage,
   //   addEmployee,
   //   isManager,
