@@ -42,9 +42,22 @@ function isManager(id) {
   return employees.map((employee) => employee.managers).shift().includes(id);
 }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function verifyEmpty(list) {
+  if (!list) return []
+  return list
+}
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+  if (!id || !firstName || !lastName) return []
+  const addANewEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers: verifyEmpty(managers),
+    responsibleFor: verifyEmpty(responsibleFor),
+  }
+  employees.push(addANewEmployee)
+  return employees
+}
 
 // function animalCount(species) {
 //   // seu código aqui
@@ -82,7 +95,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
