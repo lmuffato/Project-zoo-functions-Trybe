@@ -50,6 +50,18 @@ function getAnimalById(id) {
   return data.animals.find((animal) => animal.id === id);
 }
 
+function getResidentsNameByAnimal(animal, sort = false) {
+  return sort ? animal.residents.map((resident) => resident.name).sort()
+    : animal.residents.map((resident) => resident.name);
+}
+
+function filterResidentsNameBySex(animal, sex, sort) {
+  return sort ? animal.residents
+    .filter((resident) => resident.sex === sex).map((a) => a.name).sort()
+    : animal.residents
+      .filter((resident) => resident.sex === sex).map((a) => a.name);
+}
+
 function getAllAnimalsNameByEmployee(id) {
   const animalsNames = [];
   getEmployeeById(id)
@@ -58,6 +70,46 @@ function getAllAnimalsNameByEmployee(id) {
       animalsNames.push(getAnimalById(animalId).name);
     });
   return animalsNames;
+}
+
+function getAllAnimalsNameOrderLocation(locations = ['NE', 'NW', 'SE', 'SW']) {
+  const animalsObj = {};
+  locations.forEach((location) => {
+    const animals = data.animals.filter((animal) => animal.location === location);
+    animalsObj[location] = [];
+    animals.forEach((animal) => {
+      animalsObj[location].push(animal.name);
+    });
+  });
+  return animalsObj;
+}
+
+function getAllAnimalsItemsNamesOrderLocation(sort, locations = ['NE', 'NW', 'SE', 'SW']) {
+  const animalsObj = {};
+  locations.forEach((location) => {
+    const animals = data.animals.filter((animal) => animal.location === location);
+    animalsObj[location] = [];
+    animals.forEach((animal) => {
+      const animalObj = {};
+      animalObj[animal.name] = getResidentsNameByAnimal(animal, sort);
+      animalsObj[location].push(animalObj);
+    });
+  });
+  return animalsObj;
+}
+
+function getAnimalsItemsNameBySex(sex, sort = false, locations = ['NE', 'NW', 'SE', 'SW']) {
+  const animalsObj = {};
+  locations.forEach((location) => {
+    const animals = data.animals.filter((animal) => animal.location === location);
+    animalsObj[location] = [];
+    animals.forEach((animal) => {
+      const animalObj = {};
+      animalObj[animal.name] = filterResidentsNameBySex(animal, sex, sort);
+      animalsObj[location].push(animalObj);
+    });
+  });
+  return animalsObj;
 }
 
 function animalsByIds(...ids) {
@@ -127,8 +179,13 @@ function entryCalculator(entrants) {
   return totalValue;
 }
 
-function animalMap(options) {
-  return `${options}`;
+function animalMap(options = {}) {
+  if (Object.keys(options).length <= 0) return getAllAnimalsNameOrderLocation();
+  if (options.includeNames === true) {
+    if (options.sex !== undefined) return getAnimalsItemsNameBySex(options.sex, options.sorted);
+    return getAllAnimalsItemsNamesOrderLocation(options.sorted);
+  }
+  if (options.sex !== undefined) return getAllAnimalsNameOrderLocation();
 }
 
 function schedule(dayName) {
