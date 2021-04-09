@@ -127,7 +127,7 @@ function withoutDay() {
     Monday: 'CLOSED',
   };
 }
-
+// Consultei o código do colega Daniel Ribeiro para me auxiliar na lógica dessa função;
 function getZooHour(day) {
   const openTime = hours[day].open;
   const closeTime = hours[day].close - 12;
@@ -146,17 +146,22 @@ function schedule(dayName) {
   };
 }
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
-
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
-
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+// Requisito 11
+function oldestFromFirstSpecies(employeeId) {
+  const rightEmployee = employees.find((employee) => employee.id === employeeId);
+  const foundSpecie = rightEmployee.responsibleFor[0];
+  const foundAnimal = animals.find((animal) => animal.id === foundSpecie);
+  const getResidents = foundAnimal.residents;
+  let animalAge = 0;
+  let currentAnimal;
+  getResidents.forEach((resident) => {
+    if (resident.age >= animalAge) {
+      animalAge = resident.age;
+      currentAnimal = resident;
+    }
+  });
+  return Object.values(currentAnimal);
+}
 
 module.exports = {
   entryCalculator,
@@ -169,7 +174,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
