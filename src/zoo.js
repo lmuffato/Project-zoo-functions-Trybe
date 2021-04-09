@@ -35,14 +35,22 @@ function employeeByName(employeeName) {
   || lastName === employeeName);
   return result;
 }
-console.log(employeeByName('Nigel'));
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+// function createEmployee(personalInfo, associatedWith) {
+
+// }
+// const { animals, employees } = require('./data');
+
+function createEmployee(...paramets) {
+  const { id, firstName, lastName, managers, responsibleFor } = paramets;
+  const personalInfo = { id, firstName, lastName };
+  const associatedWith = { managers, responsibleFor };
+  return { ...personalInfo, ...associatedWith };
 }
+console.log(createEmployee(employees[0]));
 
 function isManager(id) {
-  // seu código aqui
+  return employees.some(({ managers }) => managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
