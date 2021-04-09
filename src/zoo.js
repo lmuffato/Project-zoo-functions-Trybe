@@ -107,7 +107,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   entryCalculator,
-  schedule,
+  // schedule,
   animalCount,
   // animalMap,
   animalsByIds,
