@@ -134,30 +134,39 @@ function entryCalculator(entrants) {
   return totalValue;
 }
 
-const getAnimalsByLocation = (location) => {
-  const animals = data.animals.filter((animal) => animal.location === location);
-
-  console.log(animals);
-
-  return animals;
-};
-
 function animalMap(options) {
-  if (!options) {
-    const animalsOrderly = {
-      NE: getAnimalsByLocation('NE'),
-      NW: getAnimalsByLocation('NW'),
-      SE: getAnimalsByLocation('SE'),
-      SW: getAnimalsByLocation('SW'),
-    };
 
-    return animalsOrderly;
-  }
 }
 
+const formatHour = (hour) => hour - 12;
+
+const getHourOfDay = (hour) => {
+  const openHour = data.hours[hour].open;
+  const closeHour = data.hours[hour].close;
+
+  if (!openHour || !closeHour) return 'CLOSED';
+
+  return `Open from ${openHour}am until ${formatHour(closeHour)}pm`;
+};
+
 // dayName
-function schedule() {
-  // seu código aqui
+function schedule(day) {
+  if (!day) {
+    const scheduleHour = {};
+    const scheduleArray = Object.keys(data.hours);
+
+    scheduleArray.forEach(((hour) => {
+      scheduleHour[hour] = getHourOfDay(hour);
+    }));
+
+    return scheduleHour;
+  }
+
+  const daySchedule = {};
+
+  daySchedule[day] = getHourOfDay(day);
+
+  return daySchedule;
 }
 
 // id
