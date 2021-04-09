@@ -16,7 +16,7 @@ function animalsByIds(...ids) {
   return data.animals.filter((item) => ids.includes(item.id));
 }
 
-function animalsOlderThan(animal, age) {
+/* function animalsOlderThan(animal, age) {
   // seu código aqui
 }
 
@@ -62,7 +62,7 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
-}
+} */
 
 module.exports = {
 /*   entryCalculator,
