@@ -95,11 +95,11 @@ function oldestFromFirstSpecies(id) {
 
   const todosAnimais = data.animals.find(({ id: animalId }) =>
     animalId === procurandoAnimal).residents;
-    
-    const animalMaisVelho = todosAnimais.sort(({ age: valorA }, { age: valorB }) =>
-    valorB - valorA)[0];
-  
-  return Object.values(animalMaisVelho);
+
+  const animalMaisVelho = todosAnimais.sort(({ age: valorA }, { age: valorB }) =>
+    valorB - valorA)[0];  
+
+    return Object.values(animalMaisVelho);
 }
 // function increasePrices(percentage) {
 //   // seu código aqui
