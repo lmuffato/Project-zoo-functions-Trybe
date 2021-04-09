@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, hours } = require('./data');
+const { animals, employees, hours, prices } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -62,20 +62,22 @@ function animalCount(species) {
     const animalsSpecies = animals.find((animal) => animal.name === species);
     return animalsSpecies.residents.length;
   }
-
-  return animals.reduce((obj, animal) => {
-    obj[animal.name] = animal.residents.length;
-    return obj;
-  }, {});
+  const animalsCount = {};
+  animals.forEach((animal) => {
+    animalsCount[animal.name] = animal.residents.length;
+  });
+  return animalsCount;
 }
 
-// function entryCalculator(entryPeople) {
-//   if (entryPeople !== undefined) {
-//     const { Adult = 0, Child = 0, Senior = 0 } = entryPeople;
-//     const sum = Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
-//     return sum;
-//   } return 0;
-// }
+function entryCalculator(entryPeople) {
+  if (entryPeople !== undefined) {
+    const { Adult = 0, Child = 0, Senior = 0 } = entryPeople;
+    // const { Adult = AdultPrice, Child = ChildPrice, Senior = SeniorPrice} = prices;
+    // const sum = Adult * AdultPrice + Child * ChildPrice + Senior * SeniorPrice;
+    const sum = Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
+    return sum;
+  } return 0;
+}
 
 // function animalMap(map) {
 //   if (map === undefined) {
@@ -110,23 +112,26 @@ function schedule(dayName) {
   }
   return dayObj;
 }
-console.log(schedule());
+
 // function oldestFromFirstSpecies(id) {
 //   const animalManagedById = employees.find((employee) => employee.id === id).responsibleFor[0];
 //   const animalArray = animals.filter((animal) => (animal.id === animalManagedById));
 //   animalArray.forEach(())
 // }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  const age = Object.keys(prices);
+  age.forEach((agePrice) => {
+    prices[agePrice] = (Math.round((prices[agePrice] * (1 + percentage / 100)) * 100)) / 100;
+  });
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   schedule,
   animalCount,
   // animalMap,
@@ -137,6 +142,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
