@@ -77,9 +77,45 @@ function entryCalculator(entrants={}) {
   return finalPrice;
 }
 
-function animalMap(options) {
-  // seu código aqui
+const locations = ['NE', 'NW', 'SE', 'SW'];
+
+function categorizeAnimals() {
+  const returnedValue = {};
+  locations.forEach((lct) => {
+    const filteredAnimals = animals.filter(({location}) => location === lct);
+    returnedValue[lct] = filteredAnimals.map((animal) => { return animal.name});
+  });
+  return returnedValue;
+};
+
+function categorizeAnimalsWithName(sexo, ordenar) {
+  const returnedValue = {};
+  locations.forEach((lct) => {
+    const filteredAnimals = animals.filter(({location}) => location === lct);
+    const animalsArray = [];
+    filteredAnimals.forEach(({name, residents}) => {
+      const animalObj = {};
+      if (sexo !== false) {
+        residents = residents.filter((resident) => resident.sex === sexo);
+      }
+      animalObj[name] = (ordenar) ? residents.map(({name}) => name).sort() : residents.map(({name}) => name);
+      animalsArray.push(animalObj);
+    });
+    returnedValue[lct] = animalsArray;
+  });
+  return returnedValue;
 }
+
+function animalMap(options) {
+  if (!options) {
+    return categorizeAnimals();
+  }
+  const {includeNames=false, sex=false, sorted=false} = options;
+  if (includeNames === true) {
+    return categorizeAnimalsWithName(sex, sorted);
+  }
+  return categorizeAnimals();
+};
 
 function schedule(dayName) {
   const scheduleObject = {};
@@ -115,7 +151,7 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  
 }
 
 module.exports = {
