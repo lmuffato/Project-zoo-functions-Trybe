@@ -57,7 +57,7 @@ function animalCount(species) {
   // 7 - seu código aqui
   if (species) {
     return data.animals.find((valor) =>
-      valor.name === species)[0].residents.length1;
+      valor.name === species).residents.length;
   }
   const resposta = {};
   data.animals.forEach((valor) => {
