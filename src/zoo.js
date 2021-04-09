@@ -101,33 +101,33 @@ function increasePrices(percentage) {
 }
 //  Requisito 13
 const getAnimalName = (arrayId) => {
-  const array = [];
+  const newArray = [];
   arrayId.forEach((id) =>
     animals.forEach((animal) => {
       if (animal.id === id) {
-        array.push(animal.name);
+        newArray.push(animal.name);
       }
     }));
-  return array;
+  return newArray;
 };
 
-const selectEmployee = (param) => {
-  const obj = {};
+const selectEmployee = (parameter) => {
+  const newObj = {};
   employees.forEach((emp) => {
-    if (emp.id === param || emp.lastName === param || emp.firstName === param) {
-      Object.assign(obj, { [`${emp.firstName} ${emp.lastName}`]:
+    if (emp.id === parameter || emp.lastName === parameter || emp.firstName === parameter) {
+      Object.assign(newObj, { [`${emp.firstName} ${emp.lastName}`]:
       getAnimalName(emp.responsibleFor) });
     }
   });
-  return obj;
+  return newObj;
 };
 
 function employeeCoverage(idOrName) {
-  const obj = {};
+  const newObj = {};
   if (!idOrName) {
-    employees.forEach((emp) => Object.assign(obj, { [`${emp.firstName} ${emp.lastName}`]:
+    employees.forEach((emp) => Object.assign(newObj, { [`${emp.firstName} ${emp.lastName}`]:
   getAnimalName(emp.responsibleFor) }));
-    return obj;
+    return newObj;
   }
   return selectEmployee(idOrName);
 }
