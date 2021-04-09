@@ -13,11 +13,11 @@ const data = require('./data');
 
 const { animals, employees } = data;
 
-function animalsByIds(...ids) {
-  if (typeof ids === 'undefined') {
-    return [];
-  }
-  return animals.filter((idValue) => idValue.id === ids[0]);
+function animalsByIds(ids) {
+  // if (typeof ids === 'undefined') {
+  //   return [];
+  // }
+  // return animals.filter((idValue) => idValue.id === ids[0]);
 }
 // console.log(animalsByIds('01422318-ca2d-46b8-b66c-3e9e188244ed'));
 
