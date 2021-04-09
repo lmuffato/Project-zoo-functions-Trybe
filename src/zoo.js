@@ -87,7 +87,7 @@ function schedule(dayName) {
   return scheduleList;
 }
 
-/* Source: https://github.com/tryber/sd-08-project-zoo-function/tree/5e99ab4c1f0b23aab684f400dcf5dcfb3f69e506*/
+/* Source: https://github.com/tryber/sd-08-project-zoo-function/tree/5e99ab4c1f0b23aab684f400dcf5dcfb3f69e506 */
 function oldestFromFirstSpecies(id) {
   const employeeId = employees.find((item) => item.id === id);
   const animal = animals.find((item) => employeeId.responsibleFor[0] === item.id);
@@ -96,7 +96,7 @@ function oldestFromFirstSpecies(id) {
   return Object.values(animal.residents.find((item) => item.age === oldest[0]));
 }
 
-/* Source; https://github.com/tryber/sd-08-project-zoo-function/blob/624454bd864d9badf6bdaeabfc2c929e8103720a/src/zoo.js */
+/* Source: https://github.com/tryber/sd-08-project-zoo-function/blob/624454bd864d9badf6bdaeabfc2c929e8103720a/src/zoo.js */
 function increasePrices(percentage) {
   Object.keys(prices).forEach((element) => {
     prices[element] = Math.round(prices[element] * (1 + (percentage / 100)) * 100) / 100;
