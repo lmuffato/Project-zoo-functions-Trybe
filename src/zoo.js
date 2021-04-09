@@ -78,7 +78,7 @@ function schedule(dayName) {
   const dayList = {};
   Object.keys(hours).forEach((day) => {
     if (day !== 'Monday') {
-      dayList[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`
+      dayList[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
     } else {
       dayList[day] = 'CLOSED';
     }
