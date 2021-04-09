@@ -11,6 +11,9 @@ eslint no-unused-vars: [
 
 const { animals } = require('./data');
 const { employees } = require('./data');
+const { prices } = require('./data');
+const { hours } = require('./data');
+
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -94,17 +97,32 @@ function animalCount(species) {
   return ArrayEspecies;
 }
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+function entryCalculator(entrants) {
+  if (entrants === undefined || Object.entries(entrants).length === 0) {
+    return 0;
+  }
+
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  // coloco o object destructuring, para se cado o entrants não tiver umas dessas chaves/valores eu msm atribuo.
+
+  const adulto = prices.Adult * Adult;
+  const idoso = prices.Senior * Senior;
+  const crianças = prices.Child * Child;
+  return adulto + idoso + crianças;
+}
 
 // function animalMap(options) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+function schedule(dayName) {
+  if (dayName === undefined) {
+  // const todosDias = Object.entries(hours).map((item) => `${item[0]}: Open from ${item[1]}am until ${item[2]}pm`);
+  }
+
+  const dia = hours.find((item) => item === dayName);
+  return dia;
+}
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -114,18 +132,32 @@ function animalCount(species) {
 //   // seu código aqui
 // }
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function employeeCoverage(idOrName) {
+  const objAnimaisFuncionario = employees.reduce((acc, item) => {
+    acc[item.firstName] = item.rresponsibleFor; // adiciono uma chave e um valor ao objeto
+    return acc;
+  }, {});
+
+  if (idOrName === undefined) {
+    return objAnimaisFuncionario;
+  }
+
+  // const funcionario = employees
+  //   .find((item) => item.firstName === idOrName || item.lastName === idOrName || item.id === idOrName);
+
+  // return { funcionario["firstName"]: funcionario["responsibleFor"]};
+
+  return {};
+}
 
 module.exports = {
-  // entryCalculator,
-  // schedule,
+  entryCalculator,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
