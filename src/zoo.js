@@ -98,7 +98,7 @@ const onlyFemale = (name) => {
 const regular = (endObj, funcao) => {
   const key = Object.keys(endObj);
   const value = Object.values(endObj);
-  const newValue = value.map((names) => names.map((name) => ({ [name]: [funcao(name)] })));
+  const newValue = value.map((names) => names.map((name) => ({ [name]: funcao(name) })));
   const obj = {};
   for (let index = 0; index < key.length; index += 1) {
     const element = key[index];
@@ -110,7 +110,7 @@ const regular = (endObj, funcao) => {
 const regularSort = (endObj, funcao) => {
   const key = Object.keys(endObj);
   const value = Object.values(endObj);
-  const newValue = value.map((names) => names.map((name) => ({ [name]: [funcao(name).sort()] })));
+  const newValue = value.map((names) => names.map((name) => ({ [name]: funcao(name).sort() })));
   const obj = {};
   for (let index = 0; index < key.length; index += 1) {
     const element = key[index];
