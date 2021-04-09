@@ -204,8 +204,51 @@ function increasePrices(percentage) {
   data.prices.Senior = seniorPrize;
 }
 
-function employeeCoverage() {
+const getEmployeeCoverageList = () => {
+  const employees = data.employees.map((employee) => ({
+    name: `${employee.firstName} ${employee.lastName}`,
+    responsibleFor: employee.responsibleFor,
+  }));
 
+  const list = {};
+
+  employees.forEach((employee) => {
+    const animals = findAnimalsById(employee.responsibleFor);
+
+    const animalsNames = animals.map((animal) => animal.name);
+
+    list[employee.name] = animalsNames;
+  });
+
+  return list;
+};
+
+const findEmployeeByIdOrName = (idOrName) => {
+  const employee = data.employees.find((employeeItem) => {
+    if (employeeItem.id === idOrName) return employeeItem;
+    if (employeeItem.firstName === idOrName) return employeeItem;
+    if (employeeItem.lastName === idOrName) return employeeItem;
+
+    return false;
+  });
+
+  return employee;
+};
+
+function employeeCoverage(idOrName) {
+  if (!idOrName) {
+    const employeeCoverageList = getEmployeeCoverageList();
+
+    return employeeCoverageList;
+  }
+
+  const employee = findEmployeeByIdOrName(idOrName);
+  const { firstName, lastName, responsibleFor } = employee;
+  const name = `${firstName} ${lastName}`;
+  const animals = findAnimalsById(responsibleFor).map((animal) => animal.name);
+  const employeeCoverageObj = {};
+  employeeCoverageObj[name] = animals;
+  return employeeCoverageObj;
 }
 
 module.exports = {
