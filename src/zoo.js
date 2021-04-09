@@ -178,13 +178,34 @@ function schedule(dayName) {
 
 /* function oldestFromFirstSpecies(id) {
   // seu código aqui
-}
-
+} */
+// ajuda do murilo
 function increasePrices(percentage) {
   // seu código aqui
+  /* Ao passar uma porcentagem, incrementa todos os preços,
+   arrendondados em duas casas decimais */
+  const perc = (100 + percentage) / 100;
+  const keys = Object.keys(data.prices);
+  keys.forEach((key) => {
+    const num = parseFloat((data.prices[key] * perc).toFixed(3));
+    const int = Math.floor(num);
+    const decimal = Math.ceil((num - int) * 100) / 100;
+    data.prices[key] = int + decimal;
+  });
 }
 
-function employeeCoverage(idOrName) {
+/* function increasePrices(percentage) {
+  // seu código aqui
+  const increase = (percentage / 100) + 1;
+  let increased = 0;
+  Object.entries(data.prices).forEach(([key,value])=> {
+    increase = value * increase;
+    data.prices[key] = Math.round(increase * 100) / 100;
+  });
+  return data.prices;
+} */
+
+/* function employeeCoverage(idOrName) {
   // seu código aqui
 } */
 
@@ -200,6 +221,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
