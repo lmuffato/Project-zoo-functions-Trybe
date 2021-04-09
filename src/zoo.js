@@ -41,10 +41,10 @@ function employeeByName(employeeName) {
 // }
 // const { animals, employees } = require('./data');
 
-function createEmployee(...paramets) {
-  const { id, firstName, lastName, managers, responsibleFor } = paramets;
-  const personalInfo = { id, firstName, lastName };
-  const associatedWith = { managers, responsibleFor };
+function createEmployee(personalInfo, associatedWith) {
+  // const { id, firstName, lastName, managers, responsibleFor } = paramets;
+  // const personalInfo = { id, firstName, lastName };
+  // const associatedWith = { managers, responsibleFor };
   return { ...personalInfo, ...associatedWith };
 }
 console.log(createEmployee(employees[0]));
@@ -53,8 +53,11 @@ function isManager(id) {
   return employees.some(({ managers }) => managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id = '', firstName = '', lastName = '', managers = [], responsibleFor = []) {
+  const personalInfo = { id, firstName, lastName };
+  const associatedWith = { managers, responsibleFor };
+  const employee = createEmployee(personalInfo, associatedWith);
+  employees.push(employee);
 }
 
 function animalCount(species) {
