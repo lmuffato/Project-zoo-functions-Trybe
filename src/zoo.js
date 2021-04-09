@@ -125,6 +125,9 @@ function increasePrices(percentage) {
 //  // seu código aqui
 // }
 
+// agradeço a Iago Ferreira, Lucas Pedroso, Murilo Gonsalves e Rafael Medeiros entre os outros participantes
+// da sala eterna do zoom 1, aprendi Muito nesse projeto graças aos colegas da sala, um grupo muito paciente!
+
 module.exports = {
   entryCalculator,
   schedule,
