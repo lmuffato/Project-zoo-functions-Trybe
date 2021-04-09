@@ -47,9 +47,16 @@ function isManager(id) {
   return employees.some((employee, index) => employee.managers[index] === id);
 }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
+  if (newEmployee.managers === undefined) {
+    newEmployee.managers = [];
+  }
+  if (newEmployee.responsibleFor === undefined) {
+    newEmployee.responsibleFor = [];
+  }
+  return employees.push(newEmployee);
+}
 
 // function animalCount(species) {
 //   // seu código aqui
@@ -87,7 +94,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
