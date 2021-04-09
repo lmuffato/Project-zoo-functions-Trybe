@@ -77,8 +77,8 @@ function animalMap(options) {
 function schedule(dayName) {
   const dayList = {};
   Object.keys(hours).forEach((day) => {
-    day !== 'Monday'
-      ? dayList[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`
+    day !== 'Monday' ? dayList[day]
+      = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`
       : dayList[day] = 'CLOSED';
   });
   if (!dayName) {
