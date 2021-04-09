@@ -71,7 +71,16 @@ function entryCalculator(entrants) {
 // }
 
 // function schedule(dayName) {
-//   // seu código aqui
+//   const cronograma = {};
+//   const { hours } = data;
+//   const days = Object.keys(hours);
+//   if (typeof dayName === 'undefined') {
+//     days.forEach((day) => {
+//       if (hours[day].close === 0) cronograma[day] = 'CLOSED';
+//       cronograma[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+//     });
+//   }
+//   return cronograma;
 // }
 
 // function oldestFromFirstSpecies(id) {
@@ -89,12 +98,16 @@ function increasePrices(percentage) {
 }
 
 // function employeeCoverage(idOrName) {
-//   // seu código aqui
+//   // const { animals, employees } = data;
+//   // // const resultKeyValue
+//   // if (idOrName === undefined) {
+//   //   employees.map((value) => firstName === idOrName);
+//   // }
 // }
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
