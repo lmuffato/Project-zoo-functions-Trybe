@@ -8,7 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -67,8 +67,8 @@ function entryCalculator(entrants) {
   if (entrants === undefined) return 0;
   if (Object.keys(entrants).length === 0) return 0;
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-  const totalPrice = (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior)
-  return totalPrice
+  const totalPrice = (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
+  return totalPrice;
 }
 
 function animalMap(options) {
@@ -76,7 +76,10 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  return dayName;
+  if (dayName === undefined) {
+    return Object.entries(hours);
+  }
+
 }
 
 function oldestFromFirstSpecies(id) {
