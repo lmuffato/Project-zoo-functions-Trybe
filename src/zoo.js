@@ -9,8 +9,10 @@ eslint no-unused-vars: [
 ]
 */
 
-// const { animals } = require('./data');
+const { animals } = require('./data');
 const data = require('./data');
+
+console.log(animals);
 
 function animalsByIds(...ids) { // Utilizamos o rest para a função podere receber mais de um parâmetro.
   const animalsReturned = data.animals.filter((animal, index) => animal.id === ids[index]); // Filtramos os animais pelo id, percorrendo suas posições.
@@ -38,20 +40,40 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 // function isManager(id) {
-//   const checkManager = data.employees.filter((employee) => employee.);
+//   const managersList = data.employees.forEach((employee) => {
+//     return employee.managers;
+//   });
+//   return managersList;
 // }
+// console.log(isManager());
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+  data.employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
+}
 
 // function animalCount(species) {
-//   // seu código aqui
+//   if (species === undefined) {
+//     const undefinedSpecie = data.animals
+//       .map((animal) => `${animal.name}: ${(animal.residents).length}`);
+//     return undefinedSpecie;
+//   }
+//   if (species === data.animals.species) {
+//     return `${(data.animals.residents).length}`;
+//   }
 // }
+// console.log(animalCount('lions'));
 
 // function entryCalculator(entrants) {
-//   // seu código aqui
+//   let entrantsNumb = {};
+
 // }
+// console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -81,7 +103,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   // isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
