@@ -48,7 +48,7 @@ const employee = {
   managers,
   responsibleFor,
 };
-return employee; 
+return employee;
 } */
 
 function isManager(id) {
@@ -86,7 +86,7 @@ function entryCalculator(entrants) {
   /* 'Retorna 0 se um objeto vazio for passado' */
   if (typeof entrants === 'undefined' || entrants === {}) return 0;
   const { Adult = 0, Senior = 0, Child = 0 } = entrants;
-  const { Adult: guy, Senior: idoso, Child: crianca } = data.prices
+  const { Adult: guy, Senior: idoso, Child: crianca } = data.prices;
   /* Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos */
   return (guy * Adult) + (idoso * Senior) + (crianca * Child);
 }
