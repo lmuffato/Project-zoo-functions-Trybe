@@ -45,9 +45,6 @@ function addEmployee(id = '', firstName = '', lastName = '', managers = [], resp
   const newEmp = createEmployee({ id, firstName, lastName }, { managers, responsibleFor });
   data.employees.push(newEmp);
 }
-// console.log(data.employees.length);
-// addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe');
-// console.log(data.employees[8]);
 
 const generateAnimalsList = () => {
   const listOfAnimals = {};
@@ -118,11 +115,29 @@ function animalMap(options = {}) {
   return result;
 }
 // console.log(animalMap({ includeNames: true }));
+const generateCompliteSchedule = () => {
+  const dSc = Object.entries(data.hours);
+  const cSch = {};
+  for (let index = 0; index < dSc.length; index += 1) {
+    if (dSc[index][1].open !== 0) {
+      cSch[dSc[index][0]] = `Open from ${dSc[index][1].open}am until ${dSc[index][1].close - 12}pm`;
+    } else {
+      cSch[dSc[index][0]] = 'CLOSED';
+    }
+  }
+  return cSch;
+};
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
-
+function schedule(dayName) {
+  let scheduleRequested = generateCompliteSchedule();
+  if (dayName !== undefined) {
+    const scheduleDay = scheduleRequested[dayName];
+    scheduleRequested = {};
+    scheduleRequested[dayName] = scheduleDay;
+  }
+  return scheduleRequested;
+}
+console.log(schedule('Monday'));
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
@@ -137,7 +152,7 @@ function animalMap(options = {}) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   animalMap,
   animalsByIds,
