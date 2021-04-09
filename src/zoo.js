@@ -53,9 +53,7 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   const { employees } = data;
-  const filteredManagers = employees.filter(({ firstName: name }) =>
-    name === 'Stephanie' || name === 'Ola' || name === 'Burl');
-  return filteredManagers.some(({ id: idManager }) => idManager === id);
+  return employees.some(({ managers }) => managers.includes(id));
 }
 // console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 // console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
@@ -83,7 +81,6 @@ function animalCount(species) {
 // console.log(animalCount());
 
 function entryCalculator(entrants) {
-  console.log(entrants);
   if (!entrants || Object.keys(entrants).length === 0) return 0;
   const { prices } = data;
   return Object.entries(entrants).map(([key, value]) => prices[key] * value)
