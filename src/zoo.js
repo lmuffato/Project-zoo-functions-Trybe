@@ -50,6 +50,10 @@ function getAnimalById(id) {
   return data.animals.find((animal) => animal.id === id);
 }
 
+function getAnimalsByEmployeeId(employeeId) {
+  return getEmployeeById(employeeId).responsibleFor;
+}
+
 function getResidentsNameByAnimal(animal, sort = false) {
   return sort ? animal.residents.map((resident) => resident.name).sort()
     : animal.residents.map((resident) => resident.name);
@@ -205,7 +209,10 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  return `${id}`;
+  let animal = getAnimalsByEmployeeId(id)[0];
+  animal = getAnimalById(animal);
+  const residentOld = animal.residents.sort((a, b) => b.age - a.age)[0];
+  return Object.values(residentOld);
 }
 
 function increasePrices(percentage) {
