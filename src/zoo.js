@@ -53,7 +53,16 @@ function isManager(ids) {
   return false;
 }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {}
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const obj = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  return employees.push(obj);
+}
 
 // function animalCount(species) {}
 
@@ -77,7 +86,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
