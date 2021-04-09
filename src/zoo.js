@@ -70,11 +70,22 @@ function animalCount(species) {
   return data.animals.find((animal) => animal.name === species).residents.length;
 }
 
-/*
-function entryCalculator(entrants) {
-  // seu código aqui
+function hasPeopleCalculation(people) {
+  const { Adult, Child, Senior } = people;
+
+  return (Adult ? (Adult * 49.99) : 0)
+    + (Child ? (Child * 20.99) : 0)
+    + (Senior ? (Senior * 24.99) : 0);
 }
 
+function entryCalculator(entrants) {
+  if (!entrants) return 0;
+  if (Object.entries(entrants).length === 0) return 0;
+
+  return hasPeopleCalculation(entrants);
+}
+
+/*
 function animalMap(options) {
   // seu código aqui
 }
@@ -96,7 +107,7 @@ function employeeCoverage(idOrName) {
 }
 */
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
