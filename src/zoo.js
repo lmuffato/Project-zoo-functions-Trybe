@@ -29,9 +29,11 @@ function employeeByName(employeeName) {
     .find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
 } // realizado em conjunto (Deh, Nathi, Djaniza, Thalita e Heloisa)
 
-// function createEmployee(personalInfo, associatedWith) {
-
-// }
+function createEmployee(personalInfo, associatedWith) {
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return ({ id, firstName, lastName, managers, responsibleFor });
+}
 
 function isManager(id) {
   return employees.some((employee) => employee.managers.some((employee2) => employee2 === id));
@@ -80,7 +82,7 @@ module.exports = {
   animalsOlderThan,
   animalsByIds,
   employeeByName,
-//  createEmployee,
+  createEmployee,
 //   oldestFromFirstSpecies,
 //   increasePrices,
 };
