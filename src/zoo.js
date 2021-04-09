@@ -86,27 +86,6 @@ function entryCalculator(entrants) {
 
 // }
 
-// function schedule(dayName) {
-//   const ob = {};
-//   if (typeof dayName === 'undefined') {
-//     const arr = Object.keys(data.hours);
-//     arr.forEach((el) => {
-//       if (data.hours[el].close - data.hours[el].open) {
-//         ob[el] = `Open from ${data.hours[el].open}am until ${data.hours[el].close - 12}pm`;
-//       } else {
-//         ob[el] = 'CLOSED';
-//       }
-//     });
-//     return ob;
-//   }
-//   if (data.hours[dayName].close - data.hours[dayName].open === 0) {
-//     ob[dayName] = 'CLOSED';
-//     return ob;
-//   }
-//   ob[dayName] = `Open from ${data.hours[dayName].open}am until ${data.hours[dayName].close - 12}pm`;
-//   return ob;
-// }
-
 function schedule(dayName) {
   const ob = {};
   const arr = Object.keys(data.hours);
@@ -125,9 +104,12 @@ function schedule(dayName) {
   return ob;
 }
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  const animalId = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const allResidents = data.animals.find((animal) => animal.id === animalId).residents;
+  const olderAnimal = allResidents.reduce((acc, cur) => (acc.age > cur.age ? acc : cur));
+  return [olderAnimal.name, olderAnimal.sex, olderAnimal.age];
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -148,7 +130,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  //   oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   //   increasePrices,
   createEmployee,
 };
