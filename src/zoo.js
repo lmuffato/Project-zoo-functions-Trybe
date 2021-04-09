@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees, prices } = data;
+const { animals, employees, prices, hours } = data;
 
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.find((some) => animal.id === some));
@@ -70,10 +70,25 @@ function entryCalculator(entrants = 0) {
 // function animalMap(options) {
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+function schedule(dayName) {
+  const allSchedule = {
+    Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
+    Wednesday: `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
+    Thursday: `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
+    Friday: `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
+    Saturday: `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
+    Sunday: `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
+    Monday: 'CLOSED',
+  };
+  if (!dayName) {
+    return allSchedule;
+  } if (dayName === 'Monday') {
+    return { Monday: 'CLOSED' };
+  }
+  return { [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm` };
+}
 
+// Ajuda Raphael Rodrigues
 function oldestFromFirstSpecies(id) {
   const employeeResp = employees.find((employee) => employee.id === id).responsibleFor[0];
   const animalsById = animals.find((animal) => animal.id === employeeResp);
@@ -91,7 +106,7 @@ function oldestFromFirstSpecies(id) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
