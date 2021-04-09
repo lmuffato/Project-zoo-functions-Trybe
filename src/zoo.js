@@ -1,3 +1,4 @@
+Iniciando o projeto!
 /*
 eslint no-unused-vars: [
   "error",
