@@ -33,19 +33,36 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some((employee) => employee.managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  data.employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
 }
 
 function animalCount(species) {
-  // seu código aqui
+  const getAllAnimalsAndPopulation = (acc, currentAnimal) => {
+    acc[currentAnimal.name] = currentAnimal.residents.length;
+    return acc;
+  };
+
+  if (species === undefined) {
+    return data.animals.reduce(getAllAnimalsAndPopulation, {});
+  }
+
+  return data.animals.find(({ name }) => name === species).residents.length;
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
+function entryCalculator(entrants = 0) {
+  return Object.entries(entrants).reduce((acc, [person, qty]) => {
+    return acc + data.prices[person] * qty;
+  }, 0);
 }
 
 function animalMap(options) {
