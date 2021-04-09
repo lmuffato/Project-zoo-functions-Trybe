@@ -62,9 +62,101 @@ function entryCalculator({ Adult = 0, Child = 0, Senior = 0 } = 0) {
   return total;
 }
 
-// function animalMap(options) {
+const zooMap = () => ({
+  NE: data.animals.filter((animal) => animal.location === 'NE').map((animal) => animal.name),
+  NW: data.animals.filter((animal) => animal.location === 'NW').map((animal) => animal.name),
+  SE: data.animals.filter((animal) => animal.location === 'SE').map((animal) => animal.name),
+  SW: data.animals.filter((animal) => animal.location === 'SW').map((animal) => animal.name),
+});
 
-// }
+const getResidents = (name) => {
+  const anim = data.animals.find((animal) => animal.name === name);
+  return anim.residents.map((resident) => resident.name);
+};
+
+const onlyMale = (name) => {
+  const anim = data.animals.find((animal) => animal.name === name);
+  const end = [];
+  anim.residents.forEach((resident) => {
+    if (resident.sex === 'male') {
+      end.push(resident.name);
+    }
+  });
+  return end;
+};
+
+const onlyFemale = (name) => {
+  const anim = data.animals.find((animal) => animal.name === name);
+  const end = [];
+  anim.residents.forEach((resident) => {
+    if (resident.sex === 'female') {
+      end.push(resident.name);
+    }
+  });
+  return end;
+};
+const regular = (endObj, funcao) => {
+  const key = Object.keys(endObj);
+  const value = Object.values(endObj);
+  const newValue = value.map((names) => names.map((name) => ({ [name]: [funcao(name)] })));
+  const obj = {};
+  for (let index = 0; index < key.length; index += 1) {
+    const element = key[index];
+    Object.assign(obj, { [element]: newValue[index] });
+  }
+  return obj;
+};
+
+const regularSort = (endObj, funcao) => {
+  const key = Object.keys(endObj);
+  const value = Object.values(endObj);
+  const newValue = value.map((names) => names.map((name) => ({ [name]: [funcao(name).sort()] })));
+  const obj = {};
+  for (let index = 0; index < key.length; index += 1) {
+    const element = key[index];
+    Object.assign(obj, { [element]: newValue[index] });
+  }
+  return obj;
+};
+
+const namesTrueSortedUndefined = (endObj, sex) => {
+  if (sex === undefined) {
+    return regular(endObj, getResidents);
+  } if (sex === 'male') {
+    return regular(endObj, onlyMale);
+  } if (sex === 'female') {
+    return regular(endObj, onlyFemale);
+  }
+};
+
+const namesTrue = (endObj, sex) => {
+  if (sex === undefined) {
+    return regularSort(endObj, getResidents);
+  } if (sex === 'male') {
+    return regularSort(endObj, onlyMale);
+  } if (sex === 'female') {
+    return regularSort(endObj, onlyFemale);
+  }
+};
+
+const define = (endObj, sorted, sex) => {
+  if (sorted === undefined) {
+    return namesTrueSortedUndefined(endObj, sex);
+  } if (sorted === true) {
+    return namesTrue(endObj, sex);
+  }
+};
+
+function animalMap(options) {
+  const endObj = zooMap();
+  if (options === undefined) {
+    return endObj;
+  } const { includeNames, sorted, sex } = options;
+  if (includeNames === true) {
+    return define(endObj, sorted, sex);
+  }
+  return endObj;
+}
 
 const hour = (value) => (value <= 12 ? `${value}am` : `${value - 12}pm`);
 
@@ -132,7 +224,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
