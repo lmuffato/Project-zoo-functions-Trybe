@@ -17,10 +17,14 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animalName, age) {
-  const animalWithName = animals.find((animal) => animal.name.includes(animalName)); // capturando objeto que possui animal.name passado por parametro.
-  const { residents } = animalWithName; // capturando array de residentes.
-  const answer = residents.every((elem) => elem.age >= age); // verificando se todas as expressões (elem.agr >= age) retornam true.
-  return answer; // retornando valor final.
+  // const animalWithName = animals.find((animal) => animal.name.includes(animalName)); // capturando objeto que possui animal.name passado por parametro.
+  // const { residents } = animalWithName; // capturando array de residentes.
+  // const answer = residents.every((elem) => elem.age >= age); // verificando se todas as expressões (elem.agr >= age) retornam true.
+  // return answer; // retornando valor final.
+  // --------------- tentativa otimização -----------
+  const answer = animals.find((animal) => animal.name.includes(animalName))
+    .residents.every((elem) => elem.age >= age);
+  return answer;
 }
 
 // console.log(animalsOlderThan('lions'));
