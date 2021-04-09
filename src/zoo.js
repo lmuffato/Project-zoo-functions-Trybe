@@ -50,17 +50,45 @@ function createEmployee(personalInfo, associatedWith) {
 
 /*
 function isManager(id) {
-  // seu código aqui
+  const answer = data.employees.forEach((employee) => {
+    return employee.managers.some((manager) => manager === id)
+  })
+  return answer;
 }
+
+// console.log(isManager('burlId'));
+// console.log(data.employees);
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  return data.employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  })
+  return data.employees;
 }
+
+console.log(addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe'));
+*/
 
 function animalCount(species) {
-  // seu código aqui
+  const obj = {};
+  if (!species) {
+    data.animals.forEach((animal) => {
+      const keyName = animal.name;
+      obj[keyName] = animal.residents.length;
+    });
+    return obj;
+  }
+  const specifAnimal = data.animals.filter((animal) => animal.name === species);
+  return specifAnimal[0].residents.length;
 }
 
+console.log(animalCount('lions'));
+
+/*
 function entryCalculator(entrants) {
   // seu código aqui
 }
@@ -106,4 +134,7 @@ module.exports = {
   animalsOlderThan,
   employeeByName,
   createEmployee,
+  //  isManager,
+  //  addEmployee,
+  animalCount,
 };
