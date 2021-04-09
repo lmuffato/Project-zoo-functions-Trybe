@@ -11,16 +11,18 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
+const { animals, employees } = data;
+
 function animalsByIds(...ids) {
   if (typeof ids === 'undefined') {
     return [];
   }
-  return data.animals.filter((idValue) => idValue.id === ids[0]);
+  return animals.filter((idValue) => idValue.id === ids[0]);
 }
 // console.log(animalsByIds('01422318-ca2d-46b8-b66c-3e9e188244ed'));
 
 function animalsOlderThan(animal, age) {
-  return data.animals.residents.map((nameAnimals) => nameAnimals.age <= age);
+  return animals.residents.map((nameAnimals) => nameAnimals.age <= age);
 }
 
 function employeeByName(employeeName) {
@@ -28,17 +30,15 @@ function employeeByName(employeeName) {
     return [];
   }
   if (data.employees.some((value) => value.firstName === employeeName)) {
-    return data.employees.find((value) => value.firstName === employeeName);
+    return employees.find((value) => value.firstName === employeeName);
   }
   if (data.employees.some((value) => value.lastName === employeeName)) {
-    return data.employees.find((value) => value.firstName === employeeName);
+    return employees.find((value) => value.firstName === employeeName);
   }
 }
 
-console.log(employeeByName('Ardith'));
-
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return Object.assign(personalInfo, associatedWith);
 }
 
 function isManager(id) {
