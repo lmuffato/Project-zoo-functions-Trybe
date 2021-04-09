@@ -79,25 +79,29 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-function schedule(dayName) {
-  const undefinedDay = {
-    Tuesday: 'Open from 8am until 6pm',
-    Wednesday: 'Open from 8am until 6pm',
-    Thursday: 'Open from 10am until 8pm',
-    Friday: 'Open from 10am until 8pm',
-    Saturday: 'Open from 8am until 10pm',
-    Sunday: 'Open from 8am until 8pm',
-    Monday: 'CLOSED',
-  };
-  if (dayName === undefined) {
-    return undefinedDay;
-  }
-}
-console.log(schedule('Monday'));
-
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
+// function schedule(dayName) {
+//   const undefinedDay = {
+//     Tuesday: 'Open from 8am until 6pm',
+//     Wednesday: 'Open from 8am until 6pm',
+//     Thursday: 'Open from 10am until 8pm',
+//     Friday: 'Open from 10am until 8pm',
+//     Saturday: 'Open from 8am until 10pm',
+//     Sunday: 'Open from 8am until 8pm',
+//     Monday: 'CLOSED',
+//   };
+//   if (dayName === undefined) {
+//     return undefinedDay;
+//   }
 // }
+// console.log(schedule('Monday'));
+
+function oldestFromFirstSpecies(id) {
+  const firstSpecie = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const resident = data.animals.find((animal) => animal.id === firstSpecie).residents
+    .sort((a, b) => (b.age) - (a.age));
+  const { name, sex, age } = resident;
+  return [name, sex, age];
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -109,7 +113,7 @@ console.log(schedule('Monday'));
 
 module.exports = {
   entryCalculator,
-  schedule,
+  // schedule,
   animalCount,
   // animalMap,
   animalsByIds,
@@ -118,7 +122,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
