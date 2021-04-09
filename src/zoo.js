@@ -31,13 +31,12 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  const newPeoole = { ...personalInfo, ...associatedWith };
-  return newPeoole;
+  return { ...personalInfo, ...associatedWith };
 }
 
-// function isManager(id) {
-//   // seu código aqui
-// }
+function isManager(id) {
+  return data.employees.find((people) => people.id === id).managers.length <= 1;
+}
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
@@ -80,7 +79,7 @@ module.exports = {
   employeeByName,
   // employeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
