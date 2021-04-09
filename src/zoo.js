@@ -12,7 +12,6 @@ eslint no-unused-vars: [
 
 // const assert = require('assert');
 
-const data = require('./data.js');
 const { animals, employees, hours, prices } = require('./data.js');
 
 function animalsByIds(...ids) {
@@ -145,16 +144,30 @@ function increasePrices(percentage) {
   // Com modificação sugerida pro Lucas Pedroso
   const increase = (percentage / 100) + 1;
   let increased = 0;
-  Object.entries(data.prices).forEach(([key, value]) => {
+  Object.entries(prices).forEach(([key, value]) => {
     increased = value * increase;
-    data.prices[key] = Math.round(increased * 100) / 100;
+    prices[key] = Math.round(increased * 100) / 100;
   });
-  return data.prices;
+  return prices;
 }
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function employeeCoverage(idOrName) {
+  // seu código aqui
+  const newObjt = {};
+  employees.forEach((employee) => {
+    const name = `${employee.firstName} ${employee.lastName}`;
+    const responsibleFor = employee.responsibleFor
+      .map((specie) => animals.find((animal) => animal.id === specie).name);
+    newObjt[name] = responsibleFor;
+  });
+  if (idOrName === undefined) return newObjt;
+
+  const { firstName, lastName } = employees.find((actualEmployee) => actualEmployee
+    .firstName === idOrName || actualEmployee.lastName === idOrName
+    || actualEmployee.id === idOrName);
+  const name = `${firstName} ${lastName}`;
+  return { [name]: newObjt[name] };
+}
 
 module.exports = {
   entryCalculator,
@@ -163,7 +176,7 @@ module.exports = {
   animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
