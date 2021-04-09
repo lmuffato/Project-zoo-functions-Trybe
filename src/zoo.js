@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { animals } = require('./data');
 const data = require('./data');
 
 // function animalsByIds(...ids) {
@@ -30,10 +31,10 @@ const data = require('./data');
 // }
 // console.log(employeeByName('Burl'));
 
-function createEmployee(personalInfo, associatedWith) {
-  const employee = { ...personalInfo, ...associatedWith };
-  return employee;
-}
+// function createEmployee(personalInfo, associatedWith) {
+//   const employee = { ...personalInfo, ...associatedWith };
+//   return employee;
+// }
 
 // function isManager(id) {
 //   return data.employees.some(({ managers }) => managers.includes(id));
@@ -50,9 +51,16 @@ function createEmployee(personalInfo, associatedWith) {
 //   data.employees.push(employee);
 // }
 
-// function animalCount(species) {
-//   // seu código aqui
-// }
+function animalCount(species) {
+  if (!species) {
+    return animals.reduce((acc, animal) => {
+      acc[animal.name] = animal.residents.length;
+      return acc;
+    }, {});
+  }
+  return animals.find(({ name }) => name.includes(species)).residents.length;
+}
+console.log(animalCount('lions'));
 
 // // function entryCalculator(entrants) {
 // //   // seu código aqui
@@ -81,15 +89,15 @@ function createEmployee(personalInfo, associatedWith) {
 module.exports = {
 //   // entryCalculator,
 //   // schedule,
-//   animalCount,
+  animalCount,
 //   // animalMap,
 //   animalsByIds,
   // employeeByName,
 //   // employeeCoverage,
-//   addEmployee,
-//   isManager,
+  // addEmployee,
+  // isManager,
   // animalsOlderThan,
 //   // oldestFromFirstSpecies,
 //   // increasePrices,
-  createEmployee,
+  // createEmployee,
 };
