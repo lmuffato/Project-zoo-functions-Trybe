@@ -90,10 +90,70 @@ function entryCalculator(entrants) {
   /* Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos */
   return (guy * Adult) + (idoso * Senior) + (crianca * Child);
 }
+// recebi ajuda do murilo
+const noOptions = () => {
+  const locations = [...new Set((data.animals.map(({ location }) => location)))];
+  const genericObj = locations.reduce((acc, location) => {
+    acc[location] = [];
+    return acc;
+  }, {});
+  const noParms = { ...genericObj };
+  data.animals.forEach(({ name, location }) => noParms[location].push(name));
+  return noParms;
+};
 
-/* function animalMap(options) {
-  // seu código aqui
-} */
+function sexCondition(sex, hasIncludeNames, includeNames) {
+  if (sex !== null && hasIncludeNames) {
+    const keys = Object.keys(includeNames);
+    keys.forEach((key) => {
+      includeNames[key].forEach((obj) => {
+        const obj1 = obj;
+        const animalKey = Object.keys(obj)[0];
+        const out = data.animals.filter(({ name }) => name === animalKey)
+          .map((x) => x.residents)[0];
+        const out2 = out.filter((x) => x.sex === sex);
+        const out3 = out2.map((x) => x.name);
+        obj1[animalKey] = out3;
+      });
+    });
+  }
+}
+
+function orderCondition(isOrdered, hasIncludeNames, includeNames) {
+  if (isOrdered && hasIncludeNames) {
+    const keys = Object.keys(includeNames);
+    keys.forEach((key) => {
+      includeNames[key].forEach((obj) => {
+        const obj1 = obj;
+        const objKeys = Object.keys(obj);
+        objKeys.forEach((objKey) => {
+          obj1[objKey] = obj1[objKey].sort();
+        });
+      });
+    });
+  }
+}
+
+function animalMap(options = {}) {
+  const hasIncludeNames = Object.keys(options).includes('includeNames') && options.includeNames;
+  const isOrdered = Object.keys(options).includes('sorted') && options.sorted;
+  const sex = options.sex ? options.sex : null;
+  const filterAnimalsByLocation = (loc) => data.animals.filter(({ location }) => location === loc);
+  let includeNames = {};
+
+  if (hasIncludeNames) {
+    const locations = [...new Set((data.animals.map(({ location }) => location)))];
+    locations.forEach((loc) => {
+      const value = filterAnimalsByLocation(loc)
+        .map((x1) => ({ [x1.name]: x1.residents.map((x2) => x2.name) }));
+      includeNames = { ...includeNames, ...{ [loc]: value } };
+    });
+  } else return noOptions();
+  sexCondition(sex, hasIncludeNames, includeNames);
+  orderCondition(isOrdered, hasIncludeNames, includeNames);
+
+  return includeNames;
+}
 
 const getScheduleDay = (day) => {
   const openTime = hours[day].open;
@@ -132,7 +192,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
