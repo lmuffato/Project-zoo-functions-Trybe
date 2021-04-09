@@ -61,9 +61,14 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function entryCalculator(entrants) {
   if (entrants === undefined) return 0;
-  const totalEntrants = Object.keys(entrants);
-  const total = totalEntrants.reduce((acc, curr) => acc + (entrants[curr] * prices[curr]), 0);
-  return total;
+
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+
+  const adults = prices.Adult * Adult;
+  const seniors = prices.Senior * Senior;
+  const childs = prices.Child * Child;
+
+  return adults + seniors + childs;
 }
 
 // function animalMap(options) {
@@ -78,9 +83,9 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -98,6 +103,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
