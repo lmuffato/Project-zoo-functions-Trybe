@@ -67,20 +67,24 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return employees.push(newEmployee);
 }
 
-const animalsList = () => animals.map((animal) => `${animal.name}: ${animal.residents.length}`);
+const animalsCountListComFor = () => {
+  const list = {};
+  for (let index = 0; index < animals.length; index += 1) {
+    list[`${animals[index].name}`] = animals[index].residents.length;
+  }
+  return list;
+};
 
 function animalCount(species) {
   if (species === undefined) {
-    return animalsList();
+    return animalsCountListComFor();
   }
   const soughtSpecie = animals.find((animal) => species === animal.name);
   return soughtSpecie.residents.length;
 }
 
 // console.log(animals[0].name); // animal.name = nome da especie
-// console.log(animals[0].residents.length); // animal.residents.length ==> quantidade de animais
-console.log(animalCount('lions'));
-console.log(animalCount());
+// console.log(animals[0].residents.length); animal.residents.length ==> quantidade de animais
 
 function entryCalculator(entrants = {}) {
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
