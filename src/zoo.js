@@ -68,58 +68,88 @@ function entryCalculator(entrants) {
   return people.reduce((result, key) => result + entrants[key] * data.prices[key], 0);
 }
 
-const getLocations = () => {
-  const locations = [];
-  data.animals.forEach((animal) => {
-    if (!locations.includes(animal.location)) locations.push(animal.location);
-  });
-  return locations;
-};
+// const getLocations = () => {
+//   const locations = [];
+//   data.animals.forEach((animal) => {
+//     if (!locations.includes(animal.location)) locations.push(animal.location);
+//   });
+//   return locations;
+// };
 
-const notIncludeNames = (locations) => {
-  const map = {};
-  locations.forEach((loc) => map[loc] = data.animals
-    .filter((animal) => animal.location.includes(loc)).map((animal) => animal.name));
-  return map;
+// const notIncludeNames = (locations) => {
+//   const map = {};
+//   locations.forEach((loc) => map[loc] = data.animals
+//     .filter((animal) => animal.location.includes(loc)).map((animal) => animal.name));
+//   return map;
+// }
+
+// const animalSpecie = (animalName) => {
+//   const teste = {};
+//   animalName.forEach((animal) => teste[animal] = 'teste');
+//   console.log(teste);
+// }
+
+// const filterAnimals = (loc) => {
+//   const animals = data.animals.filter((animal) => animal.location.includes(loc)).map((animal) => animal.name);
+//   const animalNames = animalSpecie(animals);
+//   return animalNames;
+// }
+
+// const includeLocations = (locations) => {
+//   const obj = {};
+//   locations.forEach((location) => obj[location] = filterAnimals(location));
+//   return obj;
+// }
+
+// function animalMap(options = { includeNames: false, sex: 'both', sorted: false }) {
+//   const locations = getLocations();
+//   if (!options.includeNames) return notIncludeNames(locations);
+//   return includeLocations(locations);
+// }
+
+// console.log(animalMap({ includeNames: true }));
+
+function daySchedule(day) {
+  const { open, close } = data.hours[day];
+  if (open > 0 && close > 0) return `Open from ${open}am until ${close - 12}pm`;
+  return 'CLOSED';
 }
 
-const animalSpecie = (animalName) => {
-  const teste = {};
-  animalName.forEach((animal) => teste[animal] = 'teste');
-  console.log(teste);
+function weekSchedule(scheduleKeys) {
+  const result = {};
+  scheduleKeys.forEach((day) => { result[day] = daySchedule(day); });
+  return result;
 }
 
-const filterAnimals = (loc) => {
-  const animals = data.animals.filter((animal) => animal.location.includes(loc)).map((animal) => animal.name);
-  const animalNames = animalSpecie(animals);
-  return animalNames;
+function fullSchedule() {
+  const openTime = data.hours;
+  const scheduleKeys = Object.keys(openTime);
+  return weekSchedule(scheduleKeys);
 }
-
-const includeLocations = (locations) => {
-  const obj = {};
-  locations.forEach((location) => obj[location] = filterAnimals(location));
-  return obj;
-}
-
-function animalMap(options = { includeNames: false, sex: 'both', sorted: false }) {
-  const locations = getLocations();
-  if (!options.includeNames) return notIncludeNames(locations);
-  return includeLocations(locations);
-}
-
-console.log(animalMap({ includeNames: true }));
 
 function schedule(dayName) {
-  // seu código aqui
+  if (!dayName) return fullSchedule();
+  return { [dayName]: daySchedule(dayName) };
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const responsibleEmployee = data.employees.find((employee) => employee.id === id);
+  const firstSpecie = responsibleEmployee.responsibleFor[0];
+  const residentList = data.animals.find((animal) => animal.id === firstSpecie).residents;
+  const oldestAnimal = residentList.reduce((result, animal) =>
+    (result.age > animal.age ? result : animal));
+  return ([oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age]);
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const priceKeys = Object.keys(data.prices);
+  priceKeys.forEach((key) => {
+    let newValue = data.prices[key] * (1 + (percentage / 100));
+    newValue = Math.ceil(newValue * 100);
+    data.prices[key] = newValue / 100;
+  });
 }
+
 
 function employeeCoverage(idOrName) {
   // seu código aqui
@@ -129,7 +159,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
