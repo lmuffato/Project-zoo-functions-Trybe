@@ -134,7 +134,8 @@ function entryCalculator(entrants) {
   return totalValue;
 }
 
-function animalMap(options) {
+// Options
+function animalMap() {
 
 }
 
@@ -149,7 +150,6 @@ const getHourOfDay = (hour) => {
   return `Open from ${openHour}am until ${formatHour(closeHour)}pm`;
 };
 
-// dayName
 function schedule(day) {
   if (!day) {
     const scheduleHour = {};
@@ -170,8 +170,24 @@ function schedule(day) {
 }
 
 // id
-function oldestFromFirstSpecies() {
-  // seu código aqui
+function oldestFromFirstSpecies(id) {
+  const employee = data.employees.find((employeeItem) => employeeItem.id === id);
+
+  const animalSpecie = employee.responsibleFor[0];
+
+  const animals = data.animals.find((animal) => animal.id === animalSpecie);
+
+  const animal = animals.residents.reduce((acc, current) => {
+    if (current.age > acc.age) {
+      return current;
+    }
+
+    return acc;
+  });
+
+  const { name, sex, age } = animal;
+
+  return [name, sex, age];
 }
 
 // percentage
