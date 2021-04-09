@@ -190,9 +190,18 @@ function oldestFromFirstSpecies(id) {
   return [name, sex, age];
 }
 
-// percentage
-function increasePrices() {
-  // seu código aqui
+// Arredondamento usando como base o código do Renzo Sevilha
+// https://github.com/tryber/sd-010-a-project-zoo-functions/pull/12/files
+function increasePrices(percentage) {
+  const { Adult, Child, Senior } = data.prices;
+
+  const adultPrize = (Math.round(Adult * percentage) + Adult * 100) / 100;
+  const childPrize = (Math.round(Child * percentage) + Child * 100) / 100;
+  const seniorPrize = (Math.round(Senior * percentage) + Senior * 100) / 100;
+
+  data.prices.Adult = adultPrize;
+  data.prices.Child = childPrize;
+  data.prices.Senior = seniorPrize;
 }
 
 // idOrName
