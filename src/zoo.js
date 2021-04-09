@@ -62,9 +62,10 @@ function addEmployee(id, firstName, lastName, managers=[], responsibleFor=[]) {
 function animalCount(species) {
   if (!species) {
     animals.sort();
-    return animals.forEach(({name, residents}) => {
-      return residents.length;
-    });
+    return animals.reduce((acc, {name, residents}) => {
+      acc[name] = residents.length;
+      return acc;
+    }, {});
   };
   const animalFromThatSpecies = animals.find(({name}) => name === species);
   return animalFromThatSpecies.residents.length;
@@ -104,7 +105,7 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  
 }
 
 function employeeCoverage(idOrName) {
