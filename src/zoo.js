@@ -119,7 +119,6 @@ const getWeek = (dayName) => (acc, [key, value]) => {
   return acc;
 };
 function schedule(dayName) {
-  // (!dayName) return
   return Object.entries(data.hours).reduce(getWeek(dayName), {});
 }
 
