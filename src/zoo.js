@@ -9,10 +9,10 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals } = require('./data');
+// const { animals } = require('./data');
 const data = require('./data');
 
-console.log(animals);
+console.log(data.employees);
 
 function animalsByIds(...ids) { // Utilizamos o rest para a função podere receber mais de um parâmetro.
   const animalsReturned = data.animals.filter((animal, index) => animal.id === ids[index]); // Filtramos os animais pelo id, percorrendo suas posições.
@@ -47,7 +47,7 @@ function createEmployee(personalInfo, associatedWith) {
 // }
 // console.log(isManager());
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   data.employees.push({
     id,
     firstName,
