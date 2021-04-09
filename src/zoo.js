@@ -9,11 +9,17 @@ eslint no-unused-vars: [
 ]
 */
 
-// const data = require('./data');
+const data = require('./data');
 
-// function animalsByIds(ids) {
-//   // seu código aqui
-// }
+const { animals } = data;
+
+// console.log(animals);
+function animalsByIds(...ids) {
+  return animals
+    .filter((animal) => ids.find((id) => id === animal.id));
+}
+// console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce', 'e8481c1d-42ea-4610-8e11-1752cfc05a46'));
+//----------------------------------------------------------
 
 // function animalsOlderThan(animal, age) {
 //   // seu código aqui
@@ -63,18 +69,18 @@ eslint no-unused-vars: [
 //   // seu código aqui
 // }
 
-// module.exports = {
-//   entryCalculator,
-//   schedule,
-//   animalCount,
-//   animalMap,
-//   animalsByIds,
-//   employeeByName,
-//   employeeCoverage,
-//   addEmployee,
-//   isManager,
-//   animalsOlderThan,
-//   oldestFromFirstSpecies,
-//   increasePrices,
-//   createEmployee,
-// };
+module.exports = {
+  // entryCalculator,
+  // schedule,
+  // animalCount,
+  // animalMap,
+  animalsByIds,
+  // employeeByName,
+  // employeeCoverage,
+  // addEmployee,
+  // isManager,
+  // animalsOlderThan,
+  // oldestFromFirstSpecies,
+  // increasePrices,
+  // createEmployee,
+};
