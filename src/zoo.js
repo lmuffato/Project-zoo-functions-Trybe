@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+const { hours } = require('./data');
 
 function animalsByIds(...ids) {
   // if (ids.length === 0) return [];
@@ -27,7 +28,7 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   if (!employeeName) return {};
   return data.employees.find(({ firstName, lastName }) => firstName === employeeName
-  || lastName === employeeName);
+    || lastName === employeeName);
 }
 
 const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
@@ -79,10 +80,21 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
-
+function schedule(dayName) {
+  const obj = {};
+  const dias = Object.keys(hours);
+  dias.forEach((dia, index) => {
+    const closes = hours[dia].close - 12;
+    const opens = hours[dia].open;
+    if (index === 6) {
+      obj[dia] = 'CLOSED';
+    } else {
+      obj[dia] = `Open from ${opens}am until ${closes}pm`;
+    }
+  });
+  if (!dayName) return obj;
+  return { [dayName]: obj[dayName] };
+}
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
@@ -103,7 +115,7 @@ function entryCalculator(entrants) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
