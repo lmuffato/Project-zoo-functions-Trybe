@@ -24,11 +24,14 @@ function animalsOlderThan(animal, age) {
 
 /* function employeeByName(employeeName) {
   return
-}
+} */
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-} */
+  return {
+    ...personalInfo,
+    ...associatedWith,
+  };
+}
 
 function isManager(id) {
   return employees.some((employee) => employee.managers.some((name) => name === id));
@@ -79,5 +82,5 @@ module.exports = {
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
