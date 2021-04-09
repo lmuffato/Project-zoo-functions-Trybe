@@ -99,10 +99,38 @@ function increasePrices(percentage) {
     prices[element] = Math.round(prices[element] * (1 + (percentage / 100)) * 100) / 100;
   });
 }
+//  Requisito 13
+const getAnimalName = (arrayId) => {
+  const array = [];
+  arrayId.forEach((id) =>
+    animals.forEach((animal) => {
+      if (animal.id === id) {
+        array.push(animal.name);
+      }
+    }));
+  return array;
+};
 
-/* function employeeCoverage(idOrName) {
-  // seu código aqui
-} */
+const selectEmployee = (param) => {
+  const obj = {};
+  employees.forEach((emp) => {
+    if (emp.id === param || emp.lastName === param || emp.firstName === param) {
+      Object.assign(obj, { [`${emp.firstName} ${emp.lastName}`]:
+      getAnimalName(emp.responsibleFor) });
+    }
+  });
+  return obj;
+};
+
+function employeeCoverage(idOrName) {
+  const obj = {};
+  if (!idOrName) {
+    employees.forEach((emp) => Object.assign(obj, { [`${emp.firstName} ${emp.lastName}`]:
+  getAnimalName(emp.responsibleFor) }));
+    return obj;
+  }
+  return selectEmployee(idOrName);
+}
 
 module.exports = {
   entryCalculator,
@@ -111,7 +139,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
