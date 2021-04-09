@@ -13,7 +13,7 @@ const { animals, employees } = require('./data');
 // const data = require('./data');
 
 // found about .includes at https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
-// Desenvolvido com ajuda das colegas Nathalia Zerbal, Debora Passos, Heloisa Hackenhaar, Djaniza Vasques e Bia Zidioti
+// Desenvolvido com ajuda das colegas Nathalia Zerbal, Debora Passos, Heloisa Hackenhaar, Djaniza Vasques, Bia Zidioti e Wanderson Sales
 
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.includes(animal.id));
@@ -36,9 +36,9 @@ function employeeByName(employeeName) {
 //   // seu código aqui
 // }
 
-// function isManager(id) {
-//   // seu código aqui
-// }
+function isManager(id) {
+  return employees.some((employee) => employee.managers.some((name) => name === id));
+}
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
@@ -81,7 +81,7 @@ module.exports = {
   employeeByName,
   // employeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
