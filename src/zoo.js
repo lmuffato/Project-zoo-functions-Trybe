@@ -43,20 +43,20 @@ function isManager(id) {
 }
 
 function verifyEmpty(list) {
-  if (!list) return []
-  return list
+  if (!list) return [];
+  return list;
 }
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  if (!id || !firstName || !lastName) return []
+  if (!id || !firstName || !lastName) return [];
   const addANewEmployee = {
     id,
     firstName,
     lastName,
     managers: verifyEmpty(managers),
     responsibleFor: verifyEmpty(responsibleFor),
-  }
-  employees.push(addANewEmployee)
-  return employees
+  };
+  employees.push(addANewEmployee);
+  return employees;
 }
 
 // function animalCount(species) {
