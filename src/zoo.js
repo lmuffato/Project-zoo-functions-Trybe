@@ -75,19 +75,23 @@ function entryCalculator(entrant = false) {
     : (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
+// function animalMap(options = false) {
+
+// }
+
+// console.log(animalMap();
+
+// function schedule(dayName) {
+//   // seu código aqui
+// }
+
+function oldestFromFirstSpecies(id = false) {
+  const idFunc = employees.find((employee) => employee.id === id).responsibleFor[0];
+  return Object.values(animals.find((animal) => animal.id === idFunc).residents
+    .sort((a, b) => b.age - a.age)[0]);
+}
+
 /*
-function animalMap(options) {
-  // seu código aqui
-}
-
-function schedule(dayName) {
-  // seu código aqui
-}
-
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
-
 function increasePrices(percentage) {
   // seu código aqui
 }
@@ -108,7 +112,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
