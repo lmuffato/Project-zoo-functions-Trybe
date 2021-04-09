@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 const { employees } = require('./data');
 const { animals } = require('./data');
+const { prices } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -38,7 +39,6 @@ function employeeByName(employeeName) {
 
 function createEmployee({ id, firstName, lastName }, { managers, responsibleFor }) {
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
-  employees.push(newEmployee);
   return newEmployee;
 }
 
@@ -53,18 +53,49 @@ function isManager(id) {
   });
   return boolCheckManager;
 }
-console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
+  employees.push(newEmployee);
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if (species === undefined) {
+    const allAnimals = {};
+    animals.forEach((animal) => {
+      allAnimals[animal.name] = animal.residents.length;
+    });
+    return allAnimals;
+  }
+  const searchSpecies = animals.find((animal) => animal.name === species);
+  return searchSpecies.residents.length;
+}
+function checkAndCalculate(arrayRealEntrants, entrants) {
+  let totalPrice = 0;
+  if (arrayRealEntrants.some((entrant) => entrant === entrants.Adult)) {
+    totalPrice += entrants.Adult * prices.Adult;
+  }
+  if (arrayRealEntrants.some((entrant) => entrant === entrants.Child)) {
+    totalPrice += entrants.Child * prices.Child;
+  }
+  if (arrayRealEntrants.some((entrant) => entrant === entrants.Senior)) {
+    totalPrice += entrants.Senior * prices.Senior;
+  }
+  return totalPrice;
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  let totalPrice = 0;
+  if (entrants === undefined) {
+    return totalPrice;
+  }
+  if (Object.keys(entrants).length === 0) {
+    return totalPrice;
+  }
+  const arrayEntrants = Object.values(entrants);
+  const arrayRealEntrants = arrayEntrants.filter((entrant) => entrant !== undefined);
+  totalPrice += checkAndCalculate(arrayRealEntrants, entrants);
+  return totalPrice;
 }
 
 function animalMap(options) {
