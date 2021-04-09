@@ -104,7 +104,14 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  
+  const perc = (percentage + 100) /100;
+  const keys = Object.keys(prices);
+  keys.map((age) => {
+    let num = (prices[age] * perc)
+    let decimalPart = parseFloat((num % 1).toFixed(3));
+    let serializedNum = (Math.ceil(decimalPart*100) /100) + Math.floor(num);
+    prices[age] = serializedNum;
+  });
 }
 
 function employeeCoverage(idOrName) {
