@@ -10,7 +10,6 @@ eslint no-unused-vars: [
 */
 
 const { animals, employees, hours, prices } = require('./data');
-const data = require('./data');
 
 // Requisito 1
 
@@ -100,57 +99,61 @@ function entryCalculator(entrants) {
 
 const operatingHours = (open, close) => {
   if (open === 0 && close === 0) return 'CLOSED';
-  return `Open from ${open}am until ${close}pm`;
+  return `Open from ${open}am until ${close - 12}pm`;
 };
 
 function schedule(dayName) {
   const diasSemanas = Object.keys(hours);
-
   // const horario = diasSemanas
   //   .reduce((acc, curr) => { acc[curr] = operatingHours(hours[curr].open, hours[curr].close); }, {});
-
   const horario = {};
   diasSemanas
     .forEach((item) => { horario[item] = operatingHours(hours[item].open, hours[item].close); });
-  if (dayName === undefined) return horario;
 
+  if (dayName === undefined) return horario;
   return { [dayName]: horario[dayName] };
 }
 
-console.log(schedule('Monday'));
-
 // Requisito 11
 
-function oldestFromFirstSpecies(id) {
-  if (id === undefined) return 'Imposivil fazer a busca';
-  const funcionario = employees.find((item) => item.id === id).managers;
-  const teste = funcionario.forEach((index) => animals.find((animal) => animal.id === index));
+// function oldestFromFirstSpecies(id) {
+//   if (id === undefined) return 'Imposivil fazer a busca';
+//   const funcionario = employees.find((item) => item.id === id).managers;
+//   console.log(funcionario[0]);
+//   console.log(funcionario[1]);
+//   const teste = animals.find
 
-  return teste;
-}
+//   return teste;
+// }
 
-console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+// console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+
+// Requisito 12
 
 // function increasePrices(percentage) {
 //   // seu código aqui
 // }
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+// Requisito 13
+
+function employeeCoverage(idOrName) {
+  if (idOrName === undefined) return 0;
+}
+
+console.log(employeeCoverage());
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
-  oldestFromFirstSpecies,
+  // oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
