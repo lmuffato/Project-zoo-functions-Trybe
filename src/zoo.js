@@ -70,29 +70,29 @@ function animalCount(species) {
   return arrayOfAnimals;
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
-}
+// function entryCalculator(entrants) {
+//   // seu código aqui
+// }
 
-function animalMap(options) {
-  // seu código aqui
-}
+// function animalMap(options) {
+//   // seu código aqui
+// }
 
-function schedule(dayName) {
-  // seu código aqui
-}
+// function schedule(dayName) {
+//   // seu código aqui
+// }
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqu
-}
+// function oldestFromFirstSpecies(id) {
+//   // seu código aqu
+// }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function increasePrices(percentage) {
+//   // seu código aqui
+// }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function employeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
   entryCalculator,
