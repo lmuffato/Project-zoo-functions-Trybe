@@ -97,9 +97,9 @@ function oldestFromFirstSpecies(id) {
     animalId === procurandoAnimal).residents;
 
   const animalMaisVelho = todosAnimais.sort(({ age: valorA }, { age: valorB }) =>
-    valorB - valorA)[0];  
+    valorB - valorA)[0];
 
-    return Object.values(animalMaisVelho);
+  return Object.values(animalMaisVelho);
 }
 // function increasePrices(percentage) {
 //   // seu código aqui
