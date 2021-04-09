@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees } = require("./data");
+const { animals, employees, prices } = require('./data');
 // const data = require('./data');
 
 const animalsByIds = (...ids) =>
@@ -23,7 +23,7 @@ const animalsOlderThan = (animal, age) =>
 const employeeByName = (employeeName) => {
   const employeeObj = employees.find(
     (employee) =>
-      employeeName === employee.firstName || employeeName === employee.lastName
+      employeeName === employee.firstName || employeeName === employee.lastName,
   );
 
   return employeeObj === undefined ? {} : employeeObj;
@@ -31,20 +31,19 @@ const employeeByName = (employeeName) => {
 
 const createEmployee = (
   { id, firstName, lastName },
-  { managers, responsibleFor }
+  { managers, responsibleFor },
 ) => ({ id, firstName, lastName, managers, responsibleFor });
 
 const isManager = (id) =>
   employees.some((employee) =>
-    employee.managers.some((idManager) => idManager === id)
-  );
+    employee.managers.some((idManager) => idManager === id));
 
 const addEmployee = (
   id,
   firstName,
   lastName,
   managers = [],
-  responsibleFor = []
+  responsibleFor = [],
 ) => {
   const newObj = { id, firstName, lastName, managers, responsibleFor };
   employees.push(newObj);
@@ -60,9 +59,8 @@ const animalCount = (species) => {
     : animals.find((animal) => animal.name === species).residents.length;
 };
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+const entryCalculator = ({ Adult = 0, Child = 0, Senior = 0 } = 0) =>
+  Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -85,7 +83,7 @@ const animalCount = (species) => {
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
