@@ -99,15 +99,15 @@ function schedule(dayName) {
 //   // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-//   const increse = (percentage / 100) + 1;
-//   let incresed = 0;
-//   Object.entries(data.prices).forEach((key, value) => {
-//     incresed = value * increse;
-//     data.prices[key] = Math.round(incresed * 100) / 100;
-//   });
-//   return data.prices;
-// }
+function increasePrices(percentage) {
+  const increse = (percentage / 100) + 1;
+  let incresed = 0;
+  Object.entries(data.prices).forEach(([key, value]) => {
+    incresed = value * increse;
+    data.prices[key] = Math.round(parseFloat(incresed) * 100) / 100;
+  });
+  return data.prices;
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -125,6 +125,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
