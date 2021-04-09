@@ -9,22 +9,21 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require("./data");
+const data = require('./data');
 
-// function animalsByIds(...ids) {
-//   // seu código aqui - ta ok
-//   return data.animals.filter((specie) => ids.some((id) => id === specie.id) === true);
-// }
+function animalsByIds(...ids) {
+  // seu código aqui - ta ok
+  return data.animals.filter((specie) => ids.some((id) => id === specie.id) === true);
+}
 
-// function animalsOlderThan(animal, age) {
-//   // seu código aqui - ok
-//   return data.animals.find((element) => element.name === animal)
-//     .residents.every((animals) => animals.age >= age);
-// }
+function animalsOlderThan(animal, age) {
+  // seu código aqui - ok
+  return data.animals.find((element) => element.name === animal)
+    .residents.every((animals) => animals.age >= age);
+}
 
 function employeeByName(employeeName) {
   if (employeeName === undefined) return {};
-
   if (employeeName) {
     return data.employees.find((employee) => employeeName === employee
       .firstName || employeeName === employee
@@ -32,15 +31,14 @@ function employeeByName(employeeName) {
   }
 }
 
-console.log(employeeByName('Wishart'));
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
 // }
 
-// function isManager(id) {
-//   // seu código aqui - ta ok
-//   return data.employees.some((employee) => employee.managers.includes(id));
-// }
+function isManager(id) {
+  // seu código aqui - ta ok
+  return data.employees.some((employee) => employee.managers.includes(id));
+}
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
@@ -79,12 +77,12 @@ module.exports = {
   //  schedule,
   //  animalCount,
   //  animalMap,
-  //  animalsByIds,
+  animalsByIds,
   employeeByName,
   //   employeeCoverage,
   //   addEmployee,
-  //  isManager,
-  //  animalsOlderThan,
+  isManager,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
