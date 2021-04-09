@@ -27,7 +27,7 @@ function animalsOlderThan(animalName, age) {
   return answer;
 }
 
-// console.log(animalsOlderThan('lions'));
+// console.log(animalsOlderThan('lions'))
 
 function employeeByName(employeeName) {
   const objectWithName = employees
