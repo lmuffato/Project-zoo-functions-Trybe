@@ -12,7 +12,6 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 const { animals } = data;
-
 // console.log(animals);
 function animalsByIds(...ids) {
   return animals
@@ -23,59 +22,68 @@ function animalsByIds(...ids) {
 
 // function animalsOlderThan(animal, age) {
 //   // seu código aqui
+//   const especies = [animals.name];
 // }
-
-// function employeeByName(employeeName) {
-//   // seu código aqui
-// }
-
+// console.log(animalsOlderThan());
+//----------------------------------------------------------
+function employeeByName(employeeName) {
+  const { employees } = data;
+  if ((!employeeName)) {
+    return {};
+  }
+  return employees
+    .find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
+  // seu código aqui
+}
+console.log(employeeByName());
+//----------------------------------------------------------
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
 // }
-
+//----------------------------------------------------------
 // function isManager(id) {
 //   // seu código aqui
 // }
-
+//----------------------------------------------------------
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
 // }
-
+//----------------------------------------------------------
 // function animalCount(species) {
 //   // seu código aqui
 // }
-
+//----------------------------------------------------------
 // function entryCalculator(entrants) {
 //   // seu código aqui
 // }
-
+//----------------------------------------------------------
 // function animalMap(options) {
 //   // seu código aqui
 // }
-
+//----------------------------------------------------------
 // function schedule(dayName) {
 //   // seu código aqui
 // }
-
+//----------------------------------------------------------
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
-
+//----------------------------------------------------------
 // function increasePrices(percentage) {
 //   // seu código aqui
 // }
-
+//----------------------------------------------------------
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
 // }
-
+//----------------------------------------------------------
 module.exports = {
   // entryCalculator,
   // schedule,
   // animalCount,
   // animalMap,
   animalsByIds,
-  // employeeByName,
+  employeeByName,
   // employeeCoverage,
   // addEmployee,
   // isManager,
