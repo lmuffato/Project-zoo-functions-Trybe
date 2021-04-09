@@ -68,9 +68,46 @@ function entryCalculator(entrants) {
   return people.reduce((result, key) => result + entrants[key] * data.prices[key], 0);
 }
 
-function animalMap(options) {
-  // seu código aqui
+const getLocations = () => {
+  const locations = [];
+  data.animals.forEach((animal) => {
+    if (!locations.includes(animal.location)) locations.push(animal.location);
+  });
+  return locations;
+};
+
+const notIncludeNames = (locations) => {
+  const map = {};
+  locations.forEach((loc) => map[loc] = data.animals
+    .filter((animal) => animal.location.includes(loc)).map((animal) => animal.name));
+  return map;
 }
+
+const animalSpecie = (animalName) => {
+  const teste = {};
+  animalName.forEach((animal) => teste[animal] = 'teste');
+  console.log(teste);
+}
+
+const filterAnimals = (loc) => {
+  const animals = data.animals.filter((animal) => animal.location.includes(loc)).map((animal) => animal.name);
+  const animalNames = animalSpecie(animals);
+  return animalNames;
+}
+
+const includeLocations = (locations) => {
+  const obj = {};
+  locations.forEach((location) => obj[location] = filterAnimals(location));
+  return obj;
+}
+
+function animalMap(options = { includeNames: false, sex: 'both', sorted: false }) {
+  const locations = getLocations();
+  if (!options.includeNames) return notIncludeNames(locations);
+  return includeLocations(locations);
+}
+
+console.log(animalMap({ includeNames: true }));
 
 function schedule(dayName) {
   // seu código aqui
