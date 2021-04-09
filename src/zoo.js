@@ -26,39 +26,20 @@ function animalsOlderThan(nAnimal, age) {
   return result;
 }
 
-console.log(animalsOlderThan('lions', 7));
-
 function employeeByName(empName) {
   const empS = data.employees.find((emp) => emp.firstName === empName || emp.lastName === empName);
   return empS !== undefined ? empS : {};
 }
 
-console.log(employeeByName());
-
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
-
-const infoPer = {
-  id: '56d43ba3-a5a7-40f6-8dd7-cbb05082383f',
-  firstName: 'Wilburn',
-  lastName: 'Wishart',
-
-};
-const assoc = {
-  managers: ['burlId', 'olaId'],
-  responsibleFor: ['snakesId', 'elephantsId'],
-};
-
-console.log(createEmployee(infoPer, assoc));
 
 function isManager(id) {
   const managers = [];
   data.employees.forEach((emp) => managers.push(...emp.managers));
   return managers.find((idMan) => idMan === id) !== undefined;
 }
-
-console.log(isManager('b0dc644a-5335-489b-8a2c-4e086c7819a2'));
 
 function addEmployee(id, firstN, lastN, managers, responsibleFor) {
   const newEmp = createEmployee({ ...id, ...firstN, ...lastN }, { ...managers, ...responsibleFor });
@@ -84,15 +65,13 @@ function animalCount(species) {
   }
   return result;
 }
-console.log(animalCount());
+// console.log(animalCount());
 
 function entryCalculator({ Adult = 0, Child = 0, Senior = 0 } = 0) {
   return Adult * data.prices.Adult + Child * data.prices.Child + Senior * data.prices.Senior;
 }
 
 const entries = { Adult: 1, Child: undefined, Senior: 2 };
-
-console.log(entryCalculator(entries));
 
 const listByRegion = () => {
   const animalList = {
@@ -130,7 +109,6 @@ const listWithNames = (sex, sorted) => {
 
 function animalMap(options = {}) {
   const { includesNames = false, sorted = false, sex = false } = options;
-  console.log(options, includesNames, sorted, sex);
   let result;
   if (!includesNames) {
     result = listByRegion();
@@ -139,7 +117,7 @@ function animalMap(options = {}) {
   }
   return result;
 }
-console.log(animalMap({ includesNames: true, sex: 'male', sorted: true }));
+// console.log(animalMap({ includesNames: true, sex: 'male', sorted: true }));
 
 // function schedule(dayName) {
 //   // seu código aqui
