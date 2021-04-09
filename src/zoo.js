@@ -60,7 +60,10 @@ function animalCount(species) {
   } 
   else {
     const resposta = {};
-    return animals.forEach((valor) => resposta[valor.name] = valor.residents.length);
+      animals.forEach((valor) => {
+      resposta[valor.name] = valor.residents.length;
+    });
+    return resposta;
   }
 }
 
@@ -91,7 +94,7 @@ function animalCount(species) {
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
