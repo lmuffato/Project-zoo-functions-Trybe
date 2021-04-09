@@ -15,6 +15,11 @@ const find = {
       return species;
     },
   },
+  byName: {
+    oneSpecies(name) {
+      return data.animals.find((species) => species.name === name);
+    },
+  },
 };
 
 const verify = {
@@ -26,7 +31,36 @@ const verify = {
   },
 };
 
+const count = {
+  oneSpecies: {
+    residents(species) {
+      const foundAnimal = find.byName.oneSpecies(species);
+      const numberOfResidents = foundAnimal.residents.length;
+      return numberOfResidents;
+    },
+  },
+
+  allSpecies: {
+    residents() {
+      const { animals } = data;
+
+      let countOfAllAnimals = {};
+
+      animals.forEach((animal) => {
+        const { name, residents } = animal;
+        countOfAllAnimals = {
+          ...countOfAllAnimals,
+          [name]: residents.length,
+        };
+      });
+
+      return countOfAllAnimals;
+    },
+  },
+};
+
 module.exports = {
   find,
   verify,
+  count,
 };
