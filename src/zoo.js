@@ -76,6 +76,8 @@ function entryCalculator(entrants) {
   total += Adult * data.prices.Adult;
   total += Child * data.prices.Child;
   total += Senior * data.prices.Senior;
+
+  return total;
 }
 
 // function animalMap(options) {
