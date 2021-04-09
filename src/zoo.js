@@ -71,9 +71,20 @@ function animalCount(species) {
   return data.animals.find((animal) => animal.name === species).residents.length;
 }
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+// Transforma o objeto recebido em um array de objetos, utilizando object destructuring;
+// Depois foi usado o map nesse array (visitors), utilizando Object.keys para acessar data.price
+// com e obter o valor da chave correspondente para depois multiplicar pela quantidade usando
+// Object.values e então se tem um array com 3 valores correspondentes a multiplicação do tipo
+// do visitante pela quantidade e então o reduce faz a soma total.
+function entryCalculator(entrants) {
+  if (entrants === undefined || entrants === {}) return 0;
+
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const visitors = [{ Adult }, { Child }, { Senior }];
+  return visitors.map((visitor) =>
+    data.prices[Object.keys(visitor)] * Object.values(visitor)).reduce((acc, curr) =>
+    acc + curr, 0);
+}
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -96,7 +107,7 @@ function animalCount(species) {
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
