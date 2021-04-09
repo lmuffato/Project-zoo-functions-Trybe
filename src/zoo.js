@@ -122,16 +122,48 @@ function schedule(dayName) {
   return Object.entries(data.hours).reduce(getWeek(dayName), {});
 }
 
+const findById = (id) => ({ id: idItem }) => idItem === id;
+const getFirstSpecieId = (id) =>
+  data.employees.find(findById(id)).responsibleFor[0];
+
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  return Object.values(data.animals.find(findById(getFirstSpecieId(id)))
+    .residents.sort(({ age: a}, { age: b}) => a - b).reverse()[0]);
 }
+
+// console.log('value: ', value, ' percente', percentage, ' result: ', (0.01 * percentage) );
+const round = (value) => Math.round(value * 100) / 100;
+const valueMorePercentage = (percentage) => 
+  ([key, value]) => [key, value + (value * (0.01 * percentage))];
+const updatePrices = ([key, value]) => { data.prices[key] = round(value); };
 
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.entries(data.prices)
+    .map(valueMorePercentage(percentage))
+    .forEach(updatePrices);
+  return data.prices;
 }
-
+const getByIdOrFirstNameOrLastName = (idOrName) =>
+  ({ id, firstName, lastName }) =>
+    id === idOrName || firstName === idOrName || lastName === idOrName;
+const getEmployee = (idOrName) => data.employees.find(getByIdOrFirstNameOrLastName(idOrName));
+const getAnimalName = (acc, curr) => {
+  acc.push(animalsByIds(curr)[0].name);
+  //console.log(acc);
+  return acc;
+};
+const createObjEmployeeWithAnimals = (acc, { firstName, lastName, responsibleFor }) => {
+  acc[`${firstName} ${lastName}`] = responsibleFor.reduce(getAnimalName, []);
+  return acc;
+};
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (idOrName === undefined) {
+    return data.employees.reduce(createObjEmployeeWithAnimals,{});
+  }
+  const { firstName, lastName, responsibleFor } = getEmployee(idOrName);
+  const result = {};
+  result[`${firstName} ${lastName}`] = responsibleFor.reduce(getAnimalName, []);
+  return result;
 }
 
 module.exports = {
