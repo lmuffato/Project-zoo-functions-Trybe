@@ -22,7 +22,8 @@ function animalsByIds(...ids) {
 // console.log(animalsByIds('01422318-ca2d-46b8-b66c-3e9e188244ed'));
 
 function animalsOlderThan(animal, age) {
-  return animals.residents.map((nameAnimals) => nameAnimals.age <= age);
+  const check = animals.find((currentValue) => currentValue.name === animal);
+  return check.residents.map((ageAnimals) => ageAnimals.age >= age);
 }
 
 function employeeByName(employeeName) {
