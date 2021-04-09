@@ -11,14 +11,14 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
+const { animals } = data;
+
 function animalsByIds(...ids) {
-  const { animals } = data;
   const arr = animals.filter((item) => ids.includes(item.id));
   return arr;
 }
 
 function animalsOlderThan(animal, age) {
-  const { animals } = data;
   const arr = animals.find((item) => item.name === animal);
   return arr.residents.every((item) => item.age >= age);
 }
@@ -62,7 +62,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species = undefined) {
-  const { animals } = data;
   if (species === undefined) {
     // o codigo da função seguinte foi baseado em: https://github.com/eslint/eslint/issues/8581
     const obj = animals.reduce((acumulat, animal) => {
@@ -118,7 +117,6 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {
   const { employees } = data;
   const person = employees.find((item) => item.id === id);
-  const { animals } = data;
   const cared = animals.find((item) => person.responsibleFor[0] === item.id);
   const { residents } = cared;
   const oldest = residents.reduce((acumulator, nextItem) => {
@@ -150,9 +148,25 @@ function increasePrices(percentage) {
   prices.Senior = newSenior;
 }
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function employeeCoverage(idOrName) {
+  const { employees } = data;
+  if (idOrName === undefined) {
+    const allNAmes = employees.reduce((acm, item) => {
+      const acumulator = { ...acm };
+      const caredId = item.responsibleFor;
+      const list = [];
+      caredId.forEach((id) => list.push(animals.find((subId) => subId.id === id).name));
+      acumulator[`${item.firstName} ${item.lastName}`] = list;
+      return acumulator;
+    }, {});
+    return allNAmes;
+  }
+  const employee = employees.find((personal) => Object.values(personal).includes(idOrName));
+  const employeeIds = employee.responsibleFor;
+  const listed = [];
+  employeeIds.forEach((ids) => listed.push(animals.find((subId) => subId.id === ids).name));
+  return { [`${employee.firstName} ${employee.lastName}`]: listed };
+}
 
 module.exports = {
   entryCalculator,
@@ -161,7 +175,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
