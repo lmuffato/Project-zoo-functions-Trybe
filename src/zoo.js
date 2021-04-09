@@ -99,6 +99,7 @@ const listWithNames = (sex, sorted) => {
     const listOfResidents = {};
     listOfResidents[animal.name] = listForSex(animal, sex);
     if (sorted) listOfResidents[animal.name].sort();
+    // console.log(listOfResidents);
     animalList[animal.location].push(listOfResidents);
   });
   return animalList;
@@ -145,8 +146,6 @@ function oldestFromFirstSpecies(id) {
   return oldestResident;
 }
 
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-
 function increasePrices(percentage = 0) {
   const multiplyFactor = ((percentage) + 100);
   const { Adult, Child, Senior } = data.prices;
@@ -155,9 +154,34 @@ function increasePrices(percentage = 0) {
   data.prices.Senior = Math.ceil(Senior * multiplyFactor) / 100;
 }
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+const getAniNames = (...ids) => ids.map((id) => {
+  const animalFinded = data.animals.find((animal) => animal.id === id);
+  return (animalFinded !== undefined) ? animalFinded.name : '';
+});
+
+const generateCoverdList = () => {
+  const list = {};
+  data.employees.forEach((employee) => {
+    list[`${employee.firstName} ${employee.lastName}`] = getAniNames(...employee.responsibleFor);
+  });
+  return list;
+};
+
+const findName = (info) => data.employees.reduce((fullName, employee) => {
+  const stringTested = `${employee.firstName} ${employee.lastName} ${employee.id}`;
+  return stringTested.includes(info) ? `${employee.firstName} ${employee.lastName}` : fullName;
+}, '');
+
+function employeeCoverage(idOrName) {
+  let coverageList = generateCoverdList();
+  if (idOrName !== undefined) {
+    const name = findName(idOrName);
+    const animalList = coverageList[name];
+    coverageList = {};
+    coverageList[name] = animalList;
+  }
+  return coverageList;
+}
 
 module.exports = {
   entryCalculator,
@@ -166,7 +190,7 @@ module.exports = {
   animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
