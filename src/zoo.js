@@ -61,7 +61,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function entryCalculator(entrants) {
   if (entrants === undefined) return 0;
-  return Object.keys(entrants).reduce((acc, curr) => acc + prices[curr] * entrants[curr], 0);
+  const totalEntrants = Object.keys(entrants);
+  const total = totalEntrants.reduce((acc, curr) => acc + (entrants[curr] * prices[curr]), 0);
+  return total;
 }
 
 // function animalMap(options) {
