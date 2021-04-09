@@ -12,44 +12,44 @@ eslint no-unused-vars: [
 const { animals } = require('./data');
 const data = require('./data');
 
-// function animalsByIds(...ids) {
-//   return data.animals.filter(({ id }) => ids.includes(id));
-// }
+function animalsByIds(...ids) {
+  return data.animals.filter(({ id }) => ids.includes(id));
+}
 
-// animalsByIds();
+animalsByIds();
 
-// function animalsOlderThan(animal, animalAge) {
-//   const especie = data.animals.find(({ name }) => name === animal);
-//   return especie.residents.every(({ age }) => age > animalAge);
-// }
-// console.log(animalsOlderThan('otters', 8));
+function animalsOlderThan(animal, animalAge) {
+  const especie = data.animals.find(({ name }) => name === animal);
+  return especie.residents.every(({ age }) => age > animalAge);
+}
+console.log(animalsOlderThan('otters', 8));
 
-// function employeeByName(employeeName) {
-//   if (!employeeName) return {};
-//   return data.employees.find(({ firstName, lastName }) => firstName === employeeName
-//   || lastName === employeeName);
-// }
-// console.log(employeeByName('Burl'));
+function employeeByName(employeeName) {
+  if (!employeeName) return {};
+  return data.employees.find(({ firstName, lastName }) => firstName === employeeName
+  || lastName === employeeName);
+}
+console.log(employeeByName('Burl'));
 
-// function createEmployee(personalInfo, associatedWith) {
-//   const employee = { ...personalInfo, ...associatedWith };
-//   return employee;
-// }
+function createEmployee(personalInfo, associatedWith) {
+  const employee = { ...personalInfo, ...associatedWith };
+  return employee;
+}
 
-// function isManager(id) {
-//   return data.employees.some(({ managers }) => managers.includes(id));
-// }
+function isManager(id) {
+  return data.employees.some(({ managers }) => managers.includes(id));
+}
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   const employee = {
-//     id,
-//     firstName,
-//     lastName,
-//     managers,
-//     responsibleFor,
-//   };
-//   data.employees.push(employee);
-// }
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+  const employee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  data.employees.push(employee);
+}
 
 function animalCount(species) {
   if (!species) {
@@ -58,7 +58,7 @@ function animalCount(species) {
       return acc;
     }, {});
   }
-  return data.animals.find(({ name }) => name.includes(species)).residents.length;
+  return animals.find(({ name }) => name.includes(species)).residents.length;
 }
 console.log(animalCount('lions'));
 
@@ -87,17 +87,17 @@ console.log(animalCount('lions'));
 // // }
 
 module.exports = {
-//   // entryCalculator,
-//   // schedule,
+  // entryCalculator,
+  // schedule,
   animalCount,
-//   // animalMap,
-//   animalsByIds,
-  // employeeByName,
-//   // employeeCoverage,
-  // addEmployee,
-  // isManager,
+  // animalMap,
+  animalsByIds,
+  employeeByName,
+  // employeeCoverage,
+  addEmployee,
+  isManager,
   // animalsOlderThan,
-//   // oldestFromFirstSpecies,
-//   // increasePrices,
-  // createEmployee,
+  // oldestFromFirstSpecies,
+  // increasePrices,
+  createEmployee,
 };
