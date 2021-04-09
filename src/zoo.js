@@ -30,9 +30,30 @@ function employeeByName(employeeName) {
   // || lastName === employeeName);
   return data.employees.find(({ firstName, lastName }) => firstName === employeeName
   || lastName === employeeName);
+  // function employeeByName(employeeName) {
+  //     if (employeeName === undefined) {
+  // return {}; } if (data.employees.firstName === employeeName) {
+  //       return data.employees.find(({ firstName, lastName }) =>
+  // firstName === employeeName || lastName === employeeName); } }
+  //   function createEmployee(personalInfo, associatedWith) {
+  //     const { id, firstName, lastName } = personalInfo;
+  //     const { managers, responsibleFor } = associatedWith;
+  //     const employee = { id,firstName, lastName, managers,
+  //       responsibleFor,
+  //     };
+  //     return employee;
+  //   }
 }
 
 function createEmployee(personalInfo, associatedWith) {
+// responsibleFor = []) {
+//   // const { id, firstName, lastName } = personalInfo;
+  //   // const { managers, responsibleFor } = associatedWith;
+  //   const employee = {
+  //     id,
+  //     firstName, lastName, managers, responsibleFor,//   };
+  //   data.employees.push(employee);
+
   const { id, firstName, lastName } = personalInfo;
   const { managers, responsibleFor } = associatedWith;
   const employee = {
