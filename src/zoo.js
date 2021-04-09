@@ -73,17 +73,27 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
+// const hourszoo = (zooOpen) => {
+//   const openzoo = zooOpen.hours.open;
+//   const closezoo = zooOpen.hours.close;
+//   if (openzoo === 0 && closezoo === 0) return 'CLOSED';
+//   return `Open from ${openzoo}am until ${closezoo - 12}pm`;
+// };
 // function schedule(dayName) {
-//   // seu código aqui
+
 // }
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  const increase = (1 + (percentage / 100));
+  const price = Object.keys(prices);
+  price.forEach((key) => {
+    prices[key] = (Math.round(prices[key] * increase * 100) / 100);
+  });
+} // Estudado e realizado em grupo com as meninas do Mulheres Tribo A.
 
 // function employeeCoverage(idOrName) {
 //   if (!idOrName) {
@@ -92,9 +102,9 @@ function entryCalculator(entrants) {
 // }
 
 module.exports = {
-//   schedule,
 //   animalMap,
 //  employeeCoverage,
+// schedule,
   entryCalculator,
   animalCount,
   addEmployee,
@@ -103,6 +113,6 @@ module.exports = {
   animalsByIds,
   employeeByName,
   createEmployee,
+  increasePrices,
 //   oldestFromFirstSpecies,
-//   increasePrices,
 };
