@@ -57,6 +57,7 @@ function animalCount(species) {
   // 7 - seu código aqui
   if (species) {
     return data.animals.find(valor => valor.name === species).residents.length;
+  }
 }
 
 // function entryCalculator(entrants) {
