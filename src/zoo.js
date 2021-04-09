@@ -64,12 +64,43 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return employees.push(newEmployee);
 }
 
-/* function animalCount(species) {
-  // seu código aqui
+// Resolução aprendida com a Beatriz Barbosa, https://github.com/tryber/sd-010-a-project-zoo-functions/pull/10/files
+function animalCount(species) {
+  // Função sem parâmetro
+  const listaAnimal = animals.reduce((acc, item) => {
+    acc[item.name] = item.residents.length;
+    return acc;
+  }, {});
+
+  if (!species) {
+    return listaAnimal;
+  }
+  // Função com parâmetro
+  const objetoEspecies = animals.find((item) => item.name === species);
+  const ArrayEspecies = objetoEspecies.residents.length;
+  return ArrayEspecies;
 }
 
-function entryCalculator(entrants) {
+/* const animalsCountListComFor = () => {
+  const list = {};
+  for (let index = 0; index < animals.length; index += 1) {
+    list[`${animals[index].name}`] = animals[index].residents.length;
+  }
+  return list;
+};
+
+function animalCount(species) {
   // seu código aqui
+  if (species === undefined) {
+    return animalsCountListComFor();
+  }
+  const soughtSpecie = animals.find((animal) => species === animal.name);
+  return soughtSpecie.residents.length; */
+
+/* function entryCalculator(entrants = {}) {
+  // desestrutura entren adult, child, outro atribuindo zero
+  // faz um if para caso seja undefined retornar (especifidade do requisito)
+  // faz a conta para cada idade, usando o parseFloat para arrendodar corretamente
 }
 
 function animalMap(options) {
@@ -95,7 +126,7 @@ function employeeCoverage(idOrName) {
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
