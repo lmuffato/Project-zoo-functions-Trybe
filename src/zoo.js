@@ -70,7 +70,7 @@ function entryCalculator(entrants) {
   // 8 - seu código aqui
   if (typeof (entrants) === 'undefined' || Object.keys(entrants).length === 0) { return 0; }
   let total = 0;
-  
+
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
 
   total += Adult * data.prices.Adult;
