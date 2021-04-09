@@ -85,39 +85,39 @@ function entryCalculator(entrants) {
 // }
 
 function scheduleExceptions(dayName) {
-  const defaultSchedule = {}
+  const defaultSchedule = {};
   if (!dayName) {
     Object.keys(hours).forEach((hour) => {
       if (hour === 'Monday') {
-        defaultSchedule[hour] ='CLOSED'
+        defaultSchedule[hour] = 'CLOSED';
       } else {
-       defaultSchedule[hour] = `Open from ${hours[hour].open}am until ${hours[hour].close -12}pm`
+        defaultSchedule[hour] = `Open from ${hours[hour].open}am until ${hours[hour].close - 12}pm`;
       }
-    })
+    });
   }
-  return defaultSchedule
+  return defaultSchedule;
 }
 
 function schedule(dayName) {
-  if (!dayName) return scheduleExceptions()
-  if (dayName === 'Monday') return {Monday:'CLOSED'}
-  const scheduleText = `Open from ${hours[dayName].open}am until ${hours[dayName].close -12}pm`
-  return { [dayName] : scheduleText }
+  if (!dayName) return scheduleExceptions();
+  if (dayName === 'Monday') return { Monday: 'CLOSED' };
+  const scheduleText = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
+  return { [dayName]: scheduleText };
 }
 
 function oldestFromFirstSpecies(id) {
-  const getSpecieId = employees.find((employee) => employee.id === id).responsibleFor[0]
-  const getAnimalsByEmployee = animals.filter((animal) => animal.id === getSpecieId).shift().residents
-  const sortedByAge = getAnimalsByEmployee.sort(function (a,b) {
-    return b.age-a.age
-  })
-  return Object.values(sortedByAge[0])
+  const getSpecieId = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const getAnimalsByEmployee = animals.filter((animal) => animal.id === getSpecieId)
+    .shift().residents;
+  const sortedByAge = getAnimalsByEmployee.sort((a, b) => b.age - a.age);
+  return Object.values(sortedByAge[0]);
 }
 
 function increasePrices(percentage) {
-  let value = Object.values(prices).map((price) => parseFloat((price + price * (percentage / 100 ) + 0.0001).toFixed(2))) 
-  Object.keys(prices).forEach((element, index) => prices[element] = value[index])
-  return prices
+  const value = Object.values(prices).map((price) => parseFloat((price + price * (percentage / 100)
+      + 0.0001).toFixed(2)));
+  Object.keys(prices).forEach((element, index) => { prices[element] = value[index]; });
+  return prices;
 }
 
 // console.log(increasePrices(50))
