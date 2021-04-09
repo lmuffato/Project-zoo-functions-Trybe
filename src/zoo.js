@@ -58,7 +58,24 @@ const entryCalculator = (entrants) => {
 };
 
 function animalMap(options) {
-  // seu código aqui
+  // if (!options) {
+  //   const map = {};
+  //   const mapZones = ['NE', 'NW', 'SE', 'SW'];
+  //   mapZones.forEach((zone) => {
+  //     Object.assign(map, { [zone]: animals
+  //       .filter(({ location }) => location === zone)
+  //       .map(({ name }) => name) });
+  //   });
+  //   return map;
+  // }
+  // const map = {};
+  // const mapZones = ['NE', 'NW', 'SE', 'SW'];
+  // mapZones.forEach((zone) => {
+  //   Object.assign(map, { [zone]: animals
+  //     .filter(({ location }) => location === zone)
+  //     .map(({ name }) => name) });
+  // });
+  // return map;
 }
 
 function schedule(dayName) {
