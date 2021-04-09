@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees } = require('./data');
+const { animals, employees, prices } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -57,26 +57,27 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-// const allSpeciesCount = () => {
-//   const speciesCount = {};
-//   animals.forEach((animal) => {
-//     speciesCount.animal.name = animal.residents.length;
-//   });
-//   return speciesCount;
-// };
-
-// function animalCount(species = allSpeciesCount) {
+// function animalCount(species) {
 //   if (species !== undefined) {
 //     const animalsSpecies = animals.find((animal) => animal.name === species);
-//     console.log(animalsSpecies.residents.length);
 //     return animalsSpecies.residents.length;
 //   }
-//   animals.reduce((acc, cv) => ({ acc.cv.name: acc[cv.residents.length]}),{} );
+
+//   return animals.reduce((obj, animal) => { 
+//     obj = {};
+//     obj[animal.name] = animal.residents.length
+//   }, {});
+
 // }
-// animalCount('snakes');
-// function entryCalculator(entrants) {
-// seu código aqui
-// }
+// animalCount();
+
+function entryCalculator(entryPeople) {
+  if (entryPeople !== undefined) {
+    const { Adult = 0, Child = 0, Senior = 0 } = entryPeople;
+    const sum = Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
+    return sum;
+  } return 0;
+}
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -99,7 +100,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   // animalCount,
   // animalMap,
