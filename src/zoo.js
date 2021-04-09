@@ -16,11 +16,8 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  const ageArr = [];
   const obj = data.animals.find((bicho) => bicho.name === animal);
-  obj.residents.forEach((resident) => {
-    ageArr.push(resident.age);
-  });
+  const ageArr = obj.residents.map((resident) => resident.age);
   return ageArr.every((idade) => idade >= age);
 }
 
