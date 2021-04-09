@@ -50,13 +50,21 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     id,
     firstName,
     lastName,
-    managers: managers || [], // implementei o operador || nessa parte da função vendo o código do Murilo Gonçalves. 
+    managers: managers || [], // implementei o operador || nessa parte da função vendo o código do Murilo Gonçalves.
     responsibleFor: responsibleFor || [],
   });
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if (species === undefined) {
+    return animals.reduce((accumulator, { name, residents }) => {
+      accumulator[name] = residents.length;
+      return accumulator;
+    }, {});
+  }
+  const arrayOfAnimals = animals.find((animal) => animal.name === species)
+    .residents.length;
+  return arrayOfAnimals;
 }
 
 function entryCalculator(entrants) {
