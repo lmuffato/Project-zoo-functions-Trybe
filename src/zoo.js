@@ -55,14 +55,14 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   // 7 - seu código aqui
-  if (species) { return data.animals.filter((valor) => valor.name === species)[0].residents.length1; }
-  else {
-    const resposta = {};
-    data.animals.forEach((valor) => {
+  if (species) { return data.animals.filter((valor) =>
+    valor.name === species)[0].residents.length1;
+  } 
+  const resposta = {};
+  data.animals.forEach((valor) => {
     resposta[valor.name] = valor.residents.length;
-    });
-    return resposta;
-  }
+  });
+  return resposta;
 }
 
 // function entryCalculator(entrants) {
