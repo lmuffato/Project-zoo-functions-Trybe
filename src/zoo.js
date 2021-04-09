@@ -11,6 +11,7 @@ eslint no-unused-vars: [
 
 const { animals } = require('./data');
 const { employees } = require('./data');
+const { prices } = require('./data');
 const data = require('./data');
 
 // Requisito 1, 2, 3 e 5 feitos colaborativamente com as colegas: Nathi Zebral, Thalita Cecilier, Debora PAssos, Djaniza Vasques Ferreira e Bia Zidioti. <3
@@ -81,29 +82,19 @@ function animalCount(species) {
   return ArrayEspecies;
 }
 
-/* const animalsCountListComFor = () => {
-  const list = {};
-  for (let index = 0; index < animals.length; index += 1) {
-    list[`${animals[index].name}`] = animals[index].residents.length;
+function entryCalculator(entrants) {
+  if (entrants === undefined || entrants === {}) {
+    return 0;
   }
-  return list;
-};
-
-function animalCount(species) {
-  // seu código aqui
-  if (species === undefined) {
-    return animalsCountListComFor();
-  }
-  const soughtSpecie = animals.find((animal) => species === animal.name);
-  return soughtSpecie.residents.length; */
-
-/* function entryCalculator(entrants = {}) {
-  // desestrutura entren adult, child, outro atribuindo zero
-  // faz um if para caso seja undefined retornar (especifidade do requisito)
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   // faz a conta para cada idade, usando o parseFloat para arrendodar corretamente
+  const adultsPrice = Adult * prices.Adult;
+  const childsPrice = Child * prices.Child;
+  const seniorsPrice = Senior * prices.Senior;
+  return parseFloat((seniorsPrice + adultsPrice + childsPrice).toFixed(2));
 }
 
-function animalMap(options) {
+/* function animalMap(options) {
   // seu código aqui
 }
 
@@ -124,7 +115,7 @@ function employeeCoverage(idOrName) {
 } */
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
