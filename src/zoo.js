@@ -57,6 +57,9 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 
 function animalCount(species) {
   if (species === undefined) {
+  // reduce feito com auxílio do code pull request do Murilo Gonçalves
+  // entendi foi feita uma desestruturação de name e residents do array animals e salvos nas constantes de mesmo nome
+  // a cada iteração do reduce o accumulator verifica a quantidade de animais de acordo com o index do current name
     return animals.reduce((accumulator, { name, residents }) => {
       accumulator[name] = residents.length;
       return accumulator;
