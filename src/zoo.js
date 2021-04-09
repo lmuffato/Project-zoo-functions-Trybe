@@ -91,32 +91,30 @@ function entryCalculator(entrants) {
   return (guy * Adult) + (idoso * Senior) + (crianca * Child);
 }
 
-function animalMap(options) {
+/* function animalMap(options) {
   // seu código aqui
-}
+} */
 
-/* const getScheduleDay = (day) => {
+const getScheduleDay = (day) => {
   const openTime = hours[day].open;
   const closingTime = hours[day].close;
   if (openTime === 0 && closingTime === 0) return 'CLOSED';
-  return `Open from ${openTime}am until ${closingTime}pm`;
+  return `Open from ${openTime}am until ${closingTime - 12}pm`;
 };
 
 function schedule(dayName) {
   // seu código aqui
+  const result = {};
+  const days = Object.keys(hours);
   if (dayName === undefined) {
-    const result = {};
-    const days = Object.keys(hours);
-    if (dayName === undefined) {
-      days.forEach((day) => {
-        result[day] = getScheduleDay(day);
-      });
-    } else {
-      result[dayName] = getScheduleDay(dayName);
-    }
-    return result;
+    days.forEach((day) => {
+      result[day] = getScheduleDay(day);
+    });
+  } else {
+    result[dayName] = getScheduleDay(dayName);
   }
-} */
+  return result;
+}
 
 /* function oldestFromFirstSpecies(id) {
   // seu código aqui
@@ -132,9 +130,9 @@ function employeeCoverage(idOrName) {
 
 module.exports = {
   entryCalculator,
-  //schedule,
+  schedule,
   animalCount,
-  animalMap,
+  //animalMap,
   animalsByIds,
   employeeByName,
   //employeeCoverage,
