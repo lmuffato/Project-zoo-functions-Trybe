@@ -204,9 +204,8 @@ function increasePrices(percentage) {
   data.prices.Senior = seniorPrize;
 }
 
-// idOrName
-function employeeCoverage() {
-  // seu código aqui
+function employeeCoverage(idOrName) {
+
 }
 
 module.exports = {
