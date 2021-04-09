@@ -67,10 +67,20 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return employees.push(newEmployee);
 }
 
-/* function animalCount(species) {
-  // seu código aqui
+const animalsList = () => animals.map((animal) => `${animal.name}: ${animal.residents.length}`);
+
+function animalCount(species) {
+  if (species === undefined) {
+    return animalsList();
+  }
+  const soughtSpecie = animals.find((animal) => species === animal.name);
+  return soughtSpecie.residents.length;
 }
-*/
+
+// console.log(animals[0].name); // animal.name = nome da especie
+// console.log(animals[0].residents.length); // animal.residents.length ==> quantidade de animais
+console.log(animalCount('lions'));
+console.log(animalCount());
 
 function entryCalculator(entrants = {}) {
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
@@ -122,7 +132,7 @@ function employeeCoverage(idOrName) {
 module.exports = {
   entryCalculator,
   schedule,
-  //  animalCount,
+  animalCount,
   //  animalMap,
   animalsByIds,
   employeeByName,
