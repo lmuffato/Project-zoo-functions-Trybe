@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -61,15 +61,14 @@ function addEmployee(id, firstName, lastName, managers=[], responsibleFor=[]) {
 
 function animalCount(species) {
   if (!species) {
-    return animals.map(({name, residents}) => {
-      {`${name}: ${residents.length}`};
+    animals.sort();
+    return animals.forEach(({name, residents}) => {
+      return residents.length;
     });
   };
   const animalFromThatSpecies = animals.find(({name}) => name === species);
   return animalFromThatSpecies.residents.length;
 }
-
-console.log(animalCount())
 
 function entryCalculator(entrants={}) {
   if (!entrants || entrants === {}) return 0;
@@ -83,8 +82,20 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  const scheduleObject = {};
+  if (!dayName) {
+    for (day in hours) {
+      scheduleObject[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+    };
+    scheduleObject['Monday'] = 'CLOSED';
+    return scheduleObject;
+  };
+  if (dayName === 'Monday') { scheduleObject[dayName] = 'CLOSED'; return scheduleObject };
+  scheduleObject[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
+  return scheduleObject;
 }
+
+console.log(schedule());
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
