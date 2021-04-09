@@ -90,7 +90,15 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  return id;
+  const nameId = employees.find((personId) => personId.id === id);
+  const animalSpecie = nameId.responsibleFor[0];
+  const animalsId = animals.find((animal) => animal.id === animalSpecie);
+  const animalDetails = animalsId.residents.reduce((acc, curr) => {
+    if (curr.age > acc.age) return curr;
+    return acc;
+  });
+  const { name, sex, age } = animalDetails;
+  return [name, sex, age];
 }
 
 function increasePrices(percentage) {
