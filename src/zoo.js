@@ -42,20 +42,55 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.some((employee, index) => employee.managers[index] === id);
+  return data.employees.some(({managers}, index) => managers[index] === id);
 }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  data.employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
+}
 
 // function animalCount(species) {
-//   // seu código aqui
+//   if (species === undefined) {
+//     const animalList = data.animals.reduce((acc, animal) => {
+//       Object.assign({}, animal.name, animal.popularity);
+//       console.log(animal.name, animal.popularity);
+//       const animals = animal.name;
+//       const quantAnimals = animal.popularity;
+//       return acc + {[animals] : quantAnimals };
+//       }, {});
+//     return animalList;
+//   }
+//   return data.animals.find((animal) => animal.name === species).popularity;
 // }
+// console.log(animalCount());
+
+// data.animals.map((animal) => {
+//   const animals = animal.name;
+//   const quantAnimals = animal.popularity;
+//   return {[animals] : quantAnimals };
+// });
+
+// data.animals.reduce((acc, animal) => {
+//   console.log(animal.name, animal.popularity);
+//   const propertyAnimal = {[animal.name] : animal.popularity};
+//   return acc + propertyAnimal;
+// }, {});
 
 // function entryCalculator(entrants) {
-//   // seu código aqui
+//   for (let key in entrants) {
+//     const calculo = data.prices.Adult
+
+//     return calculo;
+//   }
 // }
+
+// console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -78,14 +113,14 @@ function isManager(id) {
 // }
 
 module.exports = {
-//   entryCalculator,
-//   schedule,
-//   animalCount,
-//   animalMap,
+  // entryCalculator,
+  // schedule,
+  // animalCount,
+  // animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
