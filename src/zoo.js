@@ -55,11 +55,12 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-// function animalCount(species) {
-//   if (!species) {
-//     return animals.reduce((lista, animal) => lista[animal.name] = animal.residents.length, {});
-//   }
-// }
+function animalCount(species) {
+  let objSaida = {};
+  animals.map((animal) => objSaida[animal.name] = animal.residents.length);
+  if (!species) return objSaida;
+  return objSaida[species];
+}
 
 function entryCalculator({ Adult = 0, Child = 0, Senior = 0 } = 0) {
   return ((Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior));
@@ -129,7 +130,7 @@ function employeeCoverage(idOrName) {
 module.exports = {
   entryCalculator,
   schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
