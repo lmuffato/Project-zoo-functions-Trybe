@@ -67,7 +67,7 @@ function animalsByIds(...ids) {
 //   // seu código aqui
 // }
 
- module.exports = {
+module.exports = {
 //   entryCalculator,
 //   schedule,
 //   animalCount,
