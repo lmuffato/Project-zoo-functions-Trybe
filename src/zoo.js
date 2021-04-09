@@ -41,13 +41,18 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const maneger = employees.map((arr) => arr.managers);
-  return maneger.some((arr, index) => arr[index] === id);
+  const manager = employees.map((arr) => arr.managers);
+  return manager.some((arr, index) => arr[index] === id); // implementei o index na função some com ajuda da Carolina Vasconcelos
 }
 
-console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  employees.push({
+    id,
+    firstName,
+    lastName,
+    managers: managers || [], // implementei o operador || nessa parte da função vendo o código do Murilo Gonçalves. 
+    responsibleFor: responsibleFor || [],
+  });
 }
 
 function animalCount(species) {
