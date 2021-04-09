@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees, prices } = data;
+const { animals, employees, prices, hours } = data;
 
 function animalsByIds(...ids) {
   const animalsArray = [];
@@ -84,9 +84,46 @@ function entryCalculator(entrants) {
 
 //  }
 
-// function schedule(dayName) {
+const hourConverter = ((param) => {
+  let result = '';
+  if (param === 0) {
+    result = '00pm';
+  } else if (param > 12) {
+    result = `${param - 12}pm`;
+  } else { result = `${param}am`; }
+  return result;
+});
 
-// }
+const weekSchedule = (() => {
+  const obj = {};
+  const keys = Object.keys(hours);
+  keys.forEach((key) => {
+    if (hours[key].open === 0 || hours[key].close === 0) {
+      Object.assign(obj, { [key]: 'CLOSED' });
+    } else {
+      Object.assign(obj, { [key]:
+        `Open from ${hourConverter(hours[key].open)} until ${hourConverter(hours[key].close)}`,
+      });
+    }
+  });
+  return obj;
+});
+
+function schedule(day) {
+  const obj = {};
+  if (!day) {
+    return weekSchedule();
+  }
+
+  if (hours[day].open === 0 || hours[day].close === 0) {
+    Object.assign(obj, { [day]: 'CLOSED' });
+  } else {
+    Object.assign(obj, { [day]:
+    `Open from ${hourConverter(hours[day].open)} until ${hourConverter(hours[day].close)}` });
+  }
+
+  return obj;
+}
 
 function oldestFromFirstSpecies(id) {
   const specie = employees.find((emp) => (emp.id === id)).responsibleFor[0];
@@ -140,7 +177,7 @@ function employeeCoverage(idOrName) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
