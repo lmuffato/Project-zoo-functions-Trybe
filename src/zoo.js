@@ -23,10 +23,11 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  if(employeeName === undefined) {
+  if (employeeName === undefined) {
     return {};
   }
-  return employees.find((worker) => worker.firstName === employeeName || worker.lastName === employeeName);
+  return employees.find((worker) => worker.
+    firstName === employeeName || worker.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -50,31 +51,30 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  if(species === undefined) {
+  if (species === undefined) {
     return {
-      "bears": 3, 
-      "elephants": 4, 
-      "frogs": 2, 
-      "giraffes": 6, 
-      "lions": 4, 
-      "otters": 4, 
-      "penguins": 4, 
-      "snakes": 2, 
-      "tigers": 2};
-  } else {
+      bears: 3,
+      elephants: 4,
+      frogs: 2,
+      giraffes: 6,
+      lions: 4,
+      otters: 4,
+      penguins: 4,
+      snakes: 2,
+      tigers: 2 };
+  }
   return animals.find((group) => group.name === species).residents.length;
-  };
 }
 
 function entryCalculator(entrants) {
-  if(entrants === undefined) {
+  if (entrants === undefined) {
     return 0;
   }
   return Object.entries(entrants).reduce((acc, [key, value]) => acc += (prices[key] * value), 0);
 }
 
 function animalMap(options) {
-  // seu código aqui
+
 }
 
 function schedule(dayName) {
@@ -86,7 +86,13 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { Adult, Child, Senior} = prices;
+  newPriceAdult = Adult + (Math.round(Adult * percentage) / 100);
+  newPriceChild = Child + (Math.round(Child * percentage) / 100);
+  newPriceSenior = Senior + (Math.round(Senior * percentage) / 100);
+  prices.Adult = parseFloat(newPriceAdult.toFixed(2));
+  prices.Child = parseFloat(newPriceChild.toFixed(2));
+  prices.Senior = parseFloat(newPriceSenior.toFixed(2));
 }
 
 function employeeCoverage(idOrName) {
