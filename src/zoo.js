@@ -9,10 +9,9 @@ eslint no-unused-vars: [
 ]
 */
 
-const { prices } = require('./data');
 const data = require('./data');
 
-const { animals, employees } = data;
+const { animals, employees, prices } = data;
 
 function animalsByIds(...ids) {
   const animalsArray = [];
@@ -82,26 +81,19 @@ function entryCalculator(entrants) {
 }
 
 //  function animalMap(options) {
-//   const obj = {}
-//   if (!options) {
-//     animals.forEach((animal) => {
-//       if (animal.location === 'NE') {
-//         Object.assign(obj, {NE:[animal.name]})
-//       } else if (animal.location === 'NW') {
-//         Object.assign(obj, {NW:[animal.name]})
-//       }
-//     })
-//   }
-//   return obj;
+
 //  }
 
-//  function schedule(dayName) {
-//  seu código aqui
-//  }
+// function schedule(dayName) {
 
-//  function oldestFromFirstSpecies(id) {
-//  seu código aqui
-//  }
+// }
+
+function oldestFromFirstSpecies(id) {
+  const specie = employees.find((emp) => (emp.id === id)).responsibleFor[0];
+  const obj = animals.find((animal) => animal.id === specie);
+  const { name, sex, age } = obj.residents.reduce((arr, curr) => (arr.age > curr.age ? arr : curr));
+  return [name, sex, age];
+}
 
 function increasePrices(percentage) {
   const keyPrices = Object.keys(prices);
@@ -113,22 +105,51 @@ function increasePrices(percentage) {
   });
 }
 
-//  function employeeCoverage(idOrName) {
-//  seu código aqui
-//  }
+const getAnimalName = (arrayId) => {
+  const array = [];
+  arrayId.forEach((idParam) =>
+    animals.forEach((animal) => {
+      if (animal.id === idParam) {
+        array.push(animal.name);
+      }
+    }));
+  return array;
+};
+
+const selectEmployee = (param) => {
+  const obj = {};
+  employees.forEach((emp) => {
+    if (emp.id === param || emp.lastName === param || emp.firstName === param) {
+      Object.assign(obj, { [`${emp.firstName} ${emp.lastName}`]:
+      getAnimalName(emp.responsibleFor) });
+    }
+  });
+  return obj;
+};
+
+function employeeCoverage(idOrName) {
+  const obj = {};
+  if (!idOrName) {
+    employees.forEach((emp) =>
+      Object.assign(obj, { [`${emp.firstName} ${emp.lastName}`]:
+      getAnimalName(emp.responsibleFor) }));
+    return obj;
+  }
+  return selectEmployee(idOrName);
+}
 
 module.exports = {
   entryCalculator,
-  //  schedule,
+  // schedule,
   animalCount,
-  //  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
-  //  employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
-  //  oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
