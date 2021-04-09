@@ -88,10 +88,16 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
-
+function oldestFromFirstSpecies(id) {
+  // 11- seu código aqui
+  const procurandoAnimal = employees.find(({ id: employeeId }) => id === employeeId).responsibleFor[0];
+     
+  const todosAnimais = animals.find(({ id: animalId }) => animalId === procurandoAnimal).residents;
+  
+  const animalMaisVelho = todosAnimais.sort(({ age: valorA }, { age: valorB }) => valorB - valorA)[0];
+  
+  return Object.values(animalMaisVelho);
+}
 // function increasePrices(percentage) {
 //   // seu código aqui
 // }
@@ -111,7 +117,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
