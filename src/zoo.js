@@ -74,10 +74,21 @@ function animalCount(species) {
   return countObject;
 }
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+function entryCalculator(entrants = {}) {
+  const { prices } = data;
 
+  if (!Object.keys(entrants).length) return 0;
+
+  const totalPrice = Object.keys(entrants).reduce((total, personType) => {
+    const price = prices[personType];
+    const people = entrants[personType];
+    const toPay = total + (price * people);
+
+    return toPay;
+  }, 0);
+
+  return totalPrice;
+}
 // function animalMap(options) {
 //   // seu código aqui
 // }
@@ -99,7 +110,7 @@ function animalCount(species) {
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
