@@ -13,13 +13,12 @@ const { animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  const epecie = animals.filter((animal) => ids.includes(animal.id));
-  return epecie;
+  return animals.filter((animal) => ids.includes(animal.id));
 }
 
 function animalsOlderThan(animal, idade) {
-  const especie = animals.find((aa) => aa.name === animal);
-  return especie.residents.every(({ age }) => age > idade);
+  return animals.find((aa) => aa.name === animal).residents
+    .every(({ age }) => age > idade);
 }
 
 function employeeByName(employeeName) {
@@ -27,7 +26,8 @@ function employeeByName(employeeName) {
     return {};
   }
 
-  return data.employees.find((aa) => aa.firstName === employeeName || aa.lastName === employeeName);
+  return data.employees
+    .find((aa) => aa.firstName === employeeName || aa.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -38,9 +38,16 @@ function isManager(id) {
   return data.employees.find((people) => people.id === id).managers.length <= 1;
 }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newPeople = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  data.employees.push(newPeople);
+}
 
 // function animalCount(species) {
 //   // seu código aqui
@@ -78,7 +85,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
