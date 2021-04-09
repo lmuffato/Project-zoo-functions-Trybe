@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees } = require('./data');
+const { animals, employees, prices } = require('./data');
 
 // Ok
 function animalsByIds(...ids) {
@@ -54,6 +54,7 @@ function addEmployee(id = '', firstName = '', lastName = '', managers = [], resp
   employees.push(employee);
 }
 
+// Ok
 function animalCount(species) {
   const result = animals.reduce((acc, animal) => {
     const { name, residents } = animal;
@@ -64,9 +65,31 @@ function animalCount(species) {
   return result;
 }
 
+
+
+
+
+//const { animals, employees, prices } = require('./data');
+
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (!entrants) return 0;
+
+  let result = 0;
+  const ticketPrice = Object.values(entrants);
+  const arrayPeapleType = Object.keys(entrants);
+  arrayPeapleType.forEach((person, index) => {
+    result += prices[person] * ticketPrice[index];
+  });
+  return result;
 }
+//console.log(entryCalculator());
+//console.log(entryCalculator({}));
+//console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
+
+
+
+
+
 
 function animalMap(options) {
   // seu código aqui
