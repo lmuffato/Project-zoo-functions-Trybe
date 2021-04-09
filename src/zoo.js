@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { employees } = require('./data');
+// const { prices } = require('./data');
 const data = require('./data');
 
 const { animals } = data;
@@ -20,16 +21,12 @@ function animalsByIds(...ids) {
   return animalArray;
 }
 
-// function animalsOlderThan(animalName, ageAnimal) {
-//   // seu código aqui
-//   // const { residents } = animals;
-//   // const { age } = residents;
-//   const ageCheck = animals.filter((animal) => animal.name === animalName);
-//   return ageCheck; // .some(() => ageAnimal >= age);
-// }
-
-// console.log(animalsOlderThan('otters', 7));
-// console.log(animals.residents);
+function animalsOlderThan(animalName, ageAnimal) {
+  // seu código aqui
+  const nameAnimal = animals.find((animal) => animalName === animal.name);
+  const ageCheck = nameAnimal.residents;
+  return ageCheck.every((animal) => ageAnimal <= animal.age);
+}
 
 function employeeByName(employeeName) {
   // seu código aqui
@@ -65,19 +62,25 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     managers,
     responsibleFor,
   };
-  // return [
-  //   ...employees,
-  //   newEmployee,
-  // ];
   return employees.push(newEmployee);
 }
 
 // function animalCount(species) {
 //   // seu código aqui
+//   // const animalQuantity = animals.filter((animal) => animal.residents.length);
+//   if (species === undefined) {
+//     return animals.forEach((animal) => console.log(animal.name));
+//     // ...animalQuantity,
+//   }
+//   return 'Vou implementar';
 // }
 
-// function entryCalculator(entrants) {
+// function entryCalculator(...entrants) {
 //   // seu código aqui
+//   if (entrants === 0 || entrants === {}) {
+//     return 0;
+//   }
+//   const summAdult = prices.filter((price) => price.Adult);
 // }
 
 // function animalMap(options) {
@@ -110,7 +113,7 @@ module.exports = {
   // employeeCoverage,
   addEmployee,
   // isManager,
-  // animalsOlderThan,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
