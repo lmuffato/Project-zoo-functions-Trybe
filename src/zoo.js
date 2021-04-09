@@ -131,7 +131,6 @@ function oldestFromFirstSpecies(id) {
     .residents.sort(({ age: a}, { age: b}) => a - b).reverse()[0]);
 }
 
-// console.log('value: ', value, ' percente', percentage, ' result: ', (0.01 * percentage) );
 const round = (value) => Math.round(value * 100) / 100;
 const valueMorePercentage = (percentage) => 
   ([key, value]) => [key, value + (value * (0.01 * percentage))];
