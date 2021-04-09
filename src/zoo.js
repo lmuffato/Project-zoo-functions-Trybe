@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+
 const { animals, employees, hours, prices } = data; // Ideia retirada do código do Murilo Gonçalves (Turma 10-A)
 
 function animalsByIds(...ids) {
@@ -66,7 +67,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     lastName,
     managers,
     responsibleFor,
-  })
+  });
 }
 
 function animalCount(species) {
@@ -77,12 +78,10 @@ function animalCount(species) {
       finalObj[name] = residents.length);
 
     return finalObj;
-
-  } else {
-
-    return data.animals.find((animal) =>
-      species === animal.name).residents.length;
   }
+
+  return data.animals.find((animal) =>
+    species === animal.name).residents.length;
 }
 
 function entryCalculator(entrants) {
@@ -90,9 +89,9 @@ function entryCalculator(entrants) {
   if (entrants === undefined) return 0;
 
   return Object
-  .keys(entrants)
-  .reduce((totalPrice, keyPerson) =>
-    totalPrice + entrants[keyPerson] * data.prices[keyPerson], 0);
+    .keys(entrants)
+    .reduce((totalPrice, keyPerson) =>
+      totalPrice + entrants[keyPerson] * data.prices[keyPerson], 0);
 }
 
 function animalMap(options) {
@@ -113,23 +112,18 @@ function animalMap(options) {
   }
 
   if (options.includeNames) {
-
     animals.forEach((animal) => {
       const nameResidents = () => {
-
         if (options.sex !== undefined) {
           return animal.residents.filter((resident) =>
             resident.sex === options.sex).map((animalOfSex) => animalOfSex.name);
-
-        } else {
-          return animal.residents.map((resident) => resident.name);
         }
-      }
-
+        return animal.residents.map((resident) => resident.name);
+      };
       if (options.sorted) {
         locations[animal.location].push({ [animal.name]: nameResidents().sort() });
       } else {
-        locations[animal.location].push({ [animal.name]: nameResidents() })
+        locations[animal.location].push({ [animal.name]: nameResidents() });
       }
     });
     return locations;
