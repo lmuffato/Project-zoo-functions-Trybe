@@ -10,6 +10,8 @@ eslint no-unused-vars: [
 */
 const { animals } = require('./data');
 const { employees } = require('./data');
+const { prices } = require('./data');
+// const { hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -79,17 +81,23 @@ function animalCount(species = false) {
   }
   return obj;
 }
-console.log(animalCount());
+
 function entryCalculator(entrants) {
   // seu código aqui
+  if (entrants === undefined) return 0;
+  if (entrants === {}) return 0;
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+  const resultado = (Adult * prices.Adult) + (Senior * prices.Senior) + (Child * prices.Child);
+  return resultado;
 }
-
+// console.log(entryCalculator());
 function animalMap(options) {
   // seu código aqui
 }
 
 function schedule(dayName) {
   // seu código aqui
+
 }
 
 function oldestFromFirstSpecies(id) {
@@ -102,8 +110,20 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
+  const obj = {};
+  if (idOrName === undefined) {
+    employees.forEach(({ firstName, lastName, responsibleFor }) => {
+      const fullName = `${firstName} ${lastName}`;
+      // console.log(fullName);
+      const idsAnimals = (responsibleFor
+        .map((x) => animals
+          .find((animal) => animal.id === x).name));
+      obj[fullName] = idsAnimals;
+    });
+  }
+  return obj;
 }
-
+console.log(employeeCoverage());
 module.exports = {
   entryCalculator,
   schedule,
