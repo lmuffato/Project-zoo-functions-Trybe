@@ -86,13 +86,21 @@ function animalCount(species) {
   return specifAnimal[0].residents.length;
 }
 
-console.log(animalCount('lions'));
-
-/*
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (!entrants || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const people = data.prices;
+  const price = Object.keys(entrants).reduce((acc, client) => (
+    acc + people[client] * entrants[client]
+  ), 0);
+  return price;
 }
 
+console.log(entryCalculator({}));
+
+// (people.Adult * entrants.Adult) + (people.Child * entrants.Child) + (people.Senior * entrants.Senior);
+/*
 function animalMap(options) {
   // seu código aqui
 }
@@ -137,4 +145,5 @@ module.exports = {
   //  isManager,
   //  addEmployee,
   animalCount,
+  entryCalculator,
 };
