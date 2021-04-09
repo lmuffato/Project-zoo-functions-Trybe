@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 // dica para desestruturar objetos vindos de outro arquivo obtida no plantão da Joicy
-const { animals, employees } = require('./data');
+const { animals, employees, prices } = require('./data');
 // fiz esse código com ajuda da Elisa França
 function animalsByIds(...ids) {
   if (ids === null) return [];
@@ -70,10 +70,15 @@ function animalCount(species) {
   return arrayOfAnimals;
 }
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
-
+function entryCalculator(entrants) {
+  if (!entrants || Object.entries(entrants).length === 0) return 0;
+  return Object.entries(entrants)
+  // precisei pesquisar em como transformar um objeto em array e achei essa documentação sobre
+  // Object.entries que retorna um array contendo o par chave e valor: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
+    .map(([chave, valor]) => valor * prices[chave]) // map retornando um array contendo a multiplicação do número de pessoas informado no parâmetro pelo valor contido em prices de acordo com a chave obtida no parâmetro [49.99, 24.99]
+    .reduce((acc, curr) => acc + curr); // reduce no array retorna o valor do somatório de cada índice 74,98
+}
+console.log(entryCalculator({ Adult: 1, Senior: 1 }));
 // function animalMap(options) {
 //   // seu código aqui
 // }
@@ -95,7 +100,7 @@ function animalCount(species) {
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
