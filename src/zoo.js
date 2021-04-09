@@ -119,6 +119,9 @@ function schedule(dayName) {
 //   animalArray.forEach(())
 // }
 
+/* Arredondamento com duas casas:
+https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary */
+
 function increasePrices(percentage) {
   const age = Object.keys(prices);
   age.forEach((agePrice) => {
