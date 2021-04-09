@@ -102,13 +102,22 @@ function schedule(dayName) {
   }
   return result;
 }
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  // seu código aqui
+}
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  // feito com auxilio de: Iago Ferreira, Lucas Pedroso, Murilo Gonsalves e Rafael Medeiros
+  // seu código aqui
+  const increase = (percentage / 100) + 1;
+  let increased = 0;
+
+  Object.entries(data.prices).forEach(([key, value]) => {
+    increased = value * increase;
+    data.prices[key] = Math.round(parseFloat(increased) * 100) / 100;
+  });
+  return data.prices;
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -125,7 +134,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
-  // increasePrices,
+  oldestFromFirstSpecies,
+  increasePrices,
   createEmployee,
 };
