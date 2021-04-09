@@ -57,12 +57,9 @@ function animalCount(species) {
       const { name } = animal;
       result[name] = animal.residents.length;
     });
+  } else {
+    result = animals.find((animal) => animal.name === species).residents.length;
   }
-  animals.forEach((animal) => {
-    if (animal.name === species) {
-      result = animal.residents.length;
-    }
-  });
   return result;
 }
 
@@ -75,9 +72,29 @@ function entryCalculator(entrants) {
   return totalAdult + totalChild + totalSenior;
 }
 
-// function animalMap(options) {
-//   // seu código aqui
+// const getLocationsKeys = () => {
+//   const object = {};
+//   animals.forEach((animal) => {
+//     const { location } = animal;
+//     object.
+//   });
+//   return object;
 // }
+
+// function animalMap(options) {
+//   const result = {};
+//   const animalNames = [];
+//   const keys = getLocationsKeys();
+//   console.log(getLocationsKeys());
+//   // console.log(keys);
+//   // const keys = Object.keys(result);
+//   // console.log(keys);
+//   if (options === undefined) {
+//     // result[location] = animal.name;
+//   }
+//   return result;
+// }
+// console.log(animalMap());
 
 // function schedule(dayName) {
 //   // seu código aqui
