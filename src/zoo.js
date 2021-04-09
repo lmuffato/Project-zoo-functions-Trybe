@@ -31,7 +31,7 @@ function employeeByName(employeeName) {
   const defaultArr = {};
   if (employeeName === undefined) {
     return defaultArr;
-  };
+  }
   return employees.find((employee) => employee.firstName === employeeName
   || employee.lastName === employeeName);
 }
