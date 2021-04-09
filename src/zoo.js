@@ -12,71 +12,66 @@ eslint no-unused-vars: [
 const { animals } = require('./data');
 const data = require('./data');
 
-let lalala = data;
-if (lalala = 1) {
-  lalala += 1;
-};
+function animalsByIds(...ids) {
+  return animals.filter(({id}) => ids.includes(id));
+}
 
-function animalsByIds(id) {
-  return animals.filter( (a) => a.id === id);
-};
-
-console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
+console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'))
 
 /* function animalsOlderThan(animal, age) {
   // seu código aqui
-}
+} */
 
-function employeeByName(employeeName) {
+/* function employeeByName(employeeName) {
   // seu código aqui
-}
+} */
 
-function createEmployee(personalInfo, associatedWith) {
+/* function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-}
+} */
 
-function isManager(id) {
+/* function isManager(id) {
   // seu código aqui
-}
+} */
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
-}
+} */
 
-function animalCount(species) {
+/* function animalCount(species) {
   // seu código aqui
-}
+} */
 
-function entryCalculator(entrants) {
+/* function entryCalculator(entrants) {
   // seu código aqui
-}
+} */
 
-function animalMap(options) {
+/* function animalMap(options) {
   // seu código aqui
-}
+} */
 
-function schedule(dayName) {
+/* function schedule(dayName) {
   // seu código aqui
-}
+} */
 
-function oldestFromFirstSpecies(id) {
+/* function oldestFromFirstSpecies(id) {
   // seu código aqui
-}
+} */
 
-function increasePrices(percentage) {
+/* function increasePrices(percentage) {
   // seu código aqui
-}
+} */
 
-function employeeCoverage(idOrName) {
+/* function employeeCoverage(idOrName) {
   // seu código aqui
-} 
+} */
 
 module.exports = {
-  entryCalculator,
+  animalsByIds,
+  /* entryCalculator,
   schedule,
   animalCount,
   animalMap,
-  animalsByIds,
   employeeByName,
   employeeCoverage,
   addEmployee,
@@ -84,5 +79,5 @@ module.exports = {
   animalsOlderThan,
   oldestFromFirstSpecies,
   increasePrices,
-  createEmployee,
-}; */
+  createEmployee, */
+};
