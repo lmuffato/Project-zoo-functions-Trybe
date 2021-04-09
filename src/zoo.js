@@ -24,10 +24,10 @@ function animalsOlderThan(animal, age) {
   return obj.residents.every((resident) => resident.age >= age);
 }
 
-// console.log(animalsOlderThan('otters', 7));
 function employeeByName(employeeName) {
   const { employees } = data;
-  return employees.filter((employee) => employee.firstname === employeeName || employee.lastName === employeeName);
+  if (!employeeName) return {};
+  return employees.find(({ firstName, lastName }) => [firstName, lastName].includes(employeeName));
 }
 
 // function createEmployee(personalInfo, associatedWith) {
