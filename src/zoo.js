@@ -58,7 +58,7 @@ function animalCount(species) {
       return acc;
     }, {});
   }
-  return animals.find(({ name }) => name.includes(species)).residents.length;
+  return data.animals.find(({ name }) => name.includes(species)).residents.length;
 }
 console.log(animalCount('lions'));
 
