@@ -63,7 +63,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 //     return animalsSpecies.residents.length;
 //   }
 
-//   return animals.reduce((obj, animal) => { 
+//   return animals.reduce((obj, animal) => {
 //     obj = {};
 //     obj[animal.name] = animal.residents.length
 //   }, {});
