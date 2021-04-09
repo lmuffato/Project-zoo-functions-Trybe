@@ -13,7 +13,7 @@ const { animals } = require('./data');
 const { employees } = require('./data');
 const data = require('./data');
 
-// Feito colaborativamente com as colegas: Nathi Zebral, Thalita Cecilier, Debora PAssos, Djaniza Vasques Ferreira e Bia Zidioti. <3
+// Requisito 1, 2, 3 e 5 feitos colaborativamente com as colegas: Nathi Zebral, Thalita Cecilier, Debora PAssos, Djaniza Vasques Ferreira e Bia Zidioti. <3
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.includes(animal.id));
 }
@@ -38,9 +38,11 @@ function employeeByName(employeeName) {
     elem.lastName === employeeName || elem.firstName === employeeName);
 }
 
-/* function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-} */
+function createEmployee(personalInfo, associatedWith) {
+  const { id, firstName, lastName } = personalInfo;
+  const { managers = [], responsibleFor = [] } = associatedWith;
+  return { id, firstName, lastName, managers, responsibleFor };
+}
 
 // Inspiração na resolução do Renzo: https://github.com/tryber/sd-010-a-project-zoo-functions/pull/12/commits/1a3a8c3aba8cb38e7d0b28654181a325743eb124
 /* Entende-se aqui que o primeiro some passa pelo array de empregados,
@@ -51,11 +53,11 @@ function isManager(id) {
   return employees.some((empregadoDaVez) => empregadoDaVez.managers.includes(id));
 }
 
-/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+
 }
 
-function animalCount(species) {
+/* function animalCount(species) {
   // seu código aqui
 }
 
@@ -91,10 +93,10 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
