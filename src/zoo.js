@@ -42,7 +42,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.some(({managers}, index) => managers[index] === id);
+  return data.employees.some(({ managers }, index) => managers[index] === id);
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
