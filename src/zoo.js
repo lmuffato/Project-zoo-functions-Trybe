@@ -62,7 +62,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  // seu código aqui
+  // feito com auxilio de: Lucas Pedroso
   if (species === undefined) {
     return data.animals.reduce((acc, currentAnimal) => {
       acc[currentAnimal.name] = currentAnimal.residents.length;
@@ -73,6 +73,7 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
+  // feito com auxilio de: Rafael Medeiros
   // seu código aqui
   if (typeof entrants === 'undefined' || entrants === {}) return 0;
   const { Adult = 0, Senior = 0, Child = 0 } = entrants;
@@ -85,12 +86,13 @@ function entryCalculator(entrants) {
 // }
 
 const getScheduleDay = (day) => {
-  const opemTime = hours[day].open;
+  const openTime = hours[day].open;
   const closingTime = hours[day].close;
-  if (opemTime === 0 && closingTime === 0) return 'CLOSED';
-  return `Open from ${opemTime}am until ${closingTime - 12}pm`;
+  if (openTime === 0 && closingTime === 0) return 'CLOSED';
+  return `Open from ${openTime}am until ${closingTime - 12}pm`;
 };
 function schedule(dayName) {
+  // feito com auxilio de: Orlando Flores, Lucas Pedroso, Murilo Gonsalves e Rafael Medeiros
   // seu código aqui
   const result = {};
   const days = Object.keys(hours);
@@ -103,9 +105,23 @@ function schedule(dayName) {
   return result;
 }
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(params) {
+  // feito com auxilio de: Iago Ferreira, Rafael Medeiros
+  // seu código aqui
+  let oldest = [];
+  const specie = data.employees.find(({ id }) => id === params).responsibleFor[0];
+
+  data.animals.find(({ id }) => id === specie)
+    .residents.forEach((spec, index) => {
+      if (index === 0) {
+        oldest = [spec.name, spec.sex, spec.age];
+      }
+      if (spec.age > oldest[2]) {
+        oldest = [spec.name, spec.sex, spec.age];
+      }
+    });
+  return oldest;
+}
 
 function increasePrices(percentage) {
   // feito com auxilio de: Iago Ferreira, Lucas Pedroso, Murilo Gonsalves e Rafael Medeiros
@@ -135,7 +151,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
