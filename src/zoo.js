@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees } = require('./data');
+const { animals, employees, prices } = require('./data');
 // const data = require('./data');
 
 // found about .includes at https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
@@ -61,9 +61,16 @@ function animalCount(species) {
   return animals.find((animal) => animal.name === species).residents.length;
 }
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+function entryCalculator(entrants) {
+  if (entrants === undefined || entrants === {}) {
+    return 0;
+  }
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const adultsPrice = Adult * prices.Adult;
+  const childsPrice = Child * prices.Child;
+  const seniorsPrice = Senior * prices.Senior;
+  return parseFloat((seniorsPrice + adultsPrice + childsPrice).toFixed(2));
+}
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -86,7 +93,7 @@ function animalCount(species) {
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
