@@ -70,7 +70,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   const { animals } = data;
-  if (species === undefined) {
+  if (!species) {
     return animals.reduce((acc, { name, residents }) => {
       acc[name] = residents.length;
       return acc;
@@ -82,20 +82,16 @@ function animalCount(species) {
 // console.log(animalCount('snakes'));
 // console.log(animalCount());
 
-// function entryCalculator({ Adult: AdultQut = 0, Chid: ChildQut = 0, Senior: SeniorQut = 0 }) {
 function entryCalculator(entrants) {
-  if (entrants === undefined || entrants === {}) {
-    return 0;
-  }
+  console.log(entrants);
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
   const { prices } = data;
-  const { Adult, Child, Senior } = prices;
-  const { Adult: AdultQut = 0, Child: ChildQut = 0, Senior: SeniorQut = 0 } = entrants;
-  let total = 0;
-  total += (AdultQut * Adult) + (ChildQut * Child) + (SeniorQut * Senior);
-  return total;
+  return Object.entries(entrants).map(([key, value]) => prices[key] * value)
+    .reduce((acc, totalPrice) => acc + totalPrice);
 }
-// console.log(entryCalculator());
+// console.log(entryCalculator(1));
 // console.log(entryCalculator({ Child: 1, Senior: 1 }));
+// console.log(entryCalculator());
 // console.log(entryCalculator({}));
 
 // function animalMap(options) {
