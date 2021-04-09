@@ -49,8 +49,8 @@ function isManager(id) {
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // 6 - Seu cógigo aqui
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
-  employees.push(newEmployee);
-  return employees;
+  data.employees.push(newEmployee);
+  return data.employees;
 }
 
 // console.log(addEmployee('4141da1c-a6ed-4cf7-90c4-99c657ba4ef3', 'Jane', 'Doe',
