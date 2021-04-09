@@ -51,11 +51,9 @@ function animalCount(species) {
     acc[currentAnimal.name] = currentAnimal.residents.length;
     return acc;
   };
-
   if (species === undefined) {
     return data.animals.reduce(getAllAnimalsAndPopulation, {});
   }
-
   return data.animals.find(({ name }) => name === species).residents.length;
 }
 
@@ -72,13 +70,15 @@ const localeAnimals = (acc, curr) => {
   }
   return acc;
 };
+
 const getAnimalsPerLocation = () => data.animals.reduce(localeAnimals, {});
 
-const getAllResidentsNames = (isSorted, sexAnimal = 'all') => (acc, { name, sex }) => {
-  if (sexAnimal === 'all' || sexAnimal === sex) acc.push(name);
+const getAllResidentsNames = (isSorted, sexAnimal) => (acc, { name, sex }) => {
+  if (sexAnimal === undefined || sexAnimal === sex) acc.push(name);
   if (isSorted) acc.sort();
   return acc;
 };
+
 const createOrAddResident = (isSorted, sexAnimal) => (acc, { name, location, residents }) => {
   if (acc[location]) {
     acc[location].push({ [name]: residents.reduce(getAllResidentsNames(isSorted, sexAnimal), []) });
@@ -87,14 +87,14 @@ const createOrAddResident = (isSorted, sexAnimal) => (acc, { name, location, res
   }
   return acc;
 };
+
 const getAnimalsPerLocationIncludesTrue = (isSorted, sexAnimal) =>
   data.animals.reduce(createOrAddResident(isSorted, sexAnimal), {});
 
 const getAnimalsPerLocationWithIncludes = (hasIncludeNames, isSorted, sexAnimal) => {
   if (hasIncludeNames) {
-    if (sexAnimal !== undefined) return getAnimalsPerLocationIncludesTrue(isSorted, sexAnimal);
-    if (isSorted && sexAnimal === undefined) return getAnimalsPerLocationIncludesTrue(isSorted);
-    return getAnimalsPerLocationIncludesTrue();
+    if (sexAnimal === undefined && !isSorted) return getAnimalsPerLocationIncludesTrue();
+    return getAnimalsPerLocationIncludesTrue(isSorted, sexAnimal);
   }
   return getAnimalsPerLocation();
 };
@@ -128,11 +128,11 @@ const getFirstSpecieId = (id) =>
 
 function oldestFromFirstSpecies(id) {
   return Object.values(data.animals.find(findById(getFirstSpecieId(id)))
-    .residents.sort(({ age: a}, { age: b}) => a - b).reverse()[0]);
+    .residents.sort(({ age: a }, { age: b }) => a - b).reverse()[0]);
 }
 
 const round = (value) => Math.round(value * 100) / 100;
-const valueMorePercentage = (percentage) => 
+const valueMorePercentage = (percentage) =>
   ([key, value]) => [key, value + (value * (0.01 * percentage))];
 const updatePrices = ([key, value]) => { data.prices[key] = round(value); };
 
@@ -142,22 +142,25 @@ function increasePrices(percentage) {
     .forEach(updatePrices);
   return data.prices;
 }
+
 const getByIdOrFirstNameOrLastName = (idOrName) =>
   ({ id, firstName, lastName }) =>
     id === idOrName || firstName === idOrName || lastName === idOrName;
+
 const getEmployee = (idOrName) => data.employees.find(getByIdOrFirstNameOrLastName(idOrName));
+
 const getAnimalName = (acc, curr) => {
   acc.push(animalsByIds(curr)[0].name);
-  //console.log(acc);
   return acc;
 };
+
 const createObjEmployeeWithAnimals = (acc, { firstName, lastName, responsibleFor }) => {
   acc[`${firstName} ${lastName}`] = responsibleFor.reduce(getAnimalName, []);
   return acc;
 };
 function employeeCoverage(idOrName) {
   if (idOrName === undefined) {
-    return data.employees.reduce(createObjEmployeeWithAnimals,{});
+    return data.employees.reduce(createObjEmployeeWithAnimals, {});
   }
   const { firstName, lastName, responsibleFor } = getEmployee(idOrName);
   const result = {};
