@@ -41,12 +41,13 @@ function isManager(id) {
   return managers.find((idMan) => idMan === id) !== undefined;
 }
 
-function addEmployee(id, firstN, lastN, managers, responsibleFor) {
-  const newEmp = createEmployee({ ...id, ...firstN, ...lastN }, { ...managers, ...responsibleFor });
+function addEmployee(id = '', firstName = '', lastName = '', managers = [], responsibleFor = []) {
+  const newEmp = createEmployee({ id, firstName, lastName }, { managers, responsibleFor });
   data.employees.push(newEmp);
 }
-
-// addEmployee({},{},{},{})
+// console.log(data.employees.length);
+// addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe');
+// console.log(data.employees[8]);
 
 const generateAnimalsList = () => {
   const listOfAnimals = {};
