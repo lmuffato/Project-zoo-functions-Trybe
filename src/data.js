@@ -240,6 +240,7 @@ module.exports = {
       ],
     },
   ],
+
   employees: [
     {
       id: 'c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1',
@@ -317,6 +318,7 @@ module.exports = {
       ],
     },
   ],
+
   hours: {
     Tuesday: { open: 8, close: 18 },
     Wednesday: { open: 8, close: 18 },
