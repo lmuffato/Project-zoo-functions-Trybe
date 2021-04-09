@@ -94,9 +94,52 @@ const entries = { Adult: 1, Child: undefined, Senior: 2 };
 
 console.log(entryCalculator(entries));
 
-// function animalMap(options) {
-//   // seu código aqui
-// }
+const listByRegion = () => {
+  const animalList = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  data.animals.forEach((animal) => animalList[animal.location].push(animal.name));
+  return animalList;
+};
+
+const listForSex = (animal, sex) => animal.residents.reduce((list, resident) => {
+  if (!sex || sex === resident.sex) {
+    list.push(resident.name);
+  }
+  return list;
+}, []);
+
+const listWithNames = (sex, sorted) => {
+  const animalList = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  data.animals.forEach((animal) => {
+    const listOfResidents = {};
+    listOfResidents[animal.name] = listForSex(animal, sex);
+    if (sorted) listOfResidents[animal.name].sort();
+    animalList[animal.location].push(listOfResidents);
+  });
+  return animalList;
+};
+
+function animalMap(options = {}) {
+  const { includesNames = false, sorted = false, sex = false } = options;
+  console.log(options, includesNames, sorted, sex);
+  let result;
+  if (!includesNames) {
+    result = listByRegion();
+  } else {
+    result = listWithNames(sex, sorted);
+  }
+  return result;
+}
+console.log(animalMap({ includesNames: true, sex: 'male', sorted: true }));
 
 // function schedule(dayName) {
 //   // seu código aqui
@@ -118,7 +161,7 @@ module.exports = {
   entryCalculator,
   // schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
