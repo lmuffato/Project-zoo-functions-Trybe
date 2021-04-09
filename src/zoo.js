@@ -31,8 +31,6 @@ const data = require('./data');
 // console.log(employeeByName('Burl'));
 
 function createEmployee(personalInfo, associatedWith) {
-  // const { id, firstName, lastName } = personalInfo;
-  // const { managers, responsibleFor } = associatedWith;
   const employee = { ...personalInfo, ...associatedWith };
   return employee;
 }
