@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees } = require('./data');
+const { animals, employees, prices } = require('./data');
 
 function animalsByIds(...ids) {
   return ids.map((ID) => animals.find(({ id }) => id.includes(ID)));
@@ -42,21 +42,25 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 // console.log(addEmployee('92', 'Pollyana', 'Oliveira'));
 
-function animalCount(...species) {
-  if (species) {
-    return (animals.find(({ name }) =>
-      name.includes(species)).residents.length);
-  }
-  return animals.reduce((acc, kindAnimal) => {
-    acc[kindAnimal.name] = kindAnimal.residents.length;
+function animalCount(species) {
+  const allAnimals = animals.reduce((acc, currentAnimal) => {
+    acc[currentAnimal.name] = currentAnimal.residents.length;
     return acc;
   }, {});
+  if (species) {
+    return allAnimals[species];
+  }
 }
-console.log(animalCount('lions'));
+// console.log(animalCount('bears'));
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+function entryCalculator(entrants) {
+  if (!entrants) {
+    return 0;
+  }
+  return Object.keys(entrants)
+    .reduce((acc, currentValue) => acc + (entrants[currentValue] * prices[currentValue]), 0);
+}
+console.log(entryCalculator({ Adult: 2, Child: 2, Senior: 1 }));
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -79,7 +83,7 @@ console.log(animalCount('lions'));
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
