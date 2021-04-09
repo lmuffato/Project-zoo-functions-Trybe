@@ -53,14 +53,15 @@ function isManager(id) {
 }
 // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/some
 const createObj = (id, firstName, lastName, managers, responsibleFor) => {
-  return {
+  const obj = {
     id,
     firstName,
     lastName,
     managers,
     responsibleFor,
   };
-}
+  return obj;
+};
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const obj = createObj(id, firstName, lastName, managers, responsibleFor);
@@ -69,11 +70,8 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(obj);
 }
 
-const isSpecie = (specie) => specie === animals.name;
-
 function animalCount(species) {
   let count = 0;
-  
   // for (let i = 0; i <= animals.length; i += 1) {
   //   // console.log(animals[0].name);
   //   if (animals[i].name === species) {
@@ -81,7 +79,7 @@ function animalCount(species) {
   //   };
   // }
   animals.forEach((animal) => {
-    if(animal.name === species) {
+    if (animal.name === species) {
       count += 1;
     }
   });
