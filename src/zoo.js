@@ -37,14 +37,9 @@ function isManager(id) {
       .some((gerente) => gerente === id));
 }
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const array = [];
-  array.id = id;
-  array.firstName = firstName;
-  array.lastName = lastName;
-  array.managers = [...managers];
-  array.responsibleFor = [...responsibleFor];
-  employees.push(array);
+function addEmployee(id = [], firstName = [], lastName = [], managers = [], responsibleFor = []) {
+  const employee = { id, firstName, lastName, managers, responsibleFor };
+  employees.push(employee);
 }
 
 function animalCount(species) {
