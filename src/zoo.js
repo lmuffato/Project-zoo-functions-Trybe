@@ -99,15 +99,17 @@ function entryCalculator(entrants) {
 const getScheduleDay = (day) => {
   const openTime = hours[day].open;
   const closingTime = hours[day].close;
-  if (openTime === 0 && closingTime === 0) return `CLOSED`;
+  if (openTime === 0 && closingTime === 0) return 'CLOSED';
   return `Open from ${openTime}am until ${closingTime - 12}pm`;
-}
+};
 
 function schedule(dayName) {
   const result = {};
   const days = Object.keys(hours);
   if (dayName === undefined) {
-    days.forEach((day) => result[day] = getScheduleDay(day));
+    days.forEach((day) => {
+      result[day] = getScheduleDay(day);
+    });
   } else {
     result[dayName] = getScheduleDay(dayName);
   }
@@ -115,9 +117,11 @@ function schedule(dayName) {
 }
 function oldestFromFirstSpecies(id) {
   const firstSpecie = employees.find((employee) => employee.id === id).responsibleFor[0];
-  const resident = animals.find((animal) => animal.id === firstSpecie).residents.sort((a,b) => (b.age) - (a.age))[0];
+  const resident = animals.find((animal) => animal.id === firstSpecie)
+    .residents
+    .sort((a, b) => (b.age) - (a.age))[0];
   const { name, sex, age } = resident;
-  return [ name, sex, age];
+  return [name, sex, age];
 }
 console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
