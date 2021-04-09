@@ -36,23 +36,17 @@ function employeeByName(employeeName) {
   return result;
 }
 
-// function createEmployee(personalInfo, associatedWith) {
-
-// }
-// const { animals, employees } = require('./data');
-
+// Ok
 function createEmployee(personalInfo, associatedWith) {
-  // const { id, firstName, lastName, managers, responsibleFor } = paramets;
-  // const personalInfo = { id, firstName, lastName };
-  // const associatedWith = { managers, responsibleFor };
   return { ...personalInfo, ...associatedWith };
 }
-console.log(createEmployee(employees[0]));
 
+// Ok
 function isManager(id) {
   return employees.some(({ managers }) => managers.includes(id));
 }
 
+// Ok
 function addEmployee(id = '', firstName = '', lastName = '', managers = [], responsibleFor = []) {
   const personalInfo = { id, firstName, lastName };
   const associatedWith = { managers, responsibleFor };
@@ -61,7 +55,13 @@ function addEmployee(id = '', firstName = '', lastName = '', managers = [], resp
 }
 
 function animalCount(species) {
-  // seu código aqui
+  const result = animals.reduce((acc, animal) => {
+    const { name, residents } = animal;
+    acc[name] = residents.length;
+    return acc;
+  }, {});
+  if (species !== undefined) return result[species];
+  return result;
 }
 
 function entryCalculator(entrants) {
