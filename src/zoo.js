@@ -65,8 +65,8 @@ function animalCount(species) {
 
 function entryCalculator(entrants = 0) {
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-  return !entrants || entrants === {} 
-    ? 0 
+  return !entrants || entrants === {}
+    ? 0
     : (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
@@ -77,9 +77,9 @@ function animalMap(options) {
 function schedule(dayName) {
   const dayList = {};
   Object.keys(hours).forEach((day) => {
-    day !== 'Monday' ? dayList[day] =
-    `Open from ${hours[day].open}am until ${hours[day].close - 12}pm` 
-    : dayList[day] = 'CLOSED';
+    day !== 'Monday'
+      ? dayList[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`
+      : dayList[day] = 'CLOSED';
   });
   if (!dayName) {
     return dayList;
