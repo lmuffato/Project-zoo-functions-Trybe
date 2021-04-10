@@ -71,18 +71,63 @@ function entryCalculator(entrants) {
   const totalSenior = Senior * prices.Senior;
   return totalAdult + totalChild + totalSenior;
 }
-const getAnimalsByLocation = (coord) => animals.filter((animal) => animal.location === coord);
+const location = (coord) => animals.filter((animal) => animal.location === coord);
+const getSpecies = (array) => array.map((animal) => animal.name);
+const getAnimalsName = (array) => array.map((item) => item.residents.map((animal) => animal.name));
+function getAnimalsNameBySex(array, gender) {
+  const residents = array.map((item) => item.residents);
+  const filter = residents.map((resident) => resident
+    .filter((animal) => animal.sex === gender)
+    .map((one) => one.name));
+  return filter;
+}
+
+const animalsNamesObjectBySex = (array, gender) => {
+  const species = getSpecies(array);
+  const names = getAnimalsNameBySex(array, gender);
+  return species.map((specie, index) => ({ [specie]: names[index] }));
+};
+const animalsNamesObject = (array) => {
+  const species = getSpecies(array);
+  const names = getAnimalsName(array);
+  return species.map((specie, index) => ({ [specie]: names[index] }));
+};
+
+const animalsNamesObjectSorted = (array) => {
+  const species = getSpecies(array);
+  const names = getAnimalsName(array);
+  return species.map((specie, index) => ({ [specie]: names[index].sort() }));
+};
+
+function returnObject(coordenadas, fn) {
+  const object = {};
+  coordenadas.forEach((coordenada) => {
+    object[coordenada] = fn(location(coordenada));
+  });
+  return object;
+}
+
+function returnObjectBySex(coordenadas, fn, gender) {
+  const object = {};
+  coordenadas.forEach((coordenada) => {
+    object[coordenada] = fn(location(coordenada), gender);
+  });
+  return object;
+}
 
 function animalMap(options) {
-  const result = {};
   const coordenadas = ['NE', 'NW', 'SE', 'SW'];
-  const animalsLocation = coordenadas.map((coordenada) => getAnimalsByLocation(coordenada));
-  coordenadas.forEach((coordenada, index) => {
-    result[coordenada] = animalsLocation[index].map((animal) => animal.name);
-  });
-  return result;
+  if (!options) return returnObject(coordenadas, getSpecies);
+  if (options.includeNames) {
+    if (options.sorted) return returnObject(coordenadas, animalsNamesObjectSorted);
+    if (options.sex) {
+      const { sex } = options;
+      return returnObjectBySex(coordenadas, animalsNamesObjectBySex, sex);
+    }
+    return returnObject(coordenadas, animalsNamesObject);
+  }
 }
-console.log(animalMap());
+console.log(animalMap({ includeNames: true, sex: 'male' }));
 
 const getScheduleDay = (day) => {
   const openTime = hours[day].open;
@@ -154,7 +199,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
