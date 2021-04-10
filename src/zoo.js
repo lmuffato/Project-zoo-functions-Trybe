@@ -50,8 +50,9 @@ function animalCount(species) {
 function entryCalculator(entrants = {}) {
   const howMany = Object.entries(entrants);
   const priceIs = Object.entries(prices);
-  return howMany.reduce((acc, curr) =>
-    acc += curr[1] * priceIs.find((element) => element[0] === curr[0])[1], 0);
+  const thePrice = howMany.map((element1) =>
+    priceIs.find((element2) => element1[0] === element2[0])[1]);
+  return howMany.reduce((acc, curr, index) => acc + (thePrice[index] * curr[1]), 0);
 }
 
 // function animalMap(options) {
