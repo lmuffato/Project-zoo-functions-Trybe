@@ -141,8 +141,8 @@ function increasePrices(percentage) {
 
 const responsavelPorAnimal = (infDoFuncionario) => {
   const objeto = {};
-  objeto[`${infDoFuncionario.firstName}
-  ${infDoFuncionario.lastName}`] = infDoFuncionario.responsibleFor
+  let chave = `${infDoFuncionario.firstName} ${infDoFuncionario.lastName}`;
+  objeto [chave] = infDoFuncionario.responsibleFor
     .map((id) => data.animals
       .find((animal) => animal.id === id).name);
   return objeto;
