@@ -117,6 +117,7 @@ const showSex = (myObj, includeNames = false, sex = false, sorted) => {
   }
 };
 
+// Referência: Murilo Gonçalves -> Pull #108
 // Estudei bastante o código do Murilo para resolver essa questão,
 // conforme o link a seguir:
 // https://github.com/tryber/sd-010-a-project-zoo-functions/pull/108/
