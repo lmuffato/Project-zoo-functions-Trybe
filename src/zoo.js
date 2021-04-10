@@ -213,7 +213,7 @@ const chekSexNoSorted = (obj) => {
   return named(arrLocations);
 };
 
-const finaleX = ({ includeNames = true, sorted = false, sex = '' }) => {
+const finaleX = ({ sorted = false, sex = '' }) => {
   if (sorted) {
     return chekSexSorted(sex);
   }
