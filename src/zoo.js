@@ -47,7 +47,7 @@ function createEmployee(personalInfo, associatedWith) {
   pF.managers = aW.managers;
   pF.responsibleFor = aW.responsibleFor;
   employees.push(pF);
-  return employees;
+  return pF;
 }
 // function isManager(id) {
 //   // seu código aqui
