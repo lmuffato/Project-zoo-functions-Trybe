@@ -68,9 +68,9 @@ function animalCount(species) {
   const objectOfAnimals = {};
 
   if (species === undefined) {
-    for (let i = 0; i < animals.length; i += 1) {
-      objectOfAnimals[animals[i].name] = animals[i].residents.length;
-    }
+    animals.forEach((animal) => {
+      objectOfAnimals[animal.name] = animal.residents.length;
+    });
     return objectOfAnimals;
   }
 
