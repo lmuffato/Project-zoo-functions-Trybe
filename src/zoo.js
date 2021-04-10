@@ -93,9 +93,15 @@ function oldestFromFirstSpecies(id) {
 }
 // console.log(oldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  Object.keys(prices).forEach((key) => {
+    const updatePrices = Math.round((prices[key] * (1 + (percentage / 100))) * 100) / 100;
+    prices[key] = updatePrices;
+  });
+  return prices;
+}
+// Arredondar casas decimais com math.round: https://metring.com.br/arredondar-numero-em-javascript#:~:text=Para%20arredondar%20um%20n%C3%BAmero%20decimal,n%C3%A3o%20%C3%A9%20um%20m%C3%A9todo%20confi%C3%A1vel.
+// console.log(increasePrices(20));
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -113,6 +119,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
