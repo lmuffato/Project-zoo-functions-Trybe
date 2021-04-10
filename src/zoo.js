@@ -87,7 +87,6 @@ const animalPorresidencia = (animal, sorted, sex) => {
 };
 
 function animalMap(options) {
-
   const { includeNames, sex, sorted } = options;
   const objeto = {};
   data.animals.forEach((valor1) => {
