@@ -83,7 +83,7 @@ function animalMap(options) {
     const obj = {};
     obj[animal] = data.animals.find((valor) => valor.name === animal).residents;
     if (sex) obj[animal] = obj[animal].filter((bichos) => bichos.sex === sex);
-    obj[animal] = obj[animal].map((valo)r => valor.name);
+    obj[animal] = obj[animal].map((valor) => valor.name);
     if (sorted) obj[animal].sort();
       return obj;
   };
