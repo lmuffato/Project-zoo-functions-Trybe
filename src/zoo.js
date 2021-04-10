@@ -11,29 +11,27 @@ eslint no-unused-vars: [
 
 /* essa porra não quer adicionar o arquivo, por isso estou escrevendo essa merda de cometario */
 
-const { animals, employees, } = require('./data');
-
+const { animals, employees } = require('./data');
 
 function animalsByIds(...idsRest) {
   // seu código aqui
-  return animals.filter(({id}) => idsRest.includes(id));
+  return animals.filter(( {id} ) => idsRest.includes(id));
 }
 
 function animalsOlderThan(animal, ageAnimal) {
   // seu código aqui
-  const nameAnimal = animals.find(({name}) => animal.includes(name)).residents;
-  return nameAnimal.every(({age}) => age > ageAnimal);
+  const nameAnimal = animals.find(( {name} ) => animal.includes(name)).residents;
+  return nameAnimal.every(( {age} ) => age > ageAnimal);
 }
-
 
 function employeeByName(employeeName) {
   // seu código aqui
   if (employeeName === undefined) return {};
-    return employees.find(({firstName, lastName}) => (
+  return employees.find(( {firstName, lastName} ) => (
     firstName === employeeName || lastName === employeeName
-  ));  
+  ));
 }
-
+/*
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
   
@@ -74,7 +72,7 @@ function increasePrices(percentage) {
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
-
+*/
 module.exports = {
   entryCalculator,
   schedule,
