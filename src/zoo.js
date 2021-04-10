@@ -157,19 +157,18 @@ const names = (array) => {
   return obj;
 };
 
+const animalsFilteredSex = (keys, sex, sorted) => {
+  if (sorted) {
+    return namesSexSorted(keys, sex);
+  };
+  return namesSex(keys, sex);
+}
+
 function animalMap(options) {
   const keys = ['NE', 'NW', 'SE', 'SW'];
   if (!options || !options.includeNames) return none(keys);
   if (options.includeNames) {
-    if (options.sorted && options.sex) {
-      const { sex } = options;
-      return namesSexSorted(keys, sex);
-    }
     if (options.sorted) return namesSorted(keys);
-    if (options.sex) {
-      const { sex } = options;
-      return namesSex(keys, sex);
-    }
     return names(keys);
   }
 }
