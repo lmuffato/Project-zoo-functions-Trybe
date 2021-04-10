@@ -39,23 +39,26 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const newPeople = {
+  return data.employees.push({
     id,
     firstName,
     lastName,
     managers,
     responsibleFor,
-  };
-  data.employees.push(newPeople);
+  });
 }
 
 function animalCount(species) {
   if (species === undefined) {
-    return {};
+    const obj = animals.reduce((acc, animal) => {
+      const result = { ...acc };
+      result[animal.name] = animal.residents.length;
+      return result;
+    }, {});
+    return obj;
   }
-  return animals.find((aa) => aa.name === species).residents.length;
+  return animals.find((animal) => animal.name === species).residents.length;
 }
-console.log(animalCount('penguins'));
 
 // function entryCalculator(entrants) {
 //   // seu código aqui
