@@ -69,13 +69,110 @@ function entryCalculator({ Adult = 0, Child = 0, Senior = 0 } = 0) {
   return ((Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior));
 }
 
-// function animalMap({ includeNames, sorted, sex }) {
-//   const ne = animals.filter((animal) => animal.location === 'NE');
+// Encontra os animais de dada região (especies)
+const location = (key) => animals.filter((animal) => animal.location === key);
 
-//   const emptySets = { NE: ne.map((animal) => animal.name) };
+// Resgata os nome de acordo com a variável deep true or false
+const getNames = (key, deep, array) => {
+  const especies = array.map((animal) => animal.name);
+  const indie = array.map((one) => one.residents.map((animal) => animal.name));
+  if (deep) {
+    return especies;
+  }
+  return indie;
+};
 
-//   const namesOn = { NE: [{ [animal.name]: animal.residents.map((resident) => resident.name) }] };
-// }
+// Cria o objeto filho
+const innerObj = (key) => {
+  const especies = getNames(key, true, location(key));
+  const eachOne = getNames(key, false, location(key));
+  return especies.map((one, index) => ({ [one]: eachOne[index] }));
+};
+
+// Cria função sorted
+const innerObjSort = (key) => {
+  const especies = getNames(key, true, location(key));
+  const eachOne = getNames(key, false, location(key));
+  return especies.map((one, index) => ({ [one]: eachOne[index].sort() }));
+};
+
+// Cria função com os gêneros
+const sexFiltered = (key, gender) => {
+  const residents = location(key).map((animal) => animal.residents);
+  const filtered = residents.map((resident) => resident.filter((one) => one.sex === gender));
+  return filtered;
+};
+
+// Cria função sex e Names Saida
+const innerObj2 = (key, gender) => {
+  const especies = getNames(key, true, location(key));
+  const eachOne = sexFiltered(key, gender).map((specie) => specie.map((one) => one.name));
+  return especies.map((one, index) => ({ [one]: eachOne[index] }));
+};
+
+// Funções a serem retornadas
+const innerObj2Sorted = (key, gender) => {
+  const especies = getNames(key, true, location(key));
+  const eachOne = sexFiltered(key, gender).map((specie) => specie.map((one) => one.name));
+  return especies.map((one, index) => ({ [one]: eachOne[index].sort() }));
+};
+
+const none = (array) => {
+  const obj = {};
+  array.forEach((key) => {
+    obj[key] = getNames(key, true, location(key));
+  });
+  return obj;
+};
+
+const namesSexSorted = (array, sex) => {
+  const obj = {};
+  array.forEach((key) => {
+    obj[key] = innerObj2Sorted(key, sex);
+  });
+  return obj;
+};
+
+const namesSorted = (array) => {
+  const obj = {};
+  array.forEach((key) => {
+    obj[key] = innerObjSort(key);
+  });
+  return obj;
+};
+
+const namesSex = (array, sex) => {
+  const obj = {};
+  array.forEach((key) => {
+    obj[key] = innerObj2(key, sex);
+  });
+  return obj;
+};
+
+const names = (array) => {
+  const obj = {};
+  array.forEach((key) => {
+    obj[key] = innerObj(key);
+  });
+  return obj;
+};
+
+function animalMap(options) {
+  const keys = ['NE', 'NW', 'SE', 'SW'];
+  if (!options || !options.includeNames) return none(keys);
+  if (options.includeNames) {
+    if (options.sorted && options.sex) {
+      const { sex } = options;
+      return namesSexSorted(keys, sex);
+    }
+    if (options.sorted) return namesSorted(keys);
+    if (options.sex) {
+      const { sex } = options;
+      return namesSex(keys, sex);
+    }
+    return names(keys);
+  }
+}
 
 function schedule(dayName) {
   const exit = {};
@@ -134,7 +231,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
