@@ -9,7 +9,6 @@ eslint no-unused-vars: [
 ]
 */
 
-const { hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) { // Utilizamos o rest para a função podere receber mais de um parâmetro.
