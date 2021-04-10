@@ -37,13 +37,10 @@ function createEmployee(personalInfo, associatedWith) {
   };
 }
 
+// Refatoração para utilizar some inspirada no código do André Barroso,
+// conforme apresentado no fechamento do dia 10 de abril de 2021.
 function isManager(id) {
-  let manager = false;
-  data.employees.forEach((employee) => {
-    if (employee.managers.includes(id)) manager = true;
-  });
-
-  return manager;
+  return data.employees.some((employee) => employee.managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
