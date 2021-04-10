@@ -97,51 +97,51 @@ function entryCalculator(entrants) {
       totalPrice + entrants[keyPerson] * prices[keyPerson], 0);
 }
 
-function animalMap(options) {
-  // seu código aqui
-
-  const locations = {};
+// Requisito 9 - animalMap
+const getLocations = () => {
+  const locationsObj = {};
   animals.forEach(({ location }) => {
-    if (!Object.keys(locations).includes(location)) {
-      locations[location] = [];
+    if (!Object.keys(locationsObj).includes(location)) {
+      locationsObj[location] = [];
     }
   });
+  return locationsObj;
+}
 
-  if (options === undefined || !options.includeNames) {
-    animals.forEach(({ name, location }) => {
-      locations[location].push(name);
-    });
-    return locations;
+const getSpecies = (locationsObj) => {
+  animals.forEach(({ name, location }) => {
+    locationsObj[location].push(name);
+  });
+  return locationsObj;
+}
+
+const getNameResidents = ({ sex }, { residents }) => {
+  if (sex !== undefined) {
+    return residents.filter((resident) =>
+      resident.sex === sex).map(({ name }) => name);
   }
+  return residents.map(({ name }) => name);
+}
+
+function animalMap(options) {
+  // seu código aqui
+  let locations = getLocations();
+
+  if (options === undefined || !options.includeNames) return getSpecies(locations);
 
   if (options.includeNames) {
     animals.forEach((animal) => {
-      const nameResidents = () => {
-        if (options.sex !== undefined) {
-          return animal.residents.filter((resident) =>
-            resident.sex === options.sex).map((animalOfSex) => animalOfSex.name);
-        }
-        return animal.residents.map((resident) => resident.name);
-      };
+      const nameResidents = getNameResidents(options, animal);
       if (options.sorted) {
-        locations[animal.location].push({ [animal.name]: nameResidents().sort() });
+        locations[animal.location].push({ [animal.name]: nameResidents.sort() });
       } else {
-        locations[animal.location].push({ [animal.name]: nameResidents() });
+        locations[animal.location].push({ [animal.name]: nameResidents });
       }
     });
+
     return locations;
   }
 }
-
-const expected = {
-  'Tuesday': 'Open from 8am until 6pm',
-  'Wednesday': 'Open from 8am until 6pm',
-  'Thursday': 'Open from 10am until 8pm',
-  'Friday': 'Open from 10am until 8pm',
-  'Saturday': 'Open from 8am until 10pm',
-  'Sunday': 'Open from 8am until 8pm',
-  'Monday': 'CLOSED'
-};
 
 function schedule(dayName) {
   // seu código aqui
