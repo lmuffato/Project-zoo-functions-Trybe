@@ -54,9 +54,26 @@ function isManager(id) {
 
 // }
 
-// function animalCount(species) {
-// seu código aqui
-// }
+function animalCount(species) {
+  const objectAnimals = {};
+  const noParameters = () => animals.reduce((acc, value) => {
+    const arrAnimals = value.name;
+    const arrNumbers = value.residents.length;
+    objectAnimals[arrAnimals] = arrNumbers;
+    return objectAnimals;
+  }, {});
+  const parameters = (nameAnimals) => {
+    let numberAnimals = 0;
+    animals.find((currentValue, index) => {
+      if (currentValue.name === nameAnimals) {
+        numberAnimals = currentValue.residents.length;
+      }
+      return numberAnimals;
+    });
+    return numberAnimals;
+  };
+  return typeof species === 'undefined' ? noParameters() : parameters(species);
+}
 
 // function entryCalculator(entrants) {
 // seu código aqui
@@ -85,15 +102,15 @@ function isManager(id) {
 module.exports = {
 //   entryCalculator,
 //  schedule,
-//   animalCount,
+   animalCount,
 //   animalMap,
-// addEmployee,
-// oldestFromFirstSpecies,
-// increasePrices,
-//  employeeCoverage,
   animalsByIds,
   employeeByName,
+// employeeCoverage,
+// addEmployee,
   isManager,
   animalsOlderThan,
+// oldestFromFirstSpecies,
+// increasePrices,
   createEmployee,
 };
