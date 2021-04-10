@@ -87,7 +87,6 @@ function animalMap(options) {
     if (sorted) obj[animal].sort();
     return obj;
   };
-
   const { includeNames, sex, sorted } = options;
   const objeto = {};
   data.animals.forEach((valor1) => {
