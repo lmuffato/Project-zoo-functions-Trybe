@@ -189,9 +189,37 @@ function increasePrices(percentage) {
     prices[priceKey] = calcNewPrices(prices[priceKey], percentage));
 }
 
+// Requisito 13 - employeeCoverage
+const getAnimalName = (arrayAnimals) => {
+  return arrayAnimals.map((animalId) =>
+    animals.find(({ id }) =>
+      id === animalId).name);
+}
+
+const getEmployee = (info) => {
+  return employees.find(({ id, firstName, lastName }) =>
+    info === firstName || info === lastName || info === id);
+}
+
+const buildObj = ({ firstName, lastName, responsibleFor}, list) => {
+  list[`${firstName} ${lastName}`] = getAnimalName(responsibleFor);
+  return list;
+}
+
 function employeeCoverage(idOrName) {
   // seu código aqui
+  listAnimals = {};
+
+  if (idOrName === undefined) {
+    employees.forEach((employee) => buildObj(employee, listAnimals));
+    return listAnimals;
+  } else {
+    const employee = getEmployee(idOrName);
+    return buildObj(employee, listAnimals);
+  }
 }
+
+console.log(employeeCoverage());
 
 module.exports = {
   entryCalculator,
