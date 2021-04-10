@@ -125,6 +125,17 @@ const getNameResidents = ({ sex }, { residents }) => {
 
 const incrementsObj = (locations, animal, nameResidents) => {
   locations[animal.location].push({ [animal.name]: nameResidents });
+};
+
+const getSpeciesAndNames = (options, locations) => {
+  animals.forEach((animal) => {
+    const nameResidents = getNameResidents(options, animal);
+    if (options.sorted) {
+      incrementsObj(locations, animal, nameResidents.sort());
+    } else {
+      incrementsObj(locations, animal, nameResidents);
+    }
+  });
 }
 
 function animalMap(options) {
@@ -134,21 +145,7 @@ function animalMap(options) {
   if (options === undefined || !options.includeNames) return getSpecies(locations);
 
   if (options.includeNames) {
-    animals.forEach((animal) => {
-      const nameResidents = getNameResidents(options, animal);
-      if (options.sorted) {
-        incrementsObj(locations, animal, nameResidents.sort());
-      } else {
-        incrementsObj(locations, animal, nameResidents);
-      }
-
-      /* if (options.sorted) {
-        locations[animal.location].push({ [animal.name]: nameResidents.sort() });
-      } else {
-        locations[animal.location].push({ [animal.name]: nameResidents });
-      } */
-    });
-
+    getSpeciesAndNames(options, locations);
     return locations;
   }
 }
@@ -159,7 +156,7 @@ const showInfo = (day, info) => {
   } else {
     info[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
   }
-}
+};
 
 function schedule(dayName) {
   // seu código aqui
@@ -168,22 +165,10 @@ function schedule(dayName) {
   if (dayName === undefined) {
     Object.keys(hours).forEach((day) => {
       showInfo(day, info);
-      /* if (day === 'Monday') {
-        info[day] = 'CLOSED';
-      } else {
-        info[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
-      } */
     });
   } else {
     showInfo(dayName, info);
   }
-
-
-  /* } else if (dayName === 'Monday') {
-    info[dayName] = 'CLOSED';
-  } else {
-    info[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
-  } */
 
   return info;
 }
