@@ -70,10 +70,10 @@ function animalCount(species) {
 //   // seu código aqui
 // }
 
-function schedule(dayName) {
-  // if (!dayName) return hours;
-  console.log(`${key}: 'Open from ${}am until ${}pm' ` {hours.key}
-}
+// function schedule(dayName) {
+//   // if (!dayName) return hours;
+//   console.log(`${key}: 'Open from ${}am until ${}pm' ` {hours.key}
+// }
 
 // function oldestFromFirstSpecies(id) {
 // identifica responsibleFor do funcionario 
