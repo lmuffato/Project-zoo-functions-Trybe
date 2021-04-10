@@ -40,7 +40,7 @@ function isManager(id) {
   return data.employees.some(({ managers }) => managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const employee = {
     id,
     firstName,
@@ -97,8 +97,9 @@ function schedule(dayName) {
 console.log(schedule('Monday'));
 
 // function oldestFromFirstSpecies(id) {
-//   // seu código aqui
+
 // }
+
 // contribuição para desenvolvimento da lógica com 'Lucas Pedroso'
 function increasePrices(percentage) {
   const percents = (1 + (percentage / 100));
