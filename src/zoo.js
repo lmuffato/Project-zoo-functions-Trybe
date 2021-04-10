@@ -63,9 +63,13 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     managers: [],
     responsibleFor: [],
   };
-  newEmployee.managers.push(managers);
-  newEmployee.responsibleFor.push(responsibleFor);
+  if (managers !== undefined) {
+    newEmployee.managers = managers;
+  } else if (responsibleFor !== undefined) {
+    newEmployee.responsibleFor.push(responsibleFor);
+  }
   employees.push(newEmployee);
+  return newEmployee;
 }
 function animalCount(species) {
   let output;
