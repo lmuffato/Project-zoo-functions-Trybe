@@ -13,13 +13,13 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   const retorno = [];  
-  for (let index = 0; index < ids.length; index++) {
-    retorno.push(...data.animals.filter((animal) =>  animal.id === ids[index]));
-  } 
+  for (let index = 0; index < ids.length; index += 1) {
+    retorno.push(...data.animals.filter((animal) => animal.id === ids[index]));
+  }
   return retorno;
 }
 
-function animalsOlderThan(animal, age) {
+/* function animalsOlderThan(animal, age) {
   // seu código aqui
 }
 
@@ -65,7 +65,7 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
-}
+} */
 
 module.exports = {
   entryCalculator,
