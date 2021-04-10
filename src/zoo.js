@@ -97,12 +97,84 @@ function entryCalculator(entrants) {
   totalPrice += checkAndCalculate(arrayRealEntrants, entrants);
   return totalPrice;
 }
+function noParameterMap(locations) {
+  const result = {};
+  locations.forEach((location) => {
+    const arrayAnimal = animals.filter((animal) => animal.location === location);
+    const arrayAnimalLocation = [];
+    arrayAnimal.forEach((animal) => arrayAnimalLocation.push(animal.name));
+    result[location] = arrayAnimalLocation;
+  });
+  return result;
+}
+function sortedNames(op, array) {
+  if (op.sorted === true) {
+    array.sort();
+  }
+  return array;
+}
+function residentsSex(resident, op) {
+  if (op.sex === undefined) {
+    return true;
+  }
+  if (resident.sex === op.sex) {
+    return true;
+  }
+  return false;
+}
+function filteredAnimal(filterAnimal, op, loc) {
+  if (filterAnimal.location === loc) {
+    const checkResidentsSex = filterAnimal.residents
+      .filter((resident) => residentsSex(resident, op) === true);
+    const residentsNames = checkResidentsSex.map((resident) => resident.name);
+    const sortArray = sortedNames(op, residentsNames);
+    return sortArray;
+  }
 
-function animalMap(options) {
-  // seu código aqui
+  return 1;
 }
 
-function schedule(dayName) {
+function include(locations, includeNamesObj, options) {
+  const newObj = {};
+  locations.forEach((loc) => {
+    Object.values(includeNamesObj).forEach((arrAnimal) => {
+      const newArray = [];
+      arrAnimal.forEach((animal) => {
+        const filterAnimal = animals.find((animalObj) => animalObj.name === animal);
+        if (filteredAnimal(filterAnimal, options, loc) !== 1) {
+          const newObjAux = {};
+          newObjAux[animal] = filteredAnimal(filterAnimal, options, loc);
+          newArray.push(newObjAux);
+          newObj[loc] = newArray;
+        }
+      });
+    });
+  });
+  return newObj;
+}
+function option(choose) {
+  let flag;
+  if (choose === undefined) {
+    flag = 0;
+    return flag;
+  }
+  if (choose.includeNames === true) {
+    flag = 1;
+    return flag;
+  }
+  return 2;
+}
+
+function animalMap(options) {
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+  const includeNamesObj = noParameterMap(locations);
+  const flag = option(options);
+  if (flag === 1) {
+    return include(locations, includeNamesObj, options);
+  }
+  return noParameterMap(locations);
+}
+/* function schedule(dayName) {
   // seu código aqui
 }
 
@@ -117,19 +189,19 @@ function increasePrices(percentage) {
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
-
+ */
 module.exports = {
   entryCalculator,
-  schedule,
+  // schedule,
   animalCount,
   animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  // employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
-  oldestFromFirstSpecies,
-  increasePrices,
+  // oldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
