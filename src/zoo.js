@@ -19,50 +19,51 @@ function animalsByIds(...ids) {
 console.log(animalsByIds());
 
 function animalsOlderThan(animal, age) {
+  const searchAnimal = data.animals.find(({ name }) => name === animal);
+  return searchAnimal.residents.every(({ age: idade }) => idade > age);
+}
+console.log(animalsOlderThan('lions'), 12);
+function employeeByName(_employeeName) {
   // seu código aqui
 }
 
-function employeeByName(employeeName) {
+function createEmployee(_personalInfo, _associatedWith) {
   // seu código aqui
 }
 
-function createEmployee(personalInfo, associatedWith) {
+function isManager(_id) {
   // seu código aqui
 }
 
-function isManager(id) {
+function addEmployee(_id, _firstName, _lastName, _managers, _responsibleFor) {
   // seu código aqui
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function animalCount(_species) {
   // seu código aqui
 }
 
-function animalCount(species) {
+function entryCalculator(_entrants) {
   // seu código aqui
 }
 
-function entryCalculator(entrants) {
+function animalMap(_options) {
   // seu código aqui
 }
 
-function animalMap(options) {
+function schedule(_dayName) {
   // seu código aqui
 }
 
-function schedule(dayName) {
+function oldestFromFirstSpecies(_id) {
   // seu código aqui
 }
 
-function oldestFromFirstSpecies(id) {
+function increasePrices(_percentage) {
   // seu código aqui
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
-
-function employeeCoverage(idOrName) {
+function employeeCoverage(_idOrName) {
   // seu código aqui
 }
 
