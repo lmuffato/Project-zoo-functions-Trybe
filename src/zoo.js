@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 
 function animalsByIds(...ids) {
   return ids.map((ID) => animals.find(({ id }) => id.includes(ID)));
@@ -60,15 +60,29 @@ function entryCalculator(entrants) {
   return Object.keys(entrants)
     .reduce((acc, currentValue) => acc + (entrants[currentValue] * prices[currentValue]), 0);
 }
-console.log(entryCalculator({ Adult: 2, Child: 2, Senior: 1 }));
+// console.log(entryCalculator({ Adult: 2, Child: 2, Senior: 1 }));
 
 // function animalMap(options) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+function schedule(dayName) {
+  // ao chamar a função sem paramentros retorna cronograma inteiro
+  // ao chamar a função com um parametro retorna o cronograma do dia
+  const openOrClose = { };
+  Object.keys(hours).forEach((day) => {
+    if (day === 'Monday') {
+      openOrClose[day] = 'CLOSED';
+    } else {
+      openOrClose[day] = `Open from ${hours[day].open}am until ${(hours[day].close) - 12}pm`;
+    }
+  });
+  if (dayName === undefined) {
+    return openOrClose;
+  }
+  return { [dayName]: openOrClose[dayName] };
+}
+console.log(schedule('Friday'));
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -84,7 +98,7 @@ console.log(entryCalculator({ Adult: 2, Child: 2, Senior: 1 }));
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
