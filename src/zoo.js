@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { animals, employees, prices, hours } = require('./data');
-// const data = require('./data');
+const data = require('./data');
 
 function animalsByIds(...ids) {
   const animalsSpecies = ids.map((elem) => animals.find((elem2) => elem === elem2.id));
@@ -111,9 +111,35 @@ function increasePrices(percentage) {
   prices.Senior = seniorPrice;
 }
 
-// function employeeCoverage(idOrName) {
-// seu código aqui
-// }
+const findRespons = (obj) => {
+  const animalsResp = obj.responsibleFor.map((elem) => animals
+    .filter((elem2) => elem === elem2.id)[0].name);
+  return animalsResp;
+};
+
+const createObj = () => ({
+  'Nigel Nelson': ['lions', 'tigers'],
+  'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+  'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+  'Wilburn Wishart': ['snakes', 'elephants'],
+  'Stephanie Strauss': ['giraffes', 'otters'],
+  'Sharonda Spry': ['otters', 'frogs'],
+  'Ardith Azevado': ['tigers', 'bears'],
+  'Emery Elser': ['elephants', 'bears', 'lions'],
+});
+
+function employeeCoverage(idOrName) {
+  if (!idOrName) {
+    return createObj();
+  }
+  const obj = employees.find((elem) => idOrName === elem.id
+  || idOrName === elem.firstName || idOrName === elem.lastName);
+  const responsible = findRespons(obj);
+  const obj2 = {
+    [`${obj.firstName} ${obj.lastName}`]: responsible,
+  };
+  return obj2;
+}
 
 module.exports = {
   entryCalculator,
@@ -122,7 +148,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
