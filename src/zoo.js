@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) { // Utilizamos o rest para a função podere receber mais de um parâmetro.
@@ -78,19 +79,32 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
+// const fullSchedule = {
+//   Tuesday: 'Open from 8am until 6pm',
+//   Wednesday: 'Open from 8am until 6pm',
+//   Thursday: 'Open from 10am until 8pm',
+//   Friday: 'Open from 10am until 8pm',
+//   Saturday: 'Open from 8am until 10pm',
+//   Sunday: 'Open from 8am until 8pm',
+//   Monday: 'CLOSED',
+// };
 // function schedule(dayName) {
-//   const undefinedDay = {
-//     Tuesday: 'Open from 8am until 6pm',
-//     Wednesday: 'Open from 8am until 6pm',
-//     Thursday: 'Open from 10am until 8pm',
-//     Friday: 'Open from 10am until 8pm',
-//     Saturday: 'Open from 8am until 10pm',
-//     Sunday: 'Open from 8am until 8pm',
-//     Monday: 'CLOSED',
-//   };
-//   if (dayName === undefined) {
-//     return undefinedDay;
+//   const scheduleDay = {};
+//   const hoursWorking = Object.keys(data.hours);
+//   // if (dayName === undefined) {
+//   //   return fullSchedule;
+//   // }
+//   hoursWorking.forEach((day) => {
+//     if (day === 'Monday') {
+//       scheduleDay[day] = 'CLOSED';
+//     }
+//     scheduleDay[day] = `Open from ${hours[day].open}am until ${hours[day].close}pm`;
+//   });
+//   if (dayName) {
+//     return {
+//     [dayName]: scheduleDay[dayName],
 //   }
+//   return scheduleDay;
 // }
 // console.log(schedule('Monday'));
 
@@ -101,9 +115,15 @@ function oldestFromFirstSpecies(id) {
   return oldest;
 }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  const { Adult, Senior, Child } = data.prices;
+  const increasedPrices = {
+    Adult: (Math.round(Adult * (1 + percentage / 100) * 100) / 100),
+    Senior: (Math.round(Senior * (1 + percentage / 100) * 100) / 100),
+    Child: (Math.round(Child * (1 + percentage / 100) * 100) / 100),
+  };
+  Object.assign(data.prices, increasedPrices); // Objetct.assign copia os valores das propriedades para o objeto destino. https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -121,6 +141,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
