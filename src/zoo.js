@@ -46,25 +46,34 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(employee);
 }
 
-function animalCount(species) {
-  if (species === undefined) {
-    return animals.reduce((total, current) => {
-      total[current.name] = current.residents.length;
-      return total;
-    }, {});
-  }
-  return animals.find(({ name }) => name === species).residents.length;
-}
-
-// function entryCalculator(entrants) {
-//   const {Adult, Senior, Child} = prices;
-//   if (!entrants || entrants.length === 0) return 0;
-//   let price1 = prices.filter(({ Adult }) => Adult * 49.99);
-//   let price2 = prices.filter(({ Senior }) => Senior * 24.99);
-//   let price3 = prices.filter(({ Child }) => Child * 20.99);
-//   return (price1 + price2 + price3);
-//   // passar par de valor para arrays aparte, multiplicar o numero pelo preço e somar ao total
+// function animalCount(species) {
+//   if (species === undefined) {
+//     return animals.reduce((total, current) => {
+//       total[current.name] = current.residents.length;
+//       return total;
+//     }, {});
+//   }
+//   return animals.find(({ name }) => name === species).residents.length;
 // }
+
+//  função implementada baseada na forma feita no repositório do Jodiel - https://github.com/tryber/sd-010-a-project-zoo-functions/pull/106
+function entryCalculator(entrants) {
+  const {Adult, Senior, Child} = prices;
+  if (!entrants || entrants.length === 0) return 0;
+  const keys = Object.keys(entrants);
+  const value = Object.values(entrants);
+  let total = 0;
+  keys.forEach((key, index) => {
+    if (key === 'Adult') {
+      total += value[index] * prices.Adult;
+    } else if (key === 'Senior') {
+      total += value[index] * prices.Senior;
+    } else if (key === 'Child') {
+      total += value[index] * prices.Child;
+    }
+  });
+  return total;
+}
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -76,13 +85,13 @@ function animalCount(species) {
 // }
 
 // function oldestFromFirstSpecies(id) {
-// identifica responsibleFor do funcionario 
+// identifica responsibleFor do funcionario
 // na tabela animals identifica o id correspondente
 // e pesquisa nos residents o age máximo e o sexo
 // }
 
 // function increasePrices(percentage) {
-// pega tabela prices e traz os valores de volta 
+// pega tabela prices e traz os valores de volta
 // price += price * percentage /100
 // }
 
@@ -92,9 +101,9 @@ function animalCount(species) {
 // }
 
 module.exports = {
-  // entryCalculator,
-  schedule,
-  animalCount,
+  entryCalculator,
+  // schedule,
+  // animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
