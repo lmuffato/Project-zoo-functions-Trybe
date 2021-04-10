@@ -114,9 +114,22 @@ function animalCount(species) {
 //   // seu código aqui
 // }
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  const getEmployee = employees.find((employee) => employee.id === id);
+  const firstAnimal = animals.find((animal) => animal.id === getEmployee.responsibleFor[0]);
+  let oldestAnimalArray = [];
+  let maiorIdade = 0;
+  firstAnimal.residents.forEach((animal) => {
+    if (animal.age > maiorIdade) {
+      maiorIdade = animal.age;
+      oldestAnimalArray = animal;
+    }
+    return oldestAnimalArray;
+  });
+  return Object.values(oldestAnimalArray);
+}
+
+console.log(oldestFromFirstSpecies('fdb2543b-5662-46a7-badc-93d960fdc0a8'));
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -137,7 +150,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
