@@ -108,11 +108,42 @@ function entryCalculator(entrants) {
 function animalMap(options) {
   // seu código aqui
 }
+*/
+function transforSchedulesInArray() {
+  return Object.entries(data.hours).map((element) => {
+    const a = Object.entries(element[1]);
+    const b = [...a[0], ...a[1]];
+    return [element[0], ...b];
+  });
+}
+
+function objDaySchedule(day) {
+  const arraySchedule = transforSchedulesInArray();
+  const arrayDayScheduleFilter = arraySchedule.filter((element) => element[0] === day)[0];
+  const scheduleDay = {};
+  scheduleDay[day] = 'CLOSED';
+  if (day === undefined) {
+    const objScheduleList = arraySchedule.reduce((acc, cur) => {
+      acc[cur[0]] = `Open from ${cur[2]}am until ${cur[4] - 12}pm`;
+      return acc;
+    }, {});
+    objScheduleList.Monday = 'CLOSED';
+    return objScheduleList;
+  }
+  if (day !== 'Monday') {
+    const initTime = arrayDayScheduleFilter[2];
+    const endTime = arrayDayScheduleFilter[4] - 12;
+    scheduleDay[day] = `Open from ${initTime}am until ${endTime}pm`;
+  }
+  return scheduleDay;
+}
 
 function schedule(dayName) {
   // seu código aqui
+  return objDaySchedule(dayName);
 }
 
+/*
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
@@ -128,7 +159,7 @@ function employeeCoverage(idOrName) {
 
 module.exports = {
   entryCalculator,
-  //  schedule,
+  schedule,
   animalCount,
   //  animalMap,
   animalsByIds,
