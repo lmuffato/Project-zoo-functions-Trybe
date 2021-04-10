@@ -179,8 +179,14 @@ function oldestFromFirstSpecies(id) {
   return [ name, sex, age];
 }
 
+// Requisito 12 - increasePrices
+const roundValue = (price) => price = Math.round(price * 100) / 100; // Ideia retirada do código do Lucas Pedroso (Turma 10-A)
+const calcNewPrices = (price, perc) => roundValue(price += price * perc * 0.01);
+
 function increasePrices(percentage) {
   // seu código aqui
+  Object.keys(prices).forEach((priceKey) =>
+    prices[priceKey] = calcNewPrices(prices[priceKey], percentage));
 }
 
 function employeeCoverage(idOrName) {
@@ -194,11 +200,11 @@ module.exports = {
   animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
