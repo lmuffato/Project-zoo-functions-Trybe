@@ -143,24 +143,37 @@ function animalMap(options) {
   }
 }
 
+const showInfo = (day, info) => {
+  if (day === 'Monday') {
+    info[day] = 'CLOSED';
+  } else {
+    info[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+  }
+}
+
 function schedule(dayName) {
   // seu código aqui
   const info = {};
 
   if (dayName === undefined) {
     Object.keys(hours).forEach((day) => {
-      if (day === 'Monday') {
-        info[day] = `CLOSED`;
+      showInfo(day, info);
+      /* if (day === 'Monday') {
+        info[day] = 'CLOSED';
       } else {
         info[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
-      }
+      } */
     });
+  } else {
+    showInfo(dayName, info);
+  }
 
-  } else if (dayName === 'Monday') {
-      info[dayName] = 'CLOSED';
+
+  /* } else if (dayName === 'Monday') {
+    info[dayName] = 'CLOSED';
   } else {
     info[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
-  }
+  } */
 
   return info;
 }
@@ -169,14 +182,14 @@ function oldestFromFirstSpecies(id) {
   // seu código aqui
   const firstAnimalId = employees.find((employee) =>
     employee.id === id).responsibleFor[0];
-  
-  const findOldest = animals.find(({ id }) =>
-    id === firstAnimalId).residents.reduce((oldest, crr) =>
-      oldest.age > crr.age ? oldest : crr);
+
+  const findOldest = animals.find(({ id: animalId }) =>
+    animalId === firstAnimalId).residents.reduce((oldest, crr) =>
+    oldest.age > crr.age ? oldest : crr);
 
   const { name, sex, age } = findOldest;
 
-  return [ name, sex, age];
+  return [name, sex, age];
 }
 
 // Requisito 12 - increasePrices
@@ -190,33 +203,30 @@ function increasePrices(percentage) {
 }
 
 // Requisito 13 - employeeCoverage
-const getAnimalName = (arrayAnimals) => {
-  return arrayAnimals.map((animalId) =>
+const getAnimalName = (arrayAnimals) =>
+  arrayAnimals.map((animalId) =>
     animals.find(({ id }) =>
       id === animalId).name);
-}
 
-const getEmployee = (info) => {
-  return employees.find(({ id, firstName, lastName }) =>
+const getEmployee = (info) =>
+  employees.find(({ id, firstName, lastName }) =>
     info === firstName || info === lastName || info === id);
-}
 
-const buildObj = ({ firstName, lastName, responsibleFor}, list) => {
+const buildObj = ({ firstName, lastName, responsibleFor }, list) => {
   list[`${firstName} ${lastName}`] = getAnimalName(responsibleFor);
   return list;
-}
+};
 
 function employeeCoverage(idOrName) {
   // seu código aqui
-  listAnimals = {};
+  const listAnimals = {};
 
   if (idOrName === undefined) {
     employees.forEach((employee) => buildObj(employee, listAnimals));
     return listAnimals;
-  } else {
-    const employee = getEmployee(idOrName);
-    return buildObj(employee, listAnimals);
   }
+  const employee = getEmployee(idOrName);
+  return buildObj(employee, listAnimals);
 }
 
 console.log(employeeCoverage());
