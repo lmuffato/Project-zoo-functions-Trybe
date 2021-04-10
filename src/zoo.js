@@ -139,6 +139,12 @@ function getAnimals(array) {
   return array.map((animalId) => animals.find((animal) => animal.id === animalId).name);
 }
 
+function getAnimalsNames(employee) {
+  const animalsResponsible = employee.responsibleFor;
+  const animalsNames = getAnimals(animalsResponsible);
+  return animalsNames;
+}
+
 function employeeCoverage(idOrName) {
   const result = {};
   if (idOrName !== undefined) {
@@ -146,19 +152,17 @@ function employeeCoverage(idOrName) {
       || idOrName === employee.firstName
       || idOrName === employee.lastName);
     const fullName = `${person.firstName} ${person.lastName}`;
-    const animalsResponsible = person.responsibleFor;
-    const animalsNames = getAnimals(animalsResponsible);
-    result[fullName] = animalsNames;
+    result[fullName] = getAnimalsNames(person);
   } else {
-    employees.map((employee) => {
+    employees.forEach((employee) => {
       const fullName = `${employee.firstName} ${employee.lastName}`;
-      const animalsResponsible = employee.responsibleFor;
-      const animalsNames = getAnimals(animalsResponsible);
-      result[fullName] = animalsNames;
+      result[fullName] = getAnimalsNames(employee);
     });
   }
   return result;
 }
+
+console.log(employeeCoverage('Stephanie'));
 
 module.exports = {
   entryCalculator,
