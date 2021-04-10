@@ -69,9 +69,14 @@ function schedule(dayName) {
   return dayName === undefined ? ifunder : { [selectedDay[0]]: selectedDay[1] };
 }
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  const specieId = employees.find((element) => element.id === id).responsibleFor[0];
+  const theResidents = animals.find((element) => element.id === specieId).residents;
+  const higherAge = theResidents.reduce((age, animal) =>
+    ((age > animal.age) ? age : animal.age), 0);
+  const theOldestResi = theResidents.find((resi) => resi.age === higherAge);
+  return Object.values(theOldestResi);
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -92,7 +97,7 @@ module.exports = {
   addEmployee,
   // isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
