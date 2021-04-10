@@ -97,10 +97,9 @@ function entryCalculator(entrants) {
 
 // Requisito 10
 
-const operatingHours = (open, close) => {
-  if (open === 0 && close === 0) return 'CLOSED';
-  return `Open from ${open}am until ${close - 12}pm`;
-};
+const operatingHours = (open, close) =>
+  (open === 0 && close === 0
+    ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`);
 
 function schedule(dayName) {
   const diasSemanas = Object.keys(hours);
@@ -109,7 +108,7 @@ function schedule(dayName) {
   //   .reduce((acc, curr) => { acc[curr] = operatingHours(hours[curr].open, hours[curr].close); }, {});
   const horario = {};
   diasSemanas
-    .forEach((item) => { horario[item] = operatingHours(hours[item].open, hours[item].close); });
+    .forEach((dia) => { horario[dia] = operatingHours(hours[dia].open, hours[dia].close); });
 
   if (dayName === undefined) return horario;
   return { [dayName]: horario[dayName] };
@@ -131,9 +130,15 @@ function schedule(dayName) {
 
 // Requisito 12
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  const keysPrice = Object.keys(prices);
+  keysPrice.forEach((key) => {
+    const numero = parseFloat(((prices[key] * percentage) / 100 + prices[key] + 0.001).toFixed(3));
+    const priceAtt = parseFloat(numero.toFixed(2));
+    prices[key] = priceAtt;
+  });
+  return prices;
+}
 
 // Requisito 13
 
@@ -171,6 +176,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
