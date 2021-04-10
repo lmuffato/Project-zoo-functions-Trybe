@@ -82,9 +82,11 @@ function animalCount(species) {
 }
 function entryCalculator(entrants) {
   let output = 0;
-  if (entrants !== undefined && entrants.Adult !== undefined) {
-    const { Adult, Child, Senior } = entrants;
-    output = (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
+  if (entrants !== undefined && Object.entries(entrants).length > 0) {
+    const keys = Object.entries(entrants);
+    keys.forEach((key) => {
+      output += prices[key[0]] * key[1];
+    });
     output.toFixed(2);
   }
   return output;
