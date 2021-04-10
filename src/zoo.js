@@ -29,7 +29,6 @@ function employeeByName(employeeName) {
   if (!employeeName) return {};
   return employees.find(({ firstName, lastName }) => [firstName, lastName].includes(employeeName));
 }
-// https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
