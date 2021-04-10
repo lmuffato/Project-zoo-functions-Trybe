@@ -56,26 +56,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 //   return animals.find(({ name }) => name === species).residents.length;
 // }
 
-//  função implementada baseada na forma feita no repositório do Jodiel - https://github.com/tryber/sd-010-a-project-zoo-functions/pull/106
+//  função implementada baseada na forma feita no repositório do Jodiel - https://github.com/tryber/sd-010-a-project-zoo-functions/pull/80
 
-function noEntrants(entrants) {
-  if (!entrants || entrants.length === 0) return 0;
-}
 function entryCalculator(entrants) {
-  noEntrants();
-  const keys = Object.keys(entrants);
-  const value = Object.values(entrants);
-  let total = 0;
-  keys.forEach((key, index) => {
-    if (key === 'Adult') {
-      total += value[index] * prices.Adult;
-    } else if (key === 'Senior') {
-      total += value[index] * prices.Senior;
-    } else if (key === 'Child') {
-      total += value[index] * prices.Child;
-    }
-  });
-  return total;
+  if (typeof entrants === 'undefined' || entrants === {}) return 0;
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+  const { Adult: adulto, Senior: idoso, Child: criança } = data.prices;
+  return (adulto * Adult) + (idoso * Senior) + (criança * Child);
 }
 
 // function animalMap(options) {
