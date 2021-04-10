@@ -80,12 +80,12 @@ function entryCalculator(entrants) {
 
 function animalMap(options = {}) {
   const animalPorresidencia = (animal, sorted, sex) => {
-    const obj = {};
-    obj[animal] = data.animals.find((valor) => valor.name === animal).residents;
-    if (sex) obj[animal] = obj[animal].filter((bichos) => bichos.sex === sex);
-    obj[animal] = obj[animal].map((valor) => valor.name);
-    if (sorted) obj[animal].sort();
-    return obj;
+    const objeto = {};
+    objeto[animal] = data.animals.find((valor) => valor.name === animal).residents;
+    if (sex) objeto[animal] = objeto[animal].filter((bichos) => bichos.sex === sex);
+    objeto[animal] = objeto[animal].map((valor) => valor.name);
+    if (sorted) objeto[animal].sort();
+    return objeto;
   };
   const { includeNames, sex, sorted } = options;
   const objeto = {};
@@ -98,12 +98,24 @@ function animalMap(options = {}) {
   });
   return objeto;
 }
-// options = {  includeNames: true, sex: 'female', sorted: true  }
-// console.log(animalMap(options));
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+function schedule(dayName) {
+  const infoUser = (day) => {
+    if (day === 'Monday') {
+      return 'CLOSED';
+    }
+    return `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
+  };
+  const objeto = {};
+  if (dayName) {
+    objeto[dayName] = infoUser(dayName);
+    return objeto;
+  }
+  Object.keys(data.hours).forEach((valor) => {
+    objeto[valor] = infoUser(valor);
+  });
+  return objeto;
+}
 
 function oldestFromFirstSpecies(id) {
   // 11- seu código aqui
@@ -133,7 +145,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   animalMap,
   animalsByIds,
