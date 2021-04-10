@@ -78,9 +78,9 @@ function isManager(id) {
 // seu código aqui
 // }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function employeeCoverage(idOrName) {
+// seu código aqui
+// }
 
 module.exports = {
 //   entryCalculator,
@@ -90,12 +90,10 @@ module.exports = {
 // addEmployee,
 // oldestFromFirstSpecies,
 // increasePrices,
+//  employeeCoverage,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
-
   isManager,
   animalsOlderThan,
-
   createEmployee,
 };
