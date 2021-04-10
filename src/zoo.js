@@ -65,29 +65,23 @@ const createObj = (id, firstName, lastName, managers, responsibleFor) => {
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const obj = createObj(id, firstName, lastName, managers, responsibleFor);
-  // if (!managers) obj.managers = [];
-  // if (!responsibleFor) obj.responsibleFor = [];
   employees.push(obj);
 }
 
+// const foundSpecie = (animal, species) => animal.name === species;
 function animalCount(species) {
-  let count = 0;
-  // for (let i = 0; i <= animals.length; i += 1) {
-  //   // console.log(animals[0].name);
-  //   if (animals[i].name === species) {
-  //     count += 1
-  //   };
-  // }
-  animals.forEach((animal) => {
-    if (animal.name === species) {
-      count += 1;
-    }
-  });
-  console.log(count);
-  return count;
+  if (!species) {
+    const objReturn = {};
+    animals.forEach((animal) => {
+      objReturn[animal.name] = animal.residents.length;
+    });
+    return objReturn;
+  }
+  const objWithSpecie = animals.find((foundSpecie) => foundSpecie.name === species);
+  return objWithSpecie.residents.length;
 }
-animalCount('lions');
 
+// animalCount();
 // function entryCalculator(entrants) {
 //   // seu código aqui
 // }
