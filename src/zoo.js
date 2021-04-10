@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require('./data');
+// const data = require('./data');
 const { animals, employees, hours, prices } = require('./data');
 
 function animalsByIds(...ids) {
@@ -90,9 +90,9 @@ function entryCalculator(entrants) {
 }
 console.log(entryCalculator({ Adult: 12, Child: 2 }));
 
-function animalMap(options) {
-  // seu código aqui
-}
+// function animalMap(options) {
+//   // seu código aqui
+// }
 
 const changeValues = () => {
   const openFrom8am = 'Open from 8am until 6pm';
@@ -118,26 +118,42 @@ function schedule(dayName) {
   };
 }
 console.log(schedule('Monday'));
-function oldestFromFirstSpecies(id) {
+function oldestFromFirstSpecies(ids) {
   // seu código aqui
+  const employeResponsible = employees.find(({ id }) => id === ids).responsibleFor[0];
+  const animalResident = animals.find(({ id }) => id === employeResponsible).residents;
+  const { name, sex, age } = animalResident.reduce((acc, currentValue) => {
+    if (currentValue.age > acc.age) {
+      return currentValue;
+    } return acc;
+  });
+  return [name, sex, age];
 }
+console.log(oldestFromFirstSpecies('c1f50212-35a6-4ecd-8223-f835538526c2'));
 
 function increasePrices(percentage) {
   // seu código aqui
+  const result = percentage / 100;
+  const newPricesAdult = prices.Adult * result + prices.Adult;
+  const newPricesChild = prices.Child * result + prices.Child;
+  const newPricesSenior = prices.Senior * result + prices.Senior;
+  prices.Adult = Math.round(newPricesAdult * 100) / 100;
+  prices.Child = Math.round(newPricesChild * 100) / 100;
+  prices.Senior = Math.round(newPricesSenior * 100) / 100;
 }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function employeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  // employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
