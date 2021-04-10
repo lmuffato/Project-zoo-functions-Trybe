@@ -74,6 +74,7 @@ entryCalculator();
 // function animalMap(options) {
 //   // seu código aqui
 // }
+
 const message = (openHour, closeHour) => (openHour === 0 && closeHour === 0
   ? 'CLOSED' : `Open from ${openHour}am until ${closeHour - 12}pm`);
 
@@ -96,9 +97,15 @@ function schedule(dayName) {
 
 console.log(schedule('Monday'));
 
-// function oldestFromFirstSpecies(id) {
+function oldestFromFirstSpecies(id) {
+  const employ = data.employees.find((person) => person.id === id).responsibleFor[0];
+  const animalSearch = animals.find((animalFound) => animalFound.id === employ);
+  const { residents } = animalSearch;
+  const result = residents.sort((a, b) => b.age - a.age)[0];
+  const { name, sex, age } = result;
 
-// }
+  return [name, sex, age];
+}
 
 // contribuição para desenvolvimento da lógica com 'Lucas Pedroso'
 function increasePrices(percentage) {
@@ -124,7 +131,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
