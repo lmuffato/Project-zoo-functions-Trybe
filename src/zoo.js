@@ -107,9 +107,11 @@ function animalMap(options) {
   return get.all.locations.includeNames(options);
 }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+function schedule(dayName) {
+  const Schedule = functionsManagement.schedule;
+  if (!dayName) return Schedule.getSchedule();
+  return Schedule.getDaySchedule(dayName);
+}
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -125,7 +127,7 @@ function animalMap(options) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   animalMap,
   animalsByIds,
