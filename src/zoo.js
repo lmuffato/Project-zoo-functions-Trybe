@@ -16,8 +16,8 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, minimumAge) {
-  const animalName = data.animals.find(({ name }) => name === animal);
-  return animalName.residents.every(({ age }) => age >= minimumAge);
+  const animalNames = data.animals.find(({ name }) => name === animal);
+  return animalNames.residents.every(({ age }) => age >= minimumAge);
 }
 
 function employeeByName(employeeName) {
@@ -68,46 +68,59 @@ function entryCalculator(entrants) {
   return people.reduce((result, key) => result + entrants[key] * data.prices[key], 0);
 }
 
-// const getLocations = () => {
-//   const locations = [];
-//   data.animals.forEach((animal) => {
-//     if (!locations.includes(animal.location)) locations.push(animal.location);
-//   });
-//   return locations;
-// };
+const getLocations = () => {
+  const locations = [];
+  data.animals.forEach((animal) => {
+    if (!locations.includes(animal.location)) locations.push(animal.location);
+  });
+  return locations;
+};
 
-// const notIncludeNames = (locations) => {
-//   const map = {};
-//   locations.forEach((loc) => map[loc] = data.animals
-//     .filter((animal) => animal.location.includes(loc)).map((animal) => animal.name));
-//   return map;
-// }
+function animalName(loc) {
+  return data.animals.filter((animal) => animal.location.includes(loc))
+    .map((animal) => animal.name);
+}
 
-// const animalSpecie = (animalName) => {
-//   const teste = {};
-//   animalName.forEach((animal) => teste[animal] = 'teste');
-//   console.log(teste);
-// }
+function notIncludeNames(locations) {
+  const obj = {};
+  locations.forEach((loc) => { obj[loc] = animalName(loc); });
+  return obj;
+}
 
-// const filterAnimals = (loc) => {
-//   const animals = data.animals.filter((animal) => animal.location.includes(loc)).map((animal) => animal.name);
-//   const animalNames = animalSpecie(animals);
-//   return animalNames;
-// }
+function animalNameList(animalObject, isSorted, sex) {
+  const animalSpecie = {};
+  if (sex !== undefined) {
+    animalSpecie[animalObject.name] = animalObject.residents.filter((animal) => animal.sex === sex)
+      .map((animal) => animal.name);
+  } else animalSpecie[animalObject.name] = animalObject.residents.map((animal) => animal.name);
+  if (isSorted) animalSpecie[animalObject.name].sort();
+  console.log(animalSpecie);
+  return animalSpecie;
+}
 
-// const includeLocations = (locations) => {
-//   const obj = {};
-//   locations.forEach((location) => obj[location] = filterAnimals(location));
-//   return obj;
-// }
+function animalObj(loc, isSorted, sex) {
+  const nameList = [];
+  const animalKeys = data.animals.filter((animal) => animal.location.includes(loc));
+  animalKeys.forEach((animal) => nameList.push(animalNameList(animal, isSorted, sex)));
+  return nameList;
+}
 
-// function animalMap(options = { includeNames: false, sex: 'both', sorted: false }) {
-//   const locations = getLocations();
-//   if (!options.includeNames) return notIncludeNames(locations);
-//   return includeLocations(locations);
-// }
+function includeNames(locations, isSorted, sex) {
+  const obj = {};
+  locations.forEach((loc) => { obj[loc] = animalObj(loc, isSorted, sex); });
+  return obj;
+}
 
-// console.log(animalMap({ includeNames: true }));
+function animalMap(options = { includeNames: false, sex: undefined, sorted: false }) {
+  const locations = getLocations();
+  if (!options.includeNames) return notIncludeNames(locations);
+  return includeNames(locations, options.sorted, options.sex);
+}
+
+// console.log(animalMap({ includeNames: true, sex: 'male' }));
+// console.log(animalMap({ includeNames: true, sorted: true }));
+// console.table(animalMap({ includeNames: true }));
+// console.log(animalMap());
 
 function daySchedule(day) {
   const { open, close } = data.hours[day];
@@ -151,8 +164,8 @@ function increasePrices(percentage) {
 }
 
 function eachId(id) {
-  const animalObj = data.animals.find((animal) => animal.id === id);
-  return animalObj.name;
+  const animalObject = data.animals.find((animal) => animal.id === id);
+  return animalObject.name;
 }
 
 function employeeResponsability(name) {
@@ -188,7 +201,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
