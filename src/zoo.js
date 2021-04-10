@@ -81,11 +81,17 @@ function schedule(dayName) {
   if (!dayName) return obj;
   return { [dayName]: obj[dayName] };
 }
+// Recebi ajuda dos amigos, Adelino, Gabriel, Rafael Medeiros, Murilo e Lucas Lara em um plantão no sábado.
 
-console.log(schedule('Monday'));
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(funcionario) {
+  const responsabilidade = employees.find((ids) => ids.id === funcionario).responsibleFor;
+
+  const animal = animals.find(({ id }) => id === responsabilidade[0]);
+  const { residents } = animal;
+  residents.sort((a, b) => b.age - a.age);
+
+  return Object.values(residents[0]);
+} // Obtive ajuda do colega Adelino e Rafael Ribeiro.
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -106,7 +112,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
