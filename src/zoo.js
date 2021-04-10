@@ -85,16 +85,17 @@ function animalMap(options) {
     if (sex) obj[animal] = obj[animal].filter((bichos) => bichos.sex === sex);
     obj[animal] = obj[animal].map((valor) => valor.name);
     if (sorted) obj[animal].sort();
-      return obj;
+    return obj;
   };
-  
+
   const { includeNames, sex, sorted } = options;
   const objeto = {};
   data.animals.forEach((valor1) => {
-    objeto[valor1.location] = data.animals.filter((valor2) => valor2.location === valor1.location).map((valor3) => {
-      if (!includeNames) {return valor3.name;}
-        return animalPorresidencia(valor3.name, sorted, sex);
-      });
+    objeto[valor1.location] = data.animals.filter((valor2) =>
+      valor2.location === valor1.location).map((valor3) => {
+      if (!includeNames) return valor3.name;
+      return animalPorresidencia(valor3.name, sorted, sex);
+    });
   });
   return objeto;
 }
