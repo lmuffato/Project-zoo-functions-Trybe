@@ -11,22 +11,32 @@ eslint no-unused-vars: [
 
 /* essa porra não quer adicionar o arquivo, por isso estou escrevendo essa merda de cometario */
 
-const data = require('./data');
+const { animals, employees, } = require('./data');
 
-function animalsByIds(ids) {
+
+function animalsByIds(...idsRest) {
   // seu código aqui
+  return animals.filter(({id}) => idsRest.includes(id));
 }
 
-function animalsOlderThan(animal, age) {
+function animalsOlderThan(animal, ageAnimal) {
   // seu código aqui
+  const nameAnimal = animals.find(({name}) => animal.includes(name)).residents;
+  return nameAnimal.every(({age}) => age > ageAnimal);
 }
+
 
 function employeeByName(employeeName) {
   // seu código aqui
+  if (employeeName === undefined) return {};
+    return employees.find(({firstName, lastName}) => (
+    firstName === employeeName || lastName === employeeName
+  ));  
 }
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  
 }
 
 function isManager(id) {
