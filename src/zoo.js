@@ -51,9 +51,16 @@ function isManager(id) {
   return idResponsible.managers[0] === '9e7d4524-363c-416a-8759-8aa7e50c0992';
 }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-
-// }
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+  const addInformation = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  employees.push(addInformation);
+}
 
 function animalCount(species) {
   const objectAnimals = {};
@@ -103,15 +110,20 @@ function animalCount(species) {
 module.exports = {
 //   entryCalculator,
 //  schedule,
-   animalCount,
-//   animalMap,
+  animalCount,
+
   animalsByIds,
   employeeByName,
-// employeeCoverage,
-// addEmployee,
+
+  addEmployee,
   isManager,
   animalsOlderThan,
+
+  createEmployee,
+  //   animalMap,
+
+  // employeeCoverage,
+
 // oldestFromFirstSpecies,
 // increasePrices,
-  createEmployee,
 };
