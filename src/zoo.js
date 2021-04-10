@@ -65,8 +65,8 @@ console.log(animalCount('lions'));
 function entryCalculator(entrants) {
   if (!entrants || Object.keys(entrants).length === 0) return 0;
   const { Adult, Senior, Child } = data.prices;
-  const { Adult: Adulto = 0, Senior: Vovo = 0, Child: Crianca = 0 } = entrants;
-  return Adult * Adulto + Senior * Vovo + Child * Crianca;
+  const { Adult: qntAdult = 0, Senior: qntSenior = 0, Child: qntChild = 0 } = entrants;
+  return Adult * qntAdult + Senior * qntSenior + Child * qntChild;
 }
 
 entryCalculator();
@@ -74,10 +74,27 @@ entryCalculator();
 // function animalMap(options) {
 //   // seu código aqui
 // }
+const message = (openHour, closeHour) => (openHour === 0 && closeHour === 0
+  ? 'CLOSED' : `Open from ${openHour}am until ${closeHour - 12}pm`);
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+function makingObj(hours, obj) {
+  const daysObj = obj;
+  Object.entries(hours).forEach((item) => {
+    const [weekday, dayObj] = item;
+    const { open, close } = dayObj;
+    daysObj[weekday] = message(open, close);
+  });
+}
+
+function schedule(dayName) {
+  const { hours } = data;
+  const obj = {};
+  makingObj(hours, obj);
+  if (!dayName) return obj;
+  return { [dayName]: obj[dayName] };
+}
+
+console.log(schedule('Monday'));
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -93,7 +110,7 @@ entryCalculator();
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
