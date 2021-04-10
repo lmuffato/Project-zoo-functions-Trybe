@@ -26,7 +26,8 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(animal, age) {
   const check = animals.find((currentValue) => currentValue.name === animal);
-  return check.residents.map((ageAnimals) => ageAnimals.age >= age);
+  const testCheck = check.residents.every((value) => value.age >= age);
+  return testCheck;
 }
 
 function employeeByName(employeeName) {
