@@ -11,52 +11,32 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals } = data;
-const { employees } = data;
-const { hours } = data;
-const { prices } = data;
+const { animals, employees, hours, prices } = data;
 
-function animalsByIds(...ids) {
-  return ids.map((id) => animals.find(({ id: idAnimal }) => idAnimal === id));
-}
+const animalsByIds = (...ids) => ids.map((id) => animals
+  .find(({ id: idAnimal }) => idAnimal === id));
 
-function animalsOlderThan(animal, age) {
-  return animals.find((el) => el.name === animal).residents.every((res) => res.age >= age);
-}
+const animalsOlderThan = (animal, age) => animals
+  .find((el) => el.name === animal).residents
+  .every((res) => res.age >= age);
 
-function employeeByName(employeeName = false) {
-  return employeeName
-    ? employees
-      .find((employee) => employee.firstName === employeeName || employee.lastName === employeeName)
-    : {};
-}
+const employeeByName = (employeeName = false) => (employeeName
+  ? employees.find((employee) => employee.firstName === employeeName
+    || employee.lastName === employeeName)
+  : {});
 
-function createEmployee({ id, firstName, lastName } = {}, { managers, responsibleFor } = {}) {
-  employees.push({
-    id,
-    firstName,
-    lastName,
-    managers,
-    responsibleFor,
-  });
+const createEmployee = ({ id, firstName, lastName } = {}, { managers, responsibleFor } = {}) => {
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
   return employeeByName(firstName);
-}
+};
 
-function isManager(id) {
-  return employees.some((employee) => employee.managers.some((emp) => emp === id));
-}
+const isManager = (id) => employees.some((employee) => employee.managers.some((emp) => emp === id));
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  return employees.push({
-    id,
-    firstName,
-    lastName,
-    managers,
-    responsibleFor,
-  });
-}
+const addEmployee = (
+  id, firstName, lastName, managers = [], responsibleFor = [],
+) => employees.push({ id, firstName, lastName, managers, responsibleFor });
 
-function animalCount(species = false) {
+const animalCount = (species = false) => {
   const obj = {};
   if (species) {
     return animals.find((animal) => animal.name === species).residents
@@ -67,14 +47,14 @@ function animalCount(species = false) {
     obj[animal.name] = qtdAnimals;
   });
   return obj;
-}
+};
 
-function entryCalculator(entrant = false) {
+const entryCalculator = (entrant = false) => {
   const { Adult = 0, Child = 0, Senior = 0 } = entrant;
   return !entrant || entrant === {}
     ? 0
     : (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
-}
+};
 
 const withoutArgs = () => {
   let obj = {};
@@ -90,8 +70,7 @@ const withoutArgs = () => {
 const withName = () => {
   let obj = {};
   const locations = animals.reduce((acc, cur) => (acc.includes(cur.location)
-    ? acc
-    : acc.concat(cur.location)), []);
+    ? acc : acc.concat(cur.location)), []);
   locations.forEach((location) => {
     const content = animals.filter(({ location: loc }) => loc === location)
       .map((animal) => ({ [animal.name]: animal.residents
@@ -138,10 +117,10 @@ const showSex = (myObj, includeNames = false, sex = false, sorted) => {
   }
 };
 
-// Estudei bastante o códifo do Murilo para resolver essa questão,
+// Estudei bastante o código do Murilo para resolver essa questão,
 // conforme o link a seguir:
 // https://github.com/tryber/sd-010-a-project-zoo-functions/pull/108/
-function animalMap(options = false) {
+const animalMap = (options = false) => {
   const includeNames = !!options.includeNames;
   const sorted = !!options.sorted;
   const sex = options.sex ? options.sex : null;
@@ -155,15 +134,9 @@ function animalMap(options = false) {
   orderObjectByName(obj, includeNames, sorted);
   showSex(obj, includeNames, sex, sorted);
   return obj;
-}
-
-const hourAmericanFormat = (hour) => {
-  const parsedHour = parseInt(hour, 10);
-  if (parsedHour < 12) {
-    return `${parsedHour}am`;
-  }
-  return `${parsedHour - 12}pm`;
 };
+
+const hourAmericanFormat = (hour) => (hour < 12 ? `${hour}am` : `${hour - 12}pm`);
 
 const generateObjSchedule = (day, obj) => {
   const phrase1 = `Open from ${hourAmericanFormat(hours[day].open)}`;
@@ -172,18 +145,14 @@ const generateObjSchedule = (day, obj) => {
   if (hours[day].open === 0 && hours[day].close === 0) {
     fullPhrase = 'CLOSED';
   }
-  return {
-    ...obj,
-    [day]: fullPhrase,
-  };
+  return { ...obj, [day]: fullPhrase };
 };
 
 const scheduleWithoutArgs = () => {
   let obj = {};
-  Object.keys(hours)
-    .forEach((day) => {
-      obj = { ...obj, ...generateObjSchedule(day) };
-    });
+  Object.keys(hours).forEach((day) => {
+    obj = { ...obj, ...generateObjSchedule(day) };
+  });
   return obj;
 };
 
@@ -193,20 +162,16 @@ const scheduleWithArg = (dayname) => {
   return obj;
 };
 
-function schedule(dayName = false) {
-  if (!dayName) {
-    return scheduleWithoutArgs();
-  }
-  return scheduleWithArg(dayName);
-}
+const schedule = (dayName = false) => (!dayName
+  ? scheduleWithoutArgs() : scheduleWithArg(dayName));
 
-function oldestFromFirstSpecies(id = false) {
+const oldestFromFirstSpecies = (id = false) => {
   const idFunc = employees.find((employee) => employee.id === id).responsibleFor[0];
   return Object.values(animals.find((animal) => animal.id === idFunc).residents
     .sort((a, b) => b.age - a.age)[0]);
-}
+};
 
-function increasePrices(percentage) {
+const increasePrices = (percentage) => {
   Object.keys(prices).forEach((categoryPrice) => {
     let newValue = parseFloat(prices[categoryPrice]);
     const add = newValue * (percentage / 100);
@@ -214,7 +179,7 @@ function increasePrices(percentage) {
     prices[categoryPrice] = parseFloat(newValue.toFixed(0))
       + Math.ceil(((newValue - parseFloat(newValue.toFixed(0))) * 100)) / 100;
   });
-}
+};
 
 const getAnimalsByIdEmployee = (id) => employees
   .find(({ id: idEmp }) => idEmp === id).responsibleFor
@@ -223,10 +188,9 @@ const getAnimalsByIdEmployee = (id) => employees
 
 const getEmp = (idOrName) => employees
   .find(({ id, firstName, lastName }) => id === idOrName
-    || firstName === idOrName
-    || lastName === idOrName);
+    || firstName === idOrName || lastName === idOrName);
 
-function employeeCoverage(idOrName = false) {
+const employeeCoverage = (idOrName = false) => {
   if (!idOrName) {
     let obj = {};
     const ids = employees.map(({ id }) => id);
@@ -241,7 +205,7 @@ function employeeCoverage(idOrName = false) {
   const emp = getEmp(idOrName);
   obj = { ...obj, ...{ [`${emp.firstName} ${emp.lastName}`]: getAnimalsByIdEmployee(emp.id) } };
   return obj;
-}
+};
 
 employeeCoverage();
 
