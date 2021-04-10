@@ -78,17 +78,12 @@ function entryCalculator(entrants) {
   return total;
 }
 
-
 function animalMap(options) {
   const animalPorresidencia = (animal, sorted, sex) => {
     const obj = {};
-
-    obj[animal] = data.animals.find(valor => valor.name === animal).residents;
-
-    if (sex) obj[animal] = obj[animal].filter(bichos => bichos.sex === sex);
-
-    obj[animal] = obj[animal].map(valor => valor.name);
-
+    obj[animal] = data.animals.find((valor) => valor.name === animal).residents;
+    if (sex) obj[animal] = obj[animal].filter((bichos) => bichos.sex === sex);
+    obj[animal] = obj[animal].map((valo)r => valor.name);
     if (sorted) obj[animal].sort();
       return obj;
   };
