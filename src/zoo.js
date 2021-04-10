@@ -56,12 +56,12 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 //   return animals.find(({ name }) => name === species).residents.length;
 // }
 
-//  função implementada baseada na forma feita no repositório do Jodiel - https://github.com/tryber/sd-010-a-project-zoo-functions/pull/80
+//  função implementada baseada na forma feita no repositório do Nilson - https://github.com/tryber/sd-010-a-project-zoo-functions/pull/80
 
 function entryCalculator(entrants) {
   if (typeof entrants === 'undefined' || entrants === {}) return 0;
   const { Adult = 0, Senior = 0, Child = 0 } = entrants;
-  const { Adult: adulto, Senior: idoso, Child: criança } = data.prices;
+  const { Adult: adulto, Senior: idoso, Child: criança } = prices;
   return (adulto * Adult) + (idoso * Senior) + (criança * Child);
 }
 
