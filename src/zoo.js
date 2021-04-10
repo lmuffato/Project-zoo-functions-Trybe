@@ -13,13 +13,16 @@ const data = require('./data');
 
 const { animals, employees } = data;
 
-function animalsByIds(ids) {
-  // if (typeof ids === 'undefined') {
-  //   return [];
-  // }
-  // return animals.filter((idValue) => idValue.id === ids[0]);
+function animalsByIds(...ids) {
+  const arr = [];
+  const selectAnimals = ids.reduce((array, currentValue, index) => {
+    const valueId = ids[index];
+    const validade = animals.find((search) => search.id === valueId);
+    arr.push(validade);
+    return arr;
+  }, []);
+  return selectAnimals;
 }
-// console.log(animalsByIds('01422318-ca2d-46b8-b66c-3e9e188244ed'));
 
 function animalsOlderThan(animal, age) {
   const check = animals.find((currentValue) => currentValue.name === animal);
@@ -47,50 +50,52 @@ function isManager(id) {
   return idResponsible.managers.length === 0;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 
-function animalCount(species) {
-  // seu código aqui
-}
+// }
 
-function entryCalculator(entrants) {
-  // seu código aqui
-}
+// function animalCount(species) {
+// seu código aqui
+// }
 
-function animalMap(options) {
-  // seu código aqui
-}
+// function entryCalculator(entrants) {
+// seu código aqui
+// }
 
-function schedule(dayName) {
-  // seu código aqui
-}
+// function animalMap(options) {
+// seu código aqui
+// }
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// function schedule(dayName) {
+// seu código aqui
+// }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function oldestFromFirstSpecies(id) {
+// seu código aqui
+// }
+
+// function increasePrices(percentage) {
+// seu código aqui
+// }
 
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
 
 module.exports = {
-  entryCalculator,
-  schedule,
-  animalCount,
-  animalMap,
+//   entryCalculator,
+//  schedule,
+//   animalCount,
+//   animalMap,
+// addEmployee,
+// oldestFromFirstSpecies,
+// increasePrices,
   animalsByIds,
   employeeByName,
   employeeCoverage,
-  addEmployee,
+
   isManager,
   animalsOlderThan,
-  oldestFromFirstSpecies,
-  increasePrices,
+
   createEmployee,
 };
