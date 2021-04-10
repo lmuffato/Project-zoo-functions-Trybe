@@ -200,7 +200,8 @@ const calcNewPrices = (price, perc) => {
 function increasePrices(percentage) {
   // seu código aqui
   Object.keys(prices).forEach((priceKey) => {
-    prices[priceKey] = calcNewPrices(prices[priceKey], percentage)});
+    prices[priceKey] = calcNewPrices(prices[priceKey], percentage);
+  });
 }
 
 // Requisito 13 - employeeCoverage
