@@ -64,23 +64,73 @@ function entryCalculator(entrants) {
   const entrantsEntries = Object.entries(entrants);
   return entrantsEntries.reduce((acc, cur) => acc + prices[cur[0]] * cur[1], 0);
 }
-/* NE: [
-  { lions: [] },
-  { giraffes: [] }
-], */
-// NE: ['lions', 'giraffes'],
-function animalMap(options) {
-  // 'Sem parâmetros, retorna animais categorizados por localização'
-  // 'Com a opção `includeNames: true` especificada, retorna nomes de animais'
-  // 'Com a opção `sorted: true` especificada, retorna nomes de animais ordenados'
-  // 'Com a opção `sex: \'female\'` ou `sex: \'male\'` especificada, retorna somente nomes de animais macho/fêmea'
-  // 'Com a opção `sex: \'female\'` ou `sex: \'male\'` especificada e a opção `sort: true` especificada, retorna somente nomes de animais macho/fêmea com os nomes dos animais ordenados'
-  // 'Só retorna informações ordenadas e com sexo se a opção `includeNames: true` for especificada'
-}
 
-function schedule(dayName) {
-  // seu código aqui
+const getLocations = (array) => {
+  const locations = [];
+  array.forEach((item) => {
+    if (!locations.includes(item.location)) { locations.push(item.location); }
+  });
+  return locations;
+};
+const createEmptyDictionary = (array) => array.reduce((acc, cur) => ({ ...acc, [cur]: [] }), {});
+const populateDictionary = (dict, entries) => {
+  entries.forEach((item) => {
+    const { location } = item; // NE for example
+    dict[location].push(item); // pushes the ENTIRE OBJECT
+  });
+};
+const noName = (animals) => {
+  const animalList = [];
+  animals.forEach(({ name }) => animalList.push(name));
+  return animalList;
+};
+const withName = (animals) => {
+  const animalList = [];
+  animals.forEach(({ name, residents }) => {
+    const xablau = { [name]: [] };
+    residents.forEach(({ name: animalName }) => {
+      xablau[name].push(animalName);
+    });
+    animalList.push(xablau);
+  });
+  return animalList;
+};
+const formatDictionary = (dict, callback) => {
+  const toReturn = {};
+  Object.entries(dict).forEach(([location, animals]) => {
+    toReturn[location] = callback(animals);
+  });
+  return (toReturn);
+};
+const maybeSortNames = (dict, bool) => {
+  if (!bool) return dict;
+};
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters#destructured_parameter_with_default_value_assignment
+function animalMap(options) {
+  const { includeNames = false, sorted = false, sex = false } = options || {};
+  const { animals } = data;
+  const locations = getLocations(animals);
+  const animalsDividedByLocation = createEmptyDictionary(locations);
+  populateDictionary(animalsDividedByLocation, animals);
+  if (!includeNames) return formatDictionary(animalsDividedByLocation, noName);
+  const formattedDict = formatDictionary(animalsDividedByLocation, withName);
+  return (maybeSortNames(formattedDict, sorted));
 }
+const format24HoursToAmPm = (hour) => (hour > 12 ? `${hour - 12}pm` : `${hour}am`);
+
+const message = (open, close) => {
+  if (!(open - close)) return 'CLOSED';
+  return `Open from ${format24HoursToAmPm(open)} until ${format24HoursToAmPm(close)}`;
+};
+
+const schedule = (dayName) => {
+  const { hours } = data;
+  const obj = Object.entries(hours).reduce((acc, [weekday, { open, close }]) =>
+    ({ ...acc, [weekday]: message(open, close) }), ({}));
+  if (typeof dayName === 'undefined') return obj;
+  // https://stackoverflow.com/questions/11508463/javascript-set-object-key-by-variable
+  return { [dayName]: obj[dayName] };
+};
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
