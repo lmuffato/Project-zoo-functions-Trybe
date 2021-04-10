@@ -30,13 +30,17 @@ function animalsOlderThan(animal, age) {
   return output.every((element) => element === true);
 }
 function employeeByName(employeeName) {
-  const name = employeeName.split(' ');
   let output;
-  for (let index = 0; index < name.length; index += 1) {
-    output = employees
-      .filter((element) => (element.firstName || element.lastName) === name[index]);
+  if (employeeName !== undefined) {
+    const name = employeeName.split(' ');
+    for (let index = 0; index < name.length; index += 1) {
+      output = employees
+        .filter((element) => (element.firstName || element.lastName) === name[index]);
+    }
+    output = output.shift();
+  } else {
+    output = {};
   }
-  output = output.shift();
   return output;
 }
 // function createEmployee(personalInfo, associatedWith) {
