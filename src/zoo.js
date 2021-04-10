@@ -66,7 +66,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   if (managers !== undefined) {
     newEmployee.managers = managers;
   } else if (responsibleFor !== undefined) {
-    newEmployee.responsibleFor.push(responsibleFor);
+    newEmployee.responsibleFor = responsibleFor;
   }
   employees.push(newEmployee);
   return newEmployee;
