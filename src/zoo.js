@@ -72,7 +72,7 @@ function animalCount(species) {
   }, {});
   const parameters = (nameAnimals) => {
     let numberAnimals = 0;
-    animals.find((currentValue, index) => {
+    animals.find((currentValue) => {
       if (currentValue.name === nameAnimals) {
         numberAnimals = currentValue.residents.length;
       }
