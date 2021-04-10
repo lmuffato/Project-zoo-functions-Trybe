@@ -35,9 +35,10 @@ function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
 // }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const employee = { id, firstName, lastName, managers, responsibleFor };
+  return employees.push(employee);
+}
 
 function animalCount(species) {
   const fullList = animals.reduce((list, animal) =>
@@ -77,7 +78,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   // isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
