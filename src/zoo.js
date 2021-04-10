@@ -11,7 +11,6 @@ eslint no-unused-vars: [
 const { employees } = require('./data');
 const { animals } = require('./data');
 const { prices } = require('./data');
-const data = require('./data');
 
 function animalsByIds(...ids) {
   const animalID = ids.map((id) => {
