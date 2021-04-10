@@ -90,9 +90,142 @@ function entryCalculator(visitors) {
   return sum;
 }
 
-// function animalMap(options) {
-//   // seu código aqui
-// }
+const arrLocations = [];
+animals.forEach((animal) => arrLocations.push(animal.location));
+const onlyNames = (arr) => {
+  const returned = {};
+  arr.forEach((location) => {
+    const locatedAnimals = animals.filter((item) => item.location === location);
+    const list = [];
+    locatedAnimals.forEach((item) => list.push(item.name));
+    returned[location] = list;
+  });
+  return returned;
+};
+
+const named = (arr) => {
+  const returned = {};
+  arr.forEach((location) => {
+    returned[location] = [];
+    const locatedAnimals = animals.filter((item) => item.location === location);
+    locatedAnimals.forEach((item) => {
+      const list = [];
+      item.residents.forEach((resident) => list.push(resident.name));
+      returned[location].push({ [item.name]: list });
+    });
+  });
+  return returned;
+};
+
+const namedSort = (arr) => {
+  const returned = {};
+  arr.forEach((location) => {
+    returned[location] = [];
+    const locatedAnimals = animals.filter((item) => item.location === location);
+    locatedAnimals.forEach((item) => {
+      const list = [];
+      item.residents.forEach((resident) => list.push(resident.name));
+      returned[location].push({ [item.name]: list.sort() });
+    });
+  });
+  return returned;
+};
+const listedMales = [];
+const listedFemales = [];
+animals.forEach((group) => group.residents.forEach((animal) => {
+  if (animal.sex === 'male') listedMales.push(animal.name);
+  else listedFemales.push(animal.name);
+}));
+console.log(listedFemales);
+const isMaleSorted = (arr) => {
+  const returned = {};
+  arr.forEach((location) => {
+    returned[location] = [];
+    const locatedAnimals = animals.filter((item) => item.location === location);
+    locatedAnimals.forEach((item) => {
+      const list = [];
+      item.residents.forEach((resident) => {
+        if (listedMales.includes(resident.name)) list.push(resident.name);
+      });
+      returned[location].push({ [item.name]: list.sort() });
+    });
+  });
+  return returned;
+};
+
+const isFemaleSorted = (arr) => {
+  const returned = {};
+  arr.forEach((location) => {
+    returned[location] = [];
+    const locatedAnimals = animals.filter((item) => item.location === location);
+    locatedAnimals.forEach((item) => {
+      const list = [];
+      item.residents.forEach((resident) => {
+        if (listedFemales.includes(resident.name)) list.push(resident.name);
+      });
+      returned[location].push({ [item.name]: list.sort() });
+    });
+  });
+  return returned;
+};
+
+const isMale = (arr) => {
+  const returned = {};
+  arr.forEach((location) => {
+    returned[location] = [];
+    const locatedAnimals = animals.filter((item) => item.location === location);
+    locatedAnimals.forEach((item) => {
+      const list = [];
+      item.residents.forEach((resident) => {
+        if (listedMales.includes(resident.name)) list.push(resident.name);
+      });
+      returned[location].push({ [item.name]: list });
+    });
+  });
+  return returned;
+};
+
+const isFemale = (arr) => {
+  const returned = {};
+  arr.forEach((location) => {
+    returned[location] = [];
+    const locatedAnimals = animals.filter((item) => item.location === location);
+    locatedAnimals.forEach((item) => {
+      const list = [];
+      item.residents.forEach((resident) => {
+        if (listedFemales.includes(resident.name)) list.push(resident.name);
+      });
+      returned[location].push({ [item.name]: list });
+    });
+  });
+  return returned;
+};
+
+const chekSexSorted = (obj) => {
+  if (obj === 'male') return isMaleSorted(arrLocations);
+  if (obj === 'female') return isFemaleSorted(arrLocations);
+  return namedSort(arrLocations);
+};
+
+const chekSexNoSorted = (obj) => {
+  if (obj === 'female') return isFemale(arrLocations);
+  if (obj === 'male') return isMale(arrLocations);
+  return named(arrLocations);
+};
+
+const finaleX = ({ includeNames = true, sorted = false, sex = '' }) => {
+  if (sorted) {
+    return chekSexSorted(sex);
+  }
+  return chekSexNoSorted(sex);
+};
+
+function animalMap(obj) {
+  if (obj === undefined || obj.includeNames === false || obj.includeNames === undefined) {
+    return onlyNames(arrLocations);
+  }
+  return finaleX(obj);
+}
 
 function schedule(dayName) {
   const { hours } = data;
@@ -172,7 +305,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
