@@ -139,14 +139,16 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
+const responsavelPorAnimal = (infDoFuncionario) => {
+  const objeto = {};
+  objeto[`${infDoFuncionario.firstName} ${infDoFuncionario.lastName}`]
+     = infDoFuncionario.responsibleFor
+    .map((id) => data.animals
+      .find((animal) => animal.id === id).name);
+  return objeto;
+};
+
 const employeeCoverage = (idOrName) => {
-  const responsavelPorAnimal = (infDoFuncionario) => {
-    const objeto = {};
-    objeto[`${infDoFuncionario.firstName} ${infDoFuncionario.lastName}`] = infDoFuncionario.responsibleFor
-      .map(id => data.animals
-        .find(animal => animal.id === id).name);
-    return objeto;
-  };
   const objeto = {};
   if (idOrName) {
     Object.assign(objeto, responsavelPorAnimal(data.employees
@@ -154,13 +156,12 @@ const employeeCoverage = (idOrName) => {
         (valor.id === idOrName)
         || (valor.firstName === idOrName)
         || (valor.lastName === idOrName)
-        ))));
+      ))));
     return objeto;
   }
   data.employees.forEach((valor1) => {
     Object.assign(objeto, responsavelPorAnimal(valor1));
   });
-
   return objeto;
 };
 
