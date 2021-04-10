@@ -62,13 +62,103 @@ function entryCalculator(entrants) {
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
+// //////////////////////////////////////////////////////////////////////////
 
-// function animalMap(options) {
-//   // seu código aqui
+// const objeto = {
+//   NE: ['leão', 'girafa'],
 // }
+// const array = objeto.NE.reduce((obj, animal) => {
+//   obj[animal] = 'Batata'
+//   return obj;
+// }, {})
+const getSex = (sex) => sex === 'female' || sex === 'male';
+
+const addAnimalsByGenre = (map, { sex, sorted }) => {
+  const obj = map;
+  Object.keys(obj).forEach((el) => {
+    obj[el] = obj[el].map((animal) => {
+      const output = {};
+      if (getSex(sex) && sorted) {
+        output[animal] = animals.find((item) => item.name === animal).residents
+          .filter((element) => element.sex === sex)
+          .map((item2) => item2.name).sort();
+        return output;
+      }
+      output[animal] = animals.find((item) => item.name === animal).residents
+        .filter((element) => element.sex === sex)
+        .map((item2) => item2.name);
+      console.log('passo2');
+      return output;
+    });
+  });
+  return obj;
+};
+
+const addNamesForEachSpecie = (map, { sorted } = false) => {
+  const obj = map;
+  Object.keys(obj).forEach((el) => {
+    obj[el] = obj[el].map((animal) => {
+      const output = {};
+      if (sorted) {
+        output[animal] = animals.find((item) => item.name === animal).residents
+          .map((item2) => item2.name).sort();
+        return output;
+      }
+      output[animal] = animals.find((item) => item.name === animal).residents
+        .map((item2) => item2.name);
+      return output;
+    });
+  });
+  return obj;
+};
+
+const getAnimalsLocation = () => ({
+  NE: animals.filter((el) => el.location === 'NE').map((el) => el.name),
+  NW: animals.filter((el) => el.location === 'NW').map((el) => el.name),
+  SE: animals.filter((el) => el.location === 'SE').map((el) => el.name),
+  SW: animals.filter((el) => el.location === 'SW').map((el) => el.name),
+});
+
+const getAnimalsNamesBySpecies = (options) => {
+  const animalsLocations = getAnimalsLocation();
+  const { sex } = options;
+  if (sex) {
+    const namesOfEachSpecieGenre = addAnimalsByGenre(animalsLocations, options);
+    return namesOfEachSpecieGenre;
+  }
+  const namesOfEachSpecie = addNamesForEachSpecie(animalsLocations);
+  return namesOfEachSpecie;
+};
+
+const getAnimalsNamesBySpeciesSort = (options) => {
+  const animalsLocations = getAnimalsLocation();
+  const { includeNames, sex, sorted } = options;
+  if (includeNames && sex && sorted) return addAnimalsByGenre(animalsLocations, options);
+  const namesOfEachSpecieSort = addNamesForEachSpecie(animalsLocations, options);
+  return namesOfEachSpecieSort;
+};
+
+const checkOptions = (options) => !options || !options.includeNames;
+
+function animalMap(options) {
+  if (checkOptions(options)) return getAnimalsLocation();
+  const { includeNames, sorted } = options;
+  if (includeNames && sorted) return getAnimalsNamesBySpeciesSort(options);
+  if (includeNames) return getAnimalsNamesBySpecies(options);
+}
+
+const options = { includeNames: true, sex: 'female', sorted: true };
+console.log(animalMap(options));
+
+// reduce((item, anm) => {
+// item[anm] = 'batata';
+// return item;
+// }, {});
 
 // function schedule(dayName) {
-//   // seu código aqui
+//   if (dayName === undefined) {
+//     return Object.entries(hours).
+//   }
 // }
 
 // function oldestFromFirstSpecies(id) {
@@ -87,7 +177,7 @@ module.exports = {
   entryCalculator,
   // schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
