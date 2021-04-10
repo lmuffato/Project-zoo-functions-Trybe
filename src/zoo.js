@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 const { animals } = require('./data');
 const { employees } = require('./data');
-const { managers } = require('./data');
+const { allManagers } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -51,13 +51,20 @@ function createEmployee(personalInfo, associatedWith) {
   return pF;
 }
 function isManager(id) {
-  const output = managers.map((element) => element === id);
+  const output = allManagers.map((element) => element === id);
   return output.includes(true);
 }
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
-
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  employees.push(newEmployee);
+}
+// cara eu to com muito sono
 // function animalCount(species) {
 //   // seu código aqui
 // }
@@ -94,7 +101,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
