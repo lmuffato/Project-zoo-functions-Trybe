@@ -37,7 +37,7 @@ function employeeByName(employeeName) {
     output = employees
       .filter((element) => (element.firstName || element.lastName) === name[index]);
   }
-  return output;
+  return output.shift();
 }
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
