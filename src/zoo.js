@@ -157,20 +157,22 @@ const names = (array) => {
   return obj;
 };
 
-const animalsFilteredSex = (keys, sex, sorted) => {
-  if (sorted) {
+const animalsFiltered = (keys, sorted, sex) => {
+  if (sorted && sex) {
     return namesSexSorted(keys, sex);
-  };
-  return namesSex(keys, sex);
-}
+  }
+  if (sorted) return namesSorted(keys);
+  if (sex) {
+    return namesSex(keys, sex);
+  }
+  return names(keys);
+};
 
 function animalMap(options) {
   const keys = ['NE', 'NW', 'SE', 'SW'];
   if (!options || !options.includeNames) return none(keys);
-  if (options.includeNames) {
-    if (options.sorted) return namesSorted(keys);
-    return names(keys);
-  }
+  const { sex = false, sorted = false } = options;
+  return animalsFiltered(keys, sorted, sex);
 }
 
 function schedule(dayName) {
