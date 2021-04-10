@@ -136,7 +136,7 @@ const getSpeciesAndNames = (options, locations) => {
       incrementsObj(locations, animal, nameResidents);
     }
   });
-}
+};
 
 function animalMap(options) {
   // seu código aqui
@@ -180,7 +180,7 @@ function oldestFromFirstSpecies(id) {
 
   const findOldest = animals.find(({ id: animalId }) =>
     animalId === firstAnimalId).residents.reduce((oldest, crr) =>
-    oldest.age > crr.age ? oldest : crr);
+    (oldest.age > crr.age ? oldest : crr));
 
   const { name, sex, age } = findOldest;
 
@@ -188,8 +188,12 @@ function oldestFromFirstSpecies(id) {
 }
 
 // Requisito 12 - increasePrices
-const roundValue = (price) => price = Math.round(price * 100) / 100; // Ideia retirada do código do Lucas Pedroso (Turma 10-A)
-const calcNewPrices = (price, perc) => roundValue(price += price * perc * 0.01);
+const roundValue = (price) => Math.round(price * 100) / 100; // Ideia retirada do código do Lucas Pedroso (Turma 10-A)
+
+const calcNewPrices = (price, perc) => {
+  const value = price += price * perc * 0.01;
+  return roundValue(value);
+}
 
 function increasePrices(percentage) {
   // seu código aqui
@@ -207,7 +211,8 @@ const getEmployee = (info) =>
   employees.find(({ id, firstName, lastName }) =>
     info === firstName || info === lastName || info === id);
 
-const buildObj = ({ firstName, lastName, responsibleFor }, list) => {
+const buildObj = ({ firstName, lastName, responsibleFor }, listAnimals) => {
+  const list = listAnimals;
   list[`${firstName} ${lastName}`] = getAnimalName(responsibleFor);
   return list;
 };
