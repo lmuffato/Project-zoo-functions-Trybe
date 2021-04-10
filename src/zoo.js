@@ -62,26 +62,6 @@ const animalCount = (species) => {
 const entryCalculator = ({ Adult = 0, Child = 0, Senior = 0 } = 0) =>
   Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
 
-// function animalMap(options) {
-//   // seu código aqui
-// }
-
-// function schedule(dayName) {
-//   // seu código aqui
-// }
-
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
-
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
-
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
-
 module.exports = {
   entryCalculator,
   // schedule,
