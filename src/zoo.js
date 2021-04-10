@@ -139,9 +139,30 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+const employeeCoverage = (idOrName) => {
+  const responsavelPorAnimal = (infDoFuncionario) => {
+    const objeto = {};
+    objeto[`${infDoFuncionario.firstName} ${infDoFuncionario.lastName}`] = infDoFuncionario.responsibleFor
+      .map(id => data.animals
+        .find(animal => animal.id === id).name);
+    return objeto;
+  };
+  const objeto = {};
+  if (idOrName) {
+    Object.assign(objeto, responsavelPorAnimal(data.employees
+      .find(valor => (
+        (valor.id === idOrName)
+        || (valor.firstName === idOrName)
+        || (valor.lastName === idOrName)
+        ))));
+    return objeto;
+  }
+  data.employees.forEach((valor1) => {
+    Object.assign(objeto, responsavelPorAnimal(valor1));
+  });
+
+  return objeto;
+};
 
 module.exports = {
   entryCalculator,
@@ -150,7 +171,7 @@ module.exports = {
   animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
