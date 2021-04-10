@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, hours, prices } = require('./data');
+const { animals, employees, prices } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -57,9 +57,12 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // }
 
 //  função implementada baseada na forma feita no repositório do Jodiel - https://github.com/tryber/sd-010-a-project-zoo-functions/pull/106
-function entryCalculator(entrants) {
-  const {Adult, Senior, Child} = prices;
+
+const noEntrants = () => {
   if (!entrants || entrants.length === 0) return 0;
+}
+function entryCalculator(entrants) {
+  noEntrants;
   const keys = Object.keys(entrants);
   const value = Object.values(entrants);
   let total = 0;
