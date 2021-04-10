@@ -12,9 +12,26 @@ eslint no-unused-vars: [
 const { animals, employees, prices } = require('./data');
 const data = require('./data');
 
-// function animalsByIds(ids) {
+function animalsByIds(...ids) {
+  if (ids.length === 0) return [];
 
-// }
+  const arrSpecies = [];
+
+  if (ids.length === 1) {
+    arrSpecies.push(animals.find((animal) => animal.id === ids[0]));
+    return arrSpecies;
+  }
+
+  animals.forEach((species) => {
+    ids.forEach((id) => {
+      if (id === species.id) {
+        arrSpecies.push(species);
+      }
+    });
+  });
+
+  return arrSpecies;
+}
 
 function animalsOlderThan(animal, age) {
   const findAnimalName = animals.find((animalSpecie) => animalSpecie.name === animal);
@@ -93,7 +110,7 @@ function entryCalculator(entrants) {
   });
   return childPrice + adultPrice + seniorPrice;
 }
-console.log(entryCalculator({ Child: 0, Senior: 0, Adult: 1 }));
+
 // function animalMap(options) {
 //   // seu código aqui
 // }
@@ -119,7 +136,7 @@ module.exports = {
   // schedule,
   animalCount,
   // animalMap,
-  // animalsByIds,
+  animalsByIds,
   employeeByName,
   // employeeCoverage,
   addEmployee,
