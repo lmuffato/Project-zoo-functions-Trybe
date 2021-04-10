@@ -12,15 +12,15 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  if (!ids) return [];
   return data.animals.filter((item) => ids.includes(item.id));
 }
 
-/* function animalsOlderThan(animal, age) {
-  // seu código aqui
+function animalsOlderThan(nomeAnimal, idade) {
+  const verificarAnimal = data.animals.find(({ name }) => name === nomeAnimal);
+  return verificarAnimal.residents.every(({ age }) => age > idade);
 }
 
-function employeeByName(employeeName) {
+/* function employeeByName(employeeName) {
   // seu código aqui
 }
 
@@ -65,17 +65,17 @@ function employeeCoverage(idOrName) {
 } */
 
 module.exports = {
-/*   entryCalculator,
-  schedule,
-  animalCount,
-  animalMap, */
+  /* entryCalculator, */
+  /* schedule, */
+  /* animalCount, */
+  /* animalMap, */
   animalsByIds,
-/*   employeeByName,
-  employeeCoverage,
-  addEmployee,
-  isManager,
+  /* employeeByName, */
+  /* employeeCoverage, */
+  /* addEmployee, */
+  /* isManager, */
   animalsOlderThan,
-  oldestFromFirstSpecies,
-  increasePrices,
-  createEmployee, */
+  /* oldestFromFirstSpecies, */
+  /* increasePrices, */
+  /* createEmployee, */
 };
