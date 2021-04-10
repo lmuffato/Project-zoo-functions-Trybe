@@ -8,10 +8,9 @@ eslint no-unused-vars: [
   }
 ]
 */
-
 const { animals } = require('./data');
 const { employees } = require('./data');
-// const data = require('./data');
+const data = require('./data');
 
 function animalsByIds(...ids) {
   const result = [];
@@ -37,7 +36,8 @@ function employeeByName(employeeName) {
     output = employees
       .filter((element) => (element.firstName || element.lastName) === name[index]);
   }
-  return output.shift();
+  output = output.shift();
+  return output;
 }
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
