@@ -34,8 +34,6 @@ function employeeByName(employeeName) {
   return resposta;
 }
 
-// console.log(employeeByName('Wishart'));
-
 function createEmployee(personalInfo, associatedWith) {
   // 4- seu código aqui
   return { ...personalInfo, ...associatedWith };
@@ -80,9 +78,33 @@ function entryCalculator(entrants) {
   return total;
 }
 
-// function animalMap(options) {
-//   // seu código aqui
-// }
+
+function animalMap(options) {
+  const animalPorresidencia = (animal, sorted, sex) => {
+    const obj = {};
+
+    obj[animal] = data.animals.find(valor => valor.name === animal).residents;
+
+    if (sex) obj[animal] = obj[animal].filter(bichos => bichos.sex === sex);
+
+    obj[animal] = obj[animal].map(valor => valor.name);
+
+    if (sorted) obj[animal].sort();
+      return obj;
+  };
+  
+  const { includeNames, sex, sorted } = options;
+  const objeto = {};
+  data.animals.forEach((valor1) => {
+    objeto[valor1.location] = data.animals.filter((valor2) => valor2.location === valor1.location).map((valor3) => {
+      if (!includeNames) {return valor3.name;}
+        return animalPorresidencia(valor3.name, sorted, sex);
+      });
+  });
+  return objeto;
+}
+// options = {  includeNames: true, sex: 'female', sorted: true  }
+// console.log(animalMap(options));
 
 // function schedule(dayName) {
 //   // seu código aqui
@@ -118,7 +140,7 @@ module.exports = {
   entryCalculator,
   // schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
