@@ -331,4 +331,5 @@ module.exports = {
     Senior: 24.99,
     Child: 20.99,
   },
+  managers: [stephanieId, olaId, burlId],
 };
