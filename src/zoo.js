@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 // dica para desestruturar objetos vindos de outro arquivo obtida no plantão da Joicy
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 // fiz esse código com ajuda da Elisa França
 function animalsByIds(...ids) {
   if (ids === null) return [];
@@ -78,14 +78,24 @@ function entryCalculator(entrants) {
     .map(([chave, valor]) => valor * prices[chave]) // map retornando um array contendo a multiplicação do número de pessoas informado no parâmetro pelo valor contido em prices de acordo com a chave obtida no parâmetro [49.99, 24.99]
     .reduce((acc, curr) => acc + curr); // reduce no array retorna o valor do somatório de cada índice 74,98
 }
-console.log(entryCalculator({ Adult: 1, Senior: 1 }));
+
 // function animalMap(options) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+const getWeek = (dayName) => (acc, [key, value]) => {
+  if (dayName === undefined || dayName === key) {
+    acc[key] = value.open !== 0
+      ? `Open from ${value.open}am until ${value.close - 12}pm`
+      : 'CLOSED';
+  }
+  return acc;
+};
+// código feito baseado no pull request do Lucas Pedroso. Pude lembrar a importância de separar as funções em outras menores.
+function schedule(dayName) {
+  return Object.entries(hours).reduce(getWeek(dayName), {});
+}
+console.log(schedule());
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqu
@@ -101,7 +111,7 @@ console.log(entryCalculator({ Adult: 1, Senior: 1 }));
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
