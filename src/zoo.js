@@ -53,7 +53,7 @@ function isManager(id) {
     if (managerList.every((manager) =>
       managers.every((managerTest) =>
         manager !== managerTest))) {
-          managerList.push(...managers);
+      managerList.push(...managers);
     }
   });
 
@@ -77,7 +77,7 @@ function animalCount(species) {
   if (species === undefined) {
     const finalObj = {};
     animals.forEach(({ name, residents }) => {
-      finalObj[name] = residents.length
+      finalObj[name] = residents.length;
     });
 
     return finalObj;
@@ -106,14 +106,14 @@ const getLocations = () => {
     }
   });
   return locationsObj;
-}
+};
 
 const getSpecies = (locationsObj) => {
   animals.forEach(({ name, location }) => {
     locationsObj[location].push(name);
   });
   return locationsObj;
-}
+};
 
 const getNameResidents = ({ sex }, { residents }) => {
   if (sex !== undefined) {
@@ -121,11 +121,11 @@ const getNameResidents = ({ sex }, { residents }) => {
       resident.sex === sex).map(({ name }) => name);
   }
   return residents.map(({ name }) => name);
-}
+};
 
 function animalMap(options) {
   // seu código aqui
-  let locations = getLocations();
+  const locations = getLocations();
 
   if (options === undefined || !options.includeNames) return getSpecies(locations);
 
@@ -145,26 +145,24 @@ function animalMap(options) {
 
 function schedule(dayName) {
   // seu código aqui
-  const scheduleInfo = {};
+  const info = {};
 
   if (dayName === undefined) {
-  Object.keys(hours).forEach((day) => {
-    if (day === 'Monday') {
-      scheduleInfo[day] = `CLOSED`;
-    } else {
-      scheduleInfo[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
-    }
-  });
+    Object.keys(hours).forEach((day) => {
+      if (day === 'Monday') {
+        info[day] = `CLOSED`;
+      } else {
+        info[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+      }
+    });
 
+  } else if (dayName === 'Monday') {
+      info[dayName] = 'CLOSED';
   } else {
-    if (dayName === 'Monday') {
-      scheduleInfo[dayName] = `CLOSED`;
-    } else {
-    scheduleInfo[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
-    }
+    info[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
   }
 
-  return scheduleInfo;
+  return info;
 }
 
 /* function oldestFromFirstSpecies(id) {
