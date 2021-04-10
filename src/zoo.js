@@ -151,11 +151,13 @@ function animalMap(options) {
 }
 
 const showInfo = (day, info) => {
+  const infoDay = info;
   if (day === 'Monday') {
-    info[day] = 'CLOSED';
+    infoDay[day] = 'CLOSED';
   } else {
-    info[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+    infoDay[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
   }
+  return infoDay;
 };
 
 function schedule(dayName) {
@@ -191,14 +193,14 @@ function oldestFromFirstSpecies(id) {
 const roundValue = (price) => Math.round(price * 100) / 100; // Ideia retirada do código do Lucas Pedroso (Turma 10-A)
 
 const calcNewPrices = (price, perc) => {
-  const value = price += price * perc * 0.01;
+  const value = price + price * perc * 0.01;
   return roundValue(value);
-}
+};
 
 function increasePrices(percentage) {
   // seu código aqui
-  Object.keys(prices).forEach((priceKey) =>
-    prices[priceKey] = calcNewPrices(prices[priceKey], percentage));
+  Object.keys(prices).forEach((priceKey) => {
+    prices[priceKey] = calcNewPrices(prices[priceKey], percentage)});
 }
 
 // Requisito 13 - employeeCoverage
