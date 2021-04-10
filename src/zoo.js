@@ -13,6 +13,7 @@ const data = require('./data');
 
 const { animals } = data;
 const { employees } = data;
+const { hours } = data;
 const { prices } = data;
 
 function animalsByIds(...ids) {
@@ -156,9 +157,48 @@ function animalMap(options = false) {
   return obj;
 }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+const hourAmericanFormat = (hour) => {
+  const parsedHour = parseInt(hour, 10);
+  if (parsedHour < 12) {
+    return `${parsedHour}am`;
+  }
+  return `${parsedHour - 12}pm`;
+};
+
+const generateObjSchedule = (day, obj) => {
+  const phrase1 = `Open from ${hourAmericanFormat(hours[day].open)}`;
+  const phrase2 = ` until ${hourAmericanFormat(hours[day].close)}`;
+  let fullPhrase = phrase1 + phrase2;
+  if (hours[day].open === 0 && hours[day].close === 0) {
+    fullPhrase = 'CLOSED';
+  }
+  return {
+    ...obj,
+    [day]: fullPhrase,
+  };
+};
+
+const scheduleWithoutArgs = () => {
+  let obj = {};
+  Object.keys(hours)
+    .forEach((day) => {
+      obj = { ...obj, ...generateObjSchedule(day) };
+    });
+  return obj;
+};
+
+const scheduleWithArg = (dayname) => {
+  let obj = {};
+  obj = generateObjSchedule(dayname);
+  return obj;
+};
+
+function schedule(dayName = false) {
+  if (!dayName) {
+    return scheduleWithoutArgs();
+  }
+  return scheduleWithArg(dayName);
+}
 
 function oldestFromFirstSpecies(id = false) {
   const idFunc = employees.find((employee) => employee.id === id).responsibleFor[0];
@@ -207,7 +247,7 @@ employeeCoverage();
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   animalMap,
   animalsByIds,
