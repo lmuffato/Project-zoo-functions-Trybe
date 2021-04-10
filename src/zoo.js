@@ -9,16 +9,20 @@ eslint no-unused-vars: [
 ]
 */
 
+const { animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  const filteredById = data.animals.filter((animal, index) => (animal.id === ids[index]));
+  const filteredById = animals.filter((animal, index) => (animal.id === ids[index]));
   return filteredById;
 }
 
-// function animalsOlderThan(animal, age) {
-//   // seu código aqui
-// }
+function animalsOlderThan(animal, age) {
+  // Esta função, a partir do nome de uma espécie e uma idade mínima, verifica se todos os animais daquela espécie possuem a idade mínima especificada
+  const selectedAnimal = animals.find((eachAnimal) => eachAnimal.name === animal);
+  const checkAges = selectedAnimal.residents.every((resident) => (resident.age >= age));
+  return checkAges;
+}
 
 // function employeeByName(employeeName) {
 //   // seu código aqui
@@ -74,7 +78,7 @@ module.exports = {
   // employeeCoverage,
   // addEmployee,
   // isManager,
-  // animalsOlderThan,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
