@@ -102,20 +102,83 @@ const formatDictionary = (dict, callback) => {
   });
   return (toReturn);
 };
-const maybeSortNames = (dict, bool) => {
-  if (!bool) return dict;
+const alphabeticallyCriteria = (elemA, elemB) => {
+  if (elemA > elemB) return 1;
+  if (elemA < elemB) return -1;
+  return 0;
 };
+// const sexCriteria = (sex) => (resident) => resident.sex === sex;
+
+const maybeSortNames = (dict, arg) => {
+  if (!arg) return dict;
+  const toReturn = JSON.parse(JSON.stringify(dict));
+  Object.entries(toReturn).forEach(([location, arrayOfAnimals]) => {
+    arrayOfAnimals.forEach(({ residents }) => {
+      // The object I'm modifying below lives in this scope, there no problem modifying it
+      // eslint-disable-next-line no-param-reassign
+      residents.sort((a, b) => alphabeticallyCriteria(a.name, b.name));
+    });
+  });
+  return toReturn;
+};
+// https://stackoverflow.com/questions/37318808/what-is-the-in-place-alternative-to-array-prototype-filter
+function filterInPlace(a, callback) {
+  let j = 0;
+  a.forEach((e, i) => {
+    if (callback.call(null, e, i, a)) {
+      // eslint-disable-next-line no-param-reassign
+      if (i !== j) a[j] = e;
+      j += 1;
+    }
+  });
+
+  // eslint-disable-next-line no-param-reassign
+  a.length = j;
+  return a;
+}
+const maybeFilterAnimals = (dict, arg) => {
+  if (!arg) return dict;
+  const toReturn = JSON.parse(JSON.stringify(dict));
+  Object.entries(toReturn).forEach(([location, arrayOfAnimals]) => {
+    arrayOfAnimals.forEach(({ residents }) => {
+      // The object I'm modifying below lives in this scope, there no problem modifying it
+      // eslint-disable-next-line no-param-reassign
+      residents = filterInPlace(residents, (resident) => resident.sex === arg);
+    });
+  });
+  return toReturn;
+};
+
+// const sortAnimalsByName = (dict, sortingMethod) => dict.sort(sortingMethod);
+// const filterAnimalsBySex = (dict, sexData) => dict.filter(sexCriteria(sexData));
+/* const maybeDo = (bool, callback, arg, dict) => {
+  if (!arg) return dict;
+  const toReturn = { ...dict };
+  Object.entries(toReturn).forEach(([_, arrayOfAnimals]) => {
+    arrayOfAnimals.forEach(({ residents }) => {
+      // The object I'm modifying below lives in this scope, there no problem modifying it
+      // eslint-disable-next-line no-param-reassign
+      residents = callback(residents, arg);
+    });
+  });
+  return toReturn;
+}; */
+
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters#destructured_parameter_with_default_value_assignment
-function animalMap(options) {
-  const { includeNames = false, sorted = false, sex = false } = options || {};
+function animalMap({ includeNames = false, sorted = false, sex = false } = {}) {
+  // const { includeNames = false, sorted = false, sex = false } = options || {};
   const { animals } = data;
   const locations = getLocations(animals);
   const animalsDividedByLocation = createEmptyDictionary(locations);
   populateDictionary(animalsDividedByLocation, animals);
   if (!includeNames) return formatDictionary(animalsDividedByLocation, noName);
-  const formattedDict = formatDictionary(animalsDividedByLocation, withName);
-  return (maybeSortNames(formattedDict, sorted));
-}
+  const obj1 = maybeFilterAnimals(animalsDividedByLocation, sex);
+  const obj2 = maybeSortNames(obj1, sorted);
+  const obj3 = formatDictionary(obj2, withName);
+  return obj3;
+  // return (formatDictionary(maybeDo(filterAnimalsBySex, sex, maybeDo), withName));
+}// format, maybe filter, maybe sort
+animalMap({ includeNames: true, sex: 'female', sorted: true });
 const format24HoursToAmPm = (hour) => (hour > 12 ? `${hour - 12}pm` : `${hour}am`);
 
 const message = (open, close) => {
