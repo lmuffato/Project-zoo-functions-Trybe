@@ -82,9 +82,19 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// function increasePrices(percentage) {
+function increasePrices(percentage) {
+  const calculeteThePercentage = (price) => (price / 100) * percentage + price;
+  const round = (number) => Math.round(number * 100) / 100;
+  const { Adult, Senior, Child } = prices;
 
-// }
+  const newPriceAdult = calculeteThePercentage(Adult);
+  const newPriceSenior = calculeteThePercentage(Senior);
+  const newPriceChild = calculeteThePercentage(Child);
+
+  prices.Adult = round(newPriceAdult);
+  prices.Senior = round(newPriceSenior);
+  prices.Child = round(newPriceChild);
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -102,6 +112,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
