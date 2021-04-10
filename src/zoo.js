@@ -39,10 +39,12 @@ function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
 // }
 
-// function animalCount(species) {
-//   // seu código aqui
-// }
-
+function animalCount(species) {
+  const fullList = animals.reduce((list, animal) =>
+    ({ ...list, [animal.name]: animal.residents.length }), {});
+  const onlySpecies = animals.find((animal) => animal.name === species);
+  return species === undefined ? fullList : onlySpecies.residents.length;
+}
 // function entryCalculator(entrants) {
 //   // seu código aqui
 // }
@@ -70,7 +72,7 @@ function createEmployee(personalInfo, associatedWith) {
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
