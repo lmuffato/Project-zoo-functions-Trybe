@@ -75,11 +75,86 @@ function entryCalculator(entrant = false) {
     : (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
-// function animalMap(options = false) {
+const withoutArgs = () => {
+  let obj = {};
+  const regions = animals.map((animal) => animal.location);
+  regions.forEach((region) => {
+    const listAnimals = animals
+      .filter((animal) => animal.location === region).map((animal) => animal.name);
+    obj = { ...obj, ...{ [region]: listAnimals } };
+  });
+  return obj;
+};
 
-// }
+const withName = () => {
+  let obj = {};
+  const locations = animals.reduce((acc, cur) => (acc.includes(cur.location)
+    ? acc
+    : acc.concat(cur.location)), []);
+  locations.forEach((location) => {
+    const content = animals.filter(({ location: loc }) => loc === location)
+      .map((animal) => ({ [animal.name]: animal.residents
+        .map((ind) => ind.name) }));
+    obj = { ...obj, ...{ [location]: content } };
+  });
+  return obj;
+};
 
-// console.log(animalMap();
+const orderObjectByName = (myObj, includeNames = false, sorted) => {
+  let objOrdened;
+  if (includeNames && sorted) {
+    Object.keys(myObj).forEach((region) => {
+      myObj[region].forEach((animal) => {
+        objOrdened = animal;
+        Object.keys(animal).forEach((objKey) => {
+          objOrdened[objKey] = objOrdened[objKey].sort();
+        });
+      });
+    });
+  }
+};
+
+const sexComplement = (myObj, region, sorted, sex) => {
+  myObj[region].forEach((animal) => {
+    const onlySex = animal;
+    const nameAnimal = Object.keys(animal)[0];
+    let selectOnlySex = animals.filter(({ name }) => name === nameAnimal)
+      .map((an) => an.residents)[0]
+      .filter((resident) => resident.sex === sex)
+      .map((resident) => resident.name);
+    selectOnlySex = sorted
+      ? selectOnlySex.sort()
+      : selectOnlySex;
+    onlySex[nameAnimal] = selectOnlySex;
+  });
+};
+
+const showSex = (myObj, includeNames = false, sex = false, sorted) => {
+  if (sex && includeNames) {
+    Object.keys(myObj).forEach((region) => {
+      sexComplement(myObj, region, sorted, sex);
+    });
+  }
+};
+
+// Estudei bastante o códifo do Murilo para resolver essa questão,
+// conforme o link a seguir:
+// https://github.com/tryber/sd-010-a-project-zoo-functions/pull/108/
+function animalMap(options = false) {
+  const includeNames = !!options.includeNames;
+  const sorted = !!options.sorted;
+  const sex = options.sex ? options.sex : null;
+  let obj = {};
+
+  if (includeNames) {
+    obj = withName();
+  } else {
+    return withoutArgs();
+  }
+  orderObjectByName(obj, includeNames, sorted);
+  showSex(obj, includeNames, sex, sorted);
+  return obj;
+}
 
 // function schedule(dayName) {
 //   // seu código aqui
@@ -134,7 +209,7 @@ module.exports = {
   entryCalculator,
   // schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,

@@ -1,0 +1,16 @@
+{
+  "NE": [
+    { "lions": ["Zena", "Maxwell", "Faustino", "Dee"] },
+    { "giraffes": ["Gracia", "Antone", "Vicky", "Clay", "Arron", "Bernard"] }
+  ],
+  "NW": [
+    { "tigers": ["Shu", "Esther"] },
+    { "bears": ["Hiram", "Edwardo", "Milan"] },
+    { "elephants": ["Ilana", "Orval", "Bea", "Jefferson"] }
+  ],
+  "SE": [
+    { "penguins": ["Joe", "Tad", "Keri", "Nicholas"] },
+    { "otters": ["Neville", "Lloyd", "Mercedes", "Margherita"] }
+  ],
+  "SW": [{ "frogs": ["Cathey", "Annice"] }, { "snakes": ["Paulette", "Bill"] }]
+}
