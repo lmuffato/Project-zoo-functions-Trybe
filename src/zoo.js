@@ -91,7 +91,7 @@ function animalCount(species) {
   return getAnimal.residents.length;
 }
 
-// function entryCalculator(entrants) {
+function entryCalculator(entrants) {
 //   if ((entrants === undefined) || Object.keys(entrants).length === 0) return 0;
 //   let childPrice = 0;
 //   let adultPrice = 0;
@@ -109,7 +109,7 @@ function animalCount(species) {
 //     }
 //   });
 //   return childPrice + adultPrice + seniorPrice;
-// }
+}
 
 // function animalMap(options) {
 //   // seu código aqui
