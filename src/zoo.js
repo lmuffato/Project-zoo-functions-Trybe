@@ -14,6 +14,7 @@ const { animals, employees, prices, hours } = require('./data');
 function animalsByIds(...ids) {
   return ids.map((ID) => animals.find(({ id }) => id.includes(ID)));
 }
+// console.log(animalsByIds('ef3778eb-2844-4c7c-b66c-f432073e1c6b', '89be95b3-47e4-4c5b-b687-1fabf2afa274'));
 
 function animalsOlderThan(animal, age) {
   return animals.find((especie) => especie.name === animal).residents
@@ -90,7 +91,7 @@ function oldestFromFirstSpecies(id) {
     .sort((animal1, animal2) => animal2.age - animal1.age)[0];
   return [searchAnimal.name, searchAnimal.sex, searchAnimal.age];
 }
-console.log(oldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+// console.log(oldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 // function increasePrices(percentage) {
 //   // seu código aqui
