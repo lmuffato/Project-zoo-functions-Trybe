@@ -62,32 +62,37 @@ function animalCount(species) {
 }
 console.log(animalCount('lions'));
 
-// // function entryCalculator(entrants) {
-// //   // seu código aqui
-// // }
+function entryCalculator(entrants) {
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
+  const { Adult, Senior, Child } = data.prices;
+  const { Adult: Adulto = 0, Senior: Vovo = 0, Child: Crianca = 0 } = entrants;
+  return Adult * Adulto + Senior * Vovo + Child * Crianca;
+}
 
-// // function animalMap(options) {
-// //   // seu código aqui
-// // }
+entryCalculator();
 
-// // function schedule(dayName) {
-// //   // seu código aqui
-// // }
+// function animalMap(options) {
+//   // seu código aqui
+// }
 
-// // function oldestFromFirstSpecies(id) {
-// //   // seu código aqui
-// // }
+// function schedule(dayName) {
+//   // seu código aqui
+// }
 
-// // function increasePrices(percentage) {
-// //   // seu código aqui
-// // }
+// function oldestFromFirstSpecies(id) {
+//   // seu código aqui
+// }
 
-// // function employeeCoverage(idOrName) {
-// //   // seu código aqui
-// // }
+// function increasePrices(percentage) {
+//   // seu código aqui
+// }
+
+// function employeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
