@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees } = require('./data');
+const { animals, employees, hours, prices } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -48,41 +48,52 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   if (species === undefined) {
-    return animals.reduce((total, currenct) => { total[currenct.name] = currenct.residents.length;
+    return animals.reduce((total, current) => {
+      total[current.name] = current.residents.length;
       return total;
     }, {});
   }
-
   return animals.find(({ name }) => name === species).residents.length;
 }
 
 // function entryCalculator(entrants) {
-//   // seu código aqui
+//   const {Adult, Senior, Child} = prices;
+//   if (!entrants || entrants.length === 0) return 0;
+//   let price1 = prices.filter(({ Adult }) => Adult * 49.99);
+//   let price2 = prices.filter(({ Senior }) => Senior * 24.99);
+//   let price3 = prices.filter(({ Child }) => Child * 20.99);
+//   return (price1 + price2 + price3);
+//   // passar par de valor para arrays aparte, multiplicar o numero pelo preço e somar ao total
 // }
 
 // function animalMap(options) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+function schedule(dayName) {
+  // if (!dayName) return hours;
+  console.log(`${key}: 'Open from ${}am until ${}pm' ` {hours.key}
+}
 
 // function oldestFromFirstSpecies(id) {
-//   // seu código aqui
+// identifica responsibleFor do funcionario 
+// na tabela animals identifica o id correspondente
+// e pesquisa nos residents o age máximo e o sexo
 // }
 
 // function increasePrices(percentage) {
-//   // seu código aqui
+// pega tabela prices e traz os valores de volta 
+// price += price * percentage /100
 // }
 
 // function employeeCoverage(idOrName) {
-//   // seu código aqui
+// se vazio, traz employees;
+// pesquisa id, firstName e lastName e traz responsibleFor
 // }
 
 module.exports = {
   // entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
