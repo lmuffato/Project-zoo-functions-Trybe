@@ -59,11 +59,12 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     id,
     firstName,
     lastName,
-    managers,
-    responsibleFor,
+    managers: [],
+    responsibleFor: [],
   };
+  newEmployee.managers.push(managers);
+  newEmployee.responsibleFor.push(responsibleFor);
   employees.push(newEmployee);
-  return [];
 }
 // cara eu to com muito sono
 // function animalCount(species) {
