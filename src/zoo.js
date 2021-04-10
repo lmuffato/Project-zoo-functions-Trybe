@@ -48,9 +48,10 @@ function animalCount(species) {
     acc[currentAnimal.name] = currentAnimal.residents.length;
     return acc;
   }, {});
-  if (species) {
-    return allAnimals[species];
+  if (!species) {
+    return allAnimals;
   }
+  return allAnimals[species];
 }
 // console.log(animalCount('bears'));
 
