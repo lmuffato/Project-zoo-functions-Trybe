@@ -116,17 +116,15 @@ function schedule(dayName) {
 
 // Requisito 11
 
-// function oldestFromFirstSpecies(id) {
-//   if (id === undefined) return 'Imposivil fazer a busca';
-//   const funcionario = employees.find((item) => item.id === id).managers;
-//   console.log(funcionario[0]);
-//   console.log(funcionario[1]);
-//   const teste = animals.find
+function oldestFromFirstSpecies(id) {
+  const funcionario = employees.find((item) => item.id === id).responsibleFor[0];
+  const animalBuscado = animals.find((item) => item.id === funcionario);
+  const { residents } = animalBuscado;
+  const oldAnimal = residents.sort((a, b) => b.age - a.age)[0];
+  const { name, sex, age } = oldAnimal;
 
-//   return teste;
-// }
-
-// console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+  return [name, sex, age];
+}
 
 // Requisito 12
 
@@ -175,7 +173,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
