@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -61,13 +61,86 @@ function entryCalculator(entrants) {
     : totalPrice());
 }
 
+// ANIMAL MAP //
+
 // function animalMap(options) {
-//   // seu código aqui
+//   const newObj = {
+//     NE: [],
+//     NW: [],
+//     SE: [],
+//     SW: [],
+//   };
+//   const noParam = () => {
+//     animals.forEach((animal) => {
+//       animal.location === 'NE' ? newObj.NE.push(animal.name)
+//       : animal.location === 'NW' ? newObj.NW.push(animal.name)
+//       : animal.location === 'SE' ? newObj.SE.push(animal.name)
+//       : newObj.SW.push(animal.name);
+//     });
+//     return newObj;
+//   };
+//   const withParam = () => {
+//     const { includeNames = false, sex = 'none', sorted = false } = options;
+
+//     const namedAnimal = (animal) => {
+//       const animalResidents = [];
+//       if (sex === 'none') {
+//         animal.residents.forEach((resident) => animalResidents.push(resident.name));
+//       }
+//       if (sex === 'female') {
+//         animal.residents.forEach((resident) => {
+//           if (resident.sex === 'female') {
+//             animalResidents.push(resident.name);
+//           }
+//         });
+//       }
+//       if (sex === 'male') {
+//         animal.residents.forEach((resident) => {
+//           if (resident.sex === 'male') {
+//             animalResidents.push(resident.name);
+//           }
+//         });
+//       }
+//       return (sorted === false ? { [animal.name]: animalResidents }
+//         : { [animal.name]: animalResidents.sort() });
+//     };
+
+//     if (includeNames === false) {
+//       return noParam();
+//     }
+
+//     if (includeNames === true) {
+//       animals.forEach((animal) => {
+//         animal.location === 'NE' ? newObj.NE.push(namedAnimal(animal))
+//         : animal.location === 'NW' ? newObj.NW.push(namedAnimal(animal))
+//         : animal.location === 'SE' ? newObj.SE.push(namedAnimal(animal))
+//         : newObj.SW.push(namedAnimal(animal));
+//       });
+//     }
+
+//     return newObj;
+//   };
+//   return (options === undefined ? noParam() : withParam());
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+// ANIMAL MAP ^ //
+
+function schedule(dayName) {
+  const { Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday } = hours;
+  const days = {
+    Tuesday: `Open from ${Tuesday.open}am until ${Tuesday.close - 12}pm`,
+    Wednesday: `Open from ${Wednesday.open}am until ${Wednesday.close - 12}pm`,
+    Thursday: `Open from ${Thursday.open}am until ${Thursday.close - 12}pm`,
+    Friday: `Open from ${Friday.open}am until ${Friday.close - 12}pm`,
+    Saturday: `Open from ${Saturday.open}am until ${Saturday.close - 12}pm`,
+    Sunday: `Open from ${Sunday.open}am until ${Sunday.close - 12}pm`,
+    Monday: 'CLOSED',
+  };
+  const entries = Object.entries(days);
+  const singleDayArray = entries.find((element) => element[0] === dayName);
+  return (dayName === undefined ? days
+    : { [singleDayArray[0]]: singleDayArray[1] });
+}
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -83,7 +156,7 @@ function entryCalculator(entrants) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
