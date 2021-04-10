@@ -29,10 +29,11 @@ function employeeByName(employeeName) {
   if (!employeeName) return {};
   return employees.find(({ firstName, lastName }) => [firstName, lastName].includes(employeeName));
 }
+// https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
+}
 
 // function isManager(id) {
 //   // seu código aqui
@@ -82,5 +83,5 @@ module.exports = {
   animalsOlderThan,
   //   oldestFromFirstSpecies,
   //   increasePrices,
-  //   createEmployee,
+  createEmployee,
 };
