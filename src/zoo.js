@@ -123,6 +123,10 @@ const getNameResidents = ({ sex }, { residents }) => {
   return residents.map(({ name }) => name);
 };
 
+const incrementsObj = (locations, animal, nameResidents) => {
+  locations[animal.location].push({ [animal.name]: nameResidents });
+}
+
 function animalMap(options) {
   // seu código aqui
   const locations = getLocations();
@@ -133,10 +137,16 @@ function animalMap(options) {
     animals.forEach((animal) => {
       const nameResidents = getNameResidents(options, animal);
       if (options.sorted) {
+        incrementsObj(locations, animal, nameResidents.sort());
+      } else {
+        incrementsObj(locations, animal, nameResidents);
+      }
+
+      /* if (options.sorted) {
         locations[animal.location].push({ [animal.name]: nameResidents.sort() });
       } else {
         locations[animal.location].push({ [animal.name]: nameResidents });
-      }
+      } */
     });
 
     return locations;
@@ -228,8 +238,6 @@ function employeeCoverage(idOrName) {
   const employee = getEmployee(idOrName);
   return buildObj(employee, listAnimals);
 }
-
-console.log(employeeCoverage());
 
 module.exports = {
   entryCalculator,
