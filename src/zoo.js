@@ -71,30 +71,18 @@ function entryCalculator(entrants) {
   const totalSenior = Senior * prices.Senior;
   return totalAdult + totalChild + totalSenior;
 }
+const getAnimalsByLocation = (coord) => animals.filter((animal) => animal.location === coord);
 
-// const getLocationsKeys = () => {
-//   const object = {};
-//   animals.forEach((animal) => {
-//     const { location } = animal;
-//     object.
-//   });
-//   return object;
-// }
-
-// function animalMap(options) {
-//   const result = {};
-//   const animalNames = [];
-//   const keys = getLocationsKeys();
-//   console.log(getLocationsKeys());
-//   // console.log(keys);
-//   // const keys = Object.keys(result);
-//   // console.log(keys);
-//   if (options === undefined) {
-//     // result[location] = animal.name;
-//   }
-//   return result;
-// }
-// console.log(animalMap());
+function animalMap(options) {
+  const result = {};
+  const coordenadas = ['NE', 'NW', 'SE', 'SW'];
+  const animalsLocation = coordenadas.map((coordenada) => getAnimalsByLocation(coordenada));
+  coordenadas.forEach((coordenada, index) => {
+    result[coordenada] = animalsLocation[index].map((animal) => animal.name);
+  });
+  return result;
+}
+console.log(animalMap());
 
 const getScheduleDay = (day) => {
   const openTime = hours[day].open;
@@ -161,8 +149,6 @@ function employeeCoverage(idOrName) {
   }
   return result;
 }
-
-console.log(employeeCoverage('Stephanie'));
 
 module.exports = {
   entryCalculator,
