@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { animals } = require('./data');
+const { employees } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -29,10 +30,15 @@ function animalsOlderThan(animal, age) {
   output = output.shift().map((element) => element.age > age);
   return output.every((element) => element === true);
 }
-// function employeeByName(employeeName) {
-//   // seu código aqui
-// }
-
+function employeeByName(employeeName) {
+  const name = employeeName.split(' ');
+  let output;
+  for (let index = 0; index < name.length; index += 1) {
+    output = employees
+      .filter((element) => (element.firstName || element.lastName) === name[index]);
+  }
+  return output;
+}
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
 // }
@@ -79,7 +85,7 @@ module.exports = {
   // animalCount,
   // animalMap,
   animalsByIds,
-  // employeeByName,
+  employeeByName,
   // employeeCoverage,
   // addEmployee,
   // isManager,
