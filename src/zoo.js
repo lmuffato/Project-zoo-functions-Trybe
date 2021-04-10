@@ -15,26 +15,25 @@ const { animals, employees } = require('./data');
 
 function animalsByIds(...idsRest) {
   // seu código aqui
-  return animals.filter(( {id} ) => idsRest.includes(id));
+  return animals.filter(({ id }) => idsRest.includes(id));
 }
 
 function animalsOlderThan(animal, ageAnimal) {
   // seu código aqui
-  const nameAnimal = animals.find(( {name} ) => animal.includes(name)).residents;
-  return nameAnimal.every(( {age} ) => age > ageAnimal);
+  const nameAnimal = animals.find(({ name }) => animal.includes(name)).residents;
+  return nameAnimal.every(({ age }) => age > ageAnimal);
 }
 
 function employeeByName(employeeName) {
   // seu código aqui
   if (employeeName === undefined) return {};
-  return employees.find(( {firstName, lastName} ) => (
+  return employees.find(({ firstName, lastName }) => (
     firstName === employeeName || lastName === employeeName
   ));
 }
 /*
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  
 }
 
 function isManager(id) {
@@ -74,17 +73,17 @@ function employeeCoverage(idOrName) {
 }
 */
 module.exports = {
-  entryCalculator,
-  schedule,
-  animalCount,
-  animalMap,
+ // entryCalculator,
+ // schedule,
+ // animalCount,
+ // animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
-  addEmployee,
-  isManager,
+ // employeeCoverage,
+ // addEmployee,
+ // isManager,
   animalsOlderThan,
-  oldestFromFirstSpecies,
-  increasePrices,
-  createEmployee,
+ // oldestFromFirstSpecies,
+ // increasePrices,
+ // createEmployee,
 };
