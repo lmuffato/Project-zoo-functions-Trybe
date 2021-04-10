@@ -58,9 +58,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 //  função implementada baseada na forma feita no repositório do Jodiel - https://github.com/tryber/sd-010-a-project-zoo-functions/pull/106
 
-function noEntrants (entrants) {
+function noEntrants(entrants) {
   if (!entrants || entrants.length === 0) return 0;
-};
+}
 function entryCalculator(entrants) {
   noEntrants();
   const keys = Object.keys(entrants);
