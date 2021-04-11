@@ -10,39 +10,46 @@ eslint no-unused-vars: [
 */
 
 /* const data = require('./data'); */
-const { animals, employees } = require('./data');
+const { animals, employees, prices } = require('./data');
 /* const data = require('./data'); */
 
+// require 01
 function animalsByIds(...ids) {
   return animals.filter(({ id }) => ids.includes(id)); // this includes was based in Murilo Goncalves
 }
 
+// require 02
 function animalsOlderThan(animal, animalsAge) {
   return animals
     .find(({ name }) => name === animal)
     .residents.every(({ age }) => age >= animalsAge);
 }
 
+// require 03
 function employeeByName(employeeName) {
   if (!employeeName) return {};
   return employees
     .find(({ firstName, lastName }) => [firstName, lastName].includes(employeeName));
 }
 
+// require 04
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
+// require 05
 function isManager(id) {
   return employees.some(({ managers }) => managers.find((manager) => manager === id));
 }
 
+// require 06
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
+// require 07
 function animalCount(species) {
-  const howMannyAnimals = animals.reduce((acc, crr) => {
+  const howMannyAnimals = animals.reduce((acc, crr) => { // function inspired by Lucas Pedroso
     acc[crr.name] = crr.residents.length;
     return acc;
   }, {});
@@ -51,12 +58,17 @@ function animalCount(species) {
   return howMannyAnimals[species];
 }
 
-console.log(animalCount());
-console.log(animalCount('lions'));
+// require 08
+// entrie: { 'Adult': 2, 'Child': 3, 'Senior': 1 }
+function entryCalculator(entrants = 0) {
+  const { 'Adult': adultQnt, 'Child': childQnt, 'Senior': seniorQnt} = entrants;
+  return (!adultQnt ? 0 : adultQnt * prices.Adult) + (!childQnt ? 0 : childQnt * prices.Child) + (!seniorQnt ? 0 : seniorQnt * prices.Senior);
+}
 
-/* function entryCalculator(entrants = 0) {
-  // seu código aqui
-} */
+console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
+console.log(entryCalculator({ 'Adult': 2, 'Senior': 1 }));
+console.log(entryCalculator({ }));
+console.log(entryCalculator());
 
 /* function animalMap(options) {
   // seu código aqui
@@ -86,8 +98,8 @@ module.exports = {
   isManager,
   addEmployee,
   animalCount,
-  /* entryCalculator,
-  schedule,
+  entryCalculator,
+  /*schedule,
   animalMap,
   employeeCoverage,
   oldestFromFirstSpecies,
