@@ -71,9 +71,22 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+function schedule(dayName) {
+  const { hours } = data;
+  const openOrClose = { };
+  Object.keys(hours).forEach((day) => {
+    if (day === 'Monday') {
+      openOrClose[day] = 'CLOSED';
+    } else {
+      openOrClose[day] = `Open from ${hours[day].open}am until ${(hours[day].close) - 12}pm`;
+    }
+  });
+  if (!dayName) {
+    return openOrClose;
+  }
+  return { [dayName]: openOrClose[dayName] };
+}
+// fonte: https://trybecourse.slack.com/archives/C01DJFH0DNW/p1611760741076400?thread_ts=1611012283.421000&channel=C01DJFH0DNW&message_ts=1611760741.076400
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -89,7 +102,7 @@ function entryCalculator(entrants) {
 
 module.exports = {
   entryCalculator,
-  //   schedule,
+  schedule,
   animalCount,
   //   animalMap,
   animalsByIds,
