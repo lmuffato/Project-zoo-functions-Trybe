@@ -9,17 +9,20 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, prices, employees } = require('./data');
+const { animals, prices, employees, hours } = require('./data');
 
+// Requisito 1
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.includes(animal.id));
 }
 
+// Requisito 2
 function animalsOlderThan(animal, age) {
   const animalsList = animals.find((index) => index.name === animal);
   return animalsList.residents.every((index) => index.age >= age);
 }
 
+// Requisito 3
 function employeeByName(employeeName) {
   if (employeeName === undefined) return {};
   const employee = employees
@@ -27,15 +30,18 @@ function employeeByName(employeeName) {
   return employee;
 }
 
+// Requisito 4
 function createEmployee(personalInfo, associatedWith) {
   const employee = { ...personalInfo, ...associatedWith };
   return employee;
 }
 
+// Requisito 5
 function isManager(id) {
   return employees.some((employee) => employee.managers.includes(id));
 }
 
+// Requisito 6
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const employee = {
     id,
@@ -47,6 +53,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(employee);
 }
 
+// Requisito 7
 function animalCount(species) {
   if (species === undefined) {
     const allAnimals = {};
@@ -58,6 +65,7 @@ function animalCount(species) {
   return animals.find((animal) => animal.name === species).residents.length;
 }
 
+// Requisito 8
 function entryCalculator(entrants) {
   if (entrants === undefined) return 0;
 
@@ -70,18 +78,40 @@ function entryCalculator(entrants) {
   return adults + seniors + childs;
 }
 
+// Requisito 9
 // function animalMap(options) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+// Requisito 10
+const checkOpenOrClose = (open, close) => {
+  if (open === 0 && close === 0) {
+    return 'CLOSED';
+  }
+  return `Open from ${open}am until ${close - 12}pm`;
+};
 
+function schedule(dayName) {
+  if (dayName === undefined) {
+    const result = Object.keys(hours).reduce((acc, curr) => {
+      const { open, close } = hours[curr];
+      acc[curr] = checkOpenOrClose(open, close);
+      return acc;
+    }, {});
+    return result;
+  }
+  const { open, close } = hours[dayName];
+  return { [dayName]: checkOpenOrClose(open, close) };
+}
+
+console.log(schedule());
+
+// Requisito 11
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
 
+// Requisito 12
 function increasePrices(percentage) {
   const calculeteThePercentage = (price) => (price / 100) * percentage + price;
   const round = (number) => Math.round(number * 100) / 100;
@@ -96,13 +126,14 @@ function increasePrices(percentage) {
   prices.Child = round(newPriceChild);
 }
 
+// Requisito 13
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
 // }
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
