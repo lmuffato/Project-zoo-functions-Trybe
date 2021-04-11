@@ -87,11 +87,11 @@ function entryCalculator(entrants) {
 
 // Requisito 9
 
-function animalMap(options) {
-  const localizacao = animals.map((animal) => animal.location);
+// function animalMap(options) {
+//   const localizacao = animals.map((animal) => animal.location);
 
-  return localizacao;
-}
+//   return localizacao;
+// }
 
 console.log(animalMap());
 
@@ -168,7 +168,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
