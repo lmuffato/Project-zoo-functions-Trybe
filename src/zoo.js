@@ -61,12 +61,13 @@ function animalCount(species) {
 // require 08
 // entrie: { 'Adult': 2, 'Child': 3, 'Senior': 1 }
 function entryCalculator(entrants = 0) {
-  const { 'Adult': adultQnt, 'Child': childQnt, 'Senior': seniorQnt} = entrants;
+  const { Adult: adultQnt, Child: childQnt, Senior: seniorQnt } = entrants;
   return (!adultQnt ? 0 : adultQnt * prices.Adult) + (!childQnt ? 0 : childQnt * prices.Child) + (!seniorQnt ? 0 : seniorQnt * prices.Senior);
 }
 
 console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
 console.log(entryCalculator({ 'Adult': 2, 'Senior': 1 }));
+console.log(entryCalculator({ 'Adult': 2, 'Child': 1 }));
 console.log(entryCalculator({ }));
 console.log(entryCalculator());
 
