@@ -87,13 +87,13 @@ function entryCalculator(entrants) {
 
 // Requisito 9
 
-// function animalMap(options) {
-//   const localizacao = data.animals.map((animal) => animal.location);
+function animalMap(options) {
+  const localizacao = animals.map((animal) => animal.location);
 
-//   return localizacao;
-// }
+  return localizacao;
+}
 
-// console.log(animalMap());
+console.log(animalMap());
 
 // Requisito 10
 
@@ -140,36 +140,38 @@ function increasePrices(percentage) {
 
 // Requisito 13
 
-// const animaisResponsaveis = (animalApelido, id) => {
-//   const animais = [...animalApelido];
-//   const searchAnimals = animals.find((animal) => animal.id === id);
-//   animais.map((e) => e === );
-//   return animais;
-// };
+const searchAnimal = (idAnimal) => animals.find((animal) => animal.id === idAnimal);
 
-// const fullName = (first, last) => {
-//   return ``
-// };
+const searchIdLastFirstName = (param, obj) => {
+  const { firstName, lastName } = employees
+    .find((func) => func.id === param
+      || func.firstName === param
+      || func.lastName === param);
+  const fullName = `${firstName} ${lastName}`;
+  return { [fullName]: obj[fullName] };
+};
 
-// function employeeCoverage(idOrName) {
-//   // if (idOrName === undefined) return 0;
-//   const obj = {};
-//   employees
-//     .forEach(({ lastName, firstName, responsibleFor }) => { obj[`${firstName} ${lastName}`] = animaisResponsaveis(responsibleFor); });
-
-//   return obj;
-// }
-
-// console.log(employeeCoverage('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+function employeeCoverage(idOrName) {
+  const objFunc = {};
+  employees.forEach(({ firstName, lastName, responsibleFor }) => {
+    const namesAnimal = responsibleFor.map((idAnimal) => {
+      const { name } = searchAnimal(idAnimal);
+      return name;
+    });
+    objFunc[`${firstName} ${lastName}`] = namesAnimal;
+  });
+  if (!idOrName) return objFunc;
+  return searchIdLastFirstName(idOrName, objFunc);
+}
 
 module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
