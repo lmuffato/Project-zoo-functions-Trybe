@@ -176,10 +176,25 @@ function increasePrices(percentage) {
   });
 }
 
-// function employeeCoverage(idOrName) {
-//   seu código aqui
-// }
+function employeeCoverage(idOrName) {
+  const employeeObject = {};
+  if (!idOrName) {
+    employees.forEach((el) => {
+      const fullName = `${el.firstName} ${el.lastName}`;
+      employeeObject[fullName] = el.responsibleFor.map((animalId) =>
+        animals.find(({ id }) => animalId === id).name);
+    });
+    return employeeObject;
+  }
 
+  const especificEmployee = employees.find(({ firstName, lastName, id }) =>
+    [firstName, lastName, id].includes(idOrName));
+  const fullName = `${especificEmployee.firstName} ${especificEmployee.lastName}`;
+  employeeObject[fullName] = especificEmployee.responsibleFor.map((el2) =>
+    animals.find(({ id }) => el2 === id).name);
+  return employeeObject;
+}
+console.log(employeeCoverage('Stephanie'));
 module.exports = {
   entryCalculator,
   schedule,
@@ -187,7 +202,7 @@ module.exports = {
   animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
