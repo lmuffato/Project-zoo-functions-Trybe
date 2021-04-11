@@ -63,65 +63,65 @@ function entryCalculator(entrants) {
 
 // ANIMAL MAP //
 
-// function animalMap(options) {
-//   const newObj = {
-//     NE: [],
-//     NW: [],
-//     SE: [],
-//     SW: [],
-//   };
-//   const noParam = () => {
-//     animals.forEach((animal) => {
-//       animal.location === 'NE' ? newObj.NE.push(animal.name)
-//       : animal.location === 'NW' ? newObj.NW.push(animal.name)
-//       : animal.location === 'SE' ? newObj.SE.push(animal.name)
-//       : newObj.SW.push(animal.name);
-//     });
-//     return newObj;
-//   };
-//   const withParam = () => {
-//     const { includeNames = false, sex = 'none', sorted = false } = options;
+const createLocationsObj = () => (
+  {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  }
+);
 
-//     const namedAnimal = (animal) => {
-//       const animalResidents = [];
-//       if (sex === 'none') {
-//         animal.residents.forEach((resident) => animalResidents.push(resident.name));
-//       }
-//       if (sex === 'female') {
-//         animal.residents.forEach((resident) => {
-//           if (resident.sex === 'female') {
-//             animalResidents.push(resident.name);
-//           }
-//         });
-//       }
-//       if (sex === 'male') {
-//         animal.residents.forEach((resident) => {
-//           if (resident.sex === 'male') {
-//             animalResidents.push(resident.name);
-//           }
-//         });
-//       }
-//       return (sorted === false ? { [animal.name]: animalResidents }
-//         : { [animal.name]: animalResidents.sort() });
-//     };
+const noParam = () => {
+  const obj = createLocationsObj();
+  const locations = Object.keys(obj);
+  locations.forEach((location) => animals.forEach((animal) => {
+    if (animal.location === location) {
+      obj[location].push(animal.name);
+    }
+  }));
+  return obj;
+};
 
-//     if (includeNames === false) {
-//       return noParam();
-//     }
+const setSex = (array, animal, sex) => {
+  animal.residents.forEach((resident) => {
+    if (resident.sex === sex) {
+      array.push(resident.name);
+    }
+  });
+};
 
-//     if (includeNames === true) {
-//       animals.forEach((animal) => {
-//         animal.location === 'NE' ? newObj.NE.push(namedAnimal(animal))
-//         : animal.location === 'NW' ? newObj.NW.push(namedAnimal(animal))
-//         : animal.location === 'SE' ? newObj.SE.push(namedAnimal(animal))
-//         : newObj.SW.push(namedAnimal(animal));
-//       });
-//     }
+const namedAnimal = (animal, param) => {
+  const { sex = 'none', sorted = false } = param;
+  const animalResidents = [];
+  if (sex === 'none') {
+    animal.residents.forEach((resident) => animalResidents.push(resident.name));
+  } else {
+    setSex(animalResidents, animal, sex);
+  }
+  return (sorted === false ? { [animal.name]: animalResidents }
+    : { [animal.name]: animalResidents.sort() });
+};
 
-//     return newObj;
-//   };
-//   return (options === undefined ? noParam() : withParam());
-// }
+const displayAnimals = (param) => {
+  const obj = createLocationsObj();
+  const locations = Object.keys(obj);
+  locations.forEach((location) => animals.forEach((animal) => {
+    if (animal.location === location) {
+      obj[location].push(namedAnimal(animal, param));
+    }
+  }));
+  return obj;
+};
+
+const withParam = (param) => {
+  const { includeNames = false } = param;
+  return (includeNames === false ? noParam() : displayAnimals(param));
+};
+
+function animalMap(options) {
+  return (options === undefined ? noParam() : withParam(options));
+}
 
 // ANIMAL MAP ^ //
 
@@ -167,7 +167,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
