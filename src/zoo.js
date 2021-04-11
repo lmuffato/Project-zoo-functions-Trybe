@@ -119,11 +119,7 @@ function oldestFromFirstSpecies(id) {
     return olderAge;
   });
 
-  const result = [];
-  result.push(oldest.name);
-  result.push(oldest.sex);
-  result.push(oldest.age);
-  return result;
+  return [oldest.name, oldest.sex, oldest.age];
 }
 
 // function increasePrices(percentage) {
