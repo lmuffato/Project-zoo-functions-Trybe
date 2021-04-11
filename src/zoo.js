@@ -11,20 +11,28 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
+/* ITEM vai receber tudo que vem de DATA.ANIMALS,
+depois vai verificar se o que foi recebido em IDS
+tem algo em comum com o recebido em ITEM,
+tudo isso baseando-se pelo ID. */
 function animalsByIds(...ids) {
   return data.animals.filter((item) => ids.includes(item.id));
 }
 
+/* Vai procurar (FIND) dentro de DATA.ANIMALS o primeiro
+elemento na qual a propriedade NAME é igual ao parâmetro "nomeAnimals".
+Depois vai verificar se TODAS (EVERY) as idades da propriedade AGE
+são maiores que o parâmetro "idade" fornecido pelo teste. */
 function animalsOlderThan(nomeAnimal, idade) {
   const verificarAnimal = data.animals.find(({ name }) => name === nomeAnimal);
   return verificarAnimal.residents.every(({ age }) => age > idade);
 }
 
-/* function employeeByName(employeeName) {
-  // seu código aqui
+function employeeByName(employeeName) {
+  return data.employees.filter(({ name }) => name.firstName === employeeName || name.lastName === employeeName);
 }
 
-function createEmployee(personalInfo, associatedWith) {
+/* function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
 
@@ -70,7 +78,7 @@ module.exports = {
   /* animalCount, */
   /* animalMap, */
   animalsByIds,
-  /* employeeByName, */
+  employeeByName,
   /* employeeCoverage, */
   /* addEmployee, */
   /* isManager, */
