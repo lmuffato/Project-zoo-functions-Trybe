@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const { employees } = require('./data');
 const { prices } = require('./data');
-const { hours } = require('./data');
+// const { hours } = require('./data');
 const data = require('./data');
 
 const { animals } = data;
