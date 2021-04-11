@@ -89,6 +89,19 @@ function getLocation() {
   return locationObject;
 }
 
+function addNames() {
+  let nameObject = {};
+  const locations = animals.reduce((acc, curr) => (acc.includes(curr.location) ? acc
+    : acc.concat(curr.location)), []);
+
+  locations.forEach((location) => {
+    const specimens = animals.filter(({ location: locat }) => locat === location)
+      .map((animal) => ({ [animal.name]: animal.residents.map((specimen) => specimen.name) }));
+    nameObject = { ...nameObject, ...{ [location]: specimens } };
+  });
+  return nameObject;
+}
+
 function animalMap(options = false) {
   // Com funcionalidades sugeridas por Wanderson Sales
   // seu código aqui
@@ -105,6 +118,7 @@ function animalMap(options = false) {
 }
 
 // console.log(animalMap());
+console.log(animalMap({ includeNames: true }));
 
 function returnDays(day) {
   const openHour = hours[day].open;
