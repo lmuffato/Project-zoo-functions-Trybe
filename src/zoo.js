@@ -61,40 +61,39 @@ function animalCount(species) {
 // require 08
 // entrie: { 'Adult': 2, 'Child': 3, 'Senior': 1 }
 
-// using Object.entries to transform the object in a array:
-/* function entryCalculator(entrants = 0) {
+// using Object.entries to transform the object in array:
+function entryCalculator(entrants = 0) {
   const priceCalc = (acc, [category, qnt]) => acc + prices[category] * qnt;
   return value = Object.entries(entrants).reduce(priceCalc, 0);
-} */
-
-function entryCalculator(entrants = 0) {
-  const { Adult: adultQnt, Child: childQnt, Senior: seniorQnt } = entrants;
-  const valid = a => !a ? 0 : a;
-  return (valid(adultQnt) * prices.Adult) + (valid(childQnt) * prices.Child) + (valid(seniorQnt) * prices.Senior);
 }
 
-console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
-console.log(entryCalculator({ 'Adult': 2, 'Senior': 1 }));
-console.log(entryCalculator({ 'Adult': 2, 'Child': 1 }));
-console.log(entryCalculator({ }));
-console.log(entryCalculator());
+/* function entryCalculator(entrants = 0) {
+  const { Adult: adultQnt, Child: childQnt, Senior: seniorQnt } = entrants;
+  const validCalc = (a, b) => (!a) ? 0 : a * b;
+  return (validCalc(adultQnt, prices.Adult)) + (validCalc(childQnt, prices.Child)) + (validCalc(seniorQnt, prices.Senior));
+} */
 
+// require 09
 /* function animalMap(options) {
   // seu código aqui
 } */
 
+// require 10
 /* function schedule(dayName) {
   // seu código aqui
 } */
 
+// require 11
 /* function oldestFromFirstSpecies(id) {
   // seu código aqui
 } */
 
+// require 12
 /* function increasePrices(percentage) {
   // seu código aqui
 } */
 
+// require 13
 /* function employeeCoverage(idOrName) {
   // seu código aqui
 } */
