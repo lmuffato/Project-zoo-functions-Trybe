@@ -60,9 +60,17 @@ function animalCount(species) {
 
 // require 08
 // entrie: { 'Adult': 2, 'Child': 3, 'Senior': 1 }
+
+// using Object.entries to transform the object in a array:
+/* function entryCalculator(entrants = 0) {
+  const priceCalc = (acc, [category, qnt]) => acc + prices[category] * qnt;
+  return value = Object.entries(entrants).reduce(priceCalc, 0);
+} */
+
 function entryCalculator(entrants = 0) {
   const { Adult: adultQnt, Child: childQnt, Senior: seniorQnt } = entrants;
-  return (!adultQnt ? 0 : adultQnt * prices.Adult) + (!childQnt ? 0 : childQnt * prices.Child) + (!seniorQnt ? 0 : seniorQnt * prices.Senior);
+  const valid = a => !a ? 0 : a;
+  return (valid(adultQnt) * prices.Adult) + (valid(childQnt) * prices.Child) + (valid(seniorQnt) * prices.Senior);
 }
 
 console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
@@ -100,7 +108,7 @@ module.exports = {
   addEmployee,
   animalCount,
   entryCalculator,
-  /*schedule,
+  /* schedule,
   animalMap,
   employeeCoverage,
   oldestFromFirstSpecies,
