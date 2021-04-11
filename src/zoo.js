@@ -104,8 +104,6 @@ function schedule(dayName) {
   return { [dayName]: checkOpenOrClose(open, close) };
 }
 
-console.log(schedule());
-
 // Requisito 11
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -127,9 +125,30 @@ function increasePrices(percentage) {
 }
 
 // Requisito 13
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+const findEmployee = (idOrName) => {
+  const employee = employees.find(({ id, firstName, lastName }) =>
+    id === idOrName || firstName === idOrName || lastName === idOrName);
+  return employee;
+};
+
+const findAnimalName = (responsibleFor) => {
+  const result = responsibleFor.map((animalId) => animals.find(({ id }) => animalId === id).name);
+  return result;
+};
+
+function employeeCoverage(idOrName) {
+  if (idOrName === undefined) {
+    const employeesList = employees.reduce((acc, { firstName, lastName, responsibleFor }) => {
+      acc[`${firstName} ${lastName}`] = findAnimalName(responsibleFor);
+      return acc;
+    }, {});
+    return employeesList;
+  }
+  const { firstName, lastName, responsibleFor } = findEmployee(idOrName);
+  const result = {};
+  result[`${firstName} ${lastName}`] = findAnimalName(responsibleFor);
+  return result;
+}
 
 module.exports = {
   entryCalculator,
@@ -138,7 +157,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
