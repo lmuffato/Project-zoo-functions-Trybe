@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+// const { animals } = require('./data');
 
 function animalsByIds(...ids) {
   const { animals } = data;
@@ -64,48 +65,72 @@ function entryCalculator(entrants) {
 // Implementação item 1 requisito 9:
 const mappingAnimalsTypesByLocation = (animals, location) => animals.filter((animal) =>
   (animal.location === location)).map((animal) => animal.name);
-// Implementação item 2 requisito 9:
-const getAnimalsName = (animals, type, sorted) => {
-  const array = [];
+// Implementação item 2 e 3 requisito 9:
+
+function getAnimalsNameSexAll(animals, arrayNames, type) {
   animals.forEach((animal) => {
     animal.residents.forEach((element) => {
       if (animal.name === type) {
-        array.push(element.name);
+        arrayNames.push(element.name);
       }
     });
   });
-  if (sorted === true) {
-    return array.sort();
+  return arrayNames;
+}
+
+function getAnimalsNameSex(animals, type, sex = 'all') {
+  const arrayNames = [];
+  if (sex === 'all') {
+    getAnimalsNameSexAll(animals, arrayNames, type);
   }
-  return array;
+  animals.forEach((animal) => {
+    animal.residents.forEach((element) => {
+      if (animal.name === type && element.sex === sex) {
+        arrayNames.push(element.name);
+      }
+    });
+  });
+  return arrayNames;
+}
+
+const getAnimalsName = (animals, type, sorted, sex) => {
+  let arrayNames = [];
+  const animalsNameSex = getAnimalsNameSex(animals, type, sex);
+  arrayNames = animalsNameSex;
+  if (sorted === true) {
+    return arrayNames.sort();
+  }
+  return arrayNames;
 };
 
-const mappingAnimalsNamesByTypes = (animals, location, sorted) => {
+const mappingAnimalsNamesByTypes = (animals, location, sorted, sex) => {
   const animalsTypesByLocation = mappingAnimalsTypesByLocation(animals, location);
   return animalsTypesByLocation.map((typeAnimal) =>
-    ({ [typeAnimal]: getAnimalsName(animals, typeAnimal, sorted) }));
+    ({ [typeAnimal]: getAnimalsName(animals, typeAnimal, sorted, sex) }));
 };
+// Implementação item 4 requisito 9
+const showAnimalsBy = (animals, sorted = false, sex = 'all') =>
+  animals.reduce((acc, curr) => {
+    acc[curr.location] = mappingAnimalsNamesByTypes(animals, curr.location, sorted, sex);
+    return acc;
+  }, {});
+
+const showAnimals = (animals) =>
+  animals.reduce((acc, curr) => {
+    acc[curr.location] = mappingAnimalsTypesByLocation(animals, curr.location);
+    return acc;
+  }, {});
 
 function animalMap(options) {
   const { animals } = data;
-  if (!options) {
-    return animals.reduce((acc, curr) => {
-      acc[curr.location] = mappingAnimalsTypesByLocation(animals, curr.location);
-      return acc;
-    }, {});
+  if (!options) return showAnimals(animals);
+  if (Object.keys(options).includes('sex') && !Object.keys(options)
+    .includes('includeNames')) {
+    return showAnimals(animals);
   }
-  const { includeNames = false, sorted = false } = options;
-  if (Object.keys(options).includes('includeNames') && includeNames === true) {
-    return animals.reduce((acc, curr) => {
-      acc[curr.location] = mappingAnimalsNamesByTypes(animals, curr.location, sorted);
-      // console.log(acc);
-      return acc;
-    }, {});
-  }
+  const { sorted = false, sex = 'all' } = options;
+  return showAnimalsBy(animals, sorted, sex);
 }
-// console.log(animalMap());
-console.log(animalMap({ includeNames: true }));
-// console.log(animalMap({ includeNames: true, sorted: true }));
 
 // function schedule(dayName) {
 //   // seu código aqui
