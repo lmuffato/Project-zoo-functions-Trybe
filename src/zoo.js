@@ -64,7 +64,7 @@ function animalCount(species) {
 // using Object.entries to transform the object in array:
 function entryCalculator(entrants = 0) {
   const priceCalc = (acc, [category, qnt]) => acc + prices[category] * qnt;
-  return value = Object.entries(entrants).reduce(priceCalc, 0);
+  return Object.entries(entrants).reduce(priceCalc, 0);
 }
 
 /* function entryCalculator(entrants = 0) {
