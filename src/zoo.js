@@ -41,13 +41,7 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const obj = {
-    id,
-    firstName,
-    lastName,
-    managers,
-    responsibleFor,
-  };
+  const obj = { id, firstName, lastName, managers, responsibleFor };
   employees.push(obj);
 }
 
@@ -108,8 +102,34 @@ function increasePrices(percentage) {
   });
 }
 
+const animalName = (idParam) => {
+  const array = [];
+  idParam.forEach((id) => animals.forEach((animal) => {
+    if (animal.id === id) {
+      array.push(animal.name);
+    }
+  }));
+  return array;
+};
+
+const employeedFunc = (param) => {
+  const obj = {};
+  employees.forEach((cmp) => {
+    if (cmp.id === param || cmp.firstName === param || cmp.lastName === param) {
+      Object.assign(obj, { [`${cmp.firstName} ${cmp.lastName}`]: animalName(cmp.responsibleFor) });
+    }
+  });
+  return obj; // Referencias Bruno Mendes, Giovanni Maldonado, Wanderson Sales
+};
+
 function employeeCoverage(idOrName) {
-  return idOrName;
+  const newObj = {};
+  if (!idOrName) {
+    employees.forEach((cmp) => Object.assign(newObj, { [`${cmp.firstName} ${cmp.lastName}`]:
+    animalName(cmp.responsibleFor) }));
+    return newObj;
+  }
+  return employeedFunc(idOrName);
 }
 
 module.exports = {
