@@ -153,11 +153,17 @@ function oldestFromFirstSpecies(id) {
   return Object.values(getSpecieManegedForThisId(id).residents.sort((a, b) => b.age - a.age)[0]);
 }
 
-/*
 function increasePrices(percentage) {
   // seu código aqui
+
+  const arr = Object.keys(data.prices);
+  arr.forEach((element) => {
+    data.prices[element] = Math.round(((data.prices[element] * (percentage / 100))
+    + data.prices[element]) * 100) / 100;
+  });
 }
 
+/*
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
@@ -175,6 +181,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  //  increasePrices,
+  increasePrices,
   createEmployee,
 };
