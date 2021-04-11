@@ -78,33 +78,21 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// const fullSchedule = {
-//   Tuesday: 'Open from 8am until 6pm',
-//   Wednesday: 'Open from 8am until 6pm',
-//   Thursday: 'Open from 10am until 8pm',
-//   Friday: 'Open from 10am until 8pm',
-//   Saturday: 'Open from 8am until 10pm',
-//   Sunday: 'Open from 8am until 8pm',
-//   Monday: 'CLOSED',
-// };
-// function schedule(dayName) {
-//   const scheduleDay = {};
-//   const hoursWorking = Object.keys(data.hours);
-//   // if (dayName === undefined) {
-//   //   return fullSchedule;
-//   // }
-//   hoursWorking.forEach((day) => {
-//     if (day === 'Monday') {
-//       scheduleDay[day] = 'CLOSED';
-//     }
-//     scheduleDay[day] = `Open from ${hours[day].open}am until ${hours[day].close}pm`;
-//   });
-//   if (dayName) {
-//     return {
-//     [dayName]: scheduleDay[dayName],
-//   }
-//   return scheduleDay;
-// }
+function schedule(dayName) {
+  const daySchedule = {};
+  const dayHours = Object.keys(data.hours);
+  dayHours.forEach((day) => {
+    const closeHour = data.hours[day].close - 12;
+    const openHour = data.hours[day].open;
+    if (day === 'Monday') {
+      daySchedule[day] = 'CLOSED';
+    } else {
+      daySchedule[day] = `Open from ${openHour}am until ${closeHour}pm`;
+    }
+  });
+  if (!dayName) return daySchedule; // !dayName refere se o parâmetro não tiver sido definido.
+  return { [dayName]: daySchedule[dayName] };
+}
 // console.log(schedule('Monday'));
 
 function oldestFromFirstSpecies(id) {
@@ -130,7 +118,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
