@@ -58,9 +58,11 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   return employees.push(obj);
 }
 
-// function animalCount(species) {
-// seu código aqui
-// }
+function animalCount(species) {
+  const { animals } = data;
+  if (!species) return {};
+  return animals.find(({ name }) => name === species).popularity;
+}
 
 // function entryCalculator(entrants) {
 // seu código aqui
@@ -89,7 +91,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
