@@ -16,15 +16,15 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  const animalObject = data.animals.find(el => el.name === animal);
-  return animalObject.residents.every(resident => resident.age > age);
+  const animalObject = data.animals.find((el) => el.name === animal);
+  return animalObject.residents.every((resident) => resident.age > age);
 }
 
-console.log(animalsOlderThan('otters', 7));
-console.log(animalsOlderThan('penguins', 10));
-
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (!employeeName) return {};
+  return data.employees.find(employee => {
+    return employee.firstName === employeeName || employee.lastName === employeeName
+  });
 }
 
 function createEmployee(personalInfo, associatedWith) {

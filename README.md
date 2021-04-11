@@ -184,7 +184,7 @@ Antes de começar, analise o arquivo `src/data.js`, para ver os dados que serão
 
 ### 2. IMPLEMENTE A FUNÇÃO animalsOlderThan
 
-  Esta função, a partir do nome de uma espécie e uma idade mínima, verifica se todos os animais daquela espécie possuem a idade mínima especificada
+  Esta função, a partir do nome de uma espécie e uma idade mínima, verifica se todos os animais daquela espécie possuem a idade mínima especificada 
 
   **Observações técnicas**
 
