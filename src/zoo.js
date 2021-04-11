@@ -89,9 +89,24 @@ function increasePrices(percentage) {
   data.prices = { ...newPrices };
 }
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+const animalsByIdsV2 = (...theids) => animalsByIds(...theids).map((animal) =>
+  animal.name);
+
+const allResponsibleFor = () => employees.reduce((acc, curr) =>
+  ({ ...acc, [`${curr.firstName} ${curr.lastName}`]: animalsByIdsV2(...curr.responsibleFor) }), {});
+
+const onlyResponsibleFor = (findHim) => {
+  const itsHim = employees.find((element) => ((element.firstName === findHim)
+  || (element.lastName === findHim)) || element.id === findHim);
+  const onlyFor = {
+    [`${itsHim.firstName} ${itsHim.lastName}`]: animalsByIdsV2(...itsHim.responsibleFor),
+  };
+  return onlyFor;
+};
+
+function employeeCoverage(idOrName) {
+  return idOrName === undefined ? allResponsibleFor() : onlyResponsibleFor(idOrName);
+}
 
 module.exports = {
   entryCalculator,
@@ -100,7 +115,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
