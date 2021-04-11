@@ -70,7 +70,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 //   if (species === undefined) {
 //     return animals.map((animal) => {
 //       const obj = {
-//         animal.name: animal.residents.length,
+//         Name, animal.residents.length,
 //       }
 //     });
 //     // ...animalQuantity,
@@ -83,14 +83,19 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 // function entryCalculator(entrants) {
 //   // seu código aqui
-//   if (entrants === 0 || entrants === {}) {
+//   if (entrants === undefined || Object.keys(entrants).length === 0) {
 //     return 0;
 //   }
-//   const summAdult = prices.Adult * entrants;
-//   return summAdult;
+
+//   const summAdult = (prices.Adult * ((entrants.Adult === undefined) ? 0 : entrants.Adult));
+//   const summChild = (prices.Child * ((entrants.Child === undefined) ? 0 : entrants.Child));
+//   const summSenior = (prices.Senior * ((entrants.Senior === undefined) ? 0 : entrants.Senior));
+//   return summAdult + summChild + summSenior;
 // }
 
-// console.log(entryCalculator());
+// console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
+// console.log(entryCalculator({ 'Adult': 1 }));
+// console.log(entryCalculator({}));
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -100,9 +105,16 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 //   // seu código aqui
 // }
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  // seu código aqui
+  const personCheck = employees.find((employ) => employ.id.includes(id));
+  const firstSpecie = personCheck.responsibleFor[0];
+  const animalsByPerson = animals.find((animal) => animal.id.includes(firstSpecie));
+  const oldestAnimal = animalsByPerson.residents.sort((a, b) => a.age - b.age);
+  return [oldestAnimal[oldestAnimal.length - 1].name,
+    oldestAnimal[oldestAnimal.length - 1].sex,
+    oldestAnimal[oldestAnimal.length - 1].age];
+}
 
 function increasePrices(percentage) {
   // seu código aqui
@@ -119,7 +131,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   // entryCalculator,
-  // schedule,
+  // schedule,filter
   // animalCount,
   // animalMap,
   animalsByIds,
@@ -128,7 +140,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
