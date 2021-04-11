@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices, hours } = require("./data");
+const { animals, employees, prices } = require('./data');
 // const data = require('./data');
 
 // Requisito 1
@@ -26,7 +26,7 @@ const animalsOlderThan = (animal, age) =>
 const employeeByName = (employeeName) => {
   const employeeObj = employees.find(
     (employee) =>
-      employeeName === employee.firstName || employeeName === employee.lastName
+      employeeName === employee.firstName || employeeName === employee.lastName,
   );
   return employeeObj === undefined ? {} : employeeObj;
 };
@@ -34,14 +34,13 @@ const employeeByName = (employeeName) => {
 // Requisito 4
 const createEmployee = (
   { id, firstName, lastName },
-  { managers, responsibleFor }
+  { managers, responsibleFor },
 ) => ({ id, firstName, lastName, managers, responsibleFor });
 
 // Requisito 5
 const isManager = (id) =>
   employees.some((employee) =>
-    employee.managers.some((idManager) => idManager === id)
-  );
+    employee.managers.some((idManager) => idManager === id));
 
 // Requisito 6
 const addEmployee = (
@@ -49,7 +48,7 @@ const addEmployee = (
   firstName,
   lastName,
   managers = [],
-  responsibleFor = []
+  responsibleFor = [],
 ) => {
   const newObj = { id, firstName, lastName, managers, responsibleFor };
   employees.push(newObj);
