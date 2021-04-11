@@ -45,7 +45,7 @@ function animalCount(species) {
   const howMannyAnimals = animals.reduce((acc, crr) => {
     acc[crr.name] = crr.residents.length;
     return acc;
-  }, {} );
+  }, {});
 
   if (!species) return howMannyAnimals;
   return howMannyAnimals[species];
@@ -54,7 +54,7 @@ function animalCount(species) {
 console.log(animalCount());
 console.log(animalCount('lions'));
 
-/* function entryCalculator(entrants) {
+/* function entryCalculator(entrants = 0) {
   // seu código aqui
 } */
 
