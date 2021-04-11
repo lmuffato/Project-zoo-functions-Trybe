@@ -93,8 +93,6 @@ function entryCalculator(entrants) {
 //   return localizacao;
 // }
 
-console.log(animalMap());
-
 // Requisito 10
 
 const operatingHours = (open, close) =>
