@@ -211,8 +211,27 @@ function oldestFromFirstSpecies(thisId) {
     pipe(idMatch, find(animals)), pipe(prop('residents'), biggestProp('age')),
     objPropsToArr('name', 'sex', 'age'))(thisId);
 }
+const toFixed = (num, precision) => {
+  function round(digit) {
+    const add1 = parseInt(digit, 10) + 1;
+    return add1.toString();
+  }
+  let str = num.toString();
+  const start = str.indexOf('.');
+  const end = start + precision;
+  const roundup = str[end + 1] >= '5';
+  if (roundup) {
+    str = str.substring(0, end) + round(str[end]);
+  } else {
+    str = str.substring(0, end + 1);
+  }
+  return parseFloat(str);
+};
 function increasePrices(percentage) {
-  // seu código aqui
+  const { prices } = data;
+  Object.keys(prices).forEach((key) => {
+    prices[key] = toFixed(prices[key] + prices[key] * (percentage / 100), 2);
+  });
 }
 
 function employeeCoverage(idOrName) {
