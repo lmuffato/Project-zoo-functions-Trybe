@@ -92,8 +92,10 @@ function increasePrices(percentage) {
 const animalsByIdsV2 = (...theids) => animalsByIds(...theids).map((animal) =>
   animal.name);
 
-const allResponsibleFor = () => employees.reduce((acc, curr) =>
-  ({ ...acc, [`${curr.firstName} ${curr.lastName}`]: animalsByIdsV2(...curr.responsibleFor) }), {});
+const allResponsibleFor = () => employees.reduce((acc, curr) => (
+  { ...acc,
+    [`${curr.firstName} ${curr.lastName}`]: animalsByIdsV2(...curr.responsibleFor),
+  }), {});
 
 const onlyResponsibleFor = (findHim) => {
   const itsHim = employees.find((element) => ((element.firstName === findHim)
