@@ -194,11 +194,23 @@ const schedule = (dayName) => {
   // https://stackoverflow.com/questions/11508463/javascript-set-object-key-by-variable
   return { [dayName]: obj[dayName] };
 };
-
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
+// ----- Auxiliary functions ----- //
+const curry = (func) => (...args) => func.bind(null, ...args);
+const pipe = (...fns) => (...args) => fns.reduce((acc, func) => func(acc), ...args);
+const find = curry((arr, expBool) => arr.find(expBool));
+const prop = curry((propName, obj) => obj[propName]);
+const firstElem = (arr) => arr[0];
+const idMatch = (reference) => ({ id }) => id === reference;
+const biggestProp = curry((p, arrayOfIntegers) =>
+  arrayOfIntegers.reduce((acc, cur) => (acc[p] > cur[p] ? acc : cur), { [p]: 0 }));
+const objPropsToArr = (...args) => (obj) => args.map((p) => obj[p]);
+// ----- Business specific ----- //
+function oldestFromFirstSpecies(thisId) {
+  const { employees, animals } = data;
+  return pipe(idMatch, find(employees), prop('responsibleFor'), firstElem,
+    pipe(idMatch, find(animals)), pipe(prop('residents'), biggestProp('age')),
+    objPropsToArr('name', 'sex', 'age'))(thisId);
 }
-
 function increasePrices(percentage) {
   // seu código aqui
 }
