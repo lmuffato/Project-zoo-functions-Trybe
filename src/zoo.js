@@ -54,16 +54,16 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-function animalCount(species) {
-  if ( species === undefined){
-return animals.reduce((obj, animalValue) => {
-  obj[animalValue.name] = animalValue.residents.length;
-  return obj;
-},{})
-  }
-return animals.find(({name}) => species === name).residents.length;
-}
-console.log(animalCount('lions'));
+// function animalCount(species) {
+//   if ( species === undefined){
+// return animals.reduce((obj, animalValue) => {
+//   obj[animalValue.name] = animalValue.residents.length;
+//   return obj;
+// },{})
+//   }
+// return animals.find(({name}) => species === name).residents.length;
+// }
+// console.log(animalCount('lions'));
 
 function entryCalculator(entrants) {
   // seu código aqui
