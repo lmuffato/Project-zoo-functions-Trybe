@@ -88,9 +88,17 @@ function schedule(dayName) {
 }
 // fonte: https://trybecourse.slack.com/archives/C01DJFH0DNW/p1611760741076400?thread_ts=1611012283.421000&channel=C01DJFH0DNW&message_ts=1611760741.076400
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  const { employees, animals } = data;
+  const animalIncharge = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const objInfoAnimal = animals.find((animal) => animal.id === animalIncharge).residents;
+  const oldestanimal = objInfoAnimal.reduce((acc, animal) => {
+    if (acc.age > animal.age) return acc;
+    return animal;
+  });
+  const { name, sex, age } = oldestanimal;
+  return [name, sex, age];
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -104,14 +112,14 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  //   animalMap,
+  // //   animalMap,
   animalsByIds,
   employeeByName,
-  //   employeeCoverage,
+  // //   employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
-  //   oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   //   increasePrices,
   createEmployee,
 };
