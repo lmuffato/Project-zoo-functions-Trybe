@@ -10,7 +10,6 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const {animals: [{residents}]} = data;
 
 function animalsByIds(...ids) {
   const retornar = [];
@@ -26,11 +25,11 @@ function animalsOlderThan(animal, age) {
   // https://github.com/tryber/sd-010-a-project-zoo-functions/blob/LucasPedroso-project-zoo-functions/src/zoo.js
   // e outros
   return data
-  .animals.find((animalData) => animal === animalData.name)
-  .residents.every((resid) => resid.age >= age); 
+    .animals.find((animalData) => animal === animalData.name)
+    .residents.every((resid) => resid.age >= age);
 }
 
-/* function employeeByName(employeeName) {
+ /* function employeeByName(employeeName) {
   // seu código aqui
 }
 
@@ -72,7 +71,7 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
-}*/
+} */
 module.exports = {
   // entryCalculator,
   // schedule,
