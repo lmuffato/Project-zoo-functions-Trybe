@@ -84,9 +84,8 @@ function schedule(dayName) {
 // Recebi ajuda dos amigos, Adelino, Gabriel, Rafael Medeiros, Murilo e Lucas Lara em um plantão no sábado.
 
 function oldestFromFirstSpecies(funcionario) {
-  const responsabilidade = employees.find(({ id }) => id === funcionario).responsibleFor;
-
-  const animal = animals.find(({ id }) => id === responsabilidade[0]);
+  const responsibility = employees.find(({ id }) => id === funcionario).responsibleFor;
+  const animal = animals.find(({ id }) => id === responsibility[0]);
   const { residents } = animal;
   residents.sort((a, b) => b.age - a.age);
 
