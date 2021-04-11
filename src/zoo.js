@@ -113,39 +113,82 @@ function schedule(dayName) {
   return dayObj;
 }
 
-// function oldestFromFirstSpecies(id) {
-//   const animalManagedById = employees.find((employee) => employee.id === id).responsibleFor[0];
-//   const animalArray = animals.filter((animal) => (animal.id === animalManagedById));
-//   animalArray.forEach(())
-// }
-
-/* Arredondamento com duas casas:
-https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary */
+function oldestFromFirstSpecies(id) {
+  const animalManagedById = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const animalArray = animals.find((animal) => (animal.id === animalManagedById)).residents;
+  let oldest = animalArray[0];
+  animalArray.forEach((animal) => {
+    if (oldest.age < animal.age) {
+      oldest = animal;
+    }
+  });
+  return Object.values(oldest);
+}
+oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992');
 
 function increasePrices(percentage) {
   const age = Object.keys(prices);
   age.forEach((agePrice) => {
+  /* Arredondamento com duas casas:
+https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary */
     prices[agePrice] = (Math.round((prices[agePrice] * (1 + percentage / 100)) * 100)) / 100;
   });
 }
 
-function employeeCoverage(idOrName) {
-  const employeeCoveraged = {};
-  if (idOrName !== undefined) {
-    let animalsEmployee;
-    const selectedEmployee = employees
-      .find((employee) => (employee.id === idOrName
-        || employee.firstName === idOrName || employee.lastName === idOrName));
-    selectedEmployee.responsibleFor.forEach((animalSelected) => {
-      animalsEmployee = animals
-        .filter((animal) => animal.id === animalSelected)
-        .map((animal) => animal.name);
-    });
-    const employeeFullName = `${selectedEmployee.firstName} ${selectedEmployee.lastName}`;
-    employeeCoveraged[employeeFullName] = animalsEmployee;
-  }
-  return employeeCoveraged;
-}
+// function employeeCoverage(idOrName) {
+
+// }
+
+// console.log(employeeCoverage('Emery'));
+// const employeeCoveraged = {};
+//   if (idOrName !== undefined) {
+//     let animalsEmployee;
+//     const selectedEmployee = employees
+//       .find((employee) => (employee.id === idOrName
+//         || employee.firstName === idOrName || employee.lastName === idOrName));
+//     selectedEmployee.responsibleFor.forEach((animalSelected) => {
+//       animalsEmployee = animals
+//         .filter((animal) => animal.id === animalSelected)
+//         .map((animal) => animal.name);
+//     });
+//     const employeeFullName = `${selectedEmployee.firstName} ${selectedEmployee.lastName}`;
+//     employeeCoveraged[employeeFullName] = animalsEmployee;
+//     console.log(animalsEmployee);
+//   }
+//   return employeeCoveraged;
+
+// Second Try
+
+// const employeeAnimalsResponsible = () => {
+//   const obj = {};
+//   employees.forEach((employee) => {
+//     const employeeAnimals = animals.filter((animal) => employee.responsibleFor
+//       .includes(animal.id));
+//     const animalsNames = [];
+//     employeeAnimals.forEach((animal) => animalsNames.push(animal.name));
+//     obj[`${employee.firstName} ${employee.lastName}`] = animalsNames;
+//   });
+//   return obj;
+// };
+
+// Employee Coverage
+
+// const obj = {};
+// if (idOrName !== undefined) {
+//   const selectedEmployee = employees
+//     .find((employee) => (employee.id === idOrName
+//       || employee.firstName === idOrName
+//       || employee.lastName === idOrName));
+//   const name = `${selectedEmployee.firstName} ${selectedEmployee.lastName}`;
+//   const employeeAnimals = animals.filter((animal) => selectedEmployee.responsibleFor
+//     .includes(animal.id));
+//   const animalsNames = [];
+//   console.log(employeeAnimals);
+//   employeeAnimals.forEach((animal) => animalsNames.push(animal.name));
+//   obj[name] = animalsNames;
+//   return obj;
+// }
+// return employeeAnimalsResponsible();
 
 module.exports = {
   entryCalculator,
@@ -154,11 +197,11 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  // employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
