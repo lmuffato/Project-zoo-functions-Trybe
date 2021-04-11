@@ -85,25 +85,27 @@ function isEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
 
-const createObjWithValue = (entrant) => {
-  const { Adult, Child, Senior } = prices;
-  const entrants = entrant;
-  if (!entrants.Adult) entrants.Adult = 0;
-  if (!entrants.Child) entrants.Child = 0;
-  if (!entrants.Senior) entrants.Senior = 0;
-  const obj = {
-    valueAdult: entrants.Adult * Adult,
-    valueChild: entrants.Child * Child,
-    valueSenior: entrants.Senior * Senior,
-  };
-  return obj;
-};
+// const createObjWithValue = (entrant) => {
+//   const { Adult, Child, Senior } = prices;
+//   const entrants = entrant;
+//   if (!entrants.Adult) entrants.Adult = 0;
+//   if (!entrants.Child) entrants.Child = 0;
+//   if (!entrants.Senior) entrants.Senior = 0;
+//   const obj = {
+//     valueAdult: entrants.Adult * Adult,
+//     valueChild: entrants.Child * Child,
+//     valueSenior: entrants.Senior * Senior,
+//   };
+//   return obj;
+// };
 
 function entryCalculator(entrants) {
   if (!entrants || isEmpty(entrants)) return 0;
-  const obj = createObjWithValue(entrants);
-  const arrayValue = Object.values(obj);
-  const sum = arrayValue.reduce((acumulator, actual) => acumulator + actual);
+  // const obj = createObjWithValue(entrants);
+  // const arrayValue = Object.values(obj);
+  const arrayValue = Object.entries(entrants);
+  const sum = arrayValue.reduce((acumulator, actual) =>
+    acumulator + actual[1] * prices[actual[0]], 0);
   return sum;
 }
 
