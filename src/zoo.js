@@ -10,8 +10,9 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { animals, employees, hours } = require('./data');
+const { animals, employees, hours, prices } = require('./data');
 
+// Requisito 1
 function animalsByIds(...ids) {
   // seu código aqui
   if (!ids) {
@@ -21,6 +22,7 @@ function animalsByIds(...ids) {
   return animalsId;
 }
 
+// Requisito 2
 function animalsOlderThan(name, idade) {
   // seu código aqui
   const especie = data.animals.find((animal) => animal.name === name);
@@ -28,6 +30,7 @@ function animalsOlderThan(name, idade) {
   return idadeMinima;
 }
 
+// Requisito 3
 function employeeByName(employeeName) {
   // seu código aqui
 
@@ -38,7 +41,7 @@ function employeeByName(employeeName) {
     .find((employee) => employeeName === employee.firstName || employeeName === employee.lastName);
   return findName;
 }
-
+// Requisito 4
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
   const expected = {
@@ -49,12 +52,14 @@ function createEmployee(personalInfo, associatedWith) {
   return expected;
 }
 
+// Requisito 5
 function isManager(idColab) {
   // seu código aqui
   const verifyId = data.employees.some((employee) => employee.managers.includes(idColab));
   return verifyId;
 }
 
+// Requisito 6
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
   const Employee = {
@@ -70,6 +75,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return data.employees;
 }
 
+// Requisito 7
 function animalCount(species) {
   if (!species) {
     const fullAnimals = data.animals.reduce((acumulador, item) => {
@@ -77,7 +83,6 @@ function animalCount(species) {
       key[item.name] = item.residents.length;
       return acumulador;
     }, {});
-
     return fullAnimals;
   }
 
@@ -91,6 +96,7 @@ function animalCount(species) {
   return findAnimal;
 }
 
+// Requisito 8
 function entryCalculator(entrants) {
   // seu código aqui
   if (!entrants || entrants === {}) return 0;
@@ -100,10 +106,12 @@ function entryCalculator(entrants) {
   return total;
 }
 
+// Requisito 9
 // function animalMap(options) {
 //   // seu código aqui
 // }
 
+// Requisito 10
 const getFullDays = () => {
   const dias = Object.keys(hours);
 
@@ -136,6 +144,7 @@ function schedule(dayName) {
   return { [dayName]: `Open from ${open}am until ${close - 12}pm` };
 }
 
+// Requisito 11
 function oldestFromFirstSpecies(idEmploy) {
   // seu código aqui
   const getEmployee = employees.find(({ id }) => id === idEmploy);
@@ -147,10 +156,23 @@ function oldestFromFirstSpecies(idEmploy) {
   return [name, sex, age];
 }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+// Requisito 12
+// Requisito feito com ajuda do código do Sérgio Martins
+// Link: https://github.com/tryber/sd-010-a-project-zoo-functions/blob/dd64e46b9e1e9f050a862e548dfed64b94af0393/src/zoo.js
+function increasePrices(percentage) {
+  // seu código aqui
+  const { Adult, Senior, Child } = prices;
 
+  const percentual = (price) => (Math.round(price * percentage) + price * 100) / 100;
+
+  const novoIngresso = Object.assign(prices, {
+    Adult: percentual(Adult),
+    Senior: percentual(Senior),
+    Child: percentual(Child),
+  });
+
+  return novoIngresso;
+}
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
 // }
@@ -167,6 +189,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
