@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 // const data = require('./data');
 
 // Requisito 1
@@ -41,7 +41,6 @@ const createEmployee = (
 const isManager = (id) =>
   employees.some((employee) =>
     employee.managers.some((idManager) => idManager === id));
-
 // Requisito 6
 const addEmployee = (
   id,
@@ -73,6 +72,36 @@ const entryCalculator = ({ Adult = 0, Child = 0, Senior = 0 } = 0) =>
 
 // }
 
+// Requisito 10
+
+const changeHour = (hour) => hour - 12;
+
+const scheduleParameterUndefined = (day, open, close) => {
+  if (day === 'Monday') {
+    return 'CLOSED';
+  }
+  return `Open from ${open}am until ${changeHour(close)}pm`;
+};
+
+const schedule = (dayName) => {
+  const entries = Object.entries(hours);
+  const obj = entries.reduce((acc, x) => {
+    const { open } = x[1];
+    const { close } = x[1];
+    const day = x[0];
+    if (dayName === undefined) {
+      acc[day] = scheduleParameterUndefined(day, open, close);
+    } else if (dayName === 'Monday' && day === 'Monday') {
+      acc[day] = 'CLOSED';
+    } else if (dayName === day) {
+      acc[day] = `Open from ${open}am until ${changeHour(close)}pm`;
+    }
+    return acc;
+  }, {});
+
+  return obj;
+};
+
 // Requisito 11
 
 const getBigger = (bigger, number) =>
@@ -90,6 +119,7 @@ const oldestFromFirstSpecies = (id) => {
   return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 };
 
+// Requisito 12
 const increasePrices = (percentage) => {
   const tickets = Object.keys(prices);
 
@@ -97,19 +127,21 @@ const increasePrices = (percentage) => {
     prices[ticketType] += prices[ticketType] * (percentage / 100);
     prices[ticketType] = Math.round(prices[ticketType] * 100) / 100;
   });
-
   return prices;
 };
 
-// console.log(increasePrices(50));
-
 // function employeeCoverage(idOrName) {
-//   // seu código aqui
+//   return employees.reduce((acc, employee) => {
+//     const animalsResponse = animals.reduce((acc, animals) =>
+//     acc[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor;
+//     return acc;
+//   }, {});
 // }
 
+// console.log(employeeCoverage());
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
