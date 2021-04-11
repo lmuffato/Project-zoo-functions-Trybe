@@ -28,9 +28,9 @@ function employeeByName(employeeName) {
   const { employees } = data;
   if (!employeeName) return {};
   if (employees.some(({ firstName }) => firstName === employeeName)) {
-    return employees.filter(({ firstName }) => firstName === employeeName);
+    return employees.find(({ firstName }) => firstName === employeeName);
   }
-  return employees.filter(({ lastName }) => lastName === employeeName);
+  return employees.find(({ lastName }) => lastName === employeeName);
 }
 
 // function createEmployee(personalInfo, associatedWith) {
