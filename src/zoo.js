@@ -20,12 +20,19 @@ function animalsByIds(...ids) {
 // console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce', 'e8481c1d-42ea-4610-8e11-1752cfc05a46'));
 //----------------------------------------------------------
 
-// function animalsOlderThan(animal, age) {
-//   // seu código aqui
-//   const especies = [animals.name];
-// }
-// console.log(animalsOlderThan());
+function animalsOlderThan(animal, age) {
+  // recuperar os animais e comparar o nome com o animal passado por parametro
+  // recuparar a idade dos animais
+  // comparar se todos os animais de uma especie tem a idade minima
+  // seu código aqui
+  // const species = [animals.name];
+  return animals.find(({ name }) => name === animal).residents
+    .every(({ age: animalAge }) => animalAge >= age);
+}
+
 //----------------------------------------------------------
+// Dica fechamento dia 09/04 Guilherme e V.
+
 function employeeByName(employeeName) {
   const { employees } = data;
   if ((!employeeName)) {
@@ -35,7 +42,6 @@ function employeeByName(employeeName) {
     .find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
   // seu código aqui
 }
-console.log(employeeByName());
 //----------------------------------------------------------
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
@@ -87,7 +93,7 @@ module.exports = {
   // employeeCoverage,
   // addEmployee,
   // isManager,
-  // animalsOlderThan,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
