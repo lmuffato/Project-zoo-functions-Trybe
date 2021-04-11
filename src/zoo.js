@@ -65,7 +65,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // }
 // console.log(animalCount('lions'));
 
-/* function entryCalculator(entrants) {
+/*  function entryCalculator(entrants) {
   // seu código aqui
 }
 
