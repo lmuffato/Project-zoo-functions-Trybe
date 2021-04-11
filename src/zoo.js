@@ -11,6 +11,7 @@ eslint no-unused-vars: [
 
 const { employees } = require('./data');
 const { prices } = require('./data');
+const { hours } = require('./data');
 const data = require('./data');
 
 const { animals } = data;
@@ -63,23 +64,16 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return employees.push(newEmployee);
 }
 
-// function animalCount(species) {
-//   // seu código aqui
-//   // const animalQuantity = animals.filter((animal) => animal.residents.length);
-//   const speciesObject = [];
-//   if (species === undefined) {
-//     return animals.map((animal) => {
-//       const obj = {
-//         Name, animal.residents.length,
-//       }
-//     });
-//     // ...animalQuantity,
-//   }
-//   return 'Vou implementar';
-// }
-
-// console.log(animalCount('lions'));
-// console.log(animalCount());
+function animalCount(species) {
+  // seu código aqui
+  if (species === undefined) {
+    return animals.reduce((acc, curr) => {
+      acc[curr.name] = curr.residents.length;
+      return acc;
+    }, {});
+  }
+  return animals.find((animal) => animal.name === species).residents.length;
+} // Consegui entender a lógica de utilizar o reduce e sua criação de objeto através do código do Paulo Henrique!
 
 // function entryCalculator(entrants) {
 //   // seu código aqui
@@ -103,7 +97,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 // function schedule(dayName) {
 //   // seu código aqui
+//   const fullSchedule = {};
+//   const days = Object.keys(hours);
+//   const timeOpen = hours.Tuesday;
+//   if (dayName === undefined) {
+//     return hours;
+//   }
 // }
+
+// console.log(schedule());
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
@@ -127,12 +129,13 @@ function increasePrices(percentage) {
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
+//   if (idOrName === undefined) return employees.filter((employee) employee.id && employee.);
 // }
 
 module.exports = {
   // entryCalculator,
-  // schedule,filter
-  // animalCount,
+  // schedule,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
