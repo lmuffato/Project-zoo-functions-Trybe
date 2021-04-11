@@ -56,9 +56,85 @@ function entryCalculator(entrants = {}) {
   return howMany.reduce((acc, curr, index) => acc + (thePrice[index] * curr[1]), 0);
 }
 
-// function animalMap(options) {
-//   // seu código aqui
-// }
+// the challenge stars here
+
+const animalsByIdsV2 = (...theids) => animalsByIds(...theids).map((animal) =>
+  animal.name);
+
+const AnimalsIdsByLocation = (theLocation) => {
+  const theAnimals = animals.filter((animal) => animal.location === theLocation);
+  const theIds = theAnimals.map((animal) => animal.id);
+  return theIds;
+};
+const firstMap = () => ({
+  NE: animalsByIdsV2(...AnimalsIdsByLocation('NE')),
+  NW: animalsByIdsV2(...AnimalsIdsByLocation('NW')),
+  SE: animalsByIdsV2(...AnimalsIdsByLocation('SE')),
+  SW: animalsByIdsV2(...AnimalsIdsByLocation('SW')),
+});
+
+// first part done
+
+const turnWithName = (theLocation, isSort = false) => {
+  const animalsSpeNames = animalsByIdsV2(...AnimalsIdsByLocation(theLocation));
+  const theAnimals = animalsSpeNames.map((animalName) => animals.find((animal) =>
+    animal.name === animalName));
+  const withoutSort = theAnimals.reduce((acc, curr) => ([
+    ...acc,
+    { [curr.name]: curr.residents.map((resident) => resident.name) },
+  ]), []);
+  const withSort = theAnimals.reduce((acc, curr) => ([
+    ...acc,
+    { [curr.name]: curr.residents.map((resident) => resident.name).sort() },
+  ]), []);
+  return isSort ? withSort : withoutSort;
+};
+
+const includeNamesTrue = (isSort = false) => ({
+  NE: turnWithName('NE', isSort),
+  NW: turnWithName('NW', isSort),
+  SE: turnWithName('SE', isSort),
+  SW: turnWithName('SW', isSort),
+});
+
+// second part done, includeNames
+
+const sexIsDefined = (theLocation, sexDefine, sorted = false) => {
+  const animalsSpeNames = animalsByIdsV2(...AnimalsIdsByLocation(theLocation));
+  const theAnimals = animalsSpeNames.map((animalName) => animals.find((animal) =>
+    animal.name === animalName));
+  const notSorted = theAnimals.reduce((acc, curr) => ([
+    ...acc,
+    { [curr.name]: curr.residents.filter((ele) =>
+      ele.sex === sexDefine).map((resident) => resident.name) },
+  ]), []);
+  const isSorted = theAnimals.reduce((acc, curr) => ([
+    ...acc,
+    { [curr.name]: curr.residents.filter((ele) =>
+      ele.sex === sexDefine).map((resident) => resident.name).sort() },
+  ]), []);
+  return sorted ? isSorted : notSorted;
+};
+
+const includeNamesWithSex = (theSex, sorted = false) => ({
+  NE: sexIsDefined('NE', theSex, sorted),
+  NW: sexIsDefined('NW', theSex, sorted),
+  SE: sexIsDefined('SE', theSex, sorted),
+  SW: sexIsDefined('SW', theSex, sorted),
+});
+
+// third part done, when define sex
+
+function animalMap(options = { includeNames: false, sex: 0, sorted: false }) {
+  let what2Return = '';
+  what2Return = options.includeNames ? includeNamesTrue(options.sorted) : firstMap();
+  what2Return = ((options.sex === 'male' || options.sex === 'female')
+    && options.includeNames === true)
+    ? includeNamesWithSex(options.sex, options.sorted) : what2Return;
+  return what2Return;
+}
+
+// ends here
 
 function schedule(dayName) {
   const theHours = Object.entries(hours);
@@ -89,8 +165,7 @@ function increasePrices(percentage) {
   data.prices = { ...newPrices };
 }
 
-const animalsByIdsV2 = (...theids) => animalsByIds(...theids).map((animal) =>
-  animal.name);
+// req 13
 
 const allResponsibleFor = () => employees.reduce((acc, curr) => (
   { ...acc,
@@ -114,7 +189,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
