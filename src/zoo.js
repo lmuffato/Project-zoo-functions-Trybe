@@ -95,12 +95,20 @@ const getWeek = (dayName) => (acc, [key, value]) => {
 function schedule(dayName) {
   return Object.entries(hours).reduce(getWeek(dayName), {});
 }
-console.log(schedule());
+// console.log(schedule());
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqu
-// }
-
+function oldestFromFirstSpecies(idEmployee) {
+  const employee = employees.find((idsearch) => idsearch.id === idEmployee);
+  const firstAnimal = employee.responsibleFor[0];
+  const animal = animals.find(({ id }) => id === firstAnimal);
+  const { residents } = animal;
+  // código feito baseado no pull request do Murilo Gonçalves. Pude perceber que era necessário guardar os resultados das Hof em constantes. Aprendi bastante na análise dos destructuring feitos nas chaves a serem usadas nos filtros buscados, o que resultou em um código muito mais limpo.
+  const { name, sex, age } = residents
+    .sort((a, b) => b.age - a.age)[0];
+  // muito inteligênte o uso dessa lógica de organizar os números e com eles organizados pegar o que ficará na primeira posição que corresponde ao maior número.
+  return [name, sex, age];
+}
+console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 // function increasePrices(percentage) {
 //   // seu código aqui
 // }
@@ -120,7 +128,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
