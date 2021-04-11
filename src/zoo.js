@@ -116,25 +116,37 @@ function entryCalculator(entrants) {
 // }
 
 // function schedule(dayName) {
-//   const dias = Object.entries(hours).map((item) => `${item[0]}: Open from ${item[1].open}am until ${item[1].close}pm`);
-
 //   if (dayName === undefined) {
-//     return dias;
+//     return Object.entries(hours).map((item) => {
+//       if (item[1].open === 0 && item[1].close === 0) return `${item[0]}:CLOSED`;
+//       return `${item[0]}: Open from ${item[1].open}am until ${item[1].close}pm`;
+//     });
 //   }
 
-//   const dia = Object.entries(hours).find((item) => item[0] === dayName);
-//   return `${dia[0]}: Open from ${dia[1].open}am until ${dia[1].close}pm`;
+//   const horario = {};
+//   if (dayName === 'Monday') {
+//     horario[`${dayName}`] = 'CLOSED'; // adiciono uma chave e um valor ao objeto
+//   } else {
+//     horario[`${dayName}`] = `Open from ${hours[dayName].open}am until ${hours[dayName].close}pm`;
+//   }
+//   return horario;
 // }
 
-// function oldestFromFirstSpecies(id) {
-//   const objFuncionario = employees.find((item) => item.id === id);
-//   const arrayAnimais = objFuncionario.responsibleFor;
+function oldestFromFirstSpecies(id) {
+  const objFuncionario = employees.find((item) => item.id === id); // retorna o objeto do funcionario
+  const animal = objFuncionario.responsibleFor[0]; // retorna array com os animais resposaveis e pega o primeiro animal
+  const objAnimal = animals.find((item) => item.id === animal).residents; // retorna obj do animal especifico e pego o array residents que está dentro desse objeto
 
-//   const objAnimais = animals.filter((item) => item.id === id);
+  // fiz um reduce para diminuir o array de objetos que eu tinha em apenas 1 objeto. Se a idade do previusValue for mais que idade do currentValue eu seleciono esse objeto
+  const maisVelho = objAnimal.reduce((acc, item) => {
+    if (acc.age > item.age) return acc;
+    return item;
+  });
 
-//   const maiorIdade = animals.every((residente) => residente.age < );
-//   return idadeMinima;
-// }
+  // descoonstruo o objeto para pegar apenas os valores
+  const { name, sex, age } = maisVelho;
+  return [name, sex, age];
+}
 
 function increasePrices(percentage) {
   const { Adult, Child, Senior } = prices;
@@ -175,7 +187,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
