@@ -9,12 +9,11 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require('./data');
+const { animals, employees, hours, prices } = require('./data');
 
 function animalsByIds(...listOfIdsToSearch) {
   // This guard clause is not necessary, but imo it makes the code prettier
   if (listOfIdsToSearch.length === 0) return [];
-  const { animals } = data;
   const animalsList = [];
   listOfIdsToSearch.forEach((idToSearchFor) => {
     animalsList.push(animals.find(({ id }) => id === idToSearchFor));
@@ -23,14 +22,12 @@ function animalsByIds(...listOfIdsToSearch) {
 }
 
 function animalsOlderThan(animalName, ageToCheck) {
-  const { animals } = data;
   const animalMatch = animals.find(({ name }) => name === animalName);
   return animalMatch.residents.every(({ age }) => age >= ageToCheck);
 }
 
 function employeeByName(employeeName) {
   if (typeof employeeName === 'undefined') return ({});
-  const { employees } = data;
   return employees.find(({ firstName, lastName }) => firstName === employeeName
     || lastName === employeeName);
 }
@@ -38,18 +35,15 @@ function employeeByName(employeeName) {
 const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 
 function isManager(idToSearch) {
-  const { employees } = data;
   return employees.some(({ managers }) => managers.includes(idToSearch));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const { employees } = data;
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
   employees.push(newEmployee);
 }
 
 function animalCount(speciesNameToSearch) {
-  const { animals } = data;
   if (typeof speciesNameToSearch === 'string') {
     return animals.find(({ name }) => name === speciesNameToSearch).residents.length;
   }
@@ -60,7 +54,6 @@ function animalCount(speciesNameToSearch) {
 function entryCalculator(entrants) {
   if (typeof entrants === 'undefined') return 0;
   if (Object.keys(entrants).length === 0) return 0;
-  const { prices } = data;
   const entrantsEntries = Object.entries(entrants);
   return entrantsEntries.reduce((acc, cur) => acc + prices[cur[0]] * cur[1], 0);
 }
@@ -79,14 +72,14 @@ const populateDictionary = (dict, entries) => {
     dict[location].push(item); // pushes the ENTIRE OBJECT
   });
 };
-const noName = (animals) => {
+const noName = (animalsList) => {
   const animalList = [];
-  animals.forEach(({ name }) => animalList.push(name));
+  animalsList.forEach(({ name }) => animalList.push(name));
   return animalList;
 };
-const withName = (animals) => {
+const withName = (animalsList) => {
   const animalList = [];
-  animals.forEach(({ name, residents }) => {
+  animalsList.forEach(({ name, residents }) => {
     const xablau = { [name]: [] };
     residents.forEach(({ name: animalName }) => {
       xablau[name].push(animalName);
@@ -97,8 +90,8 @@ const withName = (animals) => {
 };
 const formatDictionary = (dict, callback) => {
   const toReturn = {};
-  Object.entries(dict).forEach(([location, animals]) => {
-    toReturn[location] = callback(animals);
+  Object.entries(dict).forEach(([location, animalsList]) => {
+    toReturn[location] = callback(animalsList);
   });
   return (toReturn);
 };
@@ -167,7 +160,6 @@ const maybeFilterAnimals = (dict, arg) => {
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters#destructured_parameter_with_default_value_assignment
 function animalMap({ includeNames = false, sorted = false, sex = false } = {}) {
   // const { includeNames = false, sorted = false, sex = false } = options || {};
-  const { animals } = data;
   const locations = getLocations(animals);
   const animalsDividedByLocation = createEmptyDictionary(locations);
   populateDictionary(animalsDividedByLocation, animals);
@@ -187,7 +179,6 @@ const message = (open, close) => {
 };
 
 const schedule = (dayName) => {
-  const { hours } = data;
   const obj = Object.entries(hours).reduce((acc, [weekday, { open, close }]) =>
     ({ ...acc, [weekday]: message(open, close) }), ({}));
   if (typeof dayName === 'undefined') return obj;
@@ -206,7 +197,6 @@ const biggestProp = curry((p, arrayOfIntegers) =>
 const objPropsToArr = (...args) => (obj) => args.map((p) => obj[p]);
 // ----- Business specific ----- //
 function oldestFromFirstSpecies(thisId) {
-  const { employees, animals } = data;
   return pipe(idMatch, find(employees), prop('responsibleFor'), firstElem,
     pipe(idMatch, find(animals)), pipe(prop('residents'), biggestProp('age')),
     objPropsToArr('name', 'sex', 'age'))(thisId);
@@ -228,14 +218,27 @@ const toFixed = (num, precision) => {
   return parseFloat(str);
 };
 function increasePrices(percentage) {
-  const { prices } = data;
   Object.keys(prices).forEach((key) => {
     prices[key] = toFixed(prices[key] + prices[key] * (percentage / 100), 2);
   });
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  function fName({ firstName, lastName }) {
+    return `${firstName} ${lastName}`;
+  }
+  const obj = {};
+  employees.forEach((employee) => {
+    const key = fName(employee);
+    const value = employee.responsibleFor.map((givenId) =>
+      animals.find(({ id }) => id === givenId).name);
+    obj[key] = value;
+  });
+  if (typeof idOrName === 'undefined') return obj;
+  const employee = employees.find(({ id, firstName, lastName }) =>
+    [id, firstName, lastName].includes(idOrName));
+  const hisFullName = fName(employee);
+  return { [hisFullName]: obj[hisFullName] };
 }
 
 module.exports = {
