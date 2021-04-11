@@ -116,6 +116,26 @@ function orderAnimalsNames(sortObject, includeNames = false, sorted) {
   }
 }
 
+function sexReturn(sexObject, sex, sorted) {
+  Object.keys(sexObject).forEach((region) => {
+    sexObject[region].forEach((animal) => {
+      const specimenSex = animal;
+      const animalName = Object.keys(animal)[0];
+      let sexFiltred = animals.filter(({ name }) => name === animalName)
+        .map((specie) => specie.residents)[0]
+        .filter((specimens) => specimens.sex === sex).map((specimen) => specimen.name);
+      sexFiltred = sorted ? sexFiltred.sort() : sexFiltred;
+      specimenSex[animalName] = sexFiltred;
+    });
+  });
+}
+
+function animalsSex(sexObject, includeNames = false, sex = false, sorted) {
+  if (includeNames && sex) {
+    sexReturn(sexObject, sex, sorted);
+  }
+}
+
 function animalMap(options = false) {
   // Com funcionalidades sugeridas por Wanderson Sales
   // seu código aqui
@@ -131,13 +151,10 @@ function animalMap(options = false) {
   }
 
   orderAnimalsNames(newObjt, includeNames, sorted);
+  animalsSex(newObjt, includeNames, sex, sorted);
 
   return newObjt;
 }
-
-// console.log(animalMap());
-// console.log(animalMap({ includeNames: true }));
-console.log(animalMap({ includeNames: true, sex: 'female' }));
 
 function returnDays(day) {
   const openHour = hours[day].open;
