@@ -87,7 +87,45 @@ function entryCalculator(entrants) {
 }
 
 // function animalMap(options) {
-//   // seu código aqui
+//   const locations = ['NE', 'NW', 'SE', 'SW'];
+
+//   if (options === undefined || options.includeNames !== true) {
+//     return locations.reduce((acc, curr) => {
+//       acc[curr] = data.animals.filter((animal) =>
+//         animal.location === curr).map((located) => located.name);
+//       return acc;
+//     }, {});
+//   } 
+  
+//   else {
+//     return locations.reduce((acc, curr) => {
+//       acc[curr] = data.animals.filter((animal) =>
+//         animal.location === curr).map((located) => {
+//         const obj = {};
+//         (options.sorted === true) ? 
+//         obj[located.name] = located.residents.reduce((arrayResidents, currentResident) => {
+//           if (options.sex === undefined) {
+//             arrayResidents.push(currentResident.name);
+//           } else if (currentResident.sex === 'female') {
+//           arrayResidents.push(currentResident.name);
+//           }
+//           return arrayResidents;
+//         }, []).sort() :
+//         obj[located.name] = located.residents.reduce((arrayResidents, currentResident) => {
+//           if (options.sex === undefined) {
+//             arrayResidents.push(currentResident.name);
+//           }
+          
+//           else if (currentResident.sex === 'female') {
+//           arrayResidents.push(currentResident.name);
+//           }
+//           return arrayResidents;
+//         }, []);
+//         return obj;
+//         });
+//       return acc;
+//     }, {});
+//   }
 // }
 
 // function schedule(dayName) {
