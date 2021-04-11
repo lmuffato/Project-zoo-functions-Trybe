@@ -75,7 +75,8 @@ const entryCalculator = ({ Adult = 0, Child = 0, Senior = 0 } = 0) =>
 
 // Requisito 11
 
-const getBigger = (bigger, number) => ((bigger > number.age) ? bigger : number.age);
+const getBigger = (bigger, number) =>
+  (bigger > number.age ? bigger : number.age);
 
 const oldestFromFirstSpecies = (id) => {
   const employeeObj = employees.find((employee) => employee.id === id);
@@ -83,13 +84,24 @@ const oldestFromFirstSpecies = (id) => {
   const animalResidents = animals.find((animal) => animal.id === animalId)
     .residents;
   const oldestAnimalYears = animalResidents.reduce(getBigger, 0);
-  const oldestAnimal = animalResidents.find((animal) => animal.age === oldestAnimalYears);
+  const oldestAnimal = animalResidents.find(
+    (animal) => animal.age === oldestAnimalYears,
+  );
   return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 };
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+const increasePrices = (percentage) => {
+  const tickets = Object.keys(prices);
+
+  tickets.forEach((ticketType) => {
+    prices[ticketType] += prices[ticketType] * (percentage / 100);
+    prices[ticketType] = Math.round(prices[ticketType] * 100) / 100;
+  });
+
+  return prices;
+};
+
+// console.log(increasePrices(50));
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -107,6 +119,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
