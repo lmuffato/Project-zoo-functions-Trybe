@@ -79,7 +79,6 @@ const addAnimalsByGenre = (map, { sex, sorted }) => {
       output[animal] = animals.find((item) => item.name === animal).residents
         .filter((element) => element.sex === sex)
         .map((item2) => item2.name);
-      console.log('passo2');
       return output;
     });
   });
@@ -139,11 +138,6 @@ function animalMap(options) {
   if (includeNames) return getAnimalsNamesBySpecies(options);
 }
 
-// reduce((item, anm) => {
-// item[anm] = 'batata';
-// return item;
-// }, {});
-
 const parkServiceHours = () => {
   const output = {};
   Object.keys(hours).forEach((el) => {
@@ -160,17 +154,23 @@ function schedule(dayName) {
     ? 'CLOSED' : `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
   return output;
 }
-console.log(schedule());
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
-
+function oldestFromFirstSpecies(id) {
+  const findAnimal = employees.find((employee) => employee.id === id).responsibleFor[0];
+  console.log(findAnimal);
+  const animal = animals.find((el) => el.id === findAnimal);
+  const oldResidentAge = animal.residents.reduce((acc, item) =>
+    ((acc > item.age) ? acc : item.age));
+  const { name, sex, age } = animal.residents.find((resident) =>
+    resident.age === oldResidentAge);
+  return [name, sex, age];
+}
+console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 // function increasePrices(percentage) {
-//   // seu código aqui
+//   seu código aqui
 // }
 
 // function employeeCoverage(idOrName) {
-//   // seu código aqui
+//   seu código aqui
 // }
 
 module.exports = {
@@ -184,7 +184,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
