@@ -84,7 +84,7 @@ function schedule(dayName) {
 // Recebi ajuda dos amigos, Adelino, Gabriel, Rafael Medeiros, Murilo e Lucas Lara em um plantão no sábado.
 
 function oldestFromFirstSpecies(funcionario) {
-  const responsabilidade = employees.find((ids) => ids.id === funcionario).responsibleFor;
+  const responsabilidade = employees.find(({ id }) => id === funcionario).responsibleFor;
 
   const animal = animals.find(({ id }) => id === responsabilidade[0]);
   const { residents } = animal;
@@ -93,9 +93,11 @@ function oldestFromFirstSpecies(funcionario) {
   return Object.values(residents[0]);
 } // Obtive ajuda do colega Adelino e Rafael Ribeiro.
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  Object.keys(prices).forEach((key) => {
+    prices[key] = parseFloat((prices[key] * (percentage / 100 + 1) + 0.005).toFixed(2));
+  });
+} // Obtive ajuda dos colegas Tiago Santos, Rafael Medeiros e Victor.
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -113,6 +115,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
