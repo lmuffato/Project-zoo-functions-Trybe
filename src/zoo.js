@@ -82,6 +82,7 @@ function entryCalculator(entrants) {
 // function animalMap(options) {
 // seu código aqui
 // }
+
 const hora = (value) => value - 12;
 function schedule(dayName) {
   const { hours } = data;
@@ -96,11 +97,17 @@ function schedule(dayName) {
   Object.assign(obj, { Monday: 'CLOSED' });
   return (dayName !== undefined ? { [dayName]: obj[dayName] } : obj);
 }
-console.log(schedule());
-// function oldestFromFirstSpecies(id) {
-// seu código aqui
-// }
 
+function oldestFromFirstSpecies(id) {
+  const { employees } = data;
+  const { animals } = data;
+
+  const employ = employees.find((employee) => employee.id === id);
+  const anim = animals.find((animal) => animal.id === employ.responsibleFor[0]);
+  const old = anim.residents.reduce((oldest, resident) =>
+    (resident.age > oldest.age ? resident : oldest));
+  return [old.name, old.sex, old.age];
+}
 // function increasePrices(percentage) {
 // seu código aqui
 // }
@@ -120,7 +127,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
