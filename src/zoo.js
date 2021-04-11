@@ -9,11 +9,12 @@ eslint no-unused-vars: [
 ]
 */
 
+const data = require('./data');
 const { animals, employees } = require('./data');
 /* const data = require('./data'); */
 
 function animalsByIds(...ids) {
-  return animals.filter(({ id }) => ids.includes(id));
+  return animals.filter(({ id }) => ids.includes(id)); // this includes was based in Murilo Goncalves
 }
 
 function animalsOlderThan(animal, animalsAge) {
@@ -32,12 +33,6 @@ function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
-/* function createEmployee(personalInfo, associatedWith) {
-  const { id, firstName, lastName } = personalInfo;
-  const { managers, responsibleFor } = associatedWith;
-  return { id, firstName, lastName, managers, responsibleFor };
-} */
-
 function isManager(id) {
   return employees.some(({ managers }) => managers.find((manager) => manager === id));
 }
@@ -46,9 +41,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-/* function animalCount(species) {
-  // seu código aqui
-} */
+function animalCount(species) {
+  const howMannyAnimals =  animals.reduce((acc, crr) => {
+    acc[crr.name] = crr.residents.length;
+    return acc;
+    }, {});
+
+  if (!species) return howMannyAnimals;
+  return howMannyAnimals[species];
+}
+
+console.log(animalCount());
+console.log(animalCount('lions'));
 
 /* function entryCalculator(entrants) {
   // seu código aqui
@@ -81,9 +85,9 @@ module.exports = {
   createEmployee,
   isManager,
   addEmployee,
+  animalCount,
   /* entryCalculator,
   schedule,
-  animalCount,
   animalMap,
   employeeCoverage,
   oldestFromFirstSpecies,
