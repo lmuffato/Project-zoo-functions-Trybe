@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -62,15 +62,7 @@ function entryCalculator(entrants) {
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
-// //////////////////////////////////////////////////////////////////////////
 
-// const objeto = {
-//   NE: ['leão', 'girafa'],
-// }
-// const array = objeto.NE.reduce((obj, animal) => {
-//   obj[animal] = 'Batata'
-//   return obj;
-// }, {})
 const getSex = (sex) => sex === 'female' || sex === 'male';
 
 const addAnimalsByGenre = (map, { sex, sorted }) => {
@@ -147,20 +139,28 @@ function animalMap(options) {
   if (includeNames) return getAnimalsNamesBySpecies(options);
 }
 
-const options = { includeNames: true, sex: 'female', sorted: true };
-console.log(animalMap(options));
-
 // reduce((item, anm) => {
 // item[anm] = 'batata';
 // return item;
 // }, {});
 
-// function schedule(dayName) {
-//   if (dayName === undefined) {
-//     return Object.entries(hours).
-//   }
-// }
+const parkServiceHours = () => {
+  const output = {};
+  Object.keys(hours).forEach((el) => {
+    output[el] = ((hours[el].open - hours[el].close) === 0)
+      ? 'CLOSED' : `Open from ${hours[el].open}am until ${hours[el].close - 12}pm`;
+  });
+  return output;
+};
 
+function schedule(dayName) {
+  if (dayName === undefined) return parkServiceHours();
+  const output = {};
+  output[dayName] = ((hours[dayName].close - hours[dayName].open) === 0)
+    ? 'CLOSED' : `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
+  return output;
+}
+console.log(schedule());
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
@@ -175,7 +175,7 @@ console.log(animalMap(options));
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   animalMap,
   animalsByIds,
