@@ -143,11 +143,17 @@ function schedule(dayName) {
   return objDaySchedule(dayName);
 }
 
-/*
+//  Requisito 11
+function getSpecieManegedForThisId(id) {
+  return data.animals.filter((animal) => animal.id === data.employees
+    .filter((element) => element.id === id)[0].responsibleFor[0])[0];
+}
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+  return Object.values(getSpecieManegedForThisId(id).residents.sort((a, b) => b.age - a.age)[0]);
 }
 
+/*
 function increasePrices(percentage) {
   // seu código aqui
 }
@@ -168,7 +174,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  //  oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   //  increasePrices,
   createEmployee,
 };
