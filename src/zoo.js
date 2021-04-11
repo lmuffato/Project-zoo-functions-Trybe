@@ -65,7 +65,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // }
 // console.log(animalCount('lions'));
 
-  /*  function entryCalculator(entrants) {
+/* function entryCalculator(entrants) {
   // seu código aqui
 }
 
@@ -92,7 +92,7 @@ function employeeCoverage(idOrName) {
 module.exports = {
   // entryCalculator,
   // schedule,
-  //animalCount,
+  // animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
