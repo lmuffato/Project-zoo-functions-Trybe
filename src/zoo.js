@@ -50,9 +50,16 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   employees.push(newEmployee);
 }
 
-// function animalCount(species) {
-// seu código aqui
-// }
+function animalCount(species) {
+  if (!species) {
+    const animalObj = {};
+    animals.forEach((animal) => {
+      animalObj[animal.name] = animal.residents.length;
+    });
+    return animalObj;
+  }
+  return animals.find((animal) => animal.name === species).residents.length;
+}
 
 function entryCalculator(entrants) {
   if (!entrants || entrants === {}) {
@@ -90,7 +97,7 @@ function increasePrices(percentage) {
 module.exports = {
   entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
