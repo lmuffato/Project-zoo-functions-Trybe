@@ -34,7 +34,7 @@ function employeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  return {...personalInfo, ...associatedWith};
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
@@ -49,8 +49,8 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     id,
     firstName,
     lastName,
-    managers, 
-    responsibleFor
+    managers,
+    responsibleFor,
   });
 }
 
@@ -65,7 +65,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // }
 // console.log(animalCount('lions'));
 
-function entryCalculator(entrants) {
+/*function entryCalculator(entrants) {
   // seu código aqui
 }
 
@@ -87,7 +87,7 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
-}
+}*/
 
 module.exports = {
   // entryCalculator,
