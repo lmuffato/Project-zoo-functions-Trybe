@@ -79,23 +79,29 @@ function entryCalculator(entrants) {
 }
 
 function getLocation() {
-  const newObjt = {};
+  const locationObject = {};
   // const animalsLocation = animals
   animals.map((animal) => animal.location)
     .forEach((region) => {
-      newObjt[region] = animals.filter((specimen) => specimen.location === region)
+      locationObject[region] = animals.filter((specimen) => specimen.location === region)
         .map((animal) => animal.name);
     });
-  return newObjt;
+  return locationObject;
 }
 
-function addNames() { }
-
-function animalMap(options) {
+function animalMap(options = false) {
   // Com funcionalidades sugeridas por Wanderson Sales
   // seu código aqui
-  if (options === undefined) return getLocation();
-  if (options.valueOf('includeNames') === true) return addNames();
+  let newObjt = {};
+  const includeNames = !!options.includeNames;
+
+  if (includeNames) {
+    newObjt = addNames();
+  } else {
+    return getLocation();
+  }
+
+  return newObjt;
 }
 
 // console.log(animalMap());
