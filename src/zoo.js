@@ -60,8 +60,14 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 
 function animalCount(species) {
   const { animals } = data;
-  if (!species) return {};
-  return animals.find(({ name }) => name === species).popularity;
+  if (!species) {
+    return animals.reduce((acc, { name, residents }) => {
+      acc[name] = residents.length;
+      return acc;
+    }, {});
+  }
+  const animal = animals.find(({ name }) => name === species);
+  return animal.residents.length;
 }
 
 // function entryCalculator(entrants) {
