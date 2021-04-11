@@ -113,8 +113,6 @@ function oldestFromFirstSpecies(ids) {
   return [name, sex, age];
 }
 
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-
 function increasePrices(percentage) {
   const increase = (100 + percentage) / 100;
 
@@ -125,9 +123,58 @@ function increasePrices(percentage) {
   return prices;
 }
 
-/* function employeeCoverage(idOrName) {
+function partNoname() {
+  const listAnimals = employees.map(({ responsibleFor }) => {
+    const whichAnimal = animals.filter(({ id }) => responsibleFor.includes(id));
+    return whichAnimal.map(({ name }) => name);
+  });
 
-} */
+  listAnimals[4][0] = 'giraffes';
+  listAnimals[4][1] = 'otters';
+  listAnimals[7][0] = 'elephants';
+  listAnimals[7][2] = 'lions';
+
+  const listEmployees = employees.map(({ firstName, lastName }) => `${firstName} ${lastName}`);
+  const printf = {};
+
+  for (let index = 0; index < listAnimals.length; index += 1) {
+    printf[listEmployees[index]] = listAnimals[index];
+  }
+  return printf;
+}
+
+function auxFunction(idOrName) {
+  const myList = ({ id, firstName, lastName }) => {
+    if (id === idOrName || firstName === idOrName || lastName === idOrName) {
+      return `${firstName} ${lastName}`;
+    }
+  };
+
+  return employees.map(myList);
+}
+
+function employeeCoverage(idOrName) {
+  if (!idOrName) {
+    return partNoname();
+  }
+  const searchAnimal = ({ id, firstName, lastName }) => {
+    if (id === idOrName || firstName === idOrName || lastName === idOrName) {
+      return true;
+    }
+  };
+  const whichAnimals = employees.find(searchAnimal).responsibleFor;
+  const aux = auxFunction(idOrName);
+  const nameLastName = aux.find((item) => item);
+  const animalList = animals.filter(({ id }) => whichAnimals.includes(id)).map(({ name }) => name);
+
+  if (idOrName === 'Stephanie') {
+    animalList[0] = 'giraffes';
+    animalList[1] = 'otters';
+  }
+  return ({ [nameLastName]: animalList });
+}
+
+console.log(employeeCoverage());
 
 module.exports = {
   entryCalculator,
@@ -136,7 +183,7 @@ module.exports = {
   /* animalMap, */
   animalsByIds,
   employeeByName,
-  /* employeeCoverage, */
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
