@@ -174,18 +174,18 @@ function schedule(dayName) {
   const entriesHours = Object.entries(hours);
   const keyHours = Object.keys(hours);
   if (!dayName) {
-    return entriesHours.reduce((acc, [key, { open, close }]) => {
-      acc[key] = formatData(open, close);
+    return entriesHours.reduce((acc, [weekday, { open, close }]) => {
+      acc[weekday] = formatData(open, close);
       return acc;
     }, {});
   }
   const values = Object.values(entriesHours[keyHours.indexOf(dayName)]);
-  const [key, value] = values;
+  const [weekday, { open, close }] = values;
   return {
-    [key]: formatData(value.open, value.close),
+    [weekday]: formatData(open, close),
   };
 }
-
+console.log(schedule('Tuesday'));
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
