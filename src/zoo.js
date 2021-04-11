@@ -153,9 +153,9 @@ function oldestFromFirstSpecies(id) {
   return Object.values(getSpecieManegedForThisId(id).residents.sort((a, b) => b.age - a.age)[0]);
 }
 
+// Requisito 12
 function increasePrices(percentage) {
   // seu código aqui
-
   const arr = Object.keys(data.prices);
   arr.forEach((element) => {
     data.prices[element] = Math.round(((data.prices[element] * (percentage / 100))
@@ -163,11 +163,36 @@ function increasePrices(percentage) {
   });
 }
 
-/*
+// Requisito 13
+
+function getArrayAninalsUnderResponsiniltes(arrayOfresponsibleFor) {
+  const arrayAnimalsUnderCare = arrayOfresponsibleFor.map((element) => data.animals
+    .filter((animal) => element === animal.id)[0].name);
+  return arrayAnimalsUnderCare;
+}
+
+function employeeYAndHisAnimalsList() {
+  return data.employees.reduce((acc, cur) => {
+    const fullName = `${cur.firstName} ${cur.lastName}`;
+    acc[fullName] = getArrayAninalsUnderResponsiniltes(cur.responsibleFor);
+    return acc;
+  }, {});
+}
+
+function employeeYAndHisAnimals(idOrName) {
+  const employee = data.employees.filter((employeer) => employeer.id === idOrName
+    || employeer.firstName === idOrName || employeer.lastName === idOrName)[0];
+  const employeeRespForAnimals = {};
+  const fullName = `${employee.firstName} ${employee.lastName}`;
+  employeeRespForAnimals[fullName] = getArrayAninalsUnderResponsiniltes(employee.responsibleFor);
+  return employeeRespForAnimals;
+}
+
 function employeeCoverage(idOrName) {
   // seu código aqui
+  if (idOrName === undefined) return employeeYAndHisAnimalsList();
+  return employeeYAndHisAnimals(idOrName);
 }
-*/
 
 module.exports = {
   entryCalculator,
@@ -176,7 +201,7 @@ module.exports = {
   //  animalMap,
   animalsByIds,
   employeeByName,
-  //  employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
