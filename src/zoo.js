@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 /* essa porra não quer adicionar o arquivo, por isso estou escrevendo essa merda de cometario */
 
-const { animals, employees, prices, hours } = require('./data');
+const { animals, employees, prices } = require('./data');
 
 function animalsByIds(...idsRest) {
   // seu código aqui
@@ -71,7 +71,7 @@ function entryCalculator(entrants = 0) {
 }
 
 // function animalMap(options) {
-//   // seu código aqui  
+//    // seu código aqui
 // }
 
 // function schedule(dayName) {
