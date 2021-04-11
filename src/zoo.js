@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 /* essa porra não quer adicionar o arquivo, por isso estou escrevendo essa merda de cometario */
 
-const { animals, employees } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 
 function animalsByIds(...idsRest) {
   // seu código aqui
@@ -54,28 +54,30 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-// function animalCount(species) {
-//   if ( species === undefined){
-// return animals.reduce((obj, animalValue) => {
-//   obj[animalValue.name] = animalValue.residents.length;
-//   return obj;
-// },{})
-//   }
-// return animals.find(({name}) => species === name).residents.length;
-// }
-// console.log(animalCount('lions'));
+function animalCount(species) {
+  if (species === undefined) {
+    return animals.reduce((acc, animalValue) => {
+      acc[animalValue.name] = animalValue.residents.length;
+      return acc;
+    }, {});
+  }
+  return animals.find(({ name }) => species === name).residents.length;
+}
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+function entryCalculator(entrants = 0) {
+  // seu código aqui
+  return Object.keys(entrants).reduce((accPrices, curValue) =>
+    accPrices + entrants[curValue] * prices[curValue], 0);
+}
 
 // function animalMap(options) {
-//   // seu código aqui
+//   // seu código aqui  
 // }
 
 // function schedule(dayName) {
 //   // seu código aqui
 // }
+// console.log(schedule());
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -90,9 +92,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
