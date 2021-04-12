@@ -141,11 +141,10 @@ const findAnimals = (employee) => {
 function employeeCoverage(idOrName) {
   const employeeCoverageAnimals = {};
   if (idOrName !== undefined) {
-    const employeeSelected = employees.find((employee) => {
-      return (employee.firstName === idOrName
+    const employeeSelected = employees
+      .find((employee) => (employee.firstName === idOrName
         || employee.lastName === idOrName
-        || employee.id === idOrName);
-    });
+        || employee.id === idOrName));
     const employeeSelectedName = `${employeeSelected.firstName} ${employeeSelected.lastName}`;
     employeeCoverageAnimals[employeeSelectedName] = findAnimals(employeeSelected);
     return employeeCoverageAnimals;
