@@ -56,8 +56,23 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const employ = id;
-  console.log(employ);
+  const allManagers = [];
+  let verifier = 0;
+  employees.forEach((info) => {
+    allManagers.push(info.managers);
+  });
+  const isAMan = (element) => {
+    const test = element.some((info) => info === id);
+    if (test === true) {
+      verifier += 1;
+    }
+  };
+  allManagers.forEach(isAMan);
+
+  if (verifier === 0) {
+    return false;
+  }
+  return true;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
