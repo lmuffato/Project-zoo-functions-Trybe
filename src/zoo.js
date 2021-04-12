@@ -56,10 +56,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-// function animalCount(species) {
-//   if (!species) {}
-//   return data.animals.find((animal) => animal.name === species).popularity;
-// }
+function animalCount(species) {
+  if (!species) {
+    return data.animals.reduce((acc, animal) => {
+      acc[animal.name] = animal.residents.length;
+      return acc;
+    }, {});
+  }
+  return data.animals.find((animal) => animal.name === species).residents.length;
+}
 // console.log(animalCount());
 
 //   if (species === undefined) {
@@ -99,17 +104,34 @@ function entryCalculator(entrants) {
 // function animalMap(options) {
 //   // seu código aqui
 // }
+// const openingHours = (open, close) => {
+//   const daysOfTheWeek = Object.keys(data.hours);
+//   const openingHours = Object.values(data.hours);
+//   return open = 'aberto'
+
+// };
+
+// const dayParametro = (dayName) => {
+//   const hour = Object.entries(data.hours);
+//   const objDay = {};
+//   hour.forEach(([day, { open, close }]) => {
+//     if (dayName === day) objDay[dayName] = 'CLOSED';
+//     objDay[dayName] = `Open from ${open}am until ${close - 12}pm`;
+//   });
+//   return objDay;
+// };
 
 // function schedule(dayName) {
 //   const hour = Object.entries(data.hours);
-//   const daysOfTheWeek = Object.keys(data.hours);
-//   const openingHours = Object.values(data.hours);
-
-//   return hour.reduce((acc, day, index) => {
-//     return { [daysOfTheWeek[index]] : `Open from ${openingHours[index].open}am until ${openingHours[index].close - 12}pm` };
-//   }, {});
+//   const objDays = {};
+//   hour.forEach(([day, { open, close }]) => {
+//     if (open !== close) objDays[day] = `Open from ${open}am until ${close - 12}pm`;
+//     if (open === close) objDays[day] = 'CLOSED';
+//   });
+//   if (!dayName) return objDays;
+//   return dayParametro(dayName);
 // }
-// console.log(schedule());
+// console.log(schedule('Monday'));
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -126,7 +148,7 @@ function entryCalculator(entrants) {
 module.exports = {
   entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
