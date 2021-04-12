@@ -27,9 +27,9 @@ function animalsOlderThan(species, animalAge) {
 
 // console.log(animalsOlderThan('lions',15)); // TEST 1 - Expected true
 // console.log(animalsOlderThan('lions',2)); // TEST 2 - Expected false
-// console.log(animalsOlderThan('otters', 7)); // TEST 4 - Expected true 
-// console.log(animalsOlderThan('penguins', 10)); // TEST 3 - Expected true
-// ; console.log(animals[0].residents[0].age) // Propriedade age
+// console.log(animalsOlderThan('otters',7)); // TEST 4 - Expected true
+// console.log(animalsOlderThan('penguins',10)); // TEST 3 - Expected true
+// console.log(animals[0].residents[0].age) // Propriedade age
 
 // function employeeByName(employeeName) {
 //   // seu código aqui
