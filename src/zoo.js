@@ -161,19 +161,13 @@ function oldestFromFirstSpecies(employeeId) {
 }
 
 function increasePrices(number) {
+  // Para essa função, consultei o conteúdo sobre arredondamento e casas decimais:
+  // http://www.javascriptkit.com/javatutors/round.shtml
   const percentNumber = (number + 100) / 100;
-  // const pricesObject = {};
-  const { Adult, Senior, Child } = data.prices;
-  // for (const price in data.prices) {
-  //   pricesObject[price] = Math.round(100 * (data.prices[price] * percentNumber)) / 100;
-  // }
-  // console.log(pricesObject);
-  // data.prices = pricesObject;
-  data.prices = {
-    Adult: Math.round(100 * (Adult * percentNumber)) / 100,
-    Senior: Math.round(100 * (Senior * percentNumber)) / 100,
-    Child: Math.round(100 * (Child * percentNumber)) / 100,
-  };
+  const pricesKeys = Object.keys(prices);
+  pricesKeys.forEach((key) => {
+    data.prices[key] = Math.round(100 * (data.prices[key] * percentNumber)) / 100;
+  });
 }
 
 module.exports = {
