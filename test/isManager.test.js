@@ -12,3 +12,9 @@ describe('Implemente a função isManager', () => {
     assert.deepStrictEqual(actual, expected);
   });
 });
+
+// chefe master stephanie 
+// sub burl, ola, emery
+// burl - sharonda, wilburn, nigel
+// ola - nigel, wilburn, sharonda
+// emery - ardith
