@@ -110,12 +110,12 @@ function schedule(dayName) {
   // seu código aqui
   if (dayName === undefined) {
     const scheduleWeek = hoursWeek.reduce((acc, hour) => {
-      const key = { ...acc };
-      key[hour] = `Open from ${hours[hour].open}am until ${hours[hour].close - 12}pm`;
-      if (key.Monday) {
-        key[hour] = 'CLOSED';
+      const objHours = { ...acc };
+      objHours[hour] = `Open from ${hours[hour].open}am until ${hours[hour].close - 12}pm`;
+      if (objHours.Monday) {
+        objHours[hour] = 'CLOSED';
       }
-      return key;
+      return objHours;
     }, {});
     return scheduleWeek;
   }
@@ -163,3 +163,4 @@ module.exports = {
 
 // Conteúdo utilizado para consulta na resolução de alguns exercícios.:
 // https://stackoverflow.com/questions/19874555/how-do-i-convert-array-of-objects-into-one-object-in-javascript
+// https://youtu.be/NiLUGy1Mh4U
