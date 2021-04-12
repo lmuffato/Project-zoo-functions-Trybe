@@ -47,7 +47,6 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
-  // const { managers } = employees;
   const personCheck = employees.filter((employ) => employ.managers.includes(id));
   return personCheck.some(() => id);
 }
@@ -75,21 +74,19 @@ function animalCount(species) {
   return animals.find((animal) => animal.name === species).residents.length;
 } // Consegui entender a lógica de utilizar o reduce e sua criação de objeto através do código do Paulo Henrique!
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-//   if (entrants === undefined || Object.keys(entrants).length === 0) {
-//     return 0;
-//   }
+const summAdult = (entrants) => (prices.Adult * ((entrants === undefined) ? 0 : entrants));
 
-//   const summAdult = (prices.Adult * ((entrants.Adult === undefined) ? 0 : entrants.Adult));
-//   const summChild = (prices.Child * ((entrants.Child === undefined) ? 0 : entrants.Child));
-//   const summSenior = (prices.Senior * ((entrants.Senior === undefined) ? 0 : entrants.Senior));
-//   return summAdult + summChild + summSenior;
-// }
+const summChild = (entrants) => (prices.Child * ((entrants === undefined) ? 0 : entrants));
 
-// console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
-// console.log(entryCalculator({ 'Adult': 1 }));
-// console.log(entryCalculator({}));
+const summSenior = (entrants) => (prices.Senior * ((entrants === undefined) ? 0 : entrants));
+
+function entryCalculator(entrants) {
+  // seu código aqui
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  return summAdult(entrants.Adult) + summChild(entrants.Child) + summSenior(entrants.Senior);
+}
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -127,19 +124,53 @@ function increasePrices(percentage) {
   return prices;
 }
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-//   if (idOrName === undefined) return employees.filter((employee) employee.id && employee.);
-// }
+const inputEmpty = () => employees.reduce((acc, curr) => {
+  const species = curr.responsibleFor;
+  const arrayAnimals = animals.filter((animal) => species.includes(animal.id));
+  const nameAnimal = arrayAnimals.reduce((accArray, currArray) => {
+    accArray.push(currArray.name);
+    return accArray;
+  }, []);
+  acc[`${curr.firstName} ${curr.lastName}`] = nameAnimal;
+  return acc;
+}, {});
+
+const inputEmploye = (idOrName) => {
+  const employeByInput = employees.reduce((acc, curr) => {
+    const employeInput = employees.find((employe) => employe.firstName === idOrName
+      || employe.lastName === idOrName || employe.id === idOrName);
+    const species = employeInput.responsibleFor;
+    const arrayAnimals = animals.filter((animal) => species.includes(animal.id));
+    const nameAnimal = arrayAnimals.reduce((accArray, currArray) => {
+      accArray.push(currArray.name);
+      return accArray;
+    }, []);
+    acc[`${employeInput.firstName} ${employeInput.lastName}`] = nameAnimal;
+    return acc;
+  }, {});
+  return employeByInput;
+};
+
+function employeeCoverage(idOrName) {
+  // seu código aqui
+  if (idOrName === undefined) {
+    return inputEmpty();
+  }
+  return inputEmploye(idOrName);
+}
+
+// console.log(employeeCoverage());
+// console.log(employeeCoverage('Stephanie'));
+// console.log(employeeCoverage('Azevado'));
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
