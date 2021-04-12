@@ -17,6 +17,7 @@ const { animals, employees, prices } = require('./data');
 function animalsByIds(...ids) {
   return animals.filter(({ id }) => ids.includes(id)); // this includes was based in Murilo Goncalves
 }
+/* return ids.map((id) => animals.find((animal) => animal.id === id)); */
 
 // require 02
 function animalsOlderThan(animal, animalsAge) {
@@ -67,6 +68,7 @@ function entryCalculator(entrants = 0) {
   return Object.entries(entrants).reduce(priceCalc, 0);
 }
 
+// the way to do this function w/o transform objects in arrays using the prototyped Object functions is:
 /* function entryCalculator(entrants = 0) {
   const { Adult: adultQnt, Child: childQnt, Senior: seniorQnt } = entrants;
   const validCalc = (a, b) => (!a) ? 0 : a * b;
@@ -74,9 +76,23 @@ function entryCalculator(entrants = 0) {
 } */
 
 // require 09
-/* function animalMap(options) {
-  // seu código aqui
-} */
+
+function animalsByLocation(...zone) {
+  return animals.filter(({ location }) => zone.includes(location));
+}
+
+const allAnimalsLocations = {
+  NE: animalsByLocation('NE'),
+  NW: animalsByLocation('NW'),
+  SE: animalsByLocation('SE'),
+  SW: animalsByLocation('SW')
+};
+
+function animalMap(...options) {
+  
+}
+
+console.log(animalMap())
 
 // require 10
 /* function schedule(dayName) {
@@ -89,9 +105,12 @@ function entryCalculator(entrants = 0) {
 } */
 
 // require 12
-/* function increasePrices(percentage) {
-  // seu código aqui
-} */
+function increasePrices(percentage) {
+  const { Adult, Child, Senior } = prices;
+  prices.Adult = Math.ceil(Adult * ((percentage) + 100)) / 100;
+  prices.Child = Math.ceil(Child * ((percentage) + 100)) / 100;
+  prices.Senior = Math.ceil(Senior * ((percentage) + 100)) / 100;
+}
 
 // require 13
 /* function employeeCoverage(idOrName) {
@@ -107,9 +126,9 @@ module.exports = {
   addEmployee,
   animalCount,
   entryCalculator,
-  /* schedule,
   animalMap,
+  increasePrices,
+  /* schedule,
   employeeCoverage,
-  oldestFromFirstSpecies,
-  increasePrices, */
+  oldestFromFirstSpecies, */
 };
