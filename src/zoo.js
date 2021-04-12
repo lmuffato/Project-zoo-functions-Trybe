@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { animals, employees, hours, prices } = require('./data');
-
+// 1
 function animalsByIds(...listOfIdsToSearch) {
   // This guard clause is not necessary, but imo it makes the code prettier
   if (listOfIdsToSearch.length === 0) return [];
@@ -20,29 +20,29 @@ function animalsByIds(...listOfIdsToSearch) {
   });
   return animalsList;
 }
-
+// 2
 function animalsOlderThan(animalName, ageToCheck) {
   const animalMatch = animals.find(({ name }) => name === animalName);
   return animalMatch.residents.every(({ age }) => age >= ageToCheck);
 }
-
+// 3
 function employeeByName(employeeName) {
   if (typeof employeeName === 'undefined') return ({});
   return employees.find(({ firstName, lastName }) => firstName === employeeName
     || lastName === employeeName);
 }
-
+// 4
 const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
-
+// 5
 function isManager(idToSearch) {
   return employees.some(({ managers }) => managers.includes(idToSearch));
 }
-
+// 6
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
   employees.push(newEmployee);
 }
-
+// 7
 function animalCount(speciesNameToSearch) {
   if (typeof speciesNameToSearch === 'string') {
     return animals.find(({ name }) => name === speciesNameToSearch).residents.length;
@@ -50,29 +50,30 @@ function animalCount(speciesNameToSearch) {
   // https://medium.com/@vmarchesin/using-array-prototype-reduce-in-objects-using-javascript-dfcdae538fc8
   return animals.reduce((acc, { name, residents }) => ({ ...acc, [name]: residents.length }), {});
 }
-
+// 8
 function entryCalculator(entrants) {
   if (typeof entrants === 'undefined') return 0;
   if (Object.keys(entrants).length === 0) return 0;
   const entrantsEntries = Object.entries(entrants);
   return entrantsEntries.reduce((acc, cur) => acc + prices[cur[0]] * cur[1], 0);
 }
-// 9 Starts here
-// https://codeburst.io/javascript-array-distinct-5edc93501dc4
-/* NE: ['lions', 'giraffes'], */
-const arrAnimalsAt = (givenLoc) => {
+// 9
+const maybeSort = (bool, arr) => (bool ? arr.sort() : arr);
+const maybeSex = (sexOption, arrOfObjs) =>
+  (sexOption ? arrOfObjs.filter((obj) => obj.sex === sexOption) : arrOfObjs);
+const animalsAt = (isSorted, isFiltered) => (givenLoc) => {
   const arr = [];
   animals.filter(({ location }) => location === givenLoc).forEach((animal) => {
-    const obj = { [animal.name]: animal.residents.map(({ name }) => name) };
+    const obj = { [animal.name]:
+      maybeSort(isSorted, maybeSex(isFiltered, animal.residents).map(({ name }) => name)) };
     arr.push(obj);
   });
   return arr;
 };
-const filterName = (givenLoc) => {
-  return animals
-    .filter(({ location }) => location === givenLoc)
-    .map(({ name }) => name);
-};
+// https://codeburst.io/javascript-array-distinct-5edc93501dc4
+const filterName = (givenLoc) => animals
+  .filter(({ location }) => location === givenLoc)
+  .map(({ name }) => name);
 const template = (callback) =>
   [...new Set(animals.map(({ location }) => location))].reduce((acc, givenLoc) => ({
     ...acc,
@@ -80,27 +81,15 @@ const template = (callback) =>
   }),
   {});
 function animalMap({ includeNames = false, sorted = false, sex = false } = {}) {
-  // 'Sem parâmetros, retorna animais categorizados por localização'
   if (!includeNames) return template(filterName);
-  // 'Com a opção `includeNames: true` especificada, retorna nomes de animais'
-  if (includeNames) return template(arrAnimalsAt);
+  return template(animalsAt(sorted, sex));
 }
-console.log(animalMap());
-console.log(animalMap({ includeNames: true }));
-// A filtering process
-// 'Com a opção `includeNames: true` especificada, retorna nomes de animais'
-// Need a map to show the names
-// 'Com a opção `sorted: true` especificada, retorna nomes de animais ordenados'
-// A sort
-// 'Com a opção `sex: \'female\'` ou `sex: \'male\'` especificada, retorna somente nomes de animais macho/fêmea'
-// Another filtering
+// 10
 const format24HoursToAmPm = (hour) => (hour > 12 ? `${hour - 12}pm` : `${hour}am`);
-
 const message = (open, close) => {
   if (!(open - close)) return 'CLOSED';
   return `Open from ${format24HoursToAmPm(open)} until ${format24HoursToAmPm(close)}`;
 };
-
 const schedule = (dayName) => {
   const obj = Object.entries(hours).reduce((acc, [weekday, { open, close }]) =>
     ({ ...acc, [weekday]: message(open, close) }), ({}));
@@ -108,7 +97,7 @@ const schedule = (dayName) => {
   // https://stackoverflow.com/questions/11508463/javascript-set-object-key-by-variable
   return { [dayName]: obj[dayName] };
 };
-schedule();
+// 11
 // ----- Auxiliary functions ----- //
 const curry = (func) => (...args) => func.bind(null, ...args);
 const pipe = (...fns) => (...args) => fns.reduce((acc, func) => func(acc), ...args);
@@ -119,7 +108,6 @@ const idMatch = (reference) => ({ id }) => id === reference;
 const biggestProp = curry((p, arrayOfIntegers) =>
   arrayOfIntegers.reduce((acc, cur) => (acc[p] > cur[p] ? acc : cur), { [p]: 0 }));
 const objPropsToArr = (...args) => (obj) => args.map((p) => obj[p]);
-
 // ----- Business specific ----- //
 function oldestFromFirstSpecies(thisId) {
   return pipe(idMatch, find(employees), prop('responsibleFor'), firstElem,
@@ -142,12 +130,13 @@ const toFixed = (num, precision) => {
   }
   return parseFloat(str);
 };
+// 12
 function increasePrices(percentage) {
   Object.keys(prices).forEach((key) => {
     prices[key] = toFixed(prices[key] + prices[key] * (percentage / 100), 2);
   });
 }
-
+// 13
 function employeeCoverage(idOrName) {
   function fName({ firstName, lastName }) {
     return `${firstName} ${lastName}`;
