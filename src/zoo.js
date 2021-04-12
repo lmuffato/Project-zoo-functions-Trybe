@@ -74,11 +74,17 @@ function animalCount(species) {
   return object;
 }
 
-/*
 function entryCalculator(entrants) {
   // seu código aqui
+  const { prices } = data;
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+  if (!entrants || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  return ((Adult * prices.Adult) + (Senior * prices.Senior) + (Child * prices.Child));
 }
 
+/*
 function animalMap(options) {
   // seu código aqui
 }
@@ -100,8 +106,8 @@ function employeeCoverage(idOrName) {
 }
 */
 module.exports = {
-/*  entryCalculator,
-  schedule, */
+  entryCalculator,
+  /* schedule, */
   animalCount,
   /*  animalMap, */
   animalsByIds,
