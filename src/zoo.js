@@ -61,7 +61,7 @@ function entryCalculator(entrants) {
     : totalPrice());
 }
 
-// ANIMAL MAP //
+// ANIMAL MAP v//
 
 const createLocationsObj = () => (
   {
@@ -159,9 +159,30 @@ function increasePrices(percentage) {
   });
 }
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+// EMPLOYEE COVERAGE
+
+const getAnimalName = (arrayIds) => arrayIds.map((id) => {
+  const animalObj = animalsByIds(id);
+  return animalObj[0].name;
+});
+
+const allEmployees = () => employees
+  .reduce((accumulator, employee) =>
+    ({ ...accumulator,
+      [`${employee.firstName} ${employee.lastName}`]:
+        getAnimalName(employee.responsibleFor) }), {});
+
+const oneEmployee = (idOrName) => {
+  const selectedEmployee = employees.find((employee) => employee.id === idOrName
+  || employee.firstName === idOrName
+  || employee.lastName === idOrName);
+  const { firstName, lastName, responsibleFor } = selectedEmployee;
+  return { [`${firstName} ${lastName}`]: getAnimalName(responsibleFor) };
+};
+
+function employeeCoverage(idOrName) {
+  return (idOrName === undefined) ? allEmployees() : oneEmployee(idOrName);
+}
 
 module.exports = {
   entryCalculator,
@@ -170,7 +191,7 @@ module.exports = {
   animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
