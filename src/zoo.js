@@ -75,53 +75,37 @@ function entryCalculator(entrants) {
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   return Adult * 49.99 + Child * 20.99 + Senior * 24.99;
 }
+function processRegion(str) {
+  const process = ({ location, name }) => {
+    if (location === str) {
+      return name;
+    }
+  };
+  return process;
+}
 
 function animalMapNoParameter() {
-  const NE = animals.map(({ location, name }) => {
-    if (location === 'NE') {
-      return name;
-    }
-  }).filter((item) => item);
-
-  const SE = animals.map(({ location, name }) => {
-    if (location === 'SE') {
-      return name;
-    }
-  }).filter((item) => item);
-
-  const NW = animals.map(({ location, name }) => {
-    if (location === 'NW') {
-      return name;
-    }
-  }).filter((item) => item);
-
-  const SW = animals.map(({ location, name }) => {
-    if (location === 'SW') {
-      return name;
-    }
-  }).filter((item) => item);
+  const NE = animals.map(processRegion('NE')).filter((item) => item);
+  const SE = animals.map(processRegion('SE')).filter((item) => item);
+  const NW = animals.map(processRegion('NW')).filter((item) => item);
+  const SW = animals.map(processRegion('SW')).filter((item) => item);
 
   return ({ NE, NW, SE, SW });
 }
 
+function processArray(listAnimal, num) {
+  const myArray = (item) => {
+    if (listAnimal[num].includes(Object.keys(item).toString())) return item;
+  };
+  return myArray;
+}
+
 function includeNames(animalsAndResidents) {
   const listAnimal = Object.values(animalMapNoParameter());
-
-  const arrayNE = animalsAndResidents.map((item) => {
-    if (listAnimal[0].includes(Object.keys(item).toString())) return item;
-  }).filter((item) => item);
-
-  const arrayNW = animalsAndResidents.map((item) => {
-    if (listAnimal[1].includes(Object.keys(item).toString())) return item;
-  }).filter((item) => item);
-
-  const arraySE = animalsAndResidents.map((item) => {
-    if (listAnimal[2].includes(Object.keys(item).toString())) return item;
-  }).filter((item) => item);
-
-  const arraySW = animalsAndResidents.map((item) => {
-    if (listAnimal[3].includes(Object.keys(item).toString())) return item;
-  }).filter((item) => item);
+  const arrayNE = animalsAndResidents.map(processArray(listAnimal, 0)).filter((item) => item);
+  const arrayNW = animalsAndResidents.map(processArray(listAnimal, 1)).filter((item) => item);
+  const arraySE = animalsAndResidents.map(processArray(listAnimal, 2)).filter((item) => item);
+  const arraySW = animalsAndResidents.map(processArray(listAnimal, 3)).filter((item) => item);
 
   return {
     NE: arrayNE,
@@ -130,23 +114,25 @@ function includeNames(animalsAndResidents) {
     SW: arraySW,
   };
 }
+function myNewArray(name, residents, sort) {
+  const retifq = residents.map((item) => item.name);
+
+  const myArray = {
+    [name]: (sort) ? retifq.sort() : retifq,
+  };
+
+  return myArray;
+}
 
 function sortArray() {
-  const animalsAndResidents = animals.map(({ name, residents }) => {
-    return {
-      [name]: residents.map(({ name }) => name).sort(),
-    };
-  });
+  const animalsAndResidents = animals.map(({ name, residents }) => myNewArray(name, residents, 1));
 
   return includeNames(animalsAndResidents);
 }
 
 function generateArray() {
-  const animalsAndResidents = animals.map(({ name, residents }) => {
-    return {
-      [name]: residents.map(({ name }) => name),
-    };
-  });
+  const animalsAndResidents = animals.map(({ name, residents }) => myNewArray(name, residents, 0));
+
   return includeNames(animalsAndResidents);
 }
 
