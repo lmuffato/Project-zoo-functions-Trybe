@@ -19,6 +19,21 @@ const find = {
       };
     },
   },
+  animals: {
+    oldestFromFirstSpecies(id) {
+      const employee = data.employees.find((person) => person.id === id);
+      const firstSpeciesId = employee.responsibleFor[0];
+      const animal = data.animals.find((species) => species.id === firstSpeciesId);
+      let oldestAnimal = { age: -1 };
+      animal.residents.forEach((resident) => {
+        if (resident.age > oldestAnimal.age) {
+          oldestAnimal = resident;
+        }
+      });
+      oldestAnimal = [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
+      return oldestAnimal;
+    },
+  },
 };
 
 const verify = {

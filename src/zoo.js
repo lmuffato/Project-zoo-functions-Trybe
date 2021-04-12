@@ -113,9 +113,10 @@ function schedule(dayName) {
   return Schedule.getDaySchedule(dayName);
 }
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  const { find } = functionsEmployee;
+  return find.animals.oldestFromFirstSpecies(id);
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -136,7 +137,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
