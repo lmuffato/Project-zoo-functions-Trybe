@@ -77,54 +77,85 @@ function entryCalculator(entrants) {
 }
 
 function animalMapNoParameter() {
-  const NE = animals.map(({location, name}) => {
+  const NE = animals.map(({ location, name }) => {
     if (location === 'NE') {
       return name;
     }
-  }).filter(item => item);
+  }).filter((item) => item);
 
-  const SE = animals.map(({location, name}) => {
+  const SE = animals.map(({ location, name }) => {
     if (location === 'SE') {
       return name;
     }
-  }).filter(item => item);
+  }).filter((item) => item);
 
-  const NW = animals.map(({location, name}) => {
+  const NW = animals.map(({ location, name }) => {
     if (location === 'NW') {
       return name;
     }
-  }).filter(item => item);
+  }).filter((item) => item);
 
-  const SW = animals.map(({location, name}) => {
+  const SW = animals.map(({ location, name }) => {
     if (location === 'SW') {
       return name;
     }
-  }).filter(item => item);
+  }).filter((item) => item);
 
-  return ({ NE,NW,SE,SW });
+  return ({ NE, NW, SE, SW });
 }
 
-function defineIfSorted(event) {
-  if (event === 'sorted') {
-    return animals.map(({name, residents}) => {
-      return {
-        [name]: residents.map(({name}) => name).sort()
-      }
-    });
-  } else {
-    return animals.map(({name, residents}) => {
-      return {
-        [name]: residents.map(({name}) => name)
-      }
-    });
-  }
+function includeNames(animalsAndResidents) {
+  const listAnimal = Object.values(animalMapNoParameter());
+
+  const arrayNE = animalsAndResidents.map((item) => {
+    if (listAnimal[0].includes(Object.keys(item).toString())) return item;
+  }).filter((item) => item);
+
+  const arrayNW = animalsAndResidents.map((item) => {
+    if (listAnimal[1].includes(Object.keys(item).toString())) return item;
+  }).filter((item) => item);
+
+  const arraySE = animalsAndResidents.map((item) => {
+    if (listAnimal[2].includes(Object.keys(item).toString())) return item;
+  }).filter((item) => item);
+
+  const arraySW = animalsAndResidents.map((item) => {
+    if (listAnimal[3].includes(Object.keys(item).toString())) return item;
+  }).filter((item) => item);
+
+  return {
+    NE: arrayNE,
+    NW: arrayNW,
+    SE: arraySE,
+    SW: arraySW,
+  };
+}
+
+function sortArray() {
+  const animalsAndResidents = animals.map(({ name, residents }) => {
+    return {
+      [name]: residents.map(({ name }) => name).sort(),
+    };
+  });
+
+  return includeNames(animalsAndResidents);
+}
+
+function generateArray() {
+  const animalsAndResidents = animals.map(({ name, residents }) => {
+    return {
+      [name]: residents.map(({ name }) => name),
+    };
+  });
+  return includeNames(animalsAndResidents);
 }
 
 function whichSex(event) {
-  if (event.sex && event.sorted) {
-    return animals.map(({name, residents}) => {
+  let animalsAndResidents = [];
+  if (event.sorted) {
+    animalsAndResidents = animals.map(({ name, residents }) => {
       return {
-        [name]: residents.map(({name, sex}) => {
+        [name]: residents.map(({ name, sex }) => {
           if (sex === event.sex) {
             return name;
           }
@@ -132,66 +163,26 @@ function whichSex(event) {
       }
     });
   } else {
-    return animals.map(({name, residents}) => {
+    animalsAndResidents = animals.map(({ name, residents }) => {
       return {
-        [name]: residents.map(({name, sex}) => {
+        [name]: residents.map(({ name, sex }) => {
           if (sex === event.sex) {
             return name;
           }
-        }).filter(item => item)
-      }
+        }).filter((item) => item),
+      };
     });
   }
+
+  return includeNames(animalsAndResidents);
 }
 
-function includeNames(event) {
-
-  let animalsAndResidents = [];
-    if (event.sex) {
-      animalsAndResidents = whichSex(event);
-    } else {
-    animalsAndResidents = defineIfSorted(event);
-    }
-  
-  console.log(animalsAndResidents);
-
-
-  const listAnimal = Object.values(animalMapNoParameter());
-  const arrayNE = animalsAndResidents.map(item => {
-    if (listAnimal[0].includes(Object.keys(item).toString())) return item;
-  }).filter(item => item);
-
-  const arrayNW = animalsAndResidents.map(item => {
-    if (listAnimal[1].includes(Object.keys(item).toString())) return item;
-  }).filter(item => item);
-
-  const arraySE = animalsAndResidents.map(item => {
-    if (listAnimal[2].includes(Object.keys(item).toString())) return item;
-  }).filter(item => item);
-
-  const arraySW = animalsAndResidents.map(item => {
-    if (listAnimal[3].includes(Object.keys(item).toString())) return item;
-  }).filter(item => item);
-
-/*   return {
-    NE: arrayNE,
-    NW: arrayNW,
-    SE: arraySE,
-    SW: arraySW,
-  }; */
-
+function animalMap(event) {
+  if (!event || !event.includeNames) return animalMapNoParameter();
+  if (event.includeNames && event.sex) return whichSex(event);
+  if (event.includeNames && event.sorted) return sortArray();
+  return generateArray();
 }
-
-function animalMap(options) {
-  if (!options) return animalMapNoParameter();
-  if (options.includeNames && options.sex) return includeNames(options);
-  if (options.includeNames) return includeNames();
-
- }
-
-const options = { includeNames: true, sex: 'female', sorted: true } 
-
-console.log(animalMap(options));
 
 const info = {
   Tuesday: 'Open from 8am until 6pm',
