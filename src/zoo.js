@@ -110,8 +110,6 @@ function increasePrices(percentage) {
   return prices;
 }
 
-// ((percentage + 100) / 100)))
-
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
 // }
@@ -129,5 +127,5 @@ module.exports = {
   animalsOlderThan,
   oldestFromFirstSpecies,
   increasePrices,
-  // createEmployee,
+  createEmployee,
 };
