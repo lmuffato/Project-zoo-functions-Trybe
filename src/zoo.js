@@ -76,9 +76,122 @@ function entryCalculator(entrants) {
   return Adult * 49.99 + Child * 20.99 + Senior * 24.99;
 }
 
-/* function animalMap(options) {
-  // seu código aqui
- } */
+function animalMapNoParameter() {
+  const NE = animals.map(({location, name}) => {
+    if (location === 'NE') {
+      return name;
+    }
+  }).filter(item => item);
+
+  const SE = animals.map(({location, name}) => {
+    if (location === 'SE') {
+      return name;
+    }
+  }).filter(item => item);
+
+  const NW = animals.map(({location, name}) => {
+    if (location === 'NW') {
+      return name;
+    }
+  }).filter(item => item);
+
+  const SW = animals.map(({location, name}) => {
+    if (location === 'SW') {
+      return name;
+    }
+  }).filter(item => item);
+
+  return ({ NE,NW,SE,SW });
+}
+
+function defineIfSorted(event) {
+  if (event === 'sorted') {
+    return animals.map(({name, residents}) => {
+      return {
+        [name]: residents.map(({name}) => name).sort()
+      }
+    });
+  } else {
+    return animals.map(({name, residents}) => {
+      return {
+        [name]: residents.map(({name}) => name)
+      }
+    });
+  }
+}
+
+function whichSex(event) {
+  if (event.sex && event.sorted) {
+    return animals.map(({name, residents}) => {
+      return {
+        [name]: residents.map(({name, sex}) => {
+          if (sex === event.sex) {
+            return name;
+          }
+        }).filter(item => item).sort()
+      }
+    });
+  } else {
+    return animals.map(({name, residents}) => {
+      return {
+        [name]: residents.map(({name, sex}) => {
+          if (sex === event.sex) {
+            return name;
+          }
+        }).filter(item => item)
+      }
+    });
+  }
+}
+
+function includeNames(event) {
+
+  let animalsAndResidents = [];
+    if (event.sex) {
+      animalsAndResidents = whichSex(event);
+    } else {
+    animalsAndResidents = defineIfSorted(event);
+    }
+  
+  console.log(animalsAndResidents);
+
+
+  const listAnimal = Object.values(animalMapNoParameter());
+  const arrayNE = animalsAndResidents.map(item => {
+    if (listAnimal[0].includes(Object.keys(item).toString())) return item;
+  }).filter(item => item);
+
+  const arrayNW = animalsAndResidents.map(item => {
+    if (listAnimal[1].includes(Object.keys(item).toString())) return item;
+  }).filter(item => item);
+
+  const arraySE = animalsAndResidents.map(item => {
+    if (listAnimal[2].includes(Object.keys(item).toString())) return item;
+  }).filter(item => item);
+
+  const arraySW = animalsAndResidents.map(item => {
+    if (listAnimal[3].includes(Object.keys(item).toString())) return item;
+  }).filter(item => item);
+
+/*   return {
+    NE: arrayNE,
+    NW: arrayNW,
+    SE: arraySE,
+    SW: arraySW,
+  }; */
+
+}
+
+function animalMap(options) {
+  if (!options) return animalMapNoParameter();
+  if (options.includeNames && options.sex) return includeNames(options);
+  if (options.includeNames) return includeNames();
+
+ }
+
+const options = { includeNames: true, sex: 'female', sorted: true } 
+
+console.log(animalMap(options));
 
 const info = {
   Tuesday: 'Open from 8am until 6pm',
@@ -174,13 +287,11 @@ function employeeCoverage(idOrName) {
   return ({ [nameLastName]: animalList });
 }
 
-console.log(employeeCoverage());
-
 module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  /* animalMap, */
+  animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
