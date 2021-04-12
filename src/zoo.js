@@ -9,13 +9,14 @@
 
 const data = require('./data');
 
-function animalsByIds(ids) {
-  return module.exports.animalMap((e) => {
-    if (ids === e.id) {
-      return `${e.animals.name}`;
-    }
-  });
+function animalsByIds(...ids) {
+  const { animals } = data;
+  if (ids.length !== 0) {
+    return ids.map((id) => animals.find((animal) => animal.id === id));
+  }
+  return ids;
 }
+
 function animalsOlderThan(animal, age) {
   // seu código aqui
 }
