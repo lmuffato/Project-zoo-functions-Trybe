@@ -68,9 +68,21 @@ function entryCalculator({ Adult = 0, Child = 0, Senior = 0 } = 0) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+function schedule(dayName) {
+  const { hours } = data;
+  const weekDays = Object.keys(hours);
+  const noParameter = weekDays.reduce((accumulator, day) => {
+    const { open, close } = hours[day];
+    const isOpen = open - close !== 0
+      ? `Open from ${open}am until ${close - 12}pm`
+      : 'CLOSED';
+    return { ...accumulator, ...{ [day]: isOpen } };
+  }, {});
+  if (!dayName) return noParameter;
+  const [date, mensage] = Object.entries(noParameter).find(([_date, _mensage]) =>
+    _date === dayName);
+  return ({ [date]: mensage });
+}
 
 function oldestFromFirstSpecies(id) {
   const { employees, animals } = data;
@@ -94,7 +106,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
