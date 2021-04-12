@@ -53,9 +53,16 @@ function addEmployee(
   return addEmployee;
 }
 
-function animalCount(_species) {
-  // seu código aqui
+function animalCount(species) {
+  const animalObj = data.animals.find(({ name }) => name === species);
+  const calcPopul = data.animals.reduce((acc, cur) => {
+    acc[cur.name] = cur.residents.length;
+    return acc;
+  }, {});
+  return !species ? calcPopul : animalObj.residents.length;
 }
+
+console.log(animalCount());
 
 function entryCalculator(_entrants) {
   // seu código aqui
