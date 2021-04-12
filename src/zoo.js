@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { animals } = require('./data');
+const data = require('./data');
 const { employees } = require('./data');
 const { prices } = require('./data');
 const { hours } = require('./data');
@@ -177,23 +178,41 @@ function increasePrices(percentage) {
 // como arredondar 2 casas decimais https://metring.com.br/arredondar-numero-em-javascript
 // fiz o caulculo de porcentagem a partir desse site https://www.estrategiaconcursos.com.br/blog/como-calcular-porcentagem/#:~:text=Exemplo%3A%20Uma%20mercadoria%20custava%20R,o%20valor%20final%20da%20mercadoria.&text=A%20taxa%20de%20aumento%20%C3%A9,%2C30%20%3D%201%2C30.
 
-// function employeeCoverage(idOrName) {
-//   // caso não tenha parametro
-//   const objAnimaisFuncionario = employees.reduce((acc, item) => {
-//     acc[`${item.firstName} ${item.lastName}`] = item.responsibleFor; // adiciono uma chave e um valor ao objeto
-//     return acc;
-//   }, {});
+function nameAnimals(arrAnimals) {
+  const nomes = [];
 
-//   if (idOrName === undefined) {
-//     return objAnimaisFuncionario;
-//   }
+  arrAnimals.forEach((item) => {
+    animals.forEach((animal) => {
+      if (item === animal.id) {
+        nomes.push(animal.name);
+      }
+    });
+  });
 
-//   // caso não tenha parametro
-//   const funcionario = employees
-//     .find((item) => item.firstName === idOrName || item.lastName === idOrName || item.id === idOrName);
+  return nomes;
+}
+// fiz um função para achar o nome dos animais a partir do id deles. Uso dois forEach seguidos, para verrer todos os itens do array que é colocado como parametro, e depois outro para varrer todos os objetos dos animais e achar qual o objeto do animal correto a partir do id no animal. Assim por ultimo, como o obejto certo em mão pego o nome e faço o push em um novo array
 
-//   return { [`${funcionario.firstName} ${funcionario.lastName}`]: funcionario.responsibleFor };
-// }
+function employeeCoverage(idOrName) {
+  // caso não tenha parametro
+  const objAnimaisFuncionario = employees.reduce((acc, item) => {
+    acc[`${item.firstName} ${item.lastName}`] = nameAnimals(item.responsibleFor); // adiciono uma chave e um valor ao objeto
+    return acc;
+  }, {});
+
+  if (idOrName === undefined) {
+    return objAnimaisFuncionario;
+  }
+
+  // caso não tenha parametro
+  const funcionario = employees
+    .find((item) => item.firstName === idOrName
+    || item.lastName === idOrName || item.id === idOrName);
+
+  return {
+    [`${funcionario.firstName} ${funcionario.lastName}`]: nameAnimals(funcionario.responsibleFor),
+  };
+}
 
 module.exports = {
   entryCalculator,
@@ -202,7 +221,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
