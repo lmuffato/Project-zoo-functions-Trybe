@@ -83,6 +83,7 @@ function entryCalculator(entrants) {
   const { Adult: Bigger = 0, Senior: OldMan = 0, Child: Kid = 0 } = entrants;
   return Adult * Bigger + Senior * OldMan + Child * Kid;
 }
+
 // function animalMap(options) {
 //   // seu código aqui
 // }
@@ -91,16 +92,17 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-//   const employee = data.employees.find((ele) => ele.id === id);
-//   const idSpecie = employee.responsibleFor[0];
-//   data.animals.reduce((acc, curr) => {
-//     curr.
-//   }, [])
-//   return idSpecie;
-// }
-// console.log(oldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+function oldestFromFirstSpecies(id) {
+  // seu código aqui
+  const employeeSearch = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const animalSearch = data.animals.find((animal) => animal.id === employeeSearch);
+  // return animalSearch.residents.reduce((biggerAge) => biggerAge.age > );
+  const biggerAge = animalSearch.residents.map((numberAge) => numberAge.age)
+    .reduce((acc, curr) => Math.max(acc, curr), []);
+  const objectAnimal = animalSearch.residents.find((element) => element.age === biggerAge);
+  const { name, sex, age } = objectAnimal;
+  return [name, sex, age];
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -124,7 +126,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
