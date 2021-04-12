@@ -26,11 +26,12 @@ function employeeByName(employeeName) {
     firstName === employeeName || lastName === employeeName);
 }
 
-/*
-
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const employee = { ...personalInfo, ...associatedWith };
+  return employee;
 }
+
+/*
 
 function isManager(id) {
   // seu código aqui
@@ -87,6 +88,6 @@ module.exports = {
   /*
   oldestFromFirstSpecies,
   increasePrices,
-  createEmployee,
   */
+  createEmployee,
 };
