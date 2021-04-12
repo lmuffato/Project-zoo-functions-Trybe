@@ -77,15 +77,31 @@ function entryCalculator(entrants = 0) {
 // function schedule(dayName) {
 //   // seu código aqui
 // }
-// console.log(schedule());
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+const oldAnimal = (animal, accumulator) => {
+  if (animal.age > accumulator.age) {
+    return animal;
+  }
+  return accumulator;
+};
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(ids) {
+  // seu código aqui
+  const employeeId = employees.find(({ id }) => id === ids).responsibleFor[0];
+  const { name, sex, age } = animals
+    .find(({ id }) => id === employeeId).residents
+    .reduce(oldAnimal);
+  return [name, sex, age];
+}
+
+function increasePrices(percentage) {
+  // seu código aqui
+  const priceArray = Object.keys(prices);
+  priceArray.forEach((element) => {
+    prices[element] = Math.round(((prices[element] * (percentage / 100))
+    + prices[element]) * 100) / 100;
+  });
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -102,7 +118,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
-  // increasePrices,
+  oldestFromFirstSpecies,
+  increasePrices,
   createEmployee,
 };
