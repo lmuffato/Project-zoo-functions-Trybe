@@ -46,9 +46,10 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  const employ = personalInfo;
-  const b = associatedWith;
-  console.log(employ + b);
+  return {
+    ...personalInfo,
+    ...associatedWith,
+  };
 }
 
 function isManager(id) {
