@@ -134,9 +134,140 @@ function entryCalculator(entrants) {
   return totalValue;
 }
 
-// Options
-function animalMap() {
+const findAnimalsByRegion = (region) => {
+  const animals = data.animals
+    .filter((animal) => animal.location === region)
+    .map((animal) => ({
+      name: animal.name,
+      residents: animal.residents,
+    }));
 
+  return animals;
+};
+
+const getAnimalsByRegion = () => {
+  const NE = findAnimalsByRegion('NE');
+  const NW = findAnimalsByRegion('NW');
+  const SE = findAnimalsByRegion('SE');
+  const SW = findAnimalsByRegion('SW');
+
+  return { NE, NW, SE, SW };
+};
+
+const formatArray = (array) => {
+  const keys = Object.keys(array);
+  const obj = {};
+
+  keys.forEach((key) => {
+    const value = array[key].map((animal) => animal.name);
+
+    obj[key] = value;
+  });
+
+  return obj;
+};
+
+const sortAnimalsBySex = (animals, sex) => {
+  const keys = Object.keys(animals);
+  const obj = {};
+
+  keys.forEach((key) => {
+    const value = animals[key].map((animal) => {
+      const residents = animal.residents
+        .filter((item) => item.sex === sex)
+        .map((item) => item.name);
+
+      return { [animal.name]: residents };
+    });
+
+    obj[key] = value;
+  });
+
+  return obj;
+};
+
+const getAnimalsNames = (animals) => {
+  const keys = Object.keys(animals);
+  const obj = {};
+
+  keys.forEach((key) => {
+    const value = animals[key].map((animal) => {
+      const residents = animal.residents.map((item) => item.name);
+
+      return { [animal.name]: residents };
+    });
+
+    obj[key] = value;
+  });
+
+  return obj;
+};
+
+const sortNames = (animals) => {
+  const keys = Object.keys(animals);
+  const obj = {};
+
+  keys.forEach((key) => {
+    const value = animals[key].map((animal) => {
+      const residents = animal.residents.map((item) => item.name);
+
+      return { [animal.name]: residents.sort() };
+    });
+
+    obj[key] = value;
+  });
+
+  return obj;
+};
+
+const sortAnimalsBySexAndOrdened = (animals, sex) => {
+  const keys = Object.keys(animals);
+  const obj = {};
+
+  keys.forEach((key) => {
+    const value = animals[key].map((animal) => {
+      const residents = animal.residents
+        .filter((item) => item.sex === sex)
+        .map((item) => item.name);
+
+      return { [animal.name]: residents.sort() };
+    });
+
+    obj[key] = value;
+  });
+
+  return obj;
+};
+
+const getOrdened = (animals, options) => {
+  const sortedAnimals = sortNames(animals);
+  if (options.sex) {
+    return sortAnimalsBySexAndOrdened(animals, options.sex);
+  }
+  return sortedAnimals;
+};
+
+const sortAnimals = (options, animals) => {
+  if (options.sorted === true) {
+    return getOrdened(animals, options);
+  }
+  if (options.sex) {
+    const sortedBySex = sortAnimalsBySex(animals, options.sex);
+    return sortedBySex;
+  }
+
+  const animalsNames = getAnimalsNames(animals);
+  return animalsNames;
+};
+
+function animalMap(options) {
+  const animalsByRegion = getAnimalsByRegion();
+
+  if (options && options.includeNames === true) { return sortAnimals(options, animalsByRegion); }
+
+  const formatedAnimals = formatArray(animalsByRegion);
+
+  return formatedAnimals;
 }
 
 const formatHour = (hour) => hour - 12;
@@ -169,7 +300,6 @@ function schedule(day) {
   return daySchedule;
 }
 
-// id
 function oldestFromFirstSpecies(id) {
   const employee = data.employees.find((employeeItem) => employeeItem.id === id);
 
