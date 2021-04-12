@@ -52,14 +52,13 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  const addInformation = {
+  employees.push({
     id,
     firstName,
     lastName,
     managers,
     responsibleFor,
-  };
-  employees.push(addInformation);
+  });
 }
 
 function animalCount(species) {
@@ -83,47 +82,96 @@ function animalCount(species) {
   return typeof species === 'undefined' ? noParameters() : parameters(species);
 }
 
-// function entryCalculator(entrants) {
-// seu código aqui
-// }
+function entryCalculator(entrants) {
+  if (typeof entrants === 'undefined' || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const { Adult: adult = 0, Child: child = 0, Senior: senior = 0 } = entrants;
+  const finalPrice = ((adult * 49.99) + (senior * 24.99) + (child * 20.99));
+  return finalPrice;
+}
 
-// function animalMap(options) {
-// seu código aqui
-// }
+function callbackMapNoParameter(arrayKey) {
+  const mapObject = {};
+  arrayKey.forEach((firstValue) => {
+    mapObject[firstValue] = [];
+    animals.forEach((secondValue) => {
+      if (secondValue.location === firstValue) {
+        mapObject[firstValue].push(secondValue.name);
+      }
+    });
+  });
+  return mapObject;
+}
 
-// function schedule(dayName) {
-// seu código aqui
-// }
+function callbackMapSortSex(mapLocation, sorted, sex) {
+  const temporaryArray = [];
+  mapLocation.forEach((secondValue) => {
+    const temporaryObject = {};
+    const mapTemporary = animals.find(({ name }) => secondValue === name);
+    let { residents: mapResidents } = mapTemporary;
+    if (sex !== 'false') {
+      mapResidents = mapResidents.filter((currentValue) => currentValue.sex === sex);
+    }
+    const residentNames = mapResidents.map((resident) => resident.name);
+    if (sorted === true) {
+      residentNames.sort();
+    }
+    temporaryObject[secondValue] = residentNames;
+    temporaryArray.push(temporaryObject);
+  });
+  return temporaryArray;
+}
 
-// function oldestFromFirstSpecies(id) {
-// seu código aqui
-// }
+function callbackMapIncludeNames(mapNames, sorted, sex) {
+  const arrayKey = Object.keys(mapNames);
+  const mapObject = {};
+  arrayKey.forEach((firstValue) => {
+    const mapLocation = Object.values(mapNames[firstValue]);
+    const temporaryArray = callbackMapSortSex(mapLocation, sorted, sex);
+    mapObject[firstValue] = temporaryArray;
+  });
+  return mapObject;
+}
 
-// function increasePrices(percentage) {
-// seu código aqui
-// }
+function animalMap(options = {}) {
+  const { includeNames = false, sorted = false, sex = 'false' } = options;
+  let newMapObject;
+  newMapObject = callbackMapNoParameter(['NE', 'NW', 'SE', 'SW']);
+  if (includeNames === true) {
+    newMapObject = callbackMapIncludeNames(newMapObject, sorted, sex);
+  }
+  return newMapObject;
+}
 
-// function employeeCoverage(idOrName) {
+function schedule(dayName) {
 // seu código aqui
-// }
+}
+
+function oldestFromFirstSpecies(id) {
+// seu código aqui
+}
+
+function increasePrices(percentage) {
+// seu código aqui
+}
+
+function employeeCoverage(idOrName) {
+// seu código aqui
+}
 
 module.exports = {
-//   entryCalculator,
-//  schedule,
+  entryCalculator,
+  schedule,
   animalCount,
-
+  animalMap,
   animalsByIds,
   employeeByName,
-
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
-
+  oldestFromFirstSpecies,
+  increasePrices,
   createEmployee,
-  //   animalMap,
-
-  // employeeCoverage,
-
-// oldestFromFirstSpecies,
-// increasePrices,
 };
