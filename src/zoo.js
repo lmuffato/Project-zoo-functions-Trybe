@@ -60,18 +60,19 @@ function entryCalculator(entrants) {
 // 9
 const maybeSort = (bool, arr) => (bool ? arr.sort() : arr);
 const maybeSex = (sexOption, arrOfObjs) =>
-  (sexOption ? arrOfObjs.filter((obj) => obj.sex === sexOption) : arrOfObjs);
-const animalsAt = (isSorted, isFiltered) => (givenLoc) => {
-  const arr = [];
-  animals.filter(({ location }) => location === givenLoc).forEach((animal) => {
-    const obj = { [animal.name]:
-      maybeSort(isSorted, maybeSex(isFiltered, animal.residents).map(({ name }) => name)) };
-    arr.push(obj);
-  });
-  return arr;
-};
+  (sexOption ? arrOfObjs.filter(({ sex }) => sex === sexOption) : arrOfObjs);
+const animalsAt = (isSorted, isFiltered) => (givenLoc) =>
+  animals.filter(({ location }) => location === givenLoc)
+    .reduce((acc, { name: species, residents }) => {
+      acc.push({
+        [species]:
+          maybeSort(isSorted, maybeSex(isFiltered, residents)
+            .map(({ name }) => name)),
+      });
+      return acc;
+    }, []);
 // https://codeburst.io/javascript-array-distinct-5edc93501dc4
-const filterName = (givenLoc) => animals
+const noNames = (givenLoc) => animals
   .filter(({ location }) => location === givenLoc)
   .map(({ name }) => name);
 const template = (callback) =>
@@ -81,7 +82,7 @@ const template = (callback) =>
   }),
   {});
 function animalMap({ includeNames = false, sorted = false, sex = false } = {}) {
-  if (!includeNames) return template(filterName);
+  if (!includeNames) return template(noNames);
   return template(animalsAt(sorted, sex));
 }
 // 10
