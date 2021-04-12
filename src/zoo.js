@@ -29,7 +29,7 @@ function employeeByName(employeeName) {
   // return data.employees.find(({ firstName, lastName }) => firstName === employeeName
   // || lastName === employeeName);
   return data.employees.find(({ firstName, lastName }) => firstName === employeeName
-  || lastName === employeeName);
+    || lastName === employeeName);
   // function employeeByName(employeeName) {
   //     if (employeeName === undefined) {
   // return {}; } if (data.employees.firstName === employeeName) {
@@ -46,8 +46,8 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-// responsibleFor = []) {
-//   // const { id, firstName, lastName } = personalInfo;
+  // responsibleFor = []) {
+  //   // const { id, firstName, lastName } = personalInfo;
   //   // const { managers, responsibleFor } = associatedWith;
   //   const employee = {
   //     id,
@@ -91,16 +91,36 @@ function animalCount(species) {
   return data.animals.find(({ name }) => name === species).residents.length;
 }
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+function entryCalculator(entrants) {
+  if (entrants === undefined) return 0;
+  if (Object.values(entrants).length === 0) return 0;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  console.log(entrants.prices);
+  return ((data.prices.Adult * Adult) + (data.prices.Senior * Senior) + 
+  (data.prices.Child * Child));
+}
+entryCalculator();
+// const pessoas = {
+//   Adult: 49.99,
+//   Senior: 24.99,
+//   Child: 20.99,
+// };
+
+// entryCalculator(pessoas);
+// prices: {
+//   Adult: 49.99,
+//   Senior: 24.99,
+//   Child: 20.99,
+// },
+
 
 // function animalMap(options) {
 //   // seu código aqui
 // }
 
 // function schedule(dayName) {
-//   // seu código aqui
+// const days = Object.keys(hours);
+//   data.hours.keys
 // }
 
 // function oldestFromFirstSpecies(id) {
@@ -116,8 +136,8 @@ function animalCount(species) {
 // }
 
 module.exports = {
-//   entryCalculator,
-//   schedule,
+  entryCalculator,
+  //   schedule,
   animalCount,
   //   animalMap,
   animalsByIds,
