@@ -22,19 +22,18 @@ function animalsOlderThan(animal, age) {
 
 function employeeByName(employeeName) {
   if (!employeeName) return {};
-  return data.employees.find(employee => {
-    return employee.firstName === employeeName || employee.lastName === employeeName
-  });
+  return data.employees.find((employee) => employee.firstName === employeeName
+  || employee.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  return { ...personalInfo, ...associatedWith};
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
   let result = false;
   data.employees.forEach((employee) => {
-    employee.managers.includes(id) ? result = true : null;
+    if (employee.managers.includes(id)) result = true;
   });
   return result;
 }
@@ -45,14 +44,12 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  console.log(species);
-  
   const animalCountObject = {};
   data.animals.forEach((animal) => animalCountObject[animal.name] = animal.residents.length);
 
   // Como faria com reduce?
 
-  if (!species) return animalCountObject
+  if (!species) return animalCountObject;
   return animalCountObject[species];
 }
 
@@ -66,12 +63,30 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  const scheduleObject = Object.keys(data.hours).reduce((accum, weekDay) => {
+    const openTime = data.hours[weekDay].open;
+    const closeTime = data.hours[weekDay].close - 12;
+    let weekDayObject = { [weekDay]: `Open from ${openTime}am until ${closeTime}pm` }; 
+      return Object.assign(accum, weekDayObject);
+    }, {});
+  
+  scheduleObject.Monday = 'CLOSED';
+
+  if (!dayName) return scheduleObject;
+  return { [dayName]: scheduleObject[dayName] };
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const firstAnimalId = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  console.log(firstAnimalId);
+  const firstAnimalObject = animalsByIds(firstAnimalId)[0];
+  console.log(firstAnimalObject);
+  const oldestAnimal = firstAnimalObject.residents.sort((a, b) => b.age - a.age)[0];
+  console.log(oldestAnimal);
+  return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
+
+console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices(percentage) {
   // seu código aqui
