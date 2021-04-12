@@ -39,11 +39,15 @@ function employeeByName(employeeName) {
     firstName === employeeName || lastName === employeeName);
 }
 
-/* function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+/* Levando em consideração que os parâmetros "personalInfo" e "associatedWith"
+vão enviar respectivamente o que eu preciso (chave e valor), basta 
+distribuir (Spread operator) dentro de uma nova constante e retornar ela. */
+function createEmployee(personalInfo, associatedWith) {
+  const novoEmpregado = { ...personalInfo, ...associatedWith };
+  return novoEmpregado;
 }
 
-function isManager(id) {
+/* function isManager(id) {
   // seu código aqui
 }
 
@@ -92,5 +96,5 @@ module.exports = {
   animalsOlderThan,
   /* oldestFromFirstSpecies, */
   /* increasePrices, */
-  /* createEmployee, */
+  createEmployee,
 };
