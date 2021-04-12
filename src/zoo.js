@@ -13,6 +13,8 @@ const data = require('./data');
 
 const { animals } = data;
 
+const { employees } = data;
+
 function animalsByIds(...ids) {
   const allAnimals = [];
 
@@ -37,8 +39,10 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  const employ = employeeName;
-  console.log(employ);
+  const employeeData = employees.find((name) => name.firstName === employeeName
+  || name.lastName === employeeName);
+
+  return employeeData;
 }
 
 function createEmployee(personalInfo, associatedWith) {
