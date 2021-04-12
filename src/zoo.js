@@ -18,7 +18,8 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, ageMin) {
-  return animals.find((selvageAnimal) => selvageAnimal.name === animal).residents.every(({ age }) => age >= ageMin);
+  return animals.find((selvageAnimal) => selvageAnimal.name === animal)
+    .residents.every(({ age }) => age >= ageMin);
 }
 
 /* function employeeByName(employeeName) {
