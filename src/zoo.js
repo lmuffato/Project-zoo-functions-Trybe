@@ -12,7 +12,7 @@ eslint no-unused-vars: [
 // const { employees } = require('./data');
 const data = require('./data');
 
-const { animals, employees, prices } = data;
+const { animals, employees} = data;
 
 function animalsByIds(...ids) {
   return animals.filter(({ id }) => ids.includes(id));
@@ -35,13 +35,13 @@ const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...
 const isManager = (id) => employees.some(({ managers }) => managers.includes(id)); // ajuda do Sergio
 
 const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) =>
-  employees.push({ id, firstName, lastName, managers, responsibleFor});
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
 
 const animalCount = (species) => {
-  if (species === undefined) return animals.map(({ name, residents }) =>
+  return species === undefined ? animals.map(({ name, residents }) =>
     ({ [name]: residents.length })).reduce((acc, cur) =>
-      Object.assign(acc, cur), {});
-  return animals.find(({ name }) => name === species).residents.length;
+      Object.assign(acc, cur), {}) : animals.find(({ name }) =>
+        name === species).residents.length;
 }
 
 /* function entryCalculator(entrants) {
