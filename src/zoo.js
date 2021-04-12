@@ -70,9 +70,9 @@ function animalCount(species) {
 function hasPeopleCalculation(people) {
   const { Adult, Child, Senior } = people;
 
-  return (Adult ? (Adult * 49.99) : 0)
-    + (Child ? (Child * 20.99) : 0)
-    + (Senior ? (Senior * 24.99) : 0);
+  return (Adult ? (Adult * data.prices.Adult) : 0)
+    + (Child ? (Child * data.prices.Child) : 0)
+    + (Senior ? (Senior * data.prices.Senior) : 0);
 }
 
 function entryCalculator(entrants) {
