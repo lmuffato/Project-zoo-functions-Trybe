@@ -9,11 +9,11 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices } = require('./data');
+const { animals, employees, hours, prices } = require('./data');
 // const data = require('./data');
 
 // found about .includes at https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
-// Desenvolvido com ajuda das colegas Nathalia Zerbal, Debora Passos, Heloisa Hackenhaar, Djaniza Vasques, Bia Zidioti, Maria Luiza, Marilia, Carol Bitencourt, Priscila Scapin, Beatriz Barbosa, Wanderson Sales
+// Projeto desenvolvido com ajuda das colegas Nathalia Zebral, Debora Passos, Heloisa Hackenhaar, Djaniza Vasques, Bia Zidioti, Maria Luiza, Marilia, Carol Bitencourt, Priscila Scapin, Beatriz Barbosa, Ana Ventura, Pollyana, Wanderson Sales
 
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.includes(animal.id));
@@ -76,9 +76,24 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+function schedule(dayName) {
+  const weekSchedule = {};
+  const weekDays = Object.keys(hours);
+
+  weekDays.forEach((day) => {
+    if (day === 'Monday') {
+      weekSchedule[day] = 'CLOSED';
+    } else {
+      weekSchedule[day] = `Open from ${hours[day].open}am until ${(hours[day].close) - 12}pm`;
+    }
+  });
+  if (!dayName) {
+    return weekSchedule;
+  }
+  return {
+    [dayName]: weekSchedule[dayName],
+  };
+}
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -98,7 +113,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
