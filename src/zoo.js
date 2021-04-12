@@ -124,40 +124,40 @@ function increasePrices(percentage) {
   return prices;
 }
 
-const inputEmpty = () => employees.reduce((acc, curr) => {
-  const species = curr.responsibleFor;
-  const arrayAnimals = animals.filter((animal) => species.includes(animal.id));
-  const nameAnimal = arrayAnimals.reduce((accArray, currArray) => {
-    accArray.push(currArray.name);
-    return accArray;
-  }, []);
-  acc[`${curr.firstName} ${curr.lastName}`] = nameAnimal;
-  return acc;
-}, {});
+// const inputEmpty = () => employees.reduce((acc, curr) => {
+//   const species = curr.responsibleFor;
+//   const arrayAnimals = animals.filter((animal) => species.includes(animal.id));
+//   const nameAnimal = arrayAnimals.reduce((accArray, currArray) => {
+//     accArray.push(currArray.name);
+//     return accArray;
+//   }, []);
+//   acc[`${curr.firstName} ${curr.lastName}`] = nameAnimal;
+//   return acc;
+// }, {});
 
-const inputEmploye = (idOrName) => {
-  const employeByInput = employees.reduce((acc, curr) => {
-    const employeInput = employees.find((employe) => employe.firstName === idOrName
-      || employe.lastName === idOrName || employe.id === idOrName);
-    const species = employeInput.responsibleFor;
-    const arrayAnimals = animals.filter((animal) => species.includes(animal.id));
-    const nameAnimal = arrayAnimals.reduce((accArray, currArray) => {
-      accArray.push(currArray.name);
-      return accArray;
-    }, []);
-    acc[`${employeInput.firstName} ${employeInput.lastName}`] = nameAnimal;
-    return acc;
-  }, {});
-  return employeByInput;
-};
+// const inputEmploye = (idOrName) => {
+//   const employeByInput = employees.reduce((acc, curr) => {
+//     const employeInput = employees.find((employe) => employe.firstName === idOrName
+//       || employe.lastName === idOrName || employe.id === idOrName);
+//     const species = employeInput.responsibleFor;
+//     const arrayAnimals = animals.filter((animal) => species.includes(animal.id));
+//     const nameAnimal = arrayAnimals.reduce((accArray, currArray) => {
+//       accArray.push(currArray.name);
+//       return accArray;
+//     }, []);
+//     acc[`${employeInput.firstName} ${employeInput.lastName}`] = nameAnimal;
+//     return acc;
+//   }, {});
+//   return employeByInput;
+// };
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-  if (idOrName === undefined) {
-    return inputEmpty();
-  }
-  return inputEmploye(idOrName);
-}
+// function employeeCoverage(idOrName) {
+//   // seu código aqui
+//   if (idOrName === undefined) {
+//     return inputEmpty();
+//   }
+//   return inputEmploye(idOrName);
+// }
 
 // console.log(employeeCoverage());
 // console.log(employeeCoverage('Stephanie'));
@@ -170,7 +170,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  // employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
