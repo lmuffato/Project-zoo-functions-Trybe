@@ -16,15 +16,18 @@ function animalsByIds(...ids) {
   const arrAnimals = animals.filter(({ id }) => ids.includes(id));
   return arrAnimals;
 }
-console.log(animalsByIds());
 
 function animalsOlderThan(animal, age) {
   const searchAnimal = data.animals.find(({ name }) => name === animal);
   return searchAnimal.residents.every(({ age: idade }) => idade > age);
 }
-console.log(animalsOlderThan('lions'), 12);
-function employeeByName(_employeeName) {
-  // seu código aqui
+
+function employeeByName(employeeName) {
+  const objEmployee = data.employees.find(
+    ({ firstName, lastName }) =>
+      employeeName === firstName || employeeName === lastName,
+  );
+  return !employeeName ? {} : objEmployee;
 }
 
 function createEmployee(_personalInfo, _associatedWith) {
@@ -55,10 +58,22 @@ function schedule(_dayName) {
   // seu código aqui
 }
 
-function oldestFromFirstSpecies(_id) {
-  // seu código aqui
+function oldestFromFirstSpecies(id) {
+  /* Passado o id de um funcionário
+  encontra a primeira espécie de animal gerenciado pelo funcionário
+  e retorna um array com nome, sexo e idade do animal mais velho dessa espécie */
+  // const firstAnimal = data.animals.find(({ id: specieId }) => specieId);
+  // const oldestAnimal = firstAnimal.residents.reduce(
+  //   (acc, { age }) => (acc > age ? acc : age),
+  //   0,
+  // );
+  // const olderFind = firstAnimal.residents.find(
+  //   ({ age }) => age === oldestAnimal,
+  // );
+  // return [olderFind.name, olderFind.sex, olderFind.age];
 }
 
+// console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 function increasePrices(_percentage) {
   // seu código aqui
 }
