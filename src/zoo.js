@@ -18,17 +18,18 @@ function animalsByIds(...ids) {
 // console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce', '89be95b3-47e4-4c5b-b687-1fabf2afa274'));// test 1
 // console.log(animalsByIds());// test 2
 
-function animalsOlderThan(animal, animalAge) {
+function animalsOlderThan(species, animalAge) {
   return animals
-    .find(({ name }) => name === animal)
+    .find(({ name }) => name === species)
     .residents
     .every(({ age }) => (animalAge >= age));
 }
-// console.log(animalsOlderThan('lions',15)); // Test 1
-// console.log(animalsOlderThan('lions',2)); // Test 2
 
+// console.log(animalsOlderThan('lions',15)); // TEST 1 - Expected true
+// console.log(animalsOlderThan('lions',2)); // TEST 2 - Expected false
+// console.log(animalsOlderThan('otters', 7)); // TEST 4 - Expected true 
+// console.log(animalsOlderThan('penguins', 10)); // TEST 3 - Expected true
 // ; console.log(animals[0].residents[0].age) // Propriedade age
-// animails = [] -> resident [{}]
 
 // function employeeByName(employeeName) {
 //   // seu código aqui
