@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees, prices } = data;
+const { animals, employees, hours, prices } = data;
 
 function animalsByIds(...ids) {
   return animals.filter(({ id }) => ids.includes(id));
@@ -102,9 +102,40 @@ function entryCalculator(entrants = 0) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+const createZooHour = () => {
+  const zooHour = {};
+  const hourKeys = Object.keys(hours);
+  const hourValues = Object.values(hours);
+
+  for (let i = 0; i < hourKeys.length; i += 1) {
+    zooHour[hourKeys[i]] = `Open from ${hourValues[i].open}am until ${hourValues[i].close - 12}pm`;
+
+    if (hourValues[i].open === 0 && hourValues[i].close === 0) {
+      zooHour[hourKeys[i]] = 'CLOSED';
+    }
+  }
+  return zooHour;
+};
+
+function schedule(dayName) {
+  const open = {};
+  const hour = createZooHour();
+  const hourKeys = Object.keys(hour);
+  const hourValues = Object.values(hour);
+
+  if (dayName === undefined) {
+    return hour;
+  }
+
+  for (let i = 0; i < hourKeys.length; i += 1) {
+    if (hourKeys[i] === dayName) {
+      open[hourKeys[i]] = hourValues[i];
+    }
+  }
+  return open;
+}
+
+console.log(schedule('Monday'));
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -120,7 +151,7 @@ function entryCalculator(entrants = 0) {
 
 module.exports = {
   entryCalculator,
-  //   schedule,
+  schedule,
   animalCount,
   //   animalMap,
   animalsByIds,
