@@ -62,10 +62,14 @@ function animalCount(species) {
   if (!species) return animalObj;
   return animalObj[species];
 }
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
-
+function entryCalculator(entrants) {
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
+  return Object.keys(entrants).map((entrant) => {
+    const { prices } = data;
+    return prices[entrant] * entrants[entrant];
+  }).reduce((acc, currVal) => acc + currVal);
+}
+console.log(entryCalculator({ Adult: 2, Child: 3, Senior: 1 }));
 // function animalMap(options) {
 //   // seu código aqui
 // }
@@ -93,7 +97,7 @@ function schedule(dayName) {
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   schedule,
   animalCount,
   // animalMap,
