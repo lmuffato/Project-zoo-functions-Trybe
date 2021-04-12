@@ -57,11 +57,43 @@ function entryCalculator(entrants) {
   const entrantsEntries = Object.entries(entrants);
   return entrantsEntries.reduce((acc, cur) => acc + prices[cur[0]] * cur[1], 0);
 }
-
-function animalMap() {
-  // Some issues with lint so I will redo this one, I wasn't satisfied with the result anyway xD
+// 9 Starts here
+// https://codeburst.io/javascript-array-distinct-5edc93501dc4
+/* NE: ['lions', 'giraffes'], */
+const arrAnimalsAt = (givenLoc) => {
+  const arr = [];
+  animals.filter(({ location }) => location === givenLoc).forEach((animal) => {
+    const obj = { [animal.name]: animal.residents.map(({ name }) => name) };
+    arr.push(obj);
+  });
+  return arr;
+};
+const filterName = (givenLoc) => {
+  return animals
+    .filter(({ location }) => location === givenLoc)
+    .map(({ name }) => name);
+};
+const template = (callback) =>
+  [...new Set(animals.map(({ location }) => location))].reduce((acc, givenLoc) => ({
+    ...acc,
+    [givenLoc]: callback(givenLoc),
+  }),
+  {});
+function animalMap({ includeNames = false, sorted = false, sex = false } = {}) {
+  // 'Sem parâmetros, retorna animais categorizados por localização'
+  if (!includeNames) return template(filterName);
+  // 'Com a opção `includeNames: true` especificada, retorna nomes de animais'
+  if (includeNames) return template(arrAnimalsAt);
 }
-
+console.log(animalMap());
+console.log(animalMap({ includeNames: true }));
+// A filtering process
+// 'Com a opção `includeNames: true` especificada, retorna nomes de animais'
+// Need a map to show the names
+// 'Com a opção `sorted: true` especificada, retorna nomes de animais ordenados'
+// A sort
+// 'Com a opção `sex: \'female\'` ou `sex: \'male\'` especificada, retorna somente nomes de animais macho/fêmea'
+// Another filtering
 const format24HoursToAmPm = (hour) => (hour > 12 ? `${hour - 12}pm` : `${hour}am`);
 
 const message = (open, close) => {
@@ -76,6 +108,7 @@ const schedule = (dayName) => {
   // https://stackoverflow.com/questions/11508463/javascript-set-object-key-by-variable
   return { [dayName]: obj[dayName] };
 };
+schedule();
 // ----- Auxiliary functions ----- //
 const curry = (func) => (...args) => func.bind(null, ...args);
 const pipe = (...fns) => (...args) => fns.reduce((acc, func) => func(acc), ...args);
@@ -86,6 +119,7 @@ const idMatch = (reference) => ({ id }) => id === reference;
 const biggestProp = curry((p, arrayOfIntegers) =>
   arrayOfIntegers.reduce((acc, cur) => (acc[p] > cur[p] ? acc : cur), { [p]: 0 }));
 const objPropsToArr = (...args) => (obj) => args.map((p) => obj[p]);
+
 // ----- Business specific ----- //
 function oldestFromFirstSpecies(thisId) {
   return pipe(idMatch, find(employees), prop('responsibleFor'), firstElem,
