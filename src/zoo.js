@@ -30,8 +30,8 @@ function employeeByName(employeeName) {
   return !employeeName ? {} : objEmployee;
 }
 
-function createEmployee(_personalInfo, _associatedWith) {
-  // seu código aqui
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(_id) {
