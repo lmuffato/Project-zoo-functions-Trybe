@@ -136,38 +136,41 @@ function generateArray() {
   return includeNames(animalsAndResidents);
 }
 
+function myResidents(residents, event) {
+  const auxObj = ({ name, sex }) => {
+    if (sex === event.sex) {
+      return name;
+    }
+  };
+  const myObj = residents.map(auxObj).filter((item) => item);
+
+  if (event.sorted) return myObj.sort();
+  return myObj;
+}
+
+function testFunction(event) {
+  const auxTest = ({ name, residents }) => ({ [name]: myResidents(residents, event) });
+  const myVariable = animals.map(auxTest);
+
+  return myVariable;
+}
+
 function whichSex(event) {
-  let animalsAndResidents = [];
-  if (event.sorted) {
-    animalsAndResidents = animals.map(({ name, residents }) => {
-      return {
-        [name]: residents.map(({ name, sex }) => {
-          if (sex === event.sex) {
-            return name;
-          }
-        }).filter(item => item).sort()
-      }
-    });
-  } else {
-    animalsAndResidents = animals.map(({ name, residents }) => {
-      return {
-        [name]: residents.map(({ name, sex }) => {
-          if (sex === event.sex) {
-            return name;
-          }
-        }).filter((item) => item),
-      };
-    });
-  }
+  const animalsAndResidents = testFunction(event);
 
   return includeNames(animalsAndResidents);
+}
+
+function animalMapAux(event) {
+  if (event.includeNames && event.sorted) return sortArray();
+  return generateArray();
 }
 
 function animalMap(event) {
   if (!event || !event.includeNames) return animalMapNoParameter();
   if (event.includeNames && event.sex) return whichSex(event);
-  if (event.includeNames && event.sorted) return sortArray();
-  return generateArray();
+
+  return animalMapAux(event);
 }
 
 const info = {
