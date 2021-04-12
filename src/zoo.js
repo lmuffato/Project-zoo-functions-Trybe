@@ -56,11 +56,17 @@ function isManager(id) {
 // function animalMap(options) {
 //   // seu código aqui
 // }
-
-// function schedule(dayName) {
-//   // seu código aqui
-// }
-
+function schedule(dayName) {
+  const returnedObj = {};
+  Object.keys(data.hours).map((day) => {
+    returnedObj[day] = data.hours[day].open < 6
+      ? 'CLOSED'
+      : `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
+    return returnedObj;
+  });
+  if (!dayName) return returnedObj;
+  return { [dayName]: returnedObj[dayName] };
+}
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
@@ -75,7 +81,7 @@ function isManager(id) {
 
 module.exports = {
   // entryCalculator,
-  // schedule,
+  schedule,
   // animalCount,
   // animalMap,
   animalsByIds,
