@@ -61,11 +61,14 @@ function animalCount(species) {
   return animals.find((animal) => animal.name === species).residents.length;
 }
 
-/*
+/* Source: https://github.com/tryber/sd-010-a-project-zoo-functions/tree/d0da599dcffd27508a334abbe287530f22d402b9 */
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (!entrants) return 0;
+
+  return Object.key(entrants).reduce((acc, cur) => acc + (entrants[cur] * prices[cur]), 0);
 }
 
+/*
 function animalMap(options) {
   // seu código aqui
 }
@@ -110,10 +113,7 @@ function employeeCoverage(idOrName) {
 */
 
 module.exports = {
-  /*
   entryCalculator,
-  */
-
   schedule,
   animalCount,
 
