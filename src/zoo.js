@@ -70,7 +70,7 @@ function employeeCoverage(idOrName) {
 }
 */
 module.exports = {
-  animalsByIds
+  animalsByIds,
   /* entryCalculator,
   schedule,
   animalCount,
