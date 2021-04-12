@@ -1,14 +1,3 @@
-/*
-eslint no-unused-vars: [
-  "error",
-  {
-    "args": "none",
-    "vars": "local",
-    "varsIgnorePattern": "data"
-  }
-]
-*/
-
 const { animals, employees, hours, prices } = require('./data');
 // 1
 const animalsByIds = (...listOfIdsToSearch) => {
@@ -103,7 +92,6 @@ const oldestFromFirstSpecies = (thisId) => pipe(
   firstElem, pipe(idMatch, find(animals)),
   pipe(prop('residents'), biggestProp('age')), objPropsToArr('name', 'sex', 'age'),
 )(thisId);
-
 // 12
 const toFixed = (num, precision) => {
   function round(digit) {
