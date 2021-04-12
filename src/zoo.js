@@ -12,7 +12,7 @@ eslint no-unused-vars: [
 const { animals } = require('./data');
 const { employees } = require('./data');
 const { prices } = require('./data');
-// const { hours } = require('./data');
+const { hours } = require('./data');
 
 // const data = require('./data');
 
@@ -115,22 +115,41 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   if (dayName === undefined) {
-//     return Object.entries(hours).map((item) => {
-//       if (item[1].open === 0 && item[1].close === 0) return `${item[0]}:CLOSED`;
-//       return `${item[0]}: Open from ${item[1].open}am until ${item[1].close}pm`;
-//     });
-//   }
+// Object.entries(hours).forEach((item) => {
+//   if (item[1].open === 0 && item[1].close === 0) return `${item[0]}:CLOSED`;
+//   return `${item[0]}: Open from ${item[1].open}am until ${item[1].close}pm`;
+// });
 
-//   const horario = {};
-//   if (dayName === 'Monday') {
-//     horario[`${dayName}`] = 'CLOSED'; // adiciono uma chave e um valor ao objeto
-//   } else {
-//     horario[`${dayName}`] = `Open from ${hours[dayName].open}am until ${hours[dayName].close}pm`;
-//   }
-//   return horario;
-// }
+let valor = '';
+const todosHorarios = {};
+const arrayKeys = Object.keys(hours);
+arrayKeys.forEach((item) => {
+  if (hours[item].open === 0 && hours[item].close === 0) {
+    valor = 'CLOSED';
+    todosHorarios[item] = valor;
+  } else {
+    valor = `Open from ${hours[item].open}am until ${hours[item].close - 12}pm`;
+    todosHorarios[item] = valor;
+  }
+  return todosHorarios;
+});
+
+// pego um array como todos as chaves (nome dos dias da semana) e com esse array faço um foreach
+// uso o if para especificar os valores e adiciona-los na variavel valor, e em seguida adiciono ao objeto todosHorarios uma chave[dia da semana] = varialvel valor
+
+function schedule(dayName) {
+  if (dayName === undefined) {
+    return todosHorarios;
+  }
+
+  const horario = {};
+  if (dayName === 'Monday') {
+    horario[dayName] = 'CLOSED'; // adiciono uma chave e um valor ao objeto horario
+  } else {
+    horario[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
+  }
+  return horario;
+}
 
 function oldestFromFirstSpecies(id) {
   const objFuncionario = employees.find((item) => item.id === id); // retorna o objeto do funcionario
@@ -178,7 +197,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
