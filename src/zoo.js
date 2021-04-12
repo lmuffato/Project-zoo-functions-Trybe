@@ -11,68 +11,56 @@ eslint no-unused-vars: [
 
 const { animals, employees, hours, prices } = require('./data');
 // 1
-function animalsByIds(...listOfIdsToSearch) {
+const animalsByIds = (...listOfIdsToSearch) => {
   // This guard clause is not necessary, but imo it makes the code prettier
   if (listOfIdsToSearch.length === 0) return [];
-  const animalsList = [];
-  listOfIdsToSearch.forEach((idToSearchFor) => {
-    animalsList.push(animals.find(({ id }) => id === idToSearchFor));
-  });
-  return animalsList;
-}
+  return listOfIdsToSearch.reduce((acc, idToSearchFor) =>
+    (acc.push(animals.find(({ id }) => id === idToSearchFor)) ? acc : null),
+  []);
+};
 // 2
-function animalsOlderThan(animalName, ageToCheck) {
-  const animalMatch = animals.find(({ name }) => name === animalName);
-  return animalMatch.residents.every(({ age }) => age >= ageToCheck);
-}
+const animalsOlderThan = (animalName, ageToCheck) =>
+  animals.find(({ name }) => name === animalName).residents.every(({ age }) => age >= ageToCheck);
 // 3
-function employeeByName(employeeName) {
+const employeeByName = (employeeName) => {
   if (typeof employeeName === 'undefined') return ({});
   return employees.find(({ firstName, lastName }) => firstName === employeeName
     || lastName === employeeName);
-}
+};
 // 4
 const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 // 5
-function isManager(idToSearch) {
-  return employees.some(({ managers }) => managers.includes(idToSearch));
-}
+const isManager = (idToSearch) => employees.some(({ managers }) => managers.includes(idToSearch));
 // 6
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
-  employees.push(newEmployee);
-}
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) =>
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
 // 7
-function animalCount(speciesNameToSearch) {
-  if (typeof speciesNameToSearch === 'string') {
-    return animals.find(({ name }) => name === speciesNameToSearch).residents.length;
-  }
+const animalCount = (speciesNameToSearch) => {
   // https://medium.com/@vmarchesin/using-array-prototype-reduce-in-objects-using-javascript-dfcdae538fc8
-  return animals.reduce((acc, { name, residents }) => ({ ...acc, [name]: residents.length }), {});
-}
+  if (typeof speciesNameToSearch === 'undefined') {
+    return animals.reduce((acc, { name, residents }) => ({ ...acc, [name]: residents.length }), {});
+  }
+  return animals.find(({ name }) => name === speciesNameToSearch).residents.length;
+};
 // 8
-function entryCalculator(entrants) {
+const entryCalculator = (entrants) => {
   if (typeof entrants === 'undefined') return 0;
   if (Object.keys(entrants).length === 0) return 0;
-  const entrantsEntries = Object.entries(entrants);
-  return entrantsEntries.reduce((acc, cur) => acc + prices[cur[0]] * cur[1], 0);
-}
+  return Object.entries(entrants).reduce((acc, [key, value]) => acc + prices[key] * value, 0);
+};
 // 9
 const maybeSort = (bool, arr) => (bool ? arr.sort() : arr);
-const maybeSex = (sexOption, arrOfObjs) =>
+const maybeFilterBySex = (sexOption, arrOfObjs) =>
   (sexOption ? arrOfObjs.filter(({ sex }) => sex === sexOption) : arrOfObjs);
-const animalsAt = (isSorted, isFiltered) => (givenLoc) =>
+const withResidentsNames = (isSorted, isFiltered) => (givenLoc) =>
   animals.filter(({ location }) => location === givenLoc)
-    .reduce((acc, { name: species, residents }) => {
-      acc.push({
-        [species]:
-          maybeSort(isSorted, maybeSex(isFiltered, residents)
-            .map(({ name }) => name)),
-      });
-      return acc;
-    }, []);
+    .reduce((acc, { name: species, residents }) =>
+      (acc.push({
+        [species]: maybeSort(isSorted,
+          maybeFilterBySex(isFiltered, residents).map(({ name }) => name)),
+      }) ? acc : null), []);
 // https://codeburst.io/javascript-array-distinct-5edc93501dc4
-const noNames = (givenLoc) => animals
+const onlySpecieName = (givenLoc) => animals
   .filter(({ location }) => location === givenLoc)
   .map(({ name }) => name);
 const template = (callback) =>
@@ -81,10 +69,10 @@ const template = (callback) =>
     [givenLoc]: callback(givenLoc),
   }),
   {});
-function animalMap({ includeNames = false, sorted = false, sex = false } = {}) {
-  if (!includeNames) return template(noNames);
-  return template(animalsAt(sorted, sex));
-}
+const animalMap = ({ includeNames = false, sorted = false, sex = false } = {}) => {
+  if (!includeNames) return template(onlySpecieName);
+  return template(withResidentsNames(sorted, sex));
+};
 // 10
 const format24HoursToAmPm = (hour) => (hour > 12 ? `${hour - 12}pm` : `${hour}am`);
 const message = (open, close) => {
@@ -110,11 +98,13 @@ const biggestProp = curry((p, arrayOfIntegers) =>
   arrayOfIntegers.reduce((acc, cur) => (acc[p] > cur[p] ? acc : cur), { [p]: 0 }));
 const objPropsToArr = (...args) => (obj) => args.map((p) => obj[p]);
 // ----- Business specific ----- //
-function oldestFromFirstSpecies(thisId) {
-  return pipe(idMatch, find(employees), prop('responsibleFor'), firstElem,
-    pipe(idMatch, find(animals)), pipe(prop('residents'), biggestProp('age')),
-    objPropsToArr('name', 'sex', 'age'))(thisId);
-}
+const oldestFromFirstSpecies = (thisId) => pipe(
+  idMatch, find(employees), prop('responsibleFor'),
+  firstElem, pipe(idMatch, find(animals)),
+  pipe(prop('residents'), biggestProp('age')), objPropsToArr('name', 'sex', 'age'),
+)(thisId);
+
+// 12
 const toFixed = (num, precision) => {
   function round(digit) {
     const add1 = parseInt(digit, 10) + 1;
@@ -131,14 +121,13 @@ const toFixed = (num, precision) => {
   }
   return parseFloat(str);
 };
-// 12
-function increasePrices(percentage) {
+const increasePrices = (percentage) => {
   Object.keys(prices).forEach((key) => {
     prices[key] = toFixed(prices[key] + prices[key] * (percentage / 100), 2);
   });
-}
+};
 // 13
-function employeeCoverage(idOrName) {
+const employeeCoverage = (idOrName) => {
   function fName({ firstName, lastName }) {
     return `${firstName} ${lastName}`;
   }
@@ -154,7 +143,7 @@ function employeeCoverage(idOrName) {
     [id, firstName, lastName].includes(idOrName));
   const hisFullName = fName(employee);
   return { [hisFullName]: obj[hisFullName] };
-}
+};
 
 module.exports = {
   entryCalculator,
