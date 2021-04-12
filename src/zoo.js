@@ -11,6 +11,7 @@ eslint no-unused-vars: [
 const { employees } = require('./data');
 const { animals } = require('./data');
 const { prices } = require('./data');
+const { hours } = require('./data');
 
 function animalsByIds(...ids) {
   const animalID = ids.map((id) => {
@@ -173,11 +174,32 @@ function animalMap(options) {
   }
   return noParameterMap(locations);
 }
-/* function schedule(dayName) {
-  // seu código aqui
+function writeMsg(dayHours) {
+  if (dayHours.open === 0) {
+    return 'CLOSED';
+  }
+  return `Open from ${dayHours.open}am until ${dayHours.close - 12}pm`;
 }
-
-function oldestFromFirstSpecies(id) {
+function schedule(dayName) {
+  const objMsg = {};
+  const arrayDays = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday'];
+  if (dayName === undefined) {
+    arrayDays.forEach((day) => {
+      const dayHours = hours[day];
+      objMsg[day] = writeMsg(dayHours);
+    });
+    return objMsg;
+  }
+  arrayDays.forEach((day) => {
+    if (day === dayName) {
+      const dayHours = hours[day];
+      objMsg[day] = writeMsg(dayHours);
+    }
+  });
+  return objMsg;
+}
+console.log(schedule('Monday'));
+/* function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
@@ -191,7 +213,7 @@ function employeeCoverage(idOrName) {
  */
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   animalMap,
   animalsByIds,
