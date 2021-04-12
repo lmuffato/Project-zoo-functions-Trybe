@@ -10,9 +10,12 @@
 const data = require('./data');
 
 function animalsByIds(ids) {
-  // seu código aqui
+  return module.exports.animalMap((e) => {
+    if (ids === e.id) {
+      return `${e.animals.name}`;
+    }
+  });
 }
-
 function animalsOlderThan(animal, age) {
   // seu código aqui
 }
