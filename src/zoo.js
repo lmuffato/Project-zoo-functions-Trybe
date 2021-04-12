@@ -70,17 +70,17 @@ function employeeCoverage(idOrName) {
 }
 */
 module.exports = {
- // entryCalculator,
- // schedule,
- // animalCount,
- // animalMap,
-  animalsByIds,
- // employeeByName,
- // employeeCoverage,
- // addEmployee,
- // isManager,
- // animalsOlderThan,
- // oldestFromFirstSpecies,
- // increasePrices,
-  //createEmployee,
+  animalsByIds
+  /* entryCalculator,
+  schedule,
+  animalCount,
+  animalMap,
+  employeeByName,
+  employeeCoverage,
+  addEmployee,
+  isManager,
+  animalsOlderThan,
+  oldestFromFirstSpecies,
+  increasePrices,
+  createEmployee, */
 };
