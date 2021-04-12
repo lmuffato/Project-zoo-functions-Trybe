@@ -45,8 +45,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   const animalCountObject = {};
-  data.animals.forEach((animal) => animalCountObject[animal.name] = animal.residents.length);
-
+  data.animals.forEach((animal) => {
+    animalCountObject[animal.name] = animal.residents.length;
+  });
   // Como faria com reduce?
 
   if (!species) return animalCountObject;
@@ -55,7 +56,10 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   if (!entrants) return 0;
-  return Object.keys(entrants).reduce((accum, ageGroup) => accum + data.prices[ageGroup]*entrants[ageGroup], 0);
+  return Object.keys(entrants).reduce((accum, ageGroup) => {
+    const newValue = data.prices[ageGroup] * entrants[ageGroup];
+    return accum + newValue;
+  }, 0);
 }
 
 function animalMap(options) {
@@ -66,10 +70,10 @@ function schedule(dayName) {
   const scheduleObject = Object.keys(data.hours).reduce((accum, weekDay) => {
     const openTime = data.hours[weekDay].open;
     const closeTime = data.hours[weekDay].close - 12;
-    let weekDayObject = { [weekDay]: `Open from ${openTime}am until ${closeTime}pm` }; 
-      return Object.assign(accum, weekDayObject);
-    }, {});
-  
+    const weekDayObject = { [weekDay]: `Open from ${openTime}am until ${closeTime}pm` };
+    return Object.assign(accum, weekDayObject);
+  }, {});
+
   scheduleObject.Monday = 'CLOSED';
 
   if (!dayName) return scheduleObject;
@@ -78,11 +82,8 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   const firstAnimalId = data.employees.find((employee) => employee.id === id).responsibleFor[0];
-  console.log(firstAnimalId);
   const firstAnimalObject = animalsByIds(firstAnimalId)[0];
-  console.log(firstAnimalObject);
   const oldestAnimal = firstAnimalObject.residents.sort((a, b) => b.age - a.age)[0];
-  console.log(oldestAnimal);
   return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
 
