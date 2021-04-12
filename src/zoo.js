@@ -31,11 +31,11 @@ function createEmployee(personalInfo, associatedWith) {
   return employee;
 }
 
-/*
-
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some(({ managers }) => managers.includes(id));
 }
+
+/*
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
@@ -82,8 +82,8 @@ module.exports = {
   /*
   employeeCoverage,
   addEmployee,
-  isManager,
   */
+  isManager,
   animalsOlderThan,
   /*
   oldestFromFirstSpecies,
