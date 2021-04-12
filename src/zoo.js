@@ -8,12 +8,16 @@ eslint no-unused-vars: [
   }
 ]
 */
-
 const { animals } = require('./data');
+const data = require('./data');
+console.log(data);
 
 function animalsByIds(...ids) {
+  if (typeof(ids) === 'undefined') {
+    ids = [];
+   return ids;
+  } 
   return animals.filter((animal) => ids.includes(animal.id));
-  // O método include está verificando se dentro do array ids, tem o id do animal passado.
 }
 
 function animalsOlderThan(animal, age) {
