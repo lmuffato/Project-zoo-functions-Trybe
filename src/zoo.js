@@ -65,12 +65,12 @@ function animalsByIds(...ids) {
 //   // seu código aqui
 // }
 
-// module.exports = {
+module.exports = {
 //   entryCalculator,
 //   schedule,
 //   animalCount,
 //   animalMap,
-//   animalsByIds,
+  animalsByIds,
 //   employeeByName,
 //   employeeCoverage,
 //   addEmployee,
@@ -79,4 +79,4 @@ function animalsByIds(...ids) {
 //   oldestFromFirstSpecies,
 //   increasePrices,
 //   createEmployee,
-// };
+};
