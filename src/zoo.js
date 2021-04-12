@@ -62,11 +62,22 @@ function animalCount(species) {
   return !species ? calcPopul : animalObj.residents.length;
 }
 
-console.log(animalCount());
-
-function entryCalculator(_entrants) {
-  // seu código aqui
+function entryCalculator(entrants) {
+  const objIsEmpty = (obj) => Object.keys(obj).length === 0;
+  if (!entrants || objIsEmpty(entrants)) return 0;
+  const {
+    Adult: priceAdult,
+    Child: priceChild,
+    Senior: princeSenior,
+  } = data.prices;
+  const listPrices = entrants;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const sumPrinces =
+    Adult * priceAdult + Child * priceChild + Senior * princeSenior;
+  return sumPrinces;
 }
+
+console.log(entryCalculator({ Adult: 2, Child: 3, Senior: 1 }));
 
 function animalMap(_options) {
   // seu código aqui
