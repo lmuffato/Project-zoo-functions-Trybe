@@ -80,17 +80,8 @@ function entryCalculator(entryPeople) {
 }
 
 // function animalMap(map) {
-//   if (map === undefined) {
-//     const sortedAnimals = animals.sort((a, b) => (a.location - b.location));
-//     return sortedAnimals.map((animal) => {
-//       const mapAnimalsByRegion = {};
-//       mapAnimalsByRegion[animal.location] = animal.name;
-//       return mapAnimalsByRegion;
-//     });
-//   }
+// if (map !== undefined) {
 //   const { includeNames = false, sex = 0, sorted = false } = map;
-// if () {
-
 // }
 // }
 
@@ -129,16 +120,43 @@ oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992');
 function increasePrices(percentage) {
   const age = Object.keys(prices);
   age.forEach((agePrice) => {
-  /* Arredondamento com duas casas:
-https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary */
+    /* Arredondamento com duas casas:
+  https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary */
     prices[agePrice] = (Math.round((prices[agePrice] * (1 + percentage / 100)) * 100)) / 100;
   });
 }
 
-// function employeeCoverage(idOrName) {
+const findAnimals = (employee) => {
+  const animalArray = [];
+  employee.responsibleFor.forEach((animalResponsible) => {
+    animals.forEach((animal) => {
+      if (animalResponsible === animal.id) {
+        animalArray.push(animal.name);
+      }
+    });
+  });
+  return animalArray;
+};
 
-// }
-
+function employeeCoverage(idOrName) {
+  const employeeCoverageAnimals = {};
+  if (idOrName !== undefined) {
+    const employeeSelected = employees.find((employee) => {
+      return (employee.firstName === idOrName
+        || employee.lastName === idOrName
+        || employee.id === idOrName);
+    });
+    const employeeSelectedName = `${employeeSelected.firstName} ${employeeSelected.lastName}`;
+    employeeCoverageAnimals[employeeSelectedName] = findAnimals(employeeSelected);
+    return employeeCoverageAnimals;
+  }
+  employees.forEach((employee) => {
+    const employeeSelectedName = `${employee.firstName} ${employee.lastName}`;
+    employeeCoverageAnimals[employeeSelectedName] = findAnimals(employee);
+  });
+  return employeeCoverageAnimals;
+}
+console.log(employeeCoverage());
 // console.log(employeeCoverage('Emery'));
 // const employeeCoveraged = {};
 //   if (idOrName !== undefined) {
@@ -197,7 +215,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
