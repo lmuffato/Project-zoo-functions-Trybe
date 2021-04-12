@@ -46,18 +46,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(employee);
 }
 
-// function animalCount(species) {
-//   if (species === undefined) {
-//     return animals.reduce((total, current) => {
-//       total[current.name] = current.residents.length;
-//       return total;
-//     }, {});
-//   }
-//   return animals.find(({ name }) => name === species).residents.length;
-// }
+function animalCount(species) {
+  if (species === undefined) {
+    return animals.reduce((acc, current) => {
+      acc[current.name] = current.residents.length;
+      return acc;
+    }, {});
+  }
+  return animals.find(({ name }) => name === species).residents.length;
+}
 
 //  função implementada baseada na forma feita no repositório do Nilson - https://github.com/tryber/sd-010-a-project-zoo-functions/pull/80
-
 function entryCalculator(entrants) {
   if (typeof entrants === 'undefined' || entrants === {}) return 0;
   const { Adult = 0, Senior = 0, Child = 0 } = entrants;
@@ -69,10 +68,16 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
+// const days = `${key}: 'Open from ${open}am until ${close}pm' ` {hours.key}
+// const zooSchedule = hours.map((day) => {
+//   return hours.day;
+// });
+
 // function schedule(dayName) {
-//   // if (!dayName) return hours;
-//   console.log(`${key}: 'Open from ${}am until ${}pm' ` {hours.key}
-// }
+//   if (!dayName) return hours;
+//   zooSchedule.forEach(element => 
+//     days(hours.open, hours.close))  
+// };
 
 // function oldestFromFirstSpecies(id) {
 // identifica responsibleFor do funcionario
@@ -93,7 +98,7 @@ function entryCalculator(entrants) {
 module.exports = {
   entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
