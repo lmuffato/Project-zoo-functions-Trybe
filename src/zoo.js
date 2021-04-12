@@ -34,8 +34,11 @@ function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
-function isManager(_id) {
-  // seu código aqui
+function isManager(thisId) {
+  const checkIsManager = data.employees.some((manager) =>
+    manager.managers.includes(thisId),
+  );
+  return checkIsManager;
 }
 
 function addEmployee(_id, _firstName, _lastName, _managers, _responsibleFor) {
