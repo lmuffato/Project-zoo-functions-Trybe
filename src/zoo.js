@@ -19,7 +19,7 @@ function animalsByIds(...ids) {
   const newAnimal = (par) => {
     for (let index = 0; index < ids.length; index += 1) {
       allAnimals.push(animals
-        .filter((animal) => animal.id === par[index]));
+        .find((animal) => animal.id === par[index]));
     }
     return allAnimals;
   };
@@ -27,9 +27,13 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  const anima = animal;
-  const ag = age;
-  console.log(anima + ag); // seu código aqui
+  const animalFound = animals.find(
+    (animalist) => (animalist.name === animal),
+  );
+  const { residents } = animalFound;
+  const animalsAge = residents.every((resident) => (resident.age >= age));
+
+  return animalsAge;
 }
 
 function employeeByName(employeeName) {
