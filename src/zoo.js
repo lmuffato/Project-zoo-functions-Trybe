@@ -128,9 +128,11 @@ function increasePrices(percentage) {
   return prices;
 }
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function employeeCoverage(idOrName) {
+  const { find } = functionsEmployee;
+  if (!idOrName) return find.animals.employeesCoverage.all();
+  return find.animals.employeesCoverage.oneEmployee(idOrName);
+}
 
 module.exports = {
   entryCalculator,
@@ -139,7 +141,7 @@ module.exports = {
   animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,

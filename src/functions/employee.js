@@ -19,6 +19,25 @@ const find = {
       };
     },
   },
+  byId(id) {
+    const result = data.employees.find((employee) => employee.id === id);
+    if (result === undefined) return false;
+    return {
+      found: true,
+      result,
+    };
+  },
+  employee(idOrName) {
+    const { byId, byName } = find;
+    const id = byId(idOrName);
+    const name = {
+      firstName: byName.firstName(idOrName),
+      lastName: byName.lastName(idOrName),
+    };
+
+    const employee = [id, name.firstName, name.lastName].find((object) => object.found === true);
+    return employee.result;
+  },
   animals: {
     oldestFromFirstSpecies(id) {
       const employee = data.employees.find((person) => person.id === id);
@@ -32,6 +51,28 @@ const find = {
       });
       oldestAnimal = [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
       return oldestAnimal;
+    },
+    employeesCoverage: {
+      oneEmployee(idOrName) {
+        const { animals } = data;
+        const employee = find.employee(idOrName);
+        const employeeFullName = `${employee.firstName} ${employee.lastName}`;
+        const animalsOfEmployee = employee.responsibleFor.map((animalId) => {
+          const animalFound = animals.find((animal) => animal.id === animalId);
+          return animalFound.name;
+        });
+        return { [employeeFullName]: animalsOfEmployee };
+      },
+      all() {
+        const employees = data.employees.map((employee) => employee.id);
+        const employeesAndItsCoverage = {};
+        employees.forEach((employeeId) => {
+          const coverage = find.animals.employeesCoverage.oneEmployee(employeeId);
+          const key = Object.keys(coverage)[0];
+          employeesAndItsCoverage[key] = coverage[key];
+        });
+        return employeesAndItsCoverage;
+      },
     },
   },
 };
