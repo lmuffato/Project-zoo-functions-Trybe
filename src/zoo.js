@@ -198,12 +198,24 @@ function schedule(dayName) {
   });
   return objMsg;
 }
-console.log(schedule('Monday'));
-/* function oldestFromFirstSpecies(id) {
-  // seu código aqui
+function oldestFromFirstSpecies(id) {
+  const infoArray = [];
+  const searchID = employees.find((employee) => employee.id === id);
+  const responsible = searchID.responsibleFor[0];
+  const animalResponsible = animals.find((animal) => animal.id === responsible);
+  const oldestAnimalObject = animalResponsible.residents.reduce((oldestAnimal, currentAnimal) => {
+    if (currentAnimal.age > oldestAnimal.age) {
+      return currentAnimal;
+    }
+    return oldestAnimal;
+  });
+  infoArray.push(oldestAnimalObject.name);
+  infoArray.push(oldestAnimalObject.sex);
+  infoArray.push(oldestAnimalObject.age);
+  return infoArray;
 }
 
-function increasePrices(percentage) {
+/* function increasePrices(percentage) {
   // seu código aqui
 }
 
@@ -222,7 +234,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
