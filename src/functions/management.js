@@ -1,5 +1,5 @@
 const { prices } = require('../data');
-let { hours } = require('../data');
+const { hours } = require('../data');
 
 const calculate = {
   entrants(entrants) {
@@ -26,30 +26,23 @@ const schedule = {
     return `${number}am`;
   },
   getSchedule() {
-    hours = Object.entries(hours);
-    hours = hours.map(([day, schedules]) => [day, {
-      open: schedule.getHour(schedules.open),
-      close: schedule.getHour(schedules.close),
-    }]);
-    let scheduleOutput = {};
-    hours.forEach(([day, schedules]) => {
-      if (schedules.open === 'CLOSED' || schedules.close === 'CLOSED') {
-        scheduleOutput = { ...scheduleOutput, [day]: 'CLOSED' };
-      } else {
-        scheduleOutput = {
-          ...scheduleOutput,
-          [day]: `Open from ${schedules.open} until ${schedules.close}`,
-        };
-      }
+    const weekSchedule = {};
+    Object.entries(hours).forEach(([day, daySchedule]) => {
+      let { open, close } = daySchedule;
+
+      open = schedule.getHour(open);
+      close = schedule.getHour(close);
+
+      if ([open, close].includes('CLOSED')) weekSchedule[day] = 'CLOSED';
+
+      else weekSchedule[day] = `Open from ${open} until ${close}`;
     });
 
-    return scheduleOutput;
+    return weekSchedule;
   },
   getDaySchedule(dayName) {
-    let daySchedule = schedule.getSchedule();
-    daySchedule = Object.entries(daySchedule).find(([day]) => day === dayName);
-    daySchedule = { [daySchedule[0]]: daySchedule[1] };
-    return daySchedule;
+    const daySchedule = schedule.getSchedule()[dayName];
+    return { [dayName]: daySchedule };
   },
 };
 module.exports = {
