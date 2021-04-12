@@ -96,7 +96,7 @@ function entryCalculator(entrants) {
   if (Object.values(entrants).length === 0) return 0;
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   console.log(entrants.prices);
-  return ((data.prices.Adult * Adult) + (data.prices.Senior * Senior) 
+  return ((data.prices.Adult * Adult) + (data.prices.Senior * Senior)
   + (data.prices.Child * Child));
 }
 entryCalculator();
