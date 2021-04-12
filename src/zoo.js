@@ -28,8 +28,15 @@ function animalsOlderThan(nomeAnimal, idade) {
   return verificarAnimal.residents.every(({ age }) => age > idade);
 }
 
+/* Procura no DATA.EMPLOYESS o primeiro elemento onde a
+propriedade "fisrtName" OU "lastName" for igual ao
+parâmetro EMPLOYESSNAME. */
 function employeeByName(employeeName) {
-  return data.employees.filter(({ name }) => name.firstName === employeeName || name.lastName === employeeName);
+  if (!employeeName) {
+    return {};
+  }
+  return data.employees.find(({ firstName, lastName }) =>
+    firstName === employeeName || lastName === employeeName);
 }
 
 /* function createEmployee(personalInfo, associatedWith) {
