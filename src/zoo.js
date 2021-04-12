@@ -64,7 +64,7 @@ const createAnimalsList = () => {
   }, {});
   return animalList;
 };
-// Função createAnimalsList adaptada da ideia da colega Beatriz Barbosa, conforme discutimos em grupo de estudo
+// Função createAnimalsList refatorada a partir da ideia da colega Beatriz Barbosa, conforme discutimos em grupo de estudo
 
 function animalCount(species) {
   if (!species) {
@@ -84,7 +84,6 @@ function entryCalculator(entrants = {}) {
 }
 // Retirei parseFloat das constantes e deixei só no return,
 // aderindo à ideia (e sugestão) da colega Heloísa Hackenhaar, conforme discutimos em grupo de estudo
-
 /*
 function animalMap(options) {
   // seu código aqui
@@ -113,26 +112,6 @@ function schedule(dayName) {
 // Ideia de usar o forEach retirada do código da colega Beatriz Estabanez. (Eu estava tentando com o reduce, mas não deu certo).
 // https://github.com/tryber/sd-010-a-project-zoo-functions/pull/62/files
 
-/*
-const animalsIds = (animalId) => {
-  // let arr = [];
-  animalId.filter((animal, index) => {
-    // animal.name;
-    // animal.sex;
-    // animal.age;
-  });
-};
-*/
-//  retorna um array com nome, sexo e idade do animal mais velho dessa espécie
-/*
-const desestrutura = () => {
-  const residentes = animals[0].residents;
-  const ages = residentes[0].age;
-  return ages;
-};
-// console.log(desestrutura());
-*/
-
 function oldestFromFirstSpecies(id) {
   const soughtId = employees.find((employee) => employee.id === id); // encontra o funcionário
   const speciesId = soughtId.responsibleFor.find((res) => res); // localiza o id da primeira espécie
@@ -156,22 +135,14 @@ function increasePrices(percentage) {
   prices.Child = parseFloat((prices.Child * increasePrice).toPrecision(4));
 }
 
-// const listOfAnimalsAndEmployees = () => {
-// };
-const animalsEmployees = employees.reduce((previousValue, value) => {
-  const previous = previousValue;
-  const valueItems = value.responsibleFor;
-  const fst = animals.find((animal) => valueItems[0] === animal.id);
-  const scd = animals.find((animal) => valueItems[1] === animal.id);
-  const trd = animals.find((animal) => valueItems[2] === animal.id);
-  const four = animals.find((animal) => valueItems[3] === animal.id);
-  previous[`${value.firstName} ${value.lastName}`] = [fst.name, scd.name];
-  if (valueItems.length === 3) {
-    previous[`${value.firstName} ${value.lastName}`] = [fst.name, scd.name, trd.name];
-  }
-  if (valueItems.length > 3) {
-    previous[`${value.firstName} ${value.lastName}`] = [fst.name, scd.name, trd.name, four.name];
-  } return previous;
+const animalsEmployees = employees.reduce((obj, employee) => {
+  const objt = obj;
+  const arrAnimals = employee.responsibleFor;
+  const fullName = `${employee.firstName} ${employee.lastName}`;
+  const animalsEmployeeIsResponsibleFor = arrAnimals
+    .map((resp) => animals.find((animal) => resp === animal.id).name);
+  objt[fullName] = animalsEmployeeIsResponsibleFor;
+  return objt;
 }, {});
 
 function employeeCoverage(idOrName) {
@@ -185,7 +156,7 @@ function employeeCoverage(idOrName) {
     .map((resp) => animals.find((animal) => resp === animal.id).name);
   return { [name]: getAnimal };
 }
-// Linhas 184-185 da função employeeCoverage adaptadas de: https://github.com/tryber/sd-09-project-zoo-functions/pull/48/files
+// Linhas 154-155 da função employeeCoverage adaptadas de: https://github.com/tryber/sd-09-project-zoo-functions/pull/48/files
 
 // Referências:
 // http://www.macoratti.net/18/09/js_marr2.htm
@@ -194,7 +165,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  //  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
