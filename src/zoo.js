@@ -18,11 +18,11 @@ function animalsByIds(...ids) {
 // console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce', '89be95b3-47e4-4c5b-b687-1fabf2afa274'));// test 1
 // console.log(animalsByIds());// test 2
 
-function animalsOlderThan(animalsName, animalsAge) {
+function animalsOlderThan(species, animalAge) {
   return animals
-    .find(({ name }) => name === animalsName)
+    .find(({ name }) => name === species)
     .residents
-    .every(({ age }) => age >= animalsAge);
+    .every(({ age }) => (age >= animalAge));
 }
 
 // console.log(animalsOlderThan('lions',15)); // TEST 1 - Expected true
