@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const { employees } = require('./data');
 const { prices } = require('./data');
-// const { hours } = require('./data');
+const { hours } = require('./data');
 const data = require('./data');
 
 const { animals } = data;
@@ -75,9 +75,7 @@ function animalCount(species) {
 } // Consegui entender a lógica de utilizar o reduce e sua criação de objeto através do código do Paulo Henrique!
 
 const summAdult = (entrants) => (prices.Adult * ((entrants === undefined) ? 0 : entrants));
-
 const summChild = (entrants) => (prices.Child * ((entrants === undefined) ? 0 : entrants));
-
 const summSenior = (entrants) => (prices.Senior * ((entrants === undefined) ? 0 : entrants));
 
 function entryCalculator(entrants) {
@@ -92,17 +90,30 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-//   const fullSchedule = {};
-//   const days = Object.keys(hours);
-//   const timeOpen = hours.Tuesday;
-//   if (dayName === undefined) {
-//     return hours;
-//   }
-// }
+const days = Object.values(hours);
+const daysWeek = Object.keys(hours);
 
-// console.log(schedule());
+const fullSchedule = days.reduce((acc, curr, index) => {
+  if (curr.open || curr.close) {
+    acc[`${daysWeek[index]}`] = `Open from ${curr.open}am until ${curr.close - 12}pm`;
+    return acc;
+  }
+  acc[`${daysWeek[index]}`] = 'CLOSED';
+  return acc;
+}, {});
+
+function schedule(dayName) {
+  // seu código aqui
+  if (dayName === undefined) {
+    return fullSchedule;
+  }
+  // const [dayWeek, info] = Object.entries(fullSchedule).find(([_dayWeek, _info]) => _info === dayName);
+  // return ({ [dayWeek]: info });
+  // Eu acabei vendo a forma abaixo como resultado através do código do Rodrigo Grande. A única coisa que tive que manter os nomes date e mensage para que funcionasse, pois como a tentativa acima ela não funcionou
+  const [date, mensage] = Object.entries(fullSchedule)
+    .find(([_date, _mensage]) => _date === dayName);
+  return ({ [date]: mensage });
+}
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
@@ -165,7 +176,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
