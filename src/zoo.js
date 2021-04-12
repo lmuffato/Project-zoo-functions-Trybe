@@ -45,7 +45,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  // seu código aqui
+  console.log(species);
+  
+  const animalCountObject = {};
+  data.animals.forEach((animal) => animalCountObject[animal.name] = animal.residents.length);
+
+  // Como faria com reduce?
+
+  if (!species) return animalCountObject
+  return animalCountObject[species];
 }
 
 function entryCalculator(entrants) {
