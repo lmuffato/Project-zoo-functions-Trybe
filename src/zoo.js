@@ -22,8 +22,8 @@ function animalsOlderThan(animal, animalAge) {
   return animals
     .find(({ name }) => name === animal)
     .residents
-    .every(({ age }) => ( animalAge >= age));
-};
+    .every(({ age }) => (animalAge >= age));
+}
 // console.log(animalsOlderThan('lions',15)); // Test 1
 // console.log(animalsOlderThan('lions',2)); // Test 2
 
@@ -75,17 +75,17 @@ function animalsOlderThan(animal, animalAge) {
 // }
 
 module.exports = {
-//   entryCalculator,
-//   schedule,
-//   animalCount,
-//   animalMap,
+  //   entryCalculator,
+  //   schedule,
+  //   animalCount,
+  //   animalMap,
   animalsByIds,
-//   employeeByName,
-//   employeeCoverage,
-//   addEmployee,
-//   isManager,
+  //   employeeByName,
+  //   employeeCoverage,
+  //   addEmployee,
+  //   isManager,
   animalsOlderThan,
-//   oldestFromFirstSpecies,
-//   increasePrices,
-//   createEmployee,
+  //   oldestFromFirstSpecies,
+  //   increasePrices,
+  //   createEmployee,
 };
