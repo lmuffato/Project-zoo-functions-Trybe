@@ -48,11 +48,19 @@ function isManager(id) {
   return employees.some(({ managers }) => managers.indexOf(id) !== -1);// se existe em cada index o id
 }
 
-/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const { employees } = data;
+    employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
+  return employees;
 }
 
-function animalCount(species) {
+/* function animalCount(species) {
   // seu código aqui
 }
 
@@ -88,7 +96,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
