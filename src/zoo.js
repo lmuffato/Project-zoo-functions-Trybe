@@ -29,8 +29,8 @@ function employeeByName(employeeName) {
     || name.lastName === employeeName);
 }
 
-const createEmployee = (personalInfo, associatedWith) => ({...personalInfo, ...associatedWith}); // ajuda do Sergio
-  // return Object.assign({}, personalInfo, associatedWith);
+const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith }); // ajuda do Sergio
+// return Object.assign({}, personalInfo, associatedWith);
 
 /* function isManager(id) {
   // seu código aqui
