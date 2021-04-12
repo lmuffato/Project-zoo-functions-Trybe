@@ -82,15 +82,36 @@ function entryCalculator(entrants) {
   return hasPeopleCalculation(entrants);
 }
 
-/*
-function animalMap(options) {
-  // seu código aqui
+// function animalMap(options) {
+//   // seu código aqui
+// }
+function fullSchedule() {
+  const allDays = {};
+  Object.keys(data.hours).forEach((weekDay) => {
+    if (data.hours[weekDay].open === 0) {
+      allDays[weekDay] = 'CLOSED';
+    } else {
+      const dayHours = data.hours[weekDay];
+      allDays[weekDay] = `Open from ${dayHours.open}am until ${dayHours.close - 12}pm`;
+    }
+  });
+  return allDays;
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  if (!dayName) return fullSchedule();
+
+  const singleDayOutput = {};
+  const dayHours = data.hours[dayName];
+  if (dayHours.open === 0) {
+    singleDayOutput[dayName] = 'CLOSED';
+  } else {
+    singleDayOutput[dayName] = `Open from ${dayHours.open}am until ${dayHours.close - 12}pm`;
+  }
+  return singleDayOutput;
 }
 
+/*
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
@@ -105,7 +126,7 @@ function employeeCoverage(idOrName) {
 */
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
