@@ -37,12 +37,10 @@ const isManager = (id) => employees.some(({ managers }) => managers.includes(id)
 const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) =>
   employees.push({ id, firstName, lastName, managers, responsibleFor });
 
-const animalCount = (species) => {
-  return species === undefined ? animals.map(({ name, residents }) =>
+const animalCount = (species) => species === undefined ? animals.map(({ name, residents }) =>
     ({ [name]: residents.length })).reduce((acc, cur) =>
       Object.assign(acc, cur), {}) : animals.find(({ name }) =>
         name === species).residents.length;
-}
 
 /* function entryCalculator(entrants) {
   
