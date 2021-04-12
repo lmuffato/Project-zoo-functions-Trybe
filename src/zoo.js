@@ -9,10 +9,8 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals } = require('./data');
-const { employees } = require('./data');
-const { prices } = require('./data');
 const data = require('./data');
+const { animals, employees, hours, prices } = require('./data');
 
 // Requisito 1, 2, 3 e 5 feitos colaborativamente com as colegas: Nathi Zebral, Thalita Cecilier, Debora PAssos, Djaniza Vasques Ferreira e Bia Zidioti. <3
 function animalsByIds(...ids) {
@@ -96,13 +94,30 @@ function entryCalculator(entrants) {
 
 /* function animalMap(options) {
   // seu código aqui
-}
+} */
 
+// Realizado o exercicio inspirada na resolução da Pollyana: https://github.com/tryber/sd-010-a-project-zoo-functions/pull/117/files
 function schedule(dayName) {
-  // seu código aqui
+  const allSchedule = {};
+  const daysOfWeek = Object.keys(hours);
+  // Sem parâmetros, retorna um cronograma legível para humanos
+  daysOfWeek.forEach((day) => {
+    if (day === 'Monday') {
+      allSchedule[day] = 'CLOSED';
+    } else {
+      allSchedule[day] = `Open from ${hours[day].open}am until ${(hours[day].close) - 12}pm`;
+    }
+  });
+  if (!dayName) {
+    return allSchedule;
+  }
+  return { [dayName]: allSchedule[dayName] };
 }
+// Se um único dia for passado, retorna somente este dia em um formato legível para humanos
 
-function oldestFromFirstSpecies(id) {
+console.log(schedule());
+console.log(schedule('Friday'));
+/* function oldestFromFirstSpecies(id) {
   // seu código aqui
 } */
 
@@ -137,11 +152,10 @@ function employeeCoverage(idOrName) {
     animals.find(({ id }) => animalId === id).name);
   return objectEmployeeResponsibleFor;
 }
-console.log(employeeCoverage('Wilburn'));
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
