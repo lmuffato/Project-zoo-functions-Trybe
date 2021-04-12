@@ -208,9 +208,32 @@ function increasePrices(percentage) {
   });
 }
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function animalsList(responsibleFor) {
+  const { animals } = data;
+  return responsibleFor.map((idResponsible) => animals
+    .find(({ id: idAnimal }) => idAnimal === idResponsible).name);
+}
+
+function employeeCoverage(idOrName) {
+  const { employees } = data;
+  const responsible = employees.filter((employee) =>
+    (employee.id === idOrName || employee.firstName.includes(idOrName)
+     || employee.lastName.includes(idOrName)));
+  const employeesList = employees.reduce((acc, curr) => {
+    const fullName = `${curr.firstName} ${curr.lastName}`;
+    acc[fullName] = animalsList(curr.responsibleFor);
+    return acc;
+  }, {});
+  if (!idOrName) return employeesList;
+  const oneEmployee = {};
+  const fullName = `${responsible[0].firstName} ${responsible[0].lastName}`;
+  oneEmployee[fullName] = employeesList[fullName];
+  return oneEmployee;
+}
+console.log(employeeCoverage('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+// console.log(employeeCoverage('Nelson'));
+// console.log(employeeCoverage('Nigel'));
+// console.log(employeeCoverage());
 
 module.exports = {
   entryCalculator,
@@ -219,7 +242,7 @@ module.exports = {
   animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
