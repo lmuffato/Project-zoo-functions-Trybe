@@ -40,18 +40,19 @@ function employeeByName(employeeName) {
 }
 
 /* Levando em consideração que os parâmetros "personalInfo" e "associatedWith"
-vão enviar respectivamente o que eu preciso (chave e valor), basta 
+vão enviar respectivamente o que eu preciso (chave e valor), basta
 distribuir (Spread operator) dentro de uma nova constante e retornar ela. */
 function createEmployee(personalInfo, associatedWith) {
   const novoEmpregado = { ...personalInfo, ...associatedWith };
   return novoEmpregado;
 }
 
-/* function isManager(id) {
-  // seu código aqui
+/* Acho que tem um erro no DATA.EMPLOYEES ou no TESTE. Depois preciso rever. */
+function isManager(id) {
+  return data.employees.some(({ managers }) => managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
@@ -92,7 +93,7 @@ module.exports = {
   employeeByName,
   /* employeeCoverage, */
   /* addEmployee, */
-  /* isManager, */
+  isManager,
   animalsOlderThan,
   /* oldestFromFirstSpecies, */
   /* increasePrices, */
