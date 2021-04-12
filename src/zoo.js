@@ -118,10 +118,26 @@ function increasePrices(percentage) {
     prices[key] = (Math.round(prices[key] * percent * 100) / 100);
   });
 }
-/*
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
-} */
+  const objectEmployeeResponsibleFor = {};
+  // Sem parametro > retorno: lista de funcionarios, e animais pelos quais sao responsaveis
+  if (!idOrName) {
+    employees.forEach(({ firstName, lastName, responsibleFor }) => {
+      objectEmployeeResponsibleFor[`${firstName} ${lastName}`] = responsibleFor.map((animalId) =>
+        animals.find(({ id }) => animalId === id).name);
+    });
+    return objectEmployeeResponsibleFor;
+  }
+  // Nome do funcionario como parametro
+  const findEmployee = employees.find((elem) =>
+    idOrName === elem.lastName || idOrName === elem.firstName || idOrName === elem.id);
+  const fullName = `${findEmployee.firstName} ${findEmployee.lastName}`;
+  objectEmployeeResponsibleFor[fullName] = findEmployee.responsibleFor.map((animalId) =>
+    animals.find(({ id }) => animalId === id).name);
+  return objectEmployeeResponsibleFor;
+}
+console.log(employeeCoverage('Wilburn'));
 
 module.exports = {
   entryCalculator,
@@ -130,7 +146,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
