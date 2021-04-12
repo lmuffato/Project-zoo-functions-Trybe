@@ -75,8 +75,8 @@ function entryCalculator(entrants) {
 
 // function schedule(dayName) {
 //   if (!dayName) return hours;
-//   zooSchedule.forEach(element => 
-//     days(hours.open, hours.close))  
+//   zooSchedule.forEach(element =>
+//     days(hours.open, hours.close))
 // };
 
 // function oldestFromFirstSpecies(id) {
