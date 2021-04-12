@@ -112,9 +112,18 @@ function entryCalculator(...entrants) {
 //   // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  // seu código aqui
+  const { Adult, Senior, Child } = data.prices;
+  const dataPrices = data.prices;
+  const calculatePrices = (prices) => (Math.round(prices * percentage + prices * 100) / 100);
+  Object.assign(dataPrices, {
+    Adult: calculatePrices(Adult),
+    Senior: calculatePrices(Senior),
+    Child: calculatePrices(Child),
+  });
+  return dataPrices;
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -132,7 +141,7 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
 
