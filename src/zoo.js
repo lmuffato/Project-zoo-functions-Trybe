@@ -126,15 +126,20 @@ const desestrutura = () => {
 };
 // console.log(desestrutura());
 */
-/*
+
 function oldestFromFirstSpecies(id) {
-  // const soughtId = employees.find((employee) => employee.id === id); // encontra o funcionário
-  // const speciesId = soughtId.responsibleFor.find((specie) => specie); // localiza o id da primeira espécie
-  // const discoverAnimal = animals.find((animal) => animal.id === speciesId); // localiza o animal correspondente ao ID
-  // const residents = discoverAnimal.residents.filter((resident) => resident); // localiza os residentes
-  // return residents;
+  const soughtId = employees.find((employee) => employee.id === id); // encontra o funcionário
+  const speciesId = soughtId.responsibleFor[0]; // localiza o id da primeira espécie
+  const discoverAnimal = animals.find((animal) => animal.id === speciesId); // localiza o animal correspondente ao ID
+  const oldest = discoverAnimal.residents.reduce((firstAnimal, animal) => {
+    if (firstAnimal.age > animal.age) return firstAnimal;
+    return animal;
+  });
+  const { name, sex, age } = oldest;
+  return [name, sex, age];
 }
-// console.log(oldestFromFirstSpecies('56d43ba3-a5a7-40f6-8dd7-cbb05082383f')); */
+// Solução da função oldestFromFirstSpecies adaptada da solução proposta pela colega Beatriz Barbosa no slack:
+// https://trybecourse.slack.com/archives/C01L16B9XC7/p1618174154409200
 
 const calculateIncrease = (percent) => 1 + (percent / 100) + 0.00001;
 
@@ -174,7 +179,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
