@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees, prices } = data;
+const { animals, employees, prices, hours } = data;
 
 function animalsByIds(...ids) {
   if (ids === null || ids === undefined) return [];
@@ -42,8 +42,8 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   return employees.some((employee) => employee.managers.includes(id));
 }
-// Ideia surgiu a partir de discussão em grupo de estudo das meninas da turma.
-// Adaptei a função isManager a partir da solução compartilhada pela colega Thalita Cecilier durante a reunião do grupo.
+// Ideia para refatorar isManager surgiu a partir de discussão em grupo de estudo das meninas da turma.
+// Nesta refatoração de isManager, tomei por base a solução compartilhada pela colega Thalita Cecilier durante a reunião do grupo.
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const newEmployee = {
@@ -90,23 +90,29 @@ function animalMap(options) {
   // seu código aqui
 }
 */
-/*
-const cronograma = () => {
-  // const day = {};
-  const days = Object.keys(hours);
-  return days;
-};
-// console.log(Object.values(days));
-console.log(cronograma());
-*/
-/*
-function schedule(dayName) {
-  if (dayName === undefined) {
-    return cronograma();
+
+const printSchedule = (day, info) => {
+  const information = info; // objeto
+  if (day === 'Monday') {
+    information[day] = 'CLOSED';
+  } else {
+    information[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
   }
-  // const day = {};
+  return information;
+};
+
+function schedule(dayName) {
+  const information = {}; // objeto
+  if (dayName === undefined) {
+    Object.keys(hours).forEach((day) => printSchedule(day, information));
+  } else {
+    return printSchedule(dayName, information);
+  }
+  return information;
 }
-*/
+// Ideia de usar o forEach retirada do código da colega Beatriz Estabanez. (Eu estava tentando com o reduce, mas não deu certo).
+// https://github.com/tryber/sd-010-a-project-zoo-functions/pull/62/files
+
 /*
 const animalsIds = (animalId) => {
   // let arr = [];
@@ -129,7 +135,7 @@ const desestrutura = () => {
 
 function oldestFromFirstSpecies(id) {
   const soughtId = employees.find((employee) => employee.id === id); // encontra o funcionário
-  const speciesId = soughtId.responsibleFor[0]; // localiza o id da primeira espécie
+  const speciesId = soughtId.responsibleFor.find((res) => res); // localiza o id da primeira espécie
   const discoverAnimal = animals.find((animal) => animal.id === speciesId); // localiza o animal correspondente ao ID
   const oldest = discoverAnimal.residents.reduce((firstAnimal, animal) => {
     if (firstAnimal.age > animal.age) return firstAnimal;
@@ -150,32 +156,48 @@ function increasePrices(percentage) {
   prices.Child = parseFloat((prices.Child * increasePrice).toPrecision(4));
 }
 
-/*
+// const listOfAnimalsAndEmployees = () => {
+// };
+const animalsEmployees = employees.reduce((previousValue, value) => {
+  const previous = previousValue;
+  const valueItems = value.responsibleFor;
+  const fst = animals.find((animal) => valueItems[0] === animal.id);
+  const scd = animals.find((animal) => valueItems[1] === animal.id);
+  const trd = animals.find((animal) => valueItems[2] === animal.id);
+  const four = animals.find((animal) => valueItems[3] === animal.id);
+  previous[`${value.firstName} ${value.lastName}`] = [fst.name, scd.name];
+  if (valueItems.length === 3) {
+    previous[`${value.firstName} ${value.lastName}`] = [fst.name, scd.name, trd.name];
+  }
+  if (valueItems.length > 3) {
+    previous[`${value.firstName} ${value.lastName}`] = [fst.name, scd.name, trd.name, four.name];
+  } return previous;
+}, {});
+
 function employeeCoverage(idOrName) {
-  const animalsEmployees = employees.reduce((previousValue, value) => {
-    const previous = previousValue;
-    const valueItems = value.responsibleFor;
-    // const discoverAnimal = animals.filter((animal, index) => animal.id === valueItems[index]);
-    previous[`${value.firstName} ${value.lastName}`] = valueItems;
-    return previous;
-  }, {});
   if (idOrName === undefined) {
     return animalsEmployees;
   }
+  const findEmployee = employees
+    .find((el) => el.id === idOrName || el.lastName === idOrName || el.firstName === idOrName);
+  const name = `${findEmployee.firstName} ${findEmployee.lastName}`;
+  const getAnimal = findEmployee.responsibleFor
+    .map((resp) => animals.find((animal) => resp === animal.id).name);
+  return { [name]: getAnimal };
 }
-console.log(employeeCoverage());
-*/
+// Linhas 184-185 da função employeeCoverage adaptadas de: https://github.com/tryber/sd-09-project-zoo-functions/pull/48/files
+
 // Referências:
 // http://www.macoratti.net/18/09/js_marr2.htm
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   //  animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
