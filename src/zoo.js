@@ -11,6 +11,7 @@ eslint no-unused-vars: [
 
 // const { animals } = require('./data');
 // const { employees } = require('./data');
+const { animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -56,19 +57,20 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 // function animalCount(species) {
-//   if (species === undefined) {
-//     const animalList = data.animals.reduce((acc, animal) => {
-//       Object.assign({}, animal.name, animal.popularity);
-//       console.log(animal.name, animal.popularity);
-//       const animals = animal.name;
-//       const quantAnimals = animal.popularity;
-//       return acc + {[animals] : quantAnimals };
-//       }, {});
-//     return animalList;
-//   }
+//   if (!species) {}
 //   return data.animals.find((animal) => animal.name === species).popularity;
 // }
 // console.log(animalCount());
+
+//   if (species === undefined) {
+//     const animalList = data.animals.reduce((acc, animal) => {
+//       Object.assign({}, animal.name, animal.popularity);
+//       const animals = animal.name;
+//       const quantAnimals = animal.popularity;
+//       return acc + { [animals] : quantAnimals };
+//       }, {});
+//     return animalList;
+//   }
 
 // data.animals.map((animal) => {
 //   const animals = animal.name;
@@ -82,23 +84,32 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 //   return acc + propertyAnimal;
 // }, {});
 
-// function entryCalculator(entrants) {
-//   for (let key in entrants) {
-//     const calculo = data.prices.Adult
+function entryCalculator(entrants) {
+  if (!entrants) return 0;
 
-//     return calculo;
-//   }
-// }
+  const visitants = Object.entries(entrants);
 
-// console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
+  if (!visitants.length) return 0;
+
+  return visitants
+    .map(([ageRange, quant]) => quant * data.prices[ageRange])
+    .reduce((acc, value) => acc + value);
+}
 
 // function animalMap(options) {
 //   // seu código aqui
 // }
 
 // function schedule(dayName) {
-//   // seu código aqui
+//   const hour = Object.entries(data.hours);
+//   const daysOfTheWeek = Object.keys(data.hours);
+//   const openingHours = Object.values(data.hours);
+
+//   return hour.reduce((acc, day, index) => {
+//     return { [daysOfTheWeek[index]] : `Open from ${openingHours[index].open}am until ${openingHours[index].close - 12}pm` };
+//   }, {});
 // }
+// console.log(schedule());
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -113,7 +124,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   // animalCount,
   // animalMap,
