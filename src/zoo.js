@@ -19,10 +19,11 @@ function animalsOlderThan(animal, age) {
   const especies = data.animals.find((especie) => especie.name === animal);
   return especies.residents.every((idd) => idd.age > age);
 }
-
-// function employeeByName(employeeName) {
-//   // seu código aqui
-// }
+// Código implementado com base no código de Nilson Ribeiro
+function employeeByName(employeeName) {
+  if (!employeeName) return {};
+  return data.employees.find(({ firstName, lastName }) => firstName === employeeName
+  || lastName === employeeName);
 
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
@@ -70,7 +71,7 @@ module.exports = {
   // animalCount,
   // animalMap,
   animalsByIds,
-  // employeeByName,
+  employeeByName,
   // employeeCoverage,
   // addEmployee,
   // isManager,
