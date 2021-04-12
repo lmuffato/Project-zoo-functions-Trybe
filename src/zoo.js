@@ -53,12 +53,24 @@ function createEmployee(personalInfo, associatedWith) {
   return newEmployee;
 }
 //----------------------------------------------------------
-// function isManager(id) {
-//   // seu código aqui
-// }
-//----------------------------------------------------------
+function isManager(id) {
+  // se o array manager está vazio
+  // retornar true se estiver vazio,  falso caso esteja preenchido
+  return employees.map(({ managers }) => [managers])
+    .some(([managers], index) => managers[index] === id);
+}
+console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
+//----------------------------------------------------
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
+//   const newEmployee = {
+//     id,
+//     firstName,
+//     lastName,
+//     ...managers,
+//     ...responsibleFor,
+//   }
+//   employees.push(newEmployee);
 // }
 //----------------------------------------------------------
 // function animalCount(species) {
@@ -98,7 +110,7 @@ module.exports = {
   employeeByName,
   // employeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,

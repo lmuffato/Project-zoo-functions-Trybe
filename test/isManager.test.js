@@ -13,8 +13,3 @@ describe('Implemente a função isManager', () => {
   });
 });
 
-// chefe master stephanie 
-// sub burl, ola, emery
-// burl - sharonda, wilburn, nigel
-// ola - nigel, wilburn, sharonda
-// emery - ardith
