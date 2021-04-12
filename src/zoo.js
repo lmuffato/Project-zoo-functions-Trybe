@@ -12,7 +12,7 @@ eslint no-unused-vars: [
 // const { employees } = require('./data');
 const data = require('./data');
 
-const { animals, employees } = data;
+const { animals, employees, prices } = data;
 
 function animalsByIds(...ids) {
   return animals.filter(({ id }) => ids.includes(id));
@@ -30,23 +30,24 @@ function employeeByName(employeeName) {
 }
 
 const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith }); // ajuda do Sergio
-// return Object.assign({}, personalInfo, associatedWith);
 
 const isManager = (id) => employees.some(({ managers }) => managers.includes(id)); // ajuda do Sergio
 
-const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) =>
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => // ajuda do Sergio
   employees.push({ id, firstName, lastName, managers, responsibleFor });
 
-function animalCount(species) {
+function animalCount(species) { // ajuda do Sergio
   return species === undefined ? animals.map(({ name, residents }) =>
     ({ [name]: residents.length })).reduce((acc, cur) =>
     Object.assign(acc, cur), {}) : animals.find(({ name }) =>
     name === species).residents.length;
 }
 
-/* function entryCalculator(entrants) {
-  // seu código aqui
-} */
+function entryCalculator(entrants = 0) { // ajuda do Anderson (Andy)
+  const entrantsValue = Object.keys(entrants);
+  return entrantsValue.reduce((previousValue, currentValue) =>
+    previousValue + entrants[currentValue] * prices[currentValue], 0);
+}
 
 /* function animalMap(options) { nao vou fzr
   // seu código aqui
@@ -69,7 +70,7 @@ function animalCount(species) {
 } */
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
