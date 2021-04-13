@@ -42,9 +42,14 @@ function employeeByName(employeeName) {
 
 }
 
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
+function createEmployee(personalInfo, associatedWith) {
+  const createFullEmployee = {
+    ...personalInfo,
+    ...associatedWith,
+  };
+  return createFullEmployee
+}
+
 
 // function isManager(id) {
 //   // seu código aqui
