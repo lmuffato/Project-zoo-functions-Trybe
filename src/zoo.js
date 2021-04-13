@@ -8,27 +8,37 @@ eslint no-unused-vars: [
   }
 ]
 */
-const { animals } = require('./data');
+const { animals, employees } = require('./data');
 const data = require('./data');
 
-console.log(data);
+//console.log(data);
 
 function animalsByIds(...ids) {
   if (typeof (ids) === 'undefined') {
     const array = [];
     return array;
   }
-  return animals.filter((animal) => ids.includes(animal.id));
+  const animais = animals.filter((animal) => ids.includes(animal.id));
+  return animais;
 }
 
-/* function animalsOlderThan(animal, age) {
+function animalsOlderThan(animal, agen) {
   // seu código aqui
+  return animals.find((anim) => anim.name === animal).residents.every(({age}) => age > agen);
 }
 
 function employeeByName(employeeName) {
   // seu código aqui
+  const obj = {};
+  if ( employeeName === 'undefined') {
+    return obj;
+  } else {
+    const emploies = employees.find((name) => name.firstName === employeeName || name.last === employeeName);
+    return emploies;
+  }
 }
 
+/*
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
@@ -71,15 +81,15 @@ function employeeCoverage(idOrName) {
 */
 module.exports = {
   animalsByIds,
+  animalsOlderThan,
+  employeeByName,
   /* entryCalculator,
   schedule,
   animalCount,
   animalMap,
-  employeeByName,
   employeeCoverage,
   addEmployee,
   isManager,
-  animalsOlderThan,
   oldestFromFirstSpecies,
   increasePrices,
   createEmployee, */
