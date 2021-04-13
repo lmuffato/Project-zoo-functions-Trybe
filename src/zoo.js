@@ -173,9 +173,44 @@ function increasePrices(percentage) {
 
   return novoIngresso;
 }
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+
+// Requisito 13
+function fullCoverage() {
+  const obj = {};
+
+  employees.forEach((employee) => {
+    const name = `${employee.firstName} ${employee.lastName}`;
+    const getResponsible = employee.responsibleFor.map((specie) => animals
+      .find((animal) => animal.id === specie).name);
+    obj[name] = getResponsible;
+    return obj;
+  });
+
+  return obj;
+}
+
+function OneCoverage(idOrName) {
+  const obj = {};
+
+  const getEmployee = employees
+    .find((employee) => employee.firstName === idOrName || employee.lastName === idOrName
+    || employee.id === idOrName);
+
+  const getResponsible = getEmployee
+    .responsibleFor.map((specie) => animals
+      .find((animal) => animal.id === specie).name);
+
+  const nome = `${getEmployee.firstName} ${getEmployee.lastName}`;
+  obj[nome] = getResponsible;
+
+  return obj;
+}
+
+function employeeCoverage(idOrName) {
+  // seu código aqui
+  if (!idOrName) return fullCoverage();
+  return OneCoverage(idOrName);
+}
 
 module.exports = {
   entryCalculator,
@@ -184,7 +219,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
