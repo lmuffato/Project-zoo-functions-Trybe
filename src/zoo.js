@@ -63,7 +63,11 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // seu código aquin
+  const price = data.prices;
+  if (!entrants || entrants === {}) return 0;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const finalPrice = (Adult * price.Adult) + (Child * price.Child) + (Senior * price.Senior);
+  return finalPrice;
 }
 
 function animalMap(options) {
