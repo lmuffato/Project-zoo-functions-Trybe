@@ -80,15 +80,16 @@ function oldestFromFirstSpecies(id) {
     .reduce((acc, cur) => (acc.age > cur.age ? acc : cur)));
 }
 
-// requisito 12 // ajuda do Renzo
-const getPrice = (info, percentage) => {
-  const [age, price] = info;
-  prices[age] = (Math.round(price * percentage) + price * 100) / 100;
-};
+// requisito 12 // ajuda do Anderson (Andy)
+const calcIncrease = (element, percent) => (parseFloat((element
+  + element * percent))
+);
 
 function increasePrices(percentage) {
-  const arr = Object.entries(prices);
-  return arr.forEach((info) => getPrice(info, percentage));
+  const percents = percentage / 100;
+  prices.Adult = Math.round(calcIncrease(prices.Adult, percents) * 100) / 100;
+  prices.Senior = Math.round(calcIncrease(prices.Senior, percents) * 100) / 100;
+  prices.Child = Math.round(calcIncrease(prices.Child, percents) * 100) / 100;
 }
 
 // requisito 13
