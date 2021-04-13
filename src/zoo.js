@@ -31,6 +31,7 @@ function employeeByName(employeeName) {
     firstName === employeeName || lastName === employeeName
   ));
 }
+// Agradecimentos ao aluno Renzo Sevilha pela ajuda na construção da lógica!!
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
@@ -63,12 +64,14 @@ function animalCount(species) {
   }
   return animals.find(({ name }) => species === name).residents.length;
 }
+// Agradecimentos ao aluno Renzo Sevilha pela ajuda na construção da lógica!!
 
 function entryCalculator(entrants = 0) {
   // seu código aqui
   return Object.keys(entrants).reduce((accPrices, curValue) =>
     accPrices + entrants[curValue] * prices[curValue], 0);
 }
+// Agradecimentos ao aluno Renzo Sevilha pela ajuda na construção da lógica!!
 
 // function animalMap(options) {
 //    // seu código aqui
@@ -103,6 +106,7 @@ function increasePrices(percentage) {
   });
 }
 
+// Agradecimentos ao aluno Renzo Sevilha pela ajuda na construção da lógica!!
 const getEmployee = (obj, { firstName, lastName, responsibleFor }) => {
   const fullName = `${firstName} ${lastName}`;
   const emploObj = obj;
