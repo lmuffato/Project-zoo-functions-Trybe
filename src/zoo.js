@@ -120,9 +120,16 @@ function schedule(dayName) {
 //   // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  // seu código aqui
+  const percentual = (percentage / 100) + 1;
+  const keys = Object.keys(prices);
+  keys.forEach((key) => {
+    const multiplyPrice = prices[key] * percentual;
+    prices[key] = Math.round(multiplyPrice * 100) / 100;
+  });
+  return prices;
+}
 
 function employeeCoverage(idOrName) {
   // seu código aqui
@@ -157,6 +164,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
