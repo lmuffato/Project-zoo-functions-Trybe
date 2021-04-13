@@ -85,10 +85,16 @@ function entryCalculator(entrants) {
 // e pesquisa nos residents o age máximo e o sexo
 // }
 
-// function increasePrices(percentage) {
-// pega tabela prices e traz os valores de volta
-// price += price * percentage /100
-// }
+// Lógica vista no repositório do Nilson - https://github.com/tryber/sd-010-a-project-zoo-functions/pull/80
+function increasePrices(percentage) {
+  const increase = (percentage / 100) + 1;
+  let newPrice;
+  Object.entries(prices).forEach(([key, value]) => {
+    newPrice = increase * value;
+    prices[key] = Math.round(parseFloat(newPrice) * 100) / 100;
+    return prices;
+  });
+}
 
 // function employeeCoverage(idOrName) {
 // se vazio, traz employees;
@@ -107,6 +113,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
