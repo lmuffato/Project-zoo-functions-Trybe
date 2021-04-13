@@ -12,8 +12,7 @@ describe('Implemente a função schedule', () => {
       'Saturday': 'Open from 8am until 10pm',
       'Sunday': 'Open from 8am until 8pm',
       'Monday': 'CLOSED'
-    };
-
+  };
     assert.deepStrictEqual(actual, expected);
   })
 

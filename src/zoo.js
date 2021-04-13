@@ -12,6 +12,7 @@ const { animals } = require('./data');
 const { employees } = require('./data');
 const { allManagers } = require('./data');
 const { prices } = require('./data');
+const { hours } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -95,14 +96,27 @@ function entryCalculator(entrants) {
   }
   return output;
 }
-// function animalMap(options) {
-//   // seu código aqui
-// }
-
-// function schedule(dayName) {
-//   // seu código aqui
-// }
-
+function animalMap(options) {
+  const output = {
+    NE: [
+      { lions: animals.filter((element) => element.name === 'lions')
+        .map((element) => element.residents).shift() }],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  return output;
+}
+function schedule(dayName) {
+  let output;
+  const sch = Object.values(hours[dayName]);
+  if (sch.every((element) => element === 0)) {
+    output = 'CLOSED';
+  } else {
+    output = `Open from ${sch[0]}am to ${sch[1]}pm`;
+  }
+  return output;
+}
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
@@ -117,9 +131,9 @@ function entryCalculator(entrants) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
