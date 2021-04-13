@@ -72,9 +72,23 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(newEmployee);
 }
 //----------------------------------------------------------
-// function animalCount(species) {
-//   // seu código aqui
-// }
+// Esta função é responsável por contabilizar a quantidade de animais.
+function animalCount(species) {
+  // seu código aqui
+  // Sem parâmetros, retorna um objeto com animais e suas quantidades
+  const newObject = {};
+  animals.forEach(({ name, residents }) => {
+    newObject[name] = residents.length;
+  });
+  if (!species) {
+    return newObject;
+  }
+  return newObject[species];
+
+  // Com o nome de uma espécie de animal, retorna um número com somente a quantidade
+  // O que será avaliado
+}
+console.log(animalCount('giraffes'));
 //----------------------------------------------------------
 // function entryCalculator(entrants) {
 //   // seu código aqui
@@ -103,7 +117,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
