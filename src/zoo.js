@@ -43,9 +43,12 @@ function isManager(idEmployee) {
 
 // console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
-/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-} */
+function addEmployee(id, firstName, lastName, [...managers] = [], [...responsibleFor] = []) {
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
+  return employees;
+}
+
+// console.log(addEmployee('4141da1c-a6ed-4cf7-90c4-99c657ba4ef3', 'Jane', 'Doe'));
 
 /* function animalCount(species) {
   // seu código aqui
@@ -82,8 +85,8 @@ module.exports = {
   /* animalMap, */
   animalsByIds,
   employeeByName,
-  /* employeeCoverage,
-  addEmployee, */
+  /* employeeCoverage, */
+  addEmployee,
   isManager,
   animalsOlderThan,
   /* oldestFromFirstSpecies,
