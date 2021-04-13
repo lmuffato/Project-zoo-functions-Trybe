@@ -105,12 +105,26 @@ function entryCalculator(entrants) {
 }
 
 // function animalMap(options) {
-//   // seu código aqui
+//  // skipar
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+function schedule(dayName) {
+  
+  const dailyObj = {};
+  Object.keys(data.hours).forEach((element) => {
+    dailyObj[element] = `Open from ${hours[element].open}am until ${(hours[element].close) - 12}pm`;
+  });
+  dailyObj.Monday = 'CLOSED';
+  
+  if (dayName === undefined) {
+    return dailyObj
+  };
+
+  return { 
+    [dayName]: dailyObj[dayName]
+  };
+  
+}
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -128,7 +142,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
