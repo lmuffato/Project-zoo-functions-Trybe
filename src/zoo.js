@@ -25,8 +25,8 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   if (!employeeName) return {};
   const empByFirstName = data.employees.find(((employee) => employee.firstName === employeeName));
-  const empByLastName = data.employees.find(((employee) => employee.lastName === employeeName));
   if (empByFirstName) return empByFirstName;
+  const empByLastName = data.employees.find(((employee) => employee.lastName === employeeName));
   if (empByLastName) return empByLastName;
 }
 
@@ -135,11 +135,15 @@ function increasePrices(percentage) {
     data.prices[price] = +((data.prices[price] * realPercentage) + 0.005).toFixed(2);
   });
 }
-/*
+
+// Sem parâmetros, retorna uma lista de funcionários e os animais pelos quais eles são responsáveis
+// Com o id de um funcionário, retorna os animais pelos quais o funcionário é responsável
+// Com o primeiro nome de um funcionário, retorna os animais pelos quais o funcionário é responsável
+// Com o último nome de um funcionário, retorna os animais pelos quais o funcionário é responsável
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
-*/
+
 module.exports = {
   entryCalculator,
   schedule,
@@ -147,7 +151,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
