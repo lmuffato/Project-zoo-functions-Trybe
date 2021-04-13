@@ -107,13 +107,33 @@ function entryCalculator(entrants) {
 //   };
 //   return output;
 // }
+const everyZero = (array) => {
+  let output;
+  if (array.every((element) => element === 0)) {
+    output = true;
+  } else {
+    output = false;
+  }
+  return output;
+};
+
 function schedule(dayName) {
   const output = {};
-  const sch = Object.values(hours[dayName]);
-  if (sch.every((element) => element === 0)) {
-    output[dayName] = 'CLOSED';
+  if (dayName !== undefined) {
+    const sch = Object.values(hours[dayName]);
+    if (everyZero(sch) === true) {
+      output[dayName] = 'CLOSED';
+    } else {
+      output[dayName] = `Open from ${sch[0]}am until ${sch[1] - 12}pm`;
+    }
   } else {
-    output[dayName] = `Open from ${sch[0]}am until ${sch[1] - 12}pm`;
+    const entries = Object.entries(hours);
+    entries.forEach((element) => {
+      const [day, sch] = element;
+      const refSch = Object.values(sch);
+      output[day] = `Open from ${refSch[0]}am until ${refSch[1] - 12}pm`;
+    });
+    output.Monday = 'CLOSED';
   }
   return output;
 }
