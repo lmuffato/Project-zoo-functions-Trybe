@@ -123,12 +123,26 @@ function schedule(dayName) {
   return { 
     [dayName]: dailyObj[dayName]
   };
-  
+
 }
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  // seu código aqui
+
+  const animalId = employees.find(element => element.id === id).responsibleFor[0];
+  const animalResidents = animals.find(element => element.id === animalId).residents;
+  let oldestAnimal = animalResidents[0].age;
+  
+  animalResidents.forEach((element) => {
+    if (element.age > oldestAnimal) {
+      oldestAnimal = element;
+    }
+  });
+
+  const { name, sex, age } = oldestAnimal;
+  return [name, sex, age];
+
+ }
 
 // function increasePrices(percentage) {
 //   // seu código aqui
