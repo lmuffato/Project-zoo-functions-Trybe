@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { animals, employees, prices } = require('./data');
-// const data = require('./data');
+const data = require('./data');
 
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.includes(animal.id));
@@ -96,10 +96,21 @@ function increasePrices(percentage) {
   });
 }
 
-// function employeeCoverage(idOrName) {
-// se vazio, traz employees;
-// pesquisa id, firstName e lastName e traz responsibleFor
-// }
+// Lógica construida com a ajuda do repositório do Iago - https://github.com/tryber/sd-010-a-project-zoo-functions/pull/30/files
+function employeeCoverage(idOrName) {
+  const newObj = {};
+  employees.forEach((employee) => {
+    const fullName = `${employee.firstName} ${employee.lastName}`;
+    const responsibleForAnimals = employee.responsibleFor
+      .map((specie) => animals.find((animal) => animal.id === specie).name);
+    newObj[fullName] = responsibleForAnimals;
+  });
+  if (idOrName === undefined) return newObj;
+  const {firstName, lastName} = employees.find((currentEmployee) => currentEmployee
+    .firstName === idOrName || currentEmployee.lastName === idOrName || currentEmployee.id === idOrName);
+    const fullName = `${ firstName } ${ lastName }`;
+    return {[fullName]: newObj[fullName]};
+}
 
 module.exports = {
   entryCalculator,
@@ -108,7 +119,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
