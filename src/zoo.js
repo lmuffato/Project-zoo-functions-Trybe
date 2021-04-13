@@ -86,7 +86,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     managers: manaFilter,
     responsibleFor: responFilter,
   };
-  Object.assign(employees, newEmployee);
+  employees.push(newEmployee)
 }
 
 function animalCount(species) {
@@ -106,7 +106,7 @@ function animalCount(species) {
     animals.forEach(objectAnimal);
     return animalsCounter;
   }
-  return { [specifAnimal.name]: specifAnimal.residents.length };
+  return specifAnimal.residents.length ;
 }
 
 function entryCalculator(entrants) {
