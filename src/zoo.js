@@ -49,9 +49,10 @@ function createEmployee(personalInfo, associatedWith) {
 // { managers:['100','101'], responsibleFor:['snake','bear'] })) // TEST 1 - Expected objeto com funcionáiro
 
 function isManager(id) {
-  if(!id) {return false}
-  return ( employees.map(({ managers }) => (managers))
-  .some(( [ids] )=> ids === id) )
+  if (!id) { return false };
+  return (employees.map(({ managers }) => (managers))
+    .some(([ids])=> ids === id)
+  );
 }
 // console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1')) // TEST 1 - Retorna falso, pois Nigel não é gerente de ninguém
 // console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83')) // TEST 2 - Retorna true, pois Burl é gerente de algumas pessoas
