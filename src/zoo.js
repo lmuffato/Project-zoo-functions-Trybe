@@ -108,12 +108,12 @@ function entryCalculator(entrants) {
 //   return output;
 // }
 function schedule(dayName) {
-  let output;
+  const output = {};
   const sch = Object.values(hours[dayName]);
   if (sch.every((element) => element === 0)) {
-    output = 'CLOSED';
+    output[dayName] = 'CLOSED';
   } else {
-    output = `Open from ${sch[0]}am to ${sch[1]}pm`;
+    output[dayName] = `Open from ${sch[0]}am to ${sch[1]}pm`;
   }
   return output;
 }
