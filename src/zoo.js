@@ -147,11 +147,42 @@ function increasePrices(percentage) {
   price.Child = Math.ceil((price.Child * (1 + percentage / 100)) * 100) / 100;
 }
 
-/*
+const idTrade = (animalId) => data.animals.find((animal) => animal.id === animalId);
+
+const findId = ((idOrName) => {
+  const obj = {};
+  data.employees.filter(({ id, firstName, lastName, responsibleFor }) => {
+    if (id === idOrName || firstName === idOrName || lastName === idOrName) {
+      const animalsNames = responsibleFor.map((specificid) => {
+        const { name } = idTrade(specificid);
+        return name;
+      });
+      obj[`${firstName} ${lastName}`] = animalsNames;
+    }
+    return obj;
+  });
+  return obj;
+});
+
+// console.log(idTrade('0938aa23-f153-4937-9f88-4858b24d6bce').name);
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const obj = {};
+  if (!idOrName) {
+    data.employees.forEach(({ firstName, lastName, responsibleFor }) => {
+      const animalArrays = responsibleFor.map((id) => {
+        const { name } = idTrade(id);
+        return name;
+      });
+      obj[`${firstName} ${lastName}`] = animalArrays;
+    });
+    return obj;
+  }
+  return findId(idOrName);
 }
 
+console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+/*
 module.exports = {
   entryCalculator,
   schedule,
@@ -180,4 +211,5 @@ module.exports = {
   // schedule,
   oldestFromFirstSpecies,
   increasePrices,
+  employeeCoverage,
 };
