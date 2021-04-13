@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -86,6 +86,32 @@ function animalCount(species) {
   return getAnimal.residents.length;
 }
 
+
+//Funcao entryCalculator: A minha primeira ideia para esta funcao funcionou perfeitamente mas a complexidade foi para 8!
+//Porém nesta funcao eu teria mais controle da quantidade de tickets de adultos, criancas e seniors pagos (pois tenho armazenados em variaveis distintas):
+
+// function entryCalculator(entrants) {
+//   if ((entrants === undefined) || Object.keys(entrants).length === 0) return 0;
+//   let childPrice = 0;
+//   let adultPrice = 0;
+//   let seniorPrice = 0;
+//   const arrayEntrants = Object.entries(entrants);
+//   arrayEntrants.forEach((item) => {
+//   if (item[0] === 'Adult') {
+//   adultPrice = item[1] * prices.Adult;
+//   }
+//   if (item[0] === 'Child') {
+//   childPrice = item[1] * prices.Child;
+//   }
+//   if (item[0] === 'Senior') {
+//   seniorPrice = item[1] * prices.Senior;
+//   }
+//   });
+//   return childPrice + adultPrice + seniorPrice;
+//   }
+
+//Refatorando a mesma funcao acima, consegui diminuir a complexidade para menos de 5 usando forEach dentro de forEach:
+
 function entryCalculator(entrants) {
   if ((entrants === undefined) || Object.keys(entrants).length === 0) return 0;
   let total = 0;
@@ -100,15 +126,38 @@ function entryCalculator(entrants) {
   return total;
 }
 
-// console.log(entryCalculator({ Adult: 2, Child: 2 }));
+function animalMap(options) {
+  if (!options) {
+    const ne = animals.filter((animal) => animal.location === 'NE').map((animal) => animal.name);
+    const nw = animals.filter((animal) => animal.location === 'NW').map((animal) => animal.name);
+    const se = animals.filter((animal) => animal.location === 'SE').map((animal) => animal.name);
+    const sw = animals.filter((animal) => animal.location === 'SW').map((animal) => animal.name);
+    const objByLocation = {
+      NE: ne,
+      NW: nw,
+      SE: se,
+      SW: sw,
+    };
+    return objByLocation;
+  }
+}
 
-// function animalMap(options) {
-//   // seu código aqui
-// }
+console.log(animalMap());
 
 // function schedule(dayName) {
-//   // seu código aqui
+//   const objDays = {};
+
+//   Object.keys(hours).forEach((day) => {
+//     console.log(Object.values(hours).forEach((val) => {
+//       Object.values(val).forEach((hora) =>
+//         console.log(hora));
+//     }));
+//     objDays[day] = `Open from am until pm`;
+//   });
+//   return objDays;
 // }
+
+// console.log(schedule('a'));
 
 function oldestFromFirstSpecies(id) {
   const getEmployee = employees.find((employee) => employee.id === id);
@@ -134,14 +183,14 @@ function increasePrices(percentage) {
 }
 
 // function employeeCoverage(idOrName) {
-//   // seu código aqui
+
 // }
 
 module.exports = {
   entryCalculator,
   // schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
