@@ -195,16 +195,14 @@ function oldestFromFirstSpecies(id) {
     .reduce((acc, curr) => (acc.age > curr.age ? acc : curr));
   return Object.values(animalOlder);
 }
-
+/* Arredonda casas decimais: https://metring.com.br/arredondar-numero-em-javascript#:~:text=Para%20arredondar%20um%20n%C3%BAmero%20decimal,n%C3%A3o%20%C3%A9%20um%20m%C3%A9todo%20confi%C3%A1vel. */
 function increasePrices(percentage) {
   const percentageValue = (percentage / 100) + 1;
-  console.log(percentageValue);
   const { prices } = data;
   const visitorsTypes = Object.keys(prices);
   visitorsTypes.forEach((visitorType) => {
     const visitorsPrices = prices[visitorType] * percentageValue;
-    prices[visitorType] = Number(((visitorsPrices
-      - Math.floor(visitorsPrices)) + 0.001).toFixed(2)) + Math.trunc(visitorsPrices);
+    prices[visitorType] = Math.round(visitorsPrices * 100) / 100;
   });
 }
 
@@ -230,10 +228,6 @@ function employeeCoverage(idOrName) {
   oneEmployee[fullName] = employeesList[fullName];
   return oneEmployee;
 }
-console.log(employeeCoverage('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
-// console.log(employeeCoverage('Nelson'));
-// console.log(employeeCoverage('Nigel'));
-// console.log(employeeCoverage());
 
 module.exports = {
   entryCalculator,
