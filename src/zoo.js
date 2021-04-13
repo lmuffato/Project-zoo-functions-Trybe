@@ -70,39 +70,53 @@ function entryCalculator(entrants) {
   return finalPrice;
 }
 
-function animalMap(options) {
-  // seu código aqui
-}
+// function animalMap(options) {}
 
 function schedule(dayName) {
-  // seu código aqui
+  const openingSchedule = (day) => {
+    const openTime = data.hours[day].open;
+    const closingTime = data.hours[day].close;
+    if (openTime === 0 && closingTime === 0) {
+      return 'CLOSED';
+    }
+    return `Open from ${openTime}am until ${closingTime - 12}pm`;
+  };
+  const days = Object.keys(data.hours);
+  const scheduleInfo = {};
+  if (dayName === undefined) {
+    days.forEach((day) => {
+      scheduleInfo[day] = openingSchedule(day);
+    });
+  } else {
+    scheduleInfo[dayName] = openingSchedule(dayName);
+  }
+  return scheduleInfo;
 }
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// function oldestFromFirstSpecies(id) {
+//   // seu código aqui
+// }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function increasePrices(percentage) {
+//   // seu código aqui
+// }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
-
+// function employeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  // employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
-  oldestFromFirstSpecies,
-  increasePrices,
+  // oldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
