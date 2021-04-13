@@ -129,15 +129,3 @@ module.exports = {
   // increasePrices,
   createEmployee,
 };
-
-// function entryCalculator(entrants) {
-//   if (entrants === undefined || entrants === {}) {
-//   return 0;
-//   }
-//   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-//   // faz a conta para cada idade, usando o parseFloat para arrendodar corretamente
-//   const adultsPrice = Adult * prices.Adult;
-//   const childsPrice = Child * prices.Child;
-//   const seniorsPrice = Senior * prices.Senior;
-//   return parseFloat((seniorsPrice + adultsPrice + childsPrice).toFixed(2));
-// };
