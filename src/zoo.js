@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+const { animals, employees, prices } = require('./data');
 
 /* ITEM vai receber tudo que vem de DATA.ANIMALS,
 depois vai verificar se o que foi recebido em IDS
@@ -77,11 +78,18 @@ function animalCount(species) {
   return data.animals.find((animal) => species === animal.name).residents.length;
 }
 
-/* function entryCalculator(entrants) {
-  // seu código aqui
+/* Recebi a ajuda da aluna Nathi Zebral - turma 10 - tribo A
+para concluir esse requisito. Obrigado Nathi! */
+function entryCalculator(entrants) {
+  if (!entrants || Object.entries(entrants).length === 0) return 0;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const adultsPrice = Adult * prices.Adult;
+  const childPrice = Child * prices.Child;
+  const seniorPrice = Senior * prices.Senior;
+  return parseFloat((adultsPrice + seniorPrice + childPrice).toFixed(2));
 }
 
-function animalMap(options) {
+/* function animalMap(options) {
   // seu código aqui
 }
 
@@ -102,7 +110,7 @@ function employeeCoverage(idOrName) {
 } */
 
 module.exports = {
-  /* entryCalculator, */
+  entryCalculator,
   /* schedule, */
   animalCount,
   /* animalMap, */
