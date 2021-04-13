@@ -62,7 +62,7 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // seu código aqui
+  console.log(options); // seu código aqui
 }
 
 function schedule(dayName) {
@@ -89,33 +89,34 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   Object.keys(data.prices).forEach((ageGroup) => {
-    data.prices[ageGroup] *= (1 + percentage/100);
-    data.prices[ageGroup] = Math.round(data.prices[ageGroup]*100)/100;
+    data.prices[ageGroup] *= (1 + percentage / 100);
+    data.prices[ageGroup] = Math.round(data.prices[ageGroup] * 100) / 100;
   });
 }
 
 // Funcao para encontrar o objeto do funcionario a partir do id
 const employeeById = (id) => data.employees.find((emp) => emp.id === id);
 
+// funcao para encontrar o fullname do funcionario a partir de nome ou id
+const getEmployeeFullName = (idOrNameParam) => {
+  let employee;
+  if (idOrNameParam.length === 36) {
+    employee = employeeById(idOrNameParam);
+  }
+
+  if (idOrNameParam.length !== 36 && idOrNameParam !== undefined) {
+    employee = employeeByName(idOrNameParam);
+  }
+
+  return `${employee.firstName} ${employee.lastName}`;
+};
+
 function employeeCoverage(idOrName) {
   const allEmployeesCoverage = data.employees.reduce((accum, emp) => {
-    let animalNames = emp.responsibleFor.map((animalId) => animalsByIds(animalId)[0].name);
-    let employeeCoverageObject = { [`${emp.firstName} ${emp.lastName}`]:  animalNames};
+    const animalNames = emp.responsibleFor.map((animalId) => animalsByIds(animalId)[0].name);
+    const employeeCoverageObject = { [`${emp.firstName} ${emp.lastName}`]: animalNames };
     return Object.assign(accum, employeeCoverageObject);
   }, {});
-
-  const getEmployeeFullName = (idOrNameParam) => {
-    let employee
-    if (idOrNameParam.length === 36) {
-      employee = employeeById(idOrNameParam);
-    } 
-    
-    if (idOrNameParam.length !== 36 && idOrNameParam !== undefined) {
-      employee = employeeByName(idOrNameParam);
-    }
-  
-    return `${employee.firstName} ${employee.lastName}`;
-  }
 
   if (!idOrName) return allEmployeesCoverage;
   return { [getEmployeeFullName(idOrName)]: allEmployeesCoverage[getEmployeeFullName(idOrName)] };
