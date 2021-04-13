@@ -42,7 +42,7 @@ const isManager = (id) => employees.some(({ managers }) => managers.includes(id)
 const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) =>
   employees.push({ id, firstName, lastName, managers, responsibleFor });
 
-  // requisito 7 // ajuda do Sergio
+// requisito 7 // ajuda do Sergio
 function animalCount(species) {
   return species === undefined ? animals.map(({ name, residents }) =>
     ({ [name]: residents.length })).reduce((acc, cur) =>
@@ -63,14 +63,14 @@ function entryCalculator(entrants = 0) {
 } */
 
 // requisito 10 // ajuda do Anderson (Andy)
-const horary = (all) => ({ [all[0]]: all[0] === 'Monday' ? 'CLOSED' :
-  `Open from ${all[1].open}am until ${all[1].close - 12}pm` });
+const horary = (all) => ({ [all[0]]: all[0] === 'Monday' ? 'CLOSED'
+  : `Open from ${all[1].open}am until ${all[1].close - 12}pm` });
 
 function schedule(dayName) {
   const daysHour = Object.entries(hours);
   return dayName === undefined ? daysHour.reduce((acc, cur) =>
-    Object.assign(acc, horary(cur)), {}) :
-      daysHour.map((each) => horary(each)).find((onlyOne) => onlyOne[dayName]);
+    Object.assign(acc, horary(cur)), {}) : daysHour.map((each) =>
+    horary(each)).find((onlyOne) => onlyOne[dayName]);
 }
 
 // requisito 11 // ajuda do Anderson (Andy)
