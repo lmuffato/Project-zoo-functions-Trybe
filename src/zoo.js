@@ -78,6 +78,34 @@ function entryCalculator(entrants) {
     .reduce((acc, value) => acc + value);
 }
 
+// function openAndCloseToText(open, close) {
+//   if (open === close) {
+//     return 'CLOSED';
+//   }
+//   return `Open from ${open}am until ${close - 12}pm`;
+// }
+
+// function schedule(dayName) {
+//   const objMessage = {};
+
+//   if (dayName) {
+//     const dayObj = data.hours[dayName];
+//     const { open, close } = dayObj;
+
+//     objMessage[dayName] = openAndCloseToText(open, close);
+
+//     return objMessage;
+//   }
+
+//   for (const day in data.hours) {
+//     const { open, close } = data.hours[day];
+
+//     objMessage[day] = openAndCloseToText(open, close);
+//   }
+
+//   return objMessage;
+// }
+
 // function schedule(dayName) {
 //   const hour = Object.entries(data.hours);
 
@@ -106,15 +134,18 @@ function oldestFromFirstSpecies(id) {
   return Object.values(findTheOldestAnimal);
 }
 
-// function increasePrices(percentage) {
-//   const arrayPrices = Object.entries(data.prices);
+function increasePrices(percentage) {
+  const { Adult, Child, Senior } = data.prices;
 
-//   return arrayPrices.reduce((acc, price) => {
-//     acc[price[0]] = Math.round((price[1] * (percentage / 100) + price[1]) * 100) / 100;
-//     return acc;
-//   }, {});
-// }
-// console.log(increasePrices(50));
+  data.prices.Adult = (Math.ceil(Adult * (percentage + 100))) / 100;
+  data.prices.Child = (Math.ceil(Child * (percentage + 100))) / 100;
+  data.prices.Senior = (Math.ceil(Senior * (percentage + 100))) / 100;
+}
+
+// return arrayPrices.reduce((acc, price) => {
+//   acc[price[0]] = Math.round((price[1] * porcentage) * 100) / 100;
+//   return acc;
+// }, {});
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -132,6 +163,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
