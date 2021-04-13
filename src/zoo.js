@@ -10,25 +10,27 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 
-function animalsByIds(ids) {
-  const animalsFilterId = data.animals.filter((animal) => {
-    const filterId = animal.includes(animal.id);
+function animalsByIds(...ids) {
+  const animalsFilterId = animals.filter((animal) => {
+    const filterId = ids.includes(animal.id);
     return filterId;
   });
   return animalsFilterId;
 }
 
 function animalsOlderThan(animal, age) {
-  const getAnimals = data.animals.find((animalN) => {
-    animalN.name === animal
+  const getAnimals = animals.find((animalN) => {
+    const gettedAnimals = animalN.name === animal;
+    return gettedAnimals;
   });
 
   const olderThan = getAnimals.residents.every((animalA) => {
-    animalA.age >= age
+    const olderAnimals = animalA.age >= age;
+    return olderAnimals;
   });
   return olderThan;
-
 }
 
 function employeeByName(employeeName) {
@@ -39,7 +41,6 @@ function employeeByName(employeeName) {
     return employeeFirstName === employeeName || employeeLastName === employeeName;
   });
   return employeeFind;
-
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -47,9 +48,8 @@ function createEmployee(personalInfo, associatedWith) {
     ...personalInfo,
     ...associatedWith,
   };
-  return createFullEmployee
+  return createFullEmployee;
 }
-
 
 function isManager(id) {
   const hasManager = data.employees.some((employee) => {
@@ -57,7 +57,6 @@ function isManager(id) {
     return validate;
   });
   return hasManager;
-
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -73,7 +72,6 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   return data.employees.push(newEmployee);
 }
 
-
 function animalCount(species) {
   const animalSpeciesEmpty = data.animals.reduce((accumulator, currentValue) => {
     accumulator[currentValue.name] = currentValue.residents.length;
@@ -84,9 +82,7 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  if (entrants === undefined) {
-    return 0;
-  }
+  if (!entrants) return 0; // redução de complexidade 5>7
   const { Adult, Senior, Child } = prices;
   let total = 0;
   const arr = Object.entries(entrants);
@@ -100,8 +96,8 @@ function entryCalculator(entrants) {
     if (element[0] === 'Senior') {
       total += Senior * element[1];
     }
+    return total;
   });
-  return total;
 }
 
 // function animalMap(options) {
@@ -109,30 +105,24 @@ function entryCalculator(entrants) {
 // }
 
 function schedule(dayName) {
-  
   const dailyObj = {};
   Object.keys(data.hours).forEach((element) => {
     dailyObj[element] = `Open from ${hours[element].open}am until ${(hours[element].close) - 12}pm`;
   });
   dailyObj.Monday = 'CLOSED';
-  
   if (dayName === undefined) {
-    return dailyObj
+    return dailyObj;
+  } return { 
+    [dayName]: dailyObj[dayName],
   };
-
-  return { 
-    [dayName]: dailyObj[dayName]
-  };
-
 }
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 
-  const animalId = employees.find(element => element.id === id).responsibleFor[0];
-  const animalResidents = animals.find(element => element.id === animalId).residents;
+  const animalId = employees.find(element => (element.id === id)).responsibleFor[0];
+  const animalResidents = animals.find(element => (element.id === animalId)).residents;
   let oldestAnimal = animalResidents[0].age;
-  
   animalResidents.forEach((element) => {
     if (element.age > oldestAnimal) {
       oldestAnimal = element;
@@ -141,8 +131,7 @@ function oldestFromFirstSpecies(id) {
 
   const { name, sex, age } = oldestAnimal;
   return [name, sex, age];
-
- }
+}
 
 function increasePrices(percentage) {
   // seu código aqui
@@ -150,7 +139,6 @@ function increasePrices(percentage) {
   Object.keys(prices).forEach((key) => {
     prices[key] = Math.round(prices[key] * increase * 100) / 100;
   });
-  
   return prices;
 }
 
@@ -165,7 +153,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  // employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
