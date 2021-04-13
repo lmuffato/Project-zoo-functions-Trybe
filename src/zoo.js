@@ -140,8 +140,36 @@ function increasePrices(percentage) {
 // Com o id de um funcionário, retorna os animais pelos quais o funcionário é responsável
 // Com o primeiro nome de um funcionário, retorna os animais pelos quais o funcionário é responsável
 // Com o último nome de um funcionário, retorna os animais pelos quais o funcionário é responsável
+function employeeByNameOrID(employeeNameOrID) {
+  const empByFirstName = data.employees.find(((emp) => emp.firstName === employeeNameOrID));
+  if (empByFirstName) return empByFirstName;
+  const empByLastName = data.employees.find(((emp) => emp.lastName === employeeNameOrID));
+  if (empByLastName) return empByLastName;
+  const empByID = data.employees.find(((emp) => emp.id === employeeNameOrID));
+  if (empByID) return empByID;
+}
+
+function animalsByName(animalsByID) {
+  return animalsByID.map((animal) =>
+    data.animals.find((eachAnimal) => eachAnimal.id === animal).name);
+}
+
+function allEmployeesAnimals() {
+  const allEmployees = {};
+  data.employees.forEach((emp) => {
+    allEmployees[`${emp.firstName} ${emp.lastName}`] = animalsByName(emp.responsibleFor);
+  });
+
+  return allEmployees;
+}
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) return allEmployeesAnimals();
+
+  const singleEmployee = {};
+  const emp = employeeByNameOrID(idOrName);
+  singleEmployee[`${emp.firstName} ${emp.lastName}`] = animalsByName(emp.responsibleFor);
+  return singleEmployee;
 }
 
 module.exports = {
