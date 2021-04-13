@@ -170,59 +170,34 @@ function increasePrices(number) {
   });
 }
 
-function getEmployeeById(employeeId) {
-  return employees.find((employee) => employee.id === employeeId);
-}
-
-function getEmployeeByName(employeeName) {
-  return employees.find((employee) => employee.firstName === employeeName);
-}
-
-function getEmployeeByLastName(employeeLastName) {
-  return employees.find((employee) => employee.lastName === employeeLastName);
-}
-
 function getAnimals(animalsIds) {
   return animalsIds.map((ids) => animals
     .find(({ id }) => id === ids).name);
 }
 
-// Para essa parte do requisito consultei o repositório do colega Sérgio Martins
 function buildResponseWithoutParam() {
-  const employeesFullName = employees.map(({ firstName, lastName }) => `${firstName} ${lastName}`);
-
-  return employeesFullName
-    .sort()
-    .map((employee) => ({ [employee]: getAnimals(employees
-      .find(({ firstName }) => employee.includes(firstName)).responsibleFor) }))
-    .reduce((obj, current) => Object.assign(obj, current), {});
+  return employees.reduce((acc, eachEmployeesObject) => {
+    const fullName = `${eachEmployeesObject.firstName} ${eachEmployeesObject.lastName}`;
+    acc[fullName] = getAnimals(eachEmployeesObject.responsibleFor);
+    return acc;
+  }, {});
 }
 
 function buildResponse(obj) {
-  const employeeResponsabilities = obj.responsibleFor;
+  const employeeResponsabilities = obj[0].responsibleFor;
   return {
-    [`${obj.firstName} ${obj.lastName}`]: getAnimals(employeeResponsabilities) };
+    [`${obj[0].firstName} ${obj[0].lastName}`]: getAnimals(employeeResponsabilities) };
 }
 
 function employeeCoverage(employeeIdOrName) {
   if (!employeeIdOrName) {
     return buildResponseWithoutParam();
   }
+  const objReturned = employees.filter((eachEmployee) =>
+    (eachEmployee.id === employeeIdOrName || eachEmployee.firstName.includes(employeeIdOrName)
+   || eachEmployee.lastName.includes(employeeIdOrName)));
 
-  let objReturned = getEmployeeById(employeeIdOrName);
-  if (objReturned) {
-    return buildResponse(objReturned);
-  }
-
-  objReturned = getEmployeeByName(employeeIdOrName);
-  if (objReturned) {
-    return buildResponse(objReturned);
-  }
-
-  objReturned = getEmployeeByLastName(employeeIdOrName);
-  if (objReturned) {
-    return buildResponse(objReturned);
-  }
+  return buildResponse(objReturned);
 }
 
 module.exports = {
