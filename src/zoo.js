@@ -113,7 +113,7 @@ function schedule(dayName) {
   if (sch.every((element) => element === 0)) {
     output[dayName] = 'CLOSED';
   } else {
-    output[dayName] = `Open from ${sch[0]}am to ${sch[1]}pm`;
+    output[dayName] = `Open from ${sch[0]}am until ${sch[1]}pm`;
   }
   return output;
 }
