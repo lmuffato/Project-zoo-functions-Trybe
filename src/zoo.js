@@ -82,8 +82,9 @@ function entryCalculator(entrants) {
   if (entrants !== undefined && entrants !== {}) {
     const entrantKeys = Object.keys(entrants);
     return entrantKeys.reduce((acc, curr) => {
-      acc.prop += entrants[curr] * prices[curr];
-      return acc;
+      let accumulator = acc;
+      accumulator += entrants[curr] * prices[curr];
+      return accumulator;
     }, 0);
   }
   return 0;
