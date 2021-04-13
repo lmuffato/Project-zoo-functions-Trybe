@@ -71,6 +71,7 @@ function entryCalculator(entrants) {
   const totalSenior = Senior * prices.Senior;
   return totalAdult + totalChild + totalSenior;
 }
+
 const location = (coord) => animals.filter((animal) => animal.location === coord);
 const getSpecies = (array) => array.map((animal) => animal.name);
 const getAnimalsName = (array) => array.map((item) => item.residents.map((animal) => animal.name));
@@ -82,11 +83,6 @@ function getAnimalsNameBySex(array, gender) {
   return filter;
 }
 
-const animalsNamesObjectBySex = (array, gender) => {
-  const species = getSpecies(array);
-  const names = getAnimalsNameBySex(array, gender);
-  return species.map((specie, index) => ({ [specie]: names[index] }));
-};
 const animalsNamesObject = (array) => {
   const species = getSpecies(array);
   const names = getAnimalsName(array);
@@ -97,6 +93,12 @@ const animalsNamesObjectSorted = (array) => {
   const species = getSpecies(array);
   const names = getAnimalsName(array);
   return species.map((specie, index) => ({ [specie]: names[index].sort() }));
+};
+
+const animalsNamesObjectBySex = (array, gender) => {
+  const species = getSpecies(array);
+  const names = getAnimalsNameBySex(array, gender);
+  return species.map((specie, index) => ({ [specie]: names[index] }));
 };
 
 const animalsNamesObjectBySexSorted = (array, gender) => {
@@ -121,23 +123,23 @@ function returnObjectBySex(coordenadas, fn, gender) {
   return object;
 }
 
+const verifySexAndSorted = (coordenadas, sex, sorted) => {
+  if (sex && sorted) {
+    return returnObjectBySex(coordenadas, animalsNamesObjectBySexSorted, sex);
+  }
+  if (sorted) return returnObject(coordenadas, animalsNamesObjectSorted);
+  if (sex) {
+    return returnObjectBySex(coordenadas, animalsNamesObjectBySex, sex);
+  }
+  return returnObject(coordenadas, animalsNamesObject);
+};
+
 function animalMap(options) {
   const coordenadas = ['NE', 'NW', 'SE', 'SW'];
-  if (!options || !options.includeNames) return returnObject(coordenadas, getSpecies);
-  if (options.includeNames) {
-    if (options.sex && options.sorted) {
-      const { sex } = options;
-      return returnObjectBySex(coordenadas, animalsNamesObjectBySexSorted, sex);
-    }
-    if (options.sorted) return returnObject(coordenadas, animalsNamesObjectSorted);
-    if (options.sex) {
-      const { sex } = options;
-      return returnObjectBySex(coordenadas, animalsNamesObjectBySex, sex);
-    }
-    return returnObject(coordenadas, animalsNamesObject);
-  }
+  const { includeNames = false, sorted = false, sex = false } = { ...options };
+  if (!options || !includeNames) return returnObject(coordenadas, getSpecies);
+  if (includeNames) return verifySexAndSorted(coordenadas, sex, sorted);
 }
-console.log(animalMap({ sex: 'female' }));
 
 const getScheduleDay = (day) => {
   const openTime = hours[day].open;
