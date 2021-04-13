@@ -90,8 +90,23 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
-  const employ = species;
-  console.log(employ);
+  const animalsCounter = {};
+
+  const objectAnimal = (animal) => {
+    const resident = animal.name;
+    const { residents } = animal;
+    const animalToPush = {
+      [resident]: residents.length,
+    };
+    Object.assign(animalsCounter, animalToPush);
+  };
+
+  const specifAnimal = animals.find((animal) => animal.name === species);
+  if (species === undefined) {
+    animals.forEach(objectAnimal);
+    return animalsCounter;
+  }
+  return { [specifAnimal.name]: specifAnimal.residents.length }
 }
 
 function entryCalculator(entrants) {
