@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { animals, employees, prices } = require('./data');
-const data = require('./data');
+// const data = require('./data');
 
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.includes(animal.id));
@@ -106,10 +106,11 @@ function employeeCoverage(idOrName) {
     newObj[fullName] = responsibleForAnimals;
   });
   if (idOrName === undefined) return newObj;
-  const {firstName, lastName} = employees.find((currentEmployee) => currentEmployee
-    .firstName === idOrName || currentEmployee.lastName === idOrName || currentEmployee.id === idOrName);
-    const fullName = `${ firstName } ${ lastName }`;
-    return {[fullName]: newObj[fullName]};
+  const { firstName, lastName } = employees.find((currentEmployee) => currentEmployee
+    .firstName === idOrName || currentEmployee.lastName === idOrName || 
+    currentEmployee.id === idOrName);
+      const fullName = `${firstName} ${lastName}`;
+      return { [fullName]: newObj[fullName] };
 }
 
 module.exports = {
