@@ -113,13 +113,17 @@ function schedule(dayName) {
 
 /* function oldestFromFirstSpecies(id) {
   // seu código aqui
-}
+} */
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { Adult, Child, Senior } = prices;
+  const porcetagem = (1 + (percentage / 100));
+  prices.Adult = Math.round((Adult * porcetagem) * 100) / 100;
+  prices.Child = Math.round((Child * porcetagem) * 100) / 100;
+  prices.Senior = Math.round((Senior * porcetagem) * 100) / 100;
 }
 
-function employeeCoverage(idOrName) {
+/* function employeeCoverage(idOrName) {
   // seu código aqui
 } */
 
@@ -135,6 +139,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
