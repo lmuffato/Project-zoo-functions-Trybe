@@ -86,9 +86,10 @@ function animalCount(species) {
   return getAnimal.residents.length;
 }
 
-
-//Funcao entryCalculator: A minha primeira ideia para esta funcao funcionou perfeitamente mas a complexidade foi para 8!
-//Porém nesta funcao eu teria mais controle da quantidade de tickets de adultos, criancas e seniors pagos (pois tenho armazenados em variaveis distintas):
+// Funcao entryCalculator: A minha primeira ideia para esta funcao funcionou perfeitamente
+// mas a complexidade foi para 8!
+// Porém nesta funcao eu teria mais controle da quantidade de tickets de adultos,
+// criancas e seniors pagos (pois tenho armazenados em variaveis distintas):
 
 // function entryCalculator(entrants) {
 //   if ((entrants === undefined) || Object.keys(entrants).length === 0) return 0;
@@ -110,7 +111,9 @@ function animalCount(species) {
 //   return childPrice + adultPrice + seniorPrice;
 //   }
 
-//Refatorando a mesma funcao acima, consegui diminuir a complexidade para menos de 5 usando forEach dentro de forEach:
+// Refatorando a mesma funcao acimas
+// consegui diminuir a complexidade para menos de 5
+// usando forEach dentro de forEach:
 
 function entryCalculator(entrants) {
   if ((entrants === undefined) || Object.keys(entrants).length === 0) return 0;
@@ -128,19 +131,21 @@ function entryCalculator(entrants) {
 
 // --------------------------------------------Desafio 9 -------------------------------------------
 
-const showAnimalsByLocation = () => {
-  const ne = animals.filter((animal) => animal.location === 'NE').map((animal) => animal.name);
-  const nw = animals.filter((animal) => animal.location === 'NW').map((animal) => animal.name);
-  const se = animals.filter((animal) => animal.location === 'SE').map((animal) => animal.name);
-  const sw = animals.filter((animal) => animal.location === 'SW').map((animal) => animal.name);
-  const objByLocation = {
-    NE: ne,
-    NW: nw,
-    SE: se,
-    SW: sw,
-  };
-  return objByLocation;
-};
+// Em construcao
+
+// const showAnimalsByLocation = () => {
+//   const ne = animals.filter((animal) => animal.location === 'NE').map((animal) => animal.name);
+//   const nw = animals.filter((animal) => animal.location === 'NW').map((animal) => animal.name);
+//   const se = animals.filter((animal) => animal.location === 'SE').map((animal) => animal.name);
+//   const sw = animals.filter((animal) => animal.location === 'SW').map((animal) => animal.name);
+//   const objByLocation = {
+//     NE: ne,
+//     NW: nw,
+//     SE: se,
+//     SW: sw,
+//   };
+//   return objByLocation;
+// };
 
 // const animalNames = () => {
 //   const objAnimal = {};
