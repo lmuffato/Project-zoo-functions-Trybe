@@ -48,9 +48,16 @@ function isManager(id) {
     .some((item) => item === id) === true);
 }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-// seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  return employees.push(newEmployee);
+}
 
 function animalCount(species) {
   const quantityOFAnimals = animals.reduce((acc, animales) => {
@@ -92,6 +99,7 @@ function entryCalculator(entrants) {
 // function increasePrices(percentage) {
 // const percent = (1 + (percentage / 100));
 // const keys = objects.keys(prices);
+
 // }
 
 // function employeeCoverage(idOrName) {
@@ -106,7 +114,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
