@@ -78,40 +78,45 @@ function entryCalculator(entrants) {
     .reduce((acc, value) => acc + value);
 }
 
-function schedule(dayName) {
-  const hour = Object.entries(data.hours);
-  const openingHours = Object.values(data.hours);
+// function schedule(dayName) {
+//   const hour = Object.entries(data.hours);
 
-  return hour.reduce((acc, animal, index) => {
-    const { open, close } = openingHours[index];
-    if (dayName === animal[0]) {
-      acc[dayName] = `Open from ${open}am until ${close - 12}pm`;
-      if (animal[0] === 'Monday') acc[dayName] = 'CLOSED';
-    }
-    if (!dayName) {
-      acc[animal[0]] = `Open from ${open}am until ${close - 12}pm`;
-      if (animal[0] === 'Monday') acc[animal[0]] = 'CLOSED';
-    }
+//   return hour.reduce((acc, day) => {
+//     const { open, close } = day[1];
+//     if (dayName === day[0]) {
+//       acc[dayName] = `Open from ${open}am until ${close - 12}pm`;
+//       if (day[0] === 'Monday') acc[dayName] = 'CLOSED';
+//     }
+//     if (!dayName) {
+//       acc[day[0]] = `Open from ${open}am until ${close - 12}pm`;
+//       if (day[0] === 'Monday') acc[day[0]] = 'CLOSED';
+//     }
+//     return acc;
+//   }, {});
+// }
+// console.log(schedule('Monday'));
+
+// function oldestFromFirstSpecies(id) {
+//   const animalId = data.employees.find((employee) => id === employee.id).responsibleFor[0];
+//   const findFirstAnima = data.animals.find((animal) => animalId === animal.id).residents;
+//   const dataAnimalOld = Object.entries(findFirstAnima).reduce((acc, age) => {
+//     (acc > age[1].age) ? acc : age.age;
+//     return acc[age[1].name, age[1].sex, age[1].age];
+//   }, []);
+
+//   return dataAnimalOld;
+// }
+// console.log(oldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+
+function increasePrices(percentage) {
+  const arrayPrices = Object.entries(data.prices);
+
+  return arrayPrices.reduce((acc, price) => {
+    acc[price[0]] = Math.round((price[1] * (percentage / 100) + price[1]) * 100) / 100;
     return acc;
   }, {});
 }
-
-// const hour = Object.entries(data.hours);
-//   const objDays = {};
-//   hour.forEach(([day, { open, close }]) => {
-//     if (open !== close) objDays[day] = `Open from ${open}am until ${close - 12}pm`;
-//     if (open === close) objDays[day] = 'CLOSED';
-//   });
-//   if (!dayName) return objDays;
-//   return dayParametro(dayName);
-
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
-
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+console.log(increasePrices(30));
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -119,7 +124,7 @@ function schedule(dayName) {
 
 module.exports = {
   entryCalculator,
-  schedule,
+  // schedule,
   animalCount,
   // animalMap,
   animalsByIds,
@@ -129,6 +134,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
