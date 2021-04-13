@@ -124,6 +124,7 @@ function animalMap(options) {
   if (includeNames === true) {
     return animalsWithNames(sorted, sex);
   }
+  return allAnimals();
 }
 
 function schedule(dayName) {
