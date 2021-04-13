@@ -24,16 +24,27 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  const { employees } = data;
+  const thereIs = employees.find((employee) =>
+    employee.firstName === employeeName || employee.lastName === employeeName);
+  return (thereIs !== '') ? console.log(thereIs) : {};
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const newEmployee = { ...personalInfo, ...associatedWith };
+  return newEmployee;
 }
 
 function isManager(id) {
-  // seu código aqui
+  const { employees } = data;
+  const trueOrFalse = employees.find((element) =>
+    element.managers.find((ids) => ids === id));
+  if (trueOrFalse !== undefined) {
+    return console.log(true);
+  }
+  return console.log(false);
 }
+isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83');
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
