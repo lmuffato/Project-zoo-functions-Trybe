@@ -77,39 +77,56 @@ function entryCalculator(entrants) {
   return sumPrinces;
 }
 
-console.log(entryCalculator({ Adult: 2, Child: 3, Senior: 1 }));
+function animalMap(options) {
+  const objAnimals = data.animals.reduce((acc, cur) => {
+    acc[cur.name] = cur.location;
+    return acc;
+  }, []);
 
-function animalMap(_options) {
-  // seu código aqui
+  // const mapObj = data.animals.reduce();
+  // return objAnimals;
 }
+
+// console.log(animalMap());
 
 function schedule(_dayName) {
   // seu código aqui
 }
 
 function oldestFromFirstSpecies(id) {
-  /* Passado o id de um funcionário
-  encontra a primeira espécie de animal gerenciado pelo funcionário
-  e retorna um array com nome, sexo e idade do animal mais velho dessa espécie */
-  // const firstAnimal = data.animals.find(({ id: specieId }) => specieId);
-  // const oldestAnimal = firstAnimal.residents.reduce(
-  //   (acc, { age }) => (acc > age ? acc : age),
-  //   0,
-  // );
-  // const olderFind = firstAnimal.residents.find(
-  //   ({ age }) => age === oldestAnimal,
-  // );
-  // return [olderFind.name, olderFind.sex, olderFind.age];
+  const objManager = data.employees.find(({ id: isId }) => isId === id);
+  const searchAnimal = data.animals.find(
+    ({ id: idAnimal }) => idAnimal === objManager.responsibleFor[0],
+  );
+  const olderAnimal = searchAnimal.residents.reduce(
+    (acc, { age }) => (acc > age ? acc : age),
+    {},
+  );
+  const newObjAnimal = searchAnimal.residents.find(
+    ({ age }) => age === olderAnimal,
+  );
+  const newArrAnimal = Object.keys(newObjAnimal).map(
+    (key) => newObjAnimal[key],
+  );
+  return newArrAnimal;
 }
 
-// console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 function increasePrices(_percentage) {
   // seu código aqui
 }
 
-function employeeCoverage(_idOrName) {
-  // seu código aqui
-}
+// function employeeCoverage(idOrName) {
+//   const employeeObj = data.employees;
+//   const objAnimal = data.animals;
+//   const arrRespon = employeeObj.reduce((acc, cur) => {
+//     acc[`${cur.firstName} ${cur.lastName}`] = objAnimal
+//       .filter(({ id }) => cur.responsibleFor.includes(id))
+//       .map(({ name }) => name);
+//     return acc;
+//   }, {});
+
+//   return arrRespon;
+// }
 
 module.exports = {
   entryCalculator,
@@ -118,7 +135,7 @@ module.exports = {
   animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  // employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
