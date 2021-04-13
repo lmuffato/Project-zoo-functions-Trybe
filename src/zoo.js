@@ -170,6 +170,61 @@ function increasePrices(number) {
   });
 }
 
+function getEmployeeById(employeeId) {
+  return employees.find((employee) => employee.id === employeeId);
+}
+
+function getEmployeeByName(employeeName) {
+  return employees.find((employee) => employee.firstName === employeeName);
+}
+
+function getEmployeeByLastName(employeeLastName) {
+  return employees.find((employee) => employee.lastName === employeeLastName);
+}
+
+function getAnimals(animalsIds) {
+  return animalsIds.map((ids) => animals
+    .find(({ id }) => id === ids).name);
+}
+
+// Para essa parte do requisito consultei o repositório do colega Sérgio Martins
+function buildResponseWithoutParam() {
+  const employeesFullName = employees.map(({ firstName, lastName }) => `${firstName} ${lastName}`);
+
+  return employeesFullName
+    .sort()
+    .map((employee) => ({ [employee]: getAnimals(employees
+      .find(({ firstName }) => employee.includes(firstName)).responsibleFor) }))
+    .reduce((obj, current) => Object.assign(obj, current), {});
+}
+
+function buildResponse(obj) {
+  const employeeResponsabilities = obj.responsibleFor;
+  return {
+    [`${obj.firstName} ${obj.lastName}`]: getAnimals(employeeResponsabilities) };
+}
+
+function employeeCoverage(employeeIdOrName) {
+  if (!employeeIdOrName) {
+    return buildResponseWithoutParam();
+  }
+
+  let objReturned = getEmployeeById(employeeIdOrName);
+  if (objReturned) {
+    return buildResponse(objReturned);
+  }
+
+  objReturned = getEmployeeByName(employeeIdOrName);
+  if (objReturned) {
+    return buildResponse(objReturned);
+  }
+
+  objReturned = getEmployeeByLastName(employeeIdOrName);
+  if (objReturned) {
+    return buildResponse(objReturned);
+  }
+}
+
 module.exports = {
   entryCalculator,
   schedule,
@@ -177,7 +232,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
