@@ -96,20 +96,13 @@ const animalsLocationsName = (locations, sorted, sex) => {
       .map((animal) => {
         const animalsName = animal.name;
         let animalsFiltered = animal.residents;
-
-        if (sex !== undefined) {
-          animalsFiltered = animalsSex(animalsFiltered, sex);
-        } else {
+        if (sex !== undefined) animalsFiltered = animalsSex(animalsFiltered, sex);
+        else {
           animalsFiltered = animalsFiltered.map((animal2) => animal2.name);
         }
-
-        if (sorted) {
-          animalsFiltered.sort();
-        }
-
+        if (sorted) animalsFiltered.sort();
         return { [animalsName]: animalsFiltered };
       });
-
     obj[location] = animalFilter;
   });
 
@@ -126,7 +119,7 @@ function animalMap(options) {
   if (includeNames) {
     return animalsLocationsName(locations, sorted, sex);
   }
-  return animalsLocations(locations, sorted, sex);
+  return animalsLocations(locations);
 }
 
 function schedule(dayName) {
