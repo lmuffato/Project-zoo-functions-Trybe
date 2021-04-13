@@ -8,6 +8,10 @@ eslint no-unused-vars: [
   }
 ]
 */
+// Este trabalho todo só foi possível graças a pessoas incríveis e dispostas que me ajudaram não
+// somente a completar os exercícios, mas me ensinaram na prática o sentido de TIME.
+// Um eterno obrigado à Marília, Nath Zebral, Ana Ventura, Beatriz Izidioti, Malu, Thalita, Lucas Lara,
+// Rafael e Henrique Lima (que além da ajuda técnica soube dizer as palavras certas num momento bem difícil).
 
 // FIRST COMMIT <3
 
@@ -64,9 +68,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push(employee);
 }
 
-// if (species === undefined) return { };
-// parâm: data.animals.name
-// entrar no data.animals.residents
 function animalCount(species) {
   if (!species) {
     const animalObj = data.animals.reduce((acc, animal) => {
@@ -76,10 +77,15 @@ function animalCount(species) {
   }
   return data.animals.find((animal) => animal.name === species).residents.length;
 }
-// function entryCalculator(entrants) {
-// seu código aqui
-// }
 
+function entryCalculator(entrants) {
+  if (!entrants || entrants === {}) {
+    return 0;
+  }
+  return Object.entries(entrants)
+    .map(([entrant, qty]) => qty * data.prices[entrant])
+    .reduce(((acc, curr) => acc + curr), 0);
+}
 // function animalMap(options) {
 // seu código aqui
 // }
@@ -97,19 +103,19 @@ function animalCount(species) {
 // }
 
 // function employeeCoverage(idOrName) {
-//   const funcionario = '${data.employees.firstName}: ${data.employee.responsibleFor}';
-//   // const employee = data.employee
-//  if (idOrName === undefined) {
-//    for (let i =0; i<= employee.lenght === 0; i + 1 ); {
-//    const objetoFunc = employees.reduce((cont, funcionario) => {
-//    cont[cont.name] = cont.employee.lenght;
-//    return cont;
-//   }, {});
-//  }
+//   const employee = data.employee;
+//   if (!idOrName) {
+//     for (let i =0; i <= employee.lenght === 0; i + 1); {
+//       const objetoFunc = employee.reduce((acc, funcionario) => {
+//         acc[acc.name] = acc.employee.lenght;
+//         return acc;
+//       }, {});
+//     }
+//   }
 // }
-// }
+
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
@@ -123,3 +129,15 @@ module.exports = {
   // increasePrices,
   createEmployee,
 };
+
+// function entryCalculator(entrants) {
+//   if (entrants === undefined || entrants === {}) {
+//   return 0;
+//   }
+//   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+//   // faz a conta para cada idade, usando o parseFloat para arrendodar corretamente
+//   const adultsPrice = Adult * prices.Adult;
+//   const childsPrice = Child * prices.Child;
+//   const seniorsPrice = Senior * prices.Senior;
+//   return parseFloat((seniorsPrice + adultsPrice + childsPrice).toFixed(2));
+// };
