@@ -72,11 +72,17 @@ function animalCount(species) {
   return animals.find((animal) => animal.name === species).residents.length;
 }
 
-/* function entryCalculator(entrants) {
-  // seu código aqui
+function entryCalculator(entrants) {
+  const { prices } = data;
+  if (!entrants) {
+    return 0;
+  }
+  return Object.keys(entrants)
+    .reduce((acc, current) =>
+      acc + (entrants[current] * prices[current]), 0);// acc = 0; entrants[current] = quantidadePessoasEntram , prices[current] = presoEntrada
 }
 
-function animalMap(options) {
+/* function animalMap(options) {
   // seu código aqui
 }
 
@@ -97,7 +103,7 @@ function employeeCoverage(idOrName) {
 } */
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
