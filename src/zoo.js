@@ -77,6 +77,7 @@ function animalCount(species) {
     accumulator[currentValue.name] = currentValue.residents.length;
     return accumulator;
   }, {});
+  if (!species) { return animalSpeciesEmpty; }
 
   return animalSpeciesEmpty[species];
 }
