@@ -65,29 +65,6 @@ function animalCount(species) {
   }
   return data.animals.find((animal) => animal.name === species).residents.length;
 }
-// console.log(animalCount());
-
-//   if (species === undefined) {
-//     const animalList = data.animals.reduce((acc, animal) => {
-//       Object.assign({}, animal.name, animal.popularity);
-//       const animals = animal.name;
-//       const quantAnimals = animal.popularity;
-//       return acc + { [animals] : quantAnimals };
-//       }, {});
-//     return animalList;
-//   }
-
-// data.animals.map((animal) => {
-//   const animals = animal.name;
-//   const quantAnimals = animal.popularity;
-//   return {[animals] : quantAnimals };
-// });
-
-// data.animals.reduce((acc, animal) => {
-//   console.log(animal.name, animal.popularity);
-//   const propertyAnimal = {[animal.name] : animal.popularity};
-//   return acc + propertyAnimal;
-// }, {});
 
 function entryCalculator(entrants) {
   if (!entrants) return 0;
@@ -101,28 +78,25 @@ function entryCalculator(entrants) {
     .reduce((acc, value) => acc + value);
 }
 
-// function animalMap(options) {
-//   // seu código aqui
-// }
-// const openingHours = (open, close) => {
-//   const daysOfTheWeek = Object.keys(data.hours);
-//   const openingHours = Object.values(data.hours);
-//   return open = 'aberto'
+function schedule(dayName) {
+  const hour = Object.entries(data.hours);
+  const openingHours = Object.values(data.hours);
 
-// };
+  return hour.reduce((acc, animal, index) => {
+    const { open, close } = openingHours[index];
+    if (dayName === animal[0]) {
+      acc[dayName] = `Open from ${open}am until ${close - 12}pm`;
+      if (animal[0] === 'Monday') acc[dayName] = 'CLOSED';
+    }
+    if (!dayName) {
+      acc[animal[0]] = `Open from ${open}am until ${close - 12}pm`;
+      if (animal[0] === 'Monday') acc[animal[0]] = 'CLOSED';
+    }
+    return acc;
+  }, {});
+}
 
-// const dayParametro = (dayName) => {
-//   const hour = Object.entries(data.hours);
-//   const objDay = {};
-//   hour.forEach(([day, { open, close }]) => {
-//     if (dayName === day) objDay[dayName] = 'CLOSED';
-//     objDay[dayName] = `Open from ${open}am until ${close - 12}pm`;
-//   });
-//   return objDay;
-// };
-
-// function schedule(dayName) {
-//   const hour = Object.entries(data.hours);
+// const hour = Object.entries(data.hours);
 //   const objDays = {};
 //   hour.forEach(([day, { open, close }]) => {
 //     if (open !== close) objDays[day] = `Open from ${open}am until ${close - 12}pm`;
@@ -130,8 +104,6 @@ function entryCalculator(entrants) {
 //   });
 //   if (!dayName) return objDays;
 //   return dayParametro(dayName);
-// }
-// console.log(schedule('Monday'));
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -147,7 +119,7 @@ function entryCalculator(entrants) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
