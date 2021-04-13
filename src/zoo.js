@@ -96,17 +96,17 @@ function entryCalculator(entrants) {
   }
   return output;
 }
-function animalMap(options) {
-  const output = {
-    NE: [
-      { lions: animals.filter((element) => element.name === 'lions')
-        .map((element) => element.residents).shift() }],
-    NW: [],
-    SE: [],
-    SW: [],
-  };
-  return output;
-}
+// function animalMap(options) {
+//   const output = {
+//     NE: [
+//       { lions: animals.filter((element) => element.name === 'lions')
+//         .map((element) => element.residents).shift() }],
+//     NW: [],
+//     SE: [],
+//     SW: [],
+//   };
+//   return output;
+// }
 function schedule(dayName) {
   let output;
   const sch = Object.values(hours[dayName]);
@@ -133,7 +133,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
