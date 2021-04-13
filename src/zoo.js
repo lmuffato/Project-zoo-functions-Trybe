@@ -107,10 +107,10 @@ function employeeCoverage(idOrName) {
   });
   if (idOrName === undefined) return newObj;
   const { firstName, lastName } = employees.find((currentEmployee) => currentEmployee
-    .firstName === idOrName || currentEmployee.lastName === idOrName || 
-    currentEmployee.id === idOrName);
-      const fullName = `${firstName} ${lastName}`;
-      return { [fullName]: newObj[fullName] };
+    .firstName === idOrName || currentEmployee.lastName === idOrName
+    || currentEmployee.id === idOrName);
+  const fullName = `${firstName} ${lastName}`;
+  return { [fullName]: newObj[fullName] };
 }
 
 module.exports = {
