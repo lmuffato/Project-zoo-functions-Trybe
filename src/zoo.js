@@ -33,9 +33,8 @@ function animalsOlderThan(species, animalAge) {
 
 function employeeByName(employeeName) {
   return employees
-    .filter((employee) => employee.firstName === employeeName ||
-      employee.lastName === employeeName
-    );
+    .filter((employee) => employee.firstName === employeeName
+    || employee.lastName === employeeName);
 }
 // console.log(employeeByName('Ola')) // TEST 1 - Expected objeto com fistName = 'Ola'
 // console.log(employeeByName('Orloff')) // TEST 2 - Expected objeto com lastName = 'Orloff'
@@ -85,7 +84,7 @@ module.exports = {
   //   schedule,
   //   animalCount,
   //   animalMap,
-  animalsByIds,
+    animalsByIds,
     employeeByName,
   //   employeeCoverage,
   //   addEmployee,
