@@ -76,9 +76,8 @@ function schedule(dayName) {
 // requisito 11 // ajuda do Anderson (Andy)
 function oldestFromFirstSpecies(id) {
   const idAnimal = employees.find((employee) => id === employee.id).responsibleFor[0];
-  const amount = animals.find((animal) => idAnimal === animal.id).residents
-    .reduce((acc, cur) => acc.age > cur.age ? acc : cur);
-  return Object.values(amount);
+  return Object.values(animals.find((animal) => idAnimal === animal.id).residents
+  .reduce((acc, cur) => (acc.age > cur.age ? acc : cur)));
 }
 
 // requisito 12
