@@ -12,6 +12,7 @@ eslint no-unused-vars: [
 const { animals } = require('./data');
 const { employees } = require('./data');
 const { prices } = require('./data');
+// const { hours } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -83,9 +84,28 @@ function entryCalculator(entrants = 0) {
 
 // function animalMap(options) {}
 
-// function schedule(dayName) {}
+// function schedule(dayName) {
+//   if (!dayName) {
+//     return Object.entries(hours).map
+//   }
+// }
 
-// function oldestFromFirstSpecies(id) {}
+// console.log(schedule());
+
+function oldestFromFirstSpecies(ids) {
+  const firstSpecies = employees.find(({ id }) => id === ids).responsibleFor[0];
+  const resident = animals.find(({ id }) => id === firstSpecies).residents;
+  const { name, sex, age } = resident.reduce((acc, curr) => {
+    if (curr.age > acc.age) {
+      return curr;
+    }
+    return acc;
+  });
+  const result = [name, sex, age];
+  return result;
+}
+
+// let expected = ['Vicky', 'female', 12];
 
 // function increasePrices(percentage) {}
 
@@ -102,7 +122,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
