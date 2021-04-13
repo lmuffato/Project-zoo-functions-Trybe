@@ -130,12 +130,17 @@ function employeeCoverage(idOrName) {
   if (idOrName === undefined) {
     employees.forEach(({ firstName, lastName, responsibleFor }) => {
       const fullName = `${firstName} ${lastName}`;
-      // console.log(fullName);
-      const idsAnimals = (responsibleFor
-        .map((x) => animals
-          .find((animal) => animal.id === x).name));
+      const idsAnimals = (responsibleFor.map((x) => animals
+        .find((animal) => animal.id === x).name));
       obj[fullName] = idsAnimals;
     });
+  } else {
+    const ifHaveId = employees.find(({ firstName, lastName, id }) => firstName === idOrName
+      || lastName === idOrName || id === idOrName);
+    const fullName = `${ifHaveId.firstName} ${ifHaveId.lastName}`;
+    const idAnimals = ifHaveId.responsibleFor.map((x) => animals
+      .find((animal) => animal.id === x).name);
+    obj[fullName] = idAnimals;
   }
   return obj;
 }
