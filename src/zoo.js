@@ -1,3 +1,5 @@
+/* eslint-disable sonarjs/no-extra-arguments */
+/* eslint-disable max-lines-per-function */
 /*
 eslint no-unused-vars: [
   "error",
@@ -67,9 +69,65 @@ function entryCalculator(entrants) {
   return Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
 }
 
-// function animalMap(options) {
-// seu código aqui
-// }
+const animalsLocations = (locations) => {
+  const obj = {};
+
+  locations.forEach((elem) => {
+    const animalFilter = animals
+      .filter((elem2) => elem2.location === elem)
+      .map((elem3) => elem3.name);
+    obj[elem] = animalFilter;
+  });
+
+  return obj;
+};
+
+const animalsSex = (animal, sex) => {
+  const animalFilter = animal.filter((elem) => elem.sex === sex)
+    .map((elem2) => elem2.name);
+  return animalFilter;
+};
+
+const animalsLocationsName = (locations, sorted, sex) => {
+  const obj = {};
+  locations.forEach((location) => {
+    const animalFilter = animals
+      .filter((animal) => animal.location === location)
+      .map((animal) => {
+        const animalsName = animal.name;
+        let animalsFiltered = animal.residents;
+
+        if (sex !== undefined) {
+          animalsFiltered = animalsSex(animalsFiltered, sex);
+        } else {
+          animalsFiltered = animalsFiltered.map((animal2) => animal2.name);
+        }
+
+        if (sorted) {
+          animalsFiltered.sort();
+        }
+
+        return { [animalsName]: animalsFiltered };
+      });
+
+    obj[location] = animalFilter;
+  });
+
+  return obj;
+};
+function animalMap(options) {
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+
+  if (!options) {
+    return animalsLocations(locations);
+  }
+  const { includeNames = false, sorted, sex } = options;
+
+  if (includeNames) {
+    return animalsLocationsName(locations, sorted, sex);
+  }
+  return animalsLocations(locations, sorted, sex);
+}
 
 function schedule(dayName) {
   const obj = {};
@@ -145,7 +203,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
