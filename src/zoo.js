@@ -32,16 +32,19 @@ function animalsOlderThan(species, animalAge) {
 // console.log(animals[0].residents[0].age) // Propriedade age
 
 function employeeByName(employeeName) {
+  if (!employeeName) return {};
   return employees
-    .filter((employee) => employee.firstName === employeeName
+    .find((employee) => employee.firstName === employeeName
     || employee.lastName === employeeName);
 }
 // console.log(employeeByName('Ola')) // TEST 1 - Expected objeto com fistName = 'Ola'
 // console.log(employeeByName('Orloff')) // TEST 2 - Expected objeto com lastName = 'Orloff'
+// console.log(employeeByName('')) // TEST 3 - Expected objeto vazio {}
+// console.log(employeeByName()) // TEST 4 - Expected objeto vazio {}
 
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
+}
 
 // function isManager(id) {
 //   // seu código aqui
@@ -92,5 +95,5 @@ module.exports = {
   animalsOlderThan,
   //   oldestFromFirstSpecies,
   //   increasePrices,
-  //   createEmployee,
+  createEmployee,
 };
