@@ -15,6 +15,8 @@ const { animals } = data;
 
 const { employees } = data;
 
+const { prices } = data;
+
 function animalsByIds(...ids) {
   const allAnimals = [];
 
@@ -109,9 +111,18 @@ function animalCount(species) {
   return specifAnimal.residents.length;
 }
 
-function entryCalculator(entrants) {
-  const employ = entrants;
-  console.log(employ);
+function entryCalculator(entrants = 0) {
+  let totalBill = 0;
+
+  Object.entries(entrants).forEach((person) => {
+    Object.entries(prices).forEach((personCost) => {
+      if (personCost[0] === person[0]) {
+        totalBill += (person[1] * personCost[1]);
+      }
+    });
+  });
+
+  return totalBill;
 }
 
 function animalMap(options) {
@@ -131,7 +142,7 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   const employ = percentage;
-  console.log(employ);
+  console.slog(employ);
 }
 
 function employeeCoverage(idOrName) {
