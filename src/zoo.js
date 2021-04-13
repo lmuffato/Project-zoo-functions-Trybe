@@ -108,14 +108,14 @@ function oldestFromFirstSpecies(idEmployee) {
   // muito inteligênte o uso dessa lógica de organizar os números e com eles organizados pegar o que ficará na primeira posição que corresponde ao maior número.
   return [name, sex, age];
 }
-console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  const { Adult, Child, Senior } = prices;
+  // código desenvolvido com ajuda da Carolina Vasconcelos
+  prices.Adult = (Math.ceil(Adult * (percentage + 100))) / 100;
+  prices.Child = (Math.ceil(Child * (percentage + 100))) / 100;
+  prices.Senior = (Math.ceil(Senior * (percentage + 100))) / 100;
+}
 
 module.exports = {
   entryCalculator,
@@ -129,6 +129,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
