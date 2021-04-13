@@ -27,37 +27,43 @@ function employeeByName(employeeName) {
   }
   const selectedEmployee = data.employees.find((employee) => employee.firstName === employeeName
   || employee.lastName === employeeName);
-  return selectedEmployee
+  return selectedEmployee;
 }
 
 function createEmployee(personalInfo, associatedWith) {
- const {id, firstName, lastName} = personalInfo;
- const {managers, responsibleFor} = associatedWith;
- return { id, firstName, lastName, managers, responsibleFor };
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return { id, firstName, lastName, managers, responsibleFor };
 }
 
 // referência https://www.w3schools.com/jsref/jsref_includes.asp#:~:text=The%20includes()%20method%20determines,()%20method%20is%20case%20sensitive.
 function isManager(id) {
-  return data.employees.some((item) => item.managers.includes(id));
+  return data.employees.some((manager) => manager.managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-    const employee = {
-      id,
-      firstName,
-      lastName,
-      managers,
-      responsibleFor,
-    };
-    data.employees.push(employee);
+  const employee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  data.employees.push(employee);
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if (!species) {
+    return data.animals.reduce((acc, item) => {
+      acc[item.name] = item.residents.length;
+      return acc;
+    }, {});
+  }
+  return data.animals.find((animal) => animal.name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  // seu código aquin
 }
 
 function animalMap(options) {
