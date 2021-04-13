@@ -8,8 +8,10 @@ eslint no-unused-vars: [
   }
 ]
 */
-const { animals, employees } = require('./data');
+
 const data = require('./data');
+
+const { animals, employees } = data;
 
 //console.log(data);
 
