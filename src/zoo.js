@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -81,10 +82,49 @@ function entryCalculator(entrants) {
   return totalPrice;
 }
 
-// function animalMap(options) {
-//   const { includeNames, sorted, sex } = options;
+const locs = data.animals.map((animale) => animale.location);
+const locations = locs.reduce((acc, cur) => (acc.includes(cur) ? acc : [...acc, cur]), []);
+const allAnimals = () => {
+  const obj = {};
+  locations.forEach((location) => {
+    const species = animals.filter((animal) => animal.location === location)
+      .map((el) => el.name);
+    obj[location] = species;
+  });
+  return obj;
+};
 
-// }
+const allSorted = (arr, bool) => (bool ? arr.sort() : arr);
+
+const animalsWithNames = (sorted, sex) => {
+  const objt = {};
+  locations.forEach((location) => {
+    const speciesName = animals.filter((animl) => animl.location === location).map((el) => el.name);
+    const arrAnimals = [];
+    speciesName.forEach((specie) => {
+      const animalObj = {};
+      const allNames = animals.find((animal) => animal.name === specie);
+      const names = (sex) ? allNames.residents.filter((resident) =>
+        resident.sex === sex).map((resid) =>
+        resid.name) : allNames.residents.map((resident) => resident.name);
+      const sortNames = allSorted(names, sorted);
+      animalObj[specie] = sortNames;
+      arrAnimals.push(animalObj);
+    });
+    objt[location] = arrAnimals;
+  });
+  return objt;
+};
+
+function animalMap(options) {
+  if (!options) {
+    return allAnimals();
+  }
+  const { includeNames = false, sorted = false, sex = false } = options;
+  if (includeNames === true) {
+    return animalsWithNames(sorted, sex);
+  }
+}
 
 function schedule(dayName) {
   const ob = {};
@@ -139,13 +179,11 @@ function employeeCoverage(idOrName) {
   return obj;
 }
 
-console.log(employeeCoverage());
-
 module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
