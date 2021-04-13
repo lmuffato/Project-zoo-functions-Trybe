@@ -78,7 +78,7 @@ function entryCalculator(entrants) {
 // }
 
 function oldestFromFirstSpecies(id) {
-  const buscaFuncionario = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const buscaFuncionario = employees.find((employee) => employee.id === id).responsibleFor[0];
   const buscaAnimal = animals.find((animal) => animal.id === buscaFuncionario).residents;
   const resultado = buscaAnimal.sort((a, b) => b.age - a.age)[0];
   return [resultado.name, resultado.sex, resultado.age];
