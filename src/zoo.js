@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { hours } = require('./data');
 const data = require('./data');
 
 const { animals } = data;
@@ -125,14 +126,57 @@ function entryCalculator(entrants = 0) {
   return totalBill;
 }
 
-function animalMap(options) {
-  const employ = options;
-  console.log(employ);
+const mapResidents = () => {
+  const residential = [];
+  animals.forEach((animal) => {
+    const { location } = animal;
+    if (residential.indexOf(location) < 0) {
+      residential.push(location);
+    }
+  });
+  return residential;
+};
+
+function animalMap() {
+  const residentialList = {};
+  mapResidents().forEach((place) => {
+    const animalFilter = () => {
+      const placeAnimals = animals.filter((animal) => {
+        if (animal.location === place) {
+          return animal.name;
+        }
+        return ' ';
+      });
+      return placeAnimals;
+    };
+    const listMaker = {
+      [place]: animalFilter(),
+    };
+    Object.assign(residentialList, listMaker);
+  });
+
+  return residentialList;
 }
 
 function schedule(dayName) {
-  const employ = dayName;
-  console.log(employ);
+  const allSchedule = {};
+  let specifDay = {};
+  const dayReceptor = (days) => {
+    if (days[1].open === 0) {
+      specifDay = { [days[0]]: 'CLOSED' };
+    } else {
+      specifDay = { [days[0]]: `Open from ${days[1].open}am until ${(days[1].close) - 12}pm` };
+    }
+    Object.assign(allSchedule, specifDay);
+  };
+
+  if (dayName === undefined) {
+    Object.entries(hours).forEach(dayReceptor);
+  } else {
+    dayReceptor(Object.entries(hours)
+      .find((specday) => specday[0] === dayName));
+  }
+  return allSchedule;
 }
 
 function oldestFromFirstSpecies(id) {
