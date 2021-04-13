@@ -43,7 +43,7 @@ function employeeByName(employeeName) {
   || name.lastName === employeeName);
 
   if (employeeData === undefined) {
-    employeeData = '';
+    employeeData = {};
   }
   return employeeData;
 }
@@ -76,12 +76,17 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  const employ = id;
-  const b = firstName;
-  const c = lastName;
-  const d = managers;
-  const e = responsibleFor;
-  console.log(employ + b + c + d + e);
+  const manaFilter = (managers === undefined) ? [] : managers;
+  const responFilter = (responsibleFor === undefined) ? [] : responsibleFor;
+
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers: manaFilter,
+    responsibleFor: responFilter,
+  };
+  Object.assign(employees, newEmployee);
 }
 
 function animalCount(species) {
