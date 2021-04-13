@@ -55,13 +55,28 @@ function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
 // }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+  const manager = [managers];
+  const responsable = [responsibleFor];
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers: manager,
+    responsibleFor: responsable,
+  };
+  return data.employees.push(newEmployee);
+}
 
-// function animalCount(species) {
-//   // seu código aqui
-// }
+
+function animalCount(species) {
+  const animalSpeciesEmpty = data.animals.reduce((accumulator, currentValue) => {
+    accumulator[currentValue.name] = currentValue.residents.length;
+    return accumulator;
+  }, {});
+
+  return animalSpeciesEmpty[species];
+}
 
 // function entryCalculator(entrants) {
 //   // seu código aqui
