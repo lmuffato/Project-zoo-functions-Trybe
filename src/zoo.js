@@ -106,7 +106,7 @@ function animalCount(species) {
     animals.forEach(objectAnimal);
     return animalsCounter;
   }
-  return { [specifAnimal.name]: specifAnimal.residents.length }
+  return { [specifAnimal.name]: specifAnimal.residents.length };
 }
 
 function entryCalculator(entrants) {
