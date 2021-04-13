@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { animals, employees, prices } = require('./data');
+const { prices } = require('./data');
 
 /* ITEM vai receber tudo que vem de DATA.ANIMALS,
 depois vai verificar se o que foi recebido em IDS
