@@ -12,6 +12,7 @@ eslint no-unused-vars: [
 const { animals } = require('./data');
 const { employees } = require('./data');
 const { prices } = require('./data');
+const { hours } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -91,13 +92,26 @@ function entryCalculator(entrants) {
 
 /* function animalMap(options) {
   // seu código aqui
-}
+} */
 
+// Exercicio realizado por inspiração da Heloisa Hackenhaar - Obrigada Heloísa pelas aulas S2
 function schedule(dayName) {
-  // seu código aqui
+  const allSchedule = {};
+  const daysOfWeek = Object.keys(hours);
+  daysOfWeek.forEach((day) => {
+    if (day === 'Monday') {
+      allSchedule[day] = 'CLOSED';
+    } else {
+      allSchedule[day] = `Open from ${hours[day].open}am until ${(hours[day].close) - 12}pm`;
+    }
+  });
+  if (!dayName) {
+    return allSchedule;
+  }
+  return { [dayName]: allSchedule[dayName] };
 }
 
-function oldestFromFirstSpecies(id) {
+/* function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
@@ -111,7 +125,7 @@ function employeeCoverage(idOrName) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
