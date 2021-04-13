@@ -126,38 +126,67 @@ function entryCalculator(entrants) {
   return total;
 }
 
-function animalMap(options) {
-  if (!options) {
-    const ne = animals.filter((animal) => animal.location === 'NE').map((animal) => animal.name);
-    const nw = animals.filter((animal) => animal.location === 'NW').map((animal) => animal.name);
-    const se = animals.filter((animal) => animal.location === 'SE').map((animal) => animal.name);
-    const sw = animals.filter((animal) => animal.location === 'SW').map((animal) => animal.name);
-    const objByLocation = {
-      NE: ne,
-      NW: nw,
-      SE: se,
-      SW: sw,
-    };
-    return objByLocation;
-  }
-}
+// --------------------------------------------Desafio 9 -------------------------------------------
 
-console.log(animalMap());
+const showAnimalsByLocation = () => {
+  const ne = animals.filter((animal) => animal.location === 'NE').map((animal) => animal.name);
+  const nw = animals.filter((animal) => animal.location === 'NW').map((animal) => animal.name);
+  const se = animals.filter((animal) => animal.location === 'SE').map((animal) => animal.name);
+  const sw = animals.filter((animal) => animal.location === 'SW').map((animal) => animal.name);
+  const objByLocation = {
+    NE: ne,
+    NW: nw,
+    SE: se,
+    SW: sw,
+  };
+  return objByLocation;
+};
 
-// function schedule(dayName) {
-//   const objDays = {};
+// const animalNames = () => {
+//   const objAnimal = {};
+//   const animalArray = [];
 
-//   Object.keys(hours).forEach((day) => {
-//     console.log(Object.values(hours).forEach((val) => {
-//       Object.values(val).forEach((hora) =>
-//         console.log(hora));
-//     }));
-//     objDays[day] = `Open from am until pm`;
-//   });
-//   return objDays;
+//   const getLoc = animals.filter((animal) => animal.location === 'NE');
+
+//   const getAnimalsNames = getLoc.map((animal) => animal.residents);
+//   getAnimalsNames.map((ani) => ani.name);
+
+//   console.log('getLoc: ', getLoc);
+//   // console.log('getAnimals: ', getAnimals);
+//   console.log('getAnimalsNames: ', getAnimalsNames);
+//   console.log('animalArray', getAnimalsNames);
+
 // }
 
-// console.log(schedule('a'));
+// function animalMap(options) {
+//   const { includeNames } = options;
+
+//   if (!options) {
+//     return showAnimalsByLocation();
+//   }
+
+//   if (includeNames === true) {
+//     return animalNames();
+//   }
+// }
+
+// animalMap({ includeNames: true });
+
+function schedule(dayName) {
+  const objDays = {};
+  const arrDays = Object.keys(hours);
+  arrDays.forEach((day) => {
+    if (!dayName || dayName === day) {
+      if (day === 'Monday') {
+        objDays[day] = 'CLOSED';
+      } else {
+        objDays[day] = `Open from ${hours[day].open}am until ${(hours[day].close - 12)}pm`;
+      }
+    }
+  });
+  return objDays;
+}
+console.log(schedule('Tuesday'));
 
 function oldestFromFirstSpecies(id) {
   const getEmployee = employees.find((employee) => employee.id === id);
@@ -188,9 +217,9 @@ function increasePrices(percentage) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
