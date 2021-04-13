@@ -48,7 +48,6 @@ function animalCount(species) {
   data.animals.forEach((animal) => {
     animalCountObject[animal.name] = animal.residents.length;
   });
-  // Como faria com reduce?
 
   if (!species) return animalCountObject;
   return animalCountObject[species];
@@ -95,8 +94,31 @@ function increasePrices(percentage) {
   });
 }
 
+// Funcao para encontrar o objeto do funcionario a partir do id
+const employeeById = (id) => data.employees.find((emp) => emp.id === id);
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const allEmployeesCoverage = data.employees.reduce((accum, emp) => {
+    let animalNames = emp.responsibleFor.map((animalId) => animalsByIds(animalId)[0].name);
+    let employeeCoverageObject = { [`${emp.firstName} ${emp.lastName}`]:  animalNames};
+    return Object.assign(accum, employeeCoverageObject);
+  }, {});
+
+  const getEmployeeFullName = (idOrNameParam) => {
+    let employee
+    if (idOrNameParam.length === 36) {
+      employee = employeeById(idOrNameParam);
+    } 
+    
+    if (idOrNameParam.length !== 36 && idOrNameParam !== undefined) {
+      employee = employeeByName(idOrNameParam);
+    }
+  
+    return `${employee.firstName} ${employee.lastName}`;
+  }
+
+  if (!idOrName) return allEmployeesCoverage;
+  return { [getEmployeeFullName(idOrName)]: allEmployeesCoverage[getEmployeeFullName(idOrName)] };
 }
 
 module.exports = {
