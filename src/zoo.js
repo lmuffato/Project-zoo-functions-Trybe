@@ -61,11 +61,13 @@ function animalCount(species) {
   return animals.find((animal) => animal.name === species).residents.length;
 }
 
-/* Source: https://github.com/tryber/sd-010-a-project-zoo-functions/tree/d0da599dcffd27508a334abbe287530f22d402b9 */
 function entryCalculator(entrants) {
   if (!entrants) return 0;
 
-  return Object.key(entrants).reduce((acc, cur) => acc + (entrants[cur] * prices[cur]), 0);
+  return Object
+    .entries(entrants)
+    .map(([key, value]) => value * prices[key])
+    .reduce((acc, curr) => acc + curr);
 }
 
 /*
