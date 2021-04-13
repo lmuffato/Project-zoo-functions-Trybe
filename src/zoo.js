@@ -81,10 +81,10 @@ function animalCount(species) {
   return animalSpeciesEmpty[species];
 }
 
-function entryCalculator(entrants) { //refatorar
+function entryCalculator(entrants = {}) { // refatorar
   return Object.entries(entrants).reduce((accumulator, [person, amount]) => {
-    accumulator += prices[person] * amount;
-    return accumulator;
+    const sum = accumulator + prices[person] * amount;
+    return sum;
   }, 0);
 }
 
@@ -100,7 +100,7 @@ function schedule(dayName) {
   dailyObj.Monday = 'CLOSED';
   if (dayName === undefined) {
     return dailyObj;
-  } return { 
+  } return {
     [dayName]: dailyObj[dayName],
   };
 }
@@ -108,8 +108,8 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 
-  const animalId = employees.find(element => (element.id === id)).responsibleFor[0];
-  const animalResidents = animals.find(element => (element.id === animalId)).residents;
+  const animalId = employees.find((element) => (element.id === id).responsibleFor[0]);
+  const animalResidents = animals.find((element) => (element.id === animalId).residents);
   let oldestAnimal = animalResidents[0].age;
   animalResidents.forEach((element) => {
     if (element.age > oldestAnimal) {
