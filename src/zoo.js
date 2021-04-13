@@ -45,6 +45,8 @@ function employeeByName(employeeName) {
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
+// console.log(createEmployee({ id:'007', firstName:'James', lastName:'Bond' },
+// { managers:['100','101'], responsibleFor:['snake','bear'] })) // TEST 1 - Expected objeto com funcionáiro
 
 // function isManager(id) {
 //   // seu código aqui
