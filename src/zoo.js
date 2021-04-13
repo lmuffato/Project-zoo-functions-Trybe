@@ -80,10 +80,16 @@ function oldestFromFirstSpecies(id) {
     .reduce((acc, cur) => (acc.age > cur.age ? acc : cur)));
 }
 
-// requisito 12
-/* function increasePrices(percentage) {
-  // seu código aqui
-} */
+// requisito 12 // ajuda do Renzo
+const getPrice = (info, percentage) => {
+  const [age, price] = info;
+  prices[age] = (Math.round(price * percentage) + price * 100) / 100;
+};
+
+function increasePrices(percentage) {
+  const arr = Object.entries(prices);
+  return arr.forEach((info) => getPrice(info, percentage));
+}
 
 // requisito 13
 /* function employeeCoverage(idOrName) {
@@ -102,6 +108,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
