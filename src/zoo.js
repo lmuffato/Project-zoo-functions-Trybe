@@ -13,8 +13,6 @@ const data = require('./data');
 
 const { animals, employees } = data;
 
-//console.log(data);
-
 function animalsByIds(...ids) {
   if (typeof (ids) === 'undefined') {
     const array = [];
