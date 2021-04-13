@@ -96,27 +96,27 @@ function entryCalculator(entrants) {
 // }
 // console.log(schedule('Monday'));
 
-// function oldestFromFirstSpecies(id) {
-//   const animalId = data.employees.find((employee) => id === employee.id).responsibleFor[0];
-//   const findFirstAnima = data.animals.find((animal) => animalId === animal.id).residents;
-//   const dataAnimalOld = Object.entries(findFirstAnima).reduce((acc, age) => {
-//     (acc > age[1].age) ? acc : age.age;
-//     return acc[age[1].name, age[1].sex, age[1].age];
-//   }, []);
-
-//   return dataAnimalOld;
-// }
-// console.log(oldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
-
-function increasePrices(percentage) {
-  const arrayPrices = Object.entries(data.prices);
-
-  return arrayPrices.reduce((acc, price) => {
-    acc[price[0]] = Math.round((price[1] * (percentage / 100) + price[1]) * 100) / 100;
-    return acc;
-  }, {});
+function oldestFromFirstSpecies(id) {
+  const animalId = data.employees.find((employee) => id === employee.id).responsibleFor[0];
+  const findFirstSpecie = data.animals.find((animal) => animalId === animal.id).residents;
+  const findAnimalOld = findFirstSpecie.reduce((acc, animal) => (acc.age > animal.age) ? acc : animal);
+  return Object.values(findAnimalOld);
 }
-console.log(increasePrices(30));
+
+// .reduce((acc, age) => {
+//   (acc > age[1].age) ? acc : age.age;
+//   return acc[age[1].name, age[1].sex, age[1].age];
+// }, []);
+
+// function increasePrices(percentage) {
+//   const arrayPrices = Object.entries(data.prices);
+
+//   return arrayPrices.reduce((acc, price) => {
+//     acc[price[0]] = Math.round((price[1] * (percentage / 100) + price[1]) * 100) / 100;
+//     return acc;
+//   }, {});
+// }
+// console.log(increasePrices(50));
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -133,7 +133,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
-  increasePrices,
+  oldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
