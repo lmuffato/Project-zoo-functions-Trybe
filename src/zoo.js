@@ -52,15 +52,32 @@ function isManager(id) {
   return data.employees.some(({ managers }) => managers.includes(id));
 }
 
-/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+/* A função vai receber vários parâmetros. Alguns parâmetros
+como "managers" e "responsibleFor" podem receber mais de um
+argumento, portanto são arrays e por isso tem "= []"
+depois do nome do parâmetro. */
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const adicionaEmpregado = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  data.employees.push(adicionaEmpregado);
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if (!species) {
+    return data.animals.reduce((indexAcumulador, indexAtual) => {
+      indexAcumulador[indexAtual.name] = indexAtual.residents.length;
+      return indexAcumulador;
+    }, {});
+  }
+  return data.animals.find((item) => species === item.name).residents.length;
 }
 
-function entryCalculator(entrants) {
+/* function entryCalculator(entrants) {
   // seu código aqui
 }
 
@@ -87,12 +104,12 @@ function employeeCoverage(idOrName) {
 module.exports = {
   /* entryCalculator, */
   /* schedule, */
-  /* animalCount, */
+  animalCount,
   /* animalMap, */
   animalsByIds,
   employeeByName,
   /* employeeCoverage, */
-  /* addEmployee, */
+  addEmployee,
   isManager,
   animalsOlderThan,
   /* oldestFromFirstSpecies, */
