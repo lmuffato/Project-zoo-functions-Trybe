@@ -48,9 +48,15 @@ function createEmployee(personalInfo, associatedWith) {
 // console.log(createEmployee({ id:'007', firstName:'James', lastName:'Bond' },
 // { managers:['100','101'], responsibleFor:['snake','bear'] })) // TEST 1 - Expected objeto com funcionáiro
 
-// function isManager(id) {
-//   // seu código aqui
-// }
+function isManager(id) {
+  if(!id) {return false}
+  return ( employees.map(({ managers }) => (managers))
+  .some(( [ids] )=> ids === id) )
+}
+// console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1')) // TEST 1 - Retorna falso, pois Nigel não é gerente de ninguém
+// console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83')) // TEST 2 - Retorna true, pois Burl é gerente de algumas pessoas
+// console.log(isManager('')) // TEST 3 - Retorna false, pois é uma string vazia
+// console.log(isManager()) // TEST 4 - Retorna false, pois não há argumento passado par a função
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
@@ -93,7 +99,7 @@ module.exports = {
   employeeByName,
   //   employeeCoverage,
   //   addEmployee,
-  //   isManager,
+  isManager,
   animalsOlderThan,
   //   oldestFromFirstSpecies,
   //   increasePrices,
