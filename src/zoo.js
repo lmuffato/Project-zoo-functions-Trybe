@@ -12,7 +12,7 @@ const { animals } = require('./data');
 const { employees } = require('./data');
 const { prices } = require('./data');
 const { hours } = require('./data');
-const data = require('./data');
+// const data = require('./data');
 
 function animalsByIds(...ids) {
   // seu código aqui
@@ -91,9 +91,9 @@ function entryCalculator(entrants) {
   return resultado;
 }
 // console.log(entryCalculator());
-function animalMap(options) {
-  // seu código aqui
-}
+// function animalMap(options) {
+//   // seu código aqui
+// }
 
 function schedule(dayName) {
   // seu código aqui
@@ -114,14 +114,15 @@ function schedule(dayName) {
   if (dayX === 'Monday') obj[dayX] = 'CLOSED';
   return obj;
 }
-console.log(schedule('Friday'));
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// console.log(schedule('Friday'));
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function oldestFromFirstSpecies(id) {
+//   // seu código aqui
+// }
+
+// function increasePrices(percentage) {
+//   // seu código aqui
+// }
 
 function employeeCoverage(idOrName) {
   // seu código aqui
@@ -143,14 +144,14 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
-  oldestFromFirstSpecies,
-  increasePrices,
+  // oldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
