@@ -81,23 +81,11 @@ function animalCount(species) {
   return animalSpeciesEmpty[species];
 }
 
-function entryCalculator(entrants) {
-  if (!entrants) return 0; // redução de complexidade 5>7
-  const { Adult, Senior, Child } = prices;
-  let total = 0;
-  const arr = Object.entries(entrants);
-  arr.forEach((element) => {
-    if (element[0] === 'Adult') {
-      total += Adult * element[1];
-    }
-    if (element[0] === 'Child') {
-      total += Child * element[1];
-    }
-    if (element[0] === 'Senior') {
-      total += Senior * element[1];
-    }
-    return total;
-  });
+function entryCalculator(entrants) { //refatorar
+  return Object.entries(entrants).reduce((accumulator, [person, amount]) => {
+    accumulator += prices[person] * amount;
+    return accumulator;
+  }, 0);
 }
 
 // function animalMap(options) {
