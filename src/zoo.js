@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -68,16 +68,22 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// const days = `${key}: 'Open from ${open}am until ${close}pm' ` {hours.key}
-// const zooSchedule = hours.map((day) => {
-//   return hours.day;
-// });
-
-// function schedule(dayName) {
-//   if (!dayName) return hours;
-//   zooSchedule.forEach(element =>
-//     days(hours.open, hours.close))
-// };
+// Lógica vista no repositório do Nilson - https://github.com/tryber/sd-010-a-project-zoo-functions/pull/80
+function schedule(dayName) {
+  const object = {};
+  const days = Object.keys(hours);
+  days.forEach((day, index) => {
+    const closes = hours[day].close - 12;
+    const opens = hours[day].open;
+    if (index === 6) {
+      object[day] = 'CLOSED';
+    } else {
+      object[day] = `Open from ${opens}am until ${closes}pm`;
+    }
+  });
+  if (!dayName) return object;
+  return { [dayName]: object[dayName] };
+}
 
 // function oldestFromFirstSpecies(id) {
 // identifica responsibleFor do funcionario
@@ -96,7 +102,7 @@ function increasePrices(percentage) {
   });
 }
 
-// Lógica construida com a ajuda do repositório do Iago - https://github.com/tryber/sd-010-a-project-zoo-functions/pull/30/files
+// Lógica construida com a ajuda do repositório do Iago - https://github.com/tryber/sd-010-a-project-zoo-functions/pull/30
 function employeeCoverage(idOrName) {
   const newObj = {};
   employees.forEach((employee) => {
@@ -115,7 +121,7 @@ function employeeCoverage(idOrName) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
