@@ -9,56 +9,56 @@ eslint no-unused-vars: [
 ]
 */
 
-// const { animals } = require('./data');
+const { animals } = require('./data');
 const data = require('./data');
 
-// function animalsByIds(...ids) {
-//   return animals.filter((animal) => ids.includes(animal.id));
-// }
+function animalsByIds(...ids) {
+  return animals.filter((animal) => ids.includes(animal.id));
+}
 
-// function animalsOlderThan(animal, idade) {
-//   return animals.find((aa) => aa.name === animal).residents
-//     .every(({ age }) => age > idade);
-// }
+function animalsOlderThan(animal, idade) {
+  return animals.find((aa) => aa.name === animal).residents
+    .every(({ age }) => age > idade);
+}
 
-// function employeeByName(employeeName) {
-//   if (employeeName === undefined) {
-//     return {};
-//   }
+function employeeByName(employeeName) {
+  if (employeeName === undefined) {
+    return {};
+  }
 
-//   return data.employees
-//     .find((aa) => aa.firstName === employeeName || aa.lastName === employeeName);
-// }
+  return data.employees
+    .find((aa) => aa.firstName === employeeName || aa.lastName === employeeName);
+}
 
-// function createEmployee(personalInfo, associatedWith) {
-//   return { ...personalInfo, ...associatedWith };
-// }
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
+}
 
-// function isManager(id) {
-//   return data.employees.find((people) => people.id === id).managers.length <= 1;
-// }
+function isManager(id) {
+  return data.employees.find((people) => people.id === id).managers.length <= 1;
+}
 
-// function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-//   return data.employees.push({
-//     id,
-//     firstName,
-//     lastName,
-//     managers,
-//     responsibleFor,
-//   });
-// }
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  return data.employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
+}
 
-// function animalCount(species) {
-//   if (species === undefined) {
-//     const obj = animals.reduce((acc, animal) => {
-//       const result = { ...acc };
-//       result[animal.name] = animal.residents.length;
-//       return result;
-//     }, {});
-//     return obj;
-//   }
-//   return animals.find((animal) => animal.name === species).residents.length;
-// }
+function animalCount(species) {
+  if (species === undefined) {
+    const obj = animals.reduce((acc, animal) => {
+      const result = { ...acc };
+      result[animal.name] = animal.residents.length;
+      return result;
+    }, {});
+    return obj;
+  }
+  return animals.find((animal) => animal.name === species).residents.length;
+}
 
 function entryCalculator(entrants) {
   if (entrants === undefined) return 0;
@@ -94,15 +94,15 @@ function entryCalculator(entrants) {
 module.exports = {
   entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
-  // animalsByIds,
-  // employeeByName,
+  animalsByIds,
+  employeeByName,
   // employeeCoverage,
-  // addEmployee,
-  // isManager,
-  // animalsOlderThan,
+  addEmployee,
+  isManager,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
