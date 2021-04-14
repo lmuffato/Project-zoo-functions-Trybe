@@ -92,7 +92,7 @@ function entryCalculator(entrants = {}) {
   return totalPrice;
 }
 
-//  ANIMAL MAP FUNCTIONS
+//  ANIMALMAP FUNCTIONS
 function genderFilter(residents, sex) {
   const residentsName = residents.reduce((genders, { name, sex: animalGender }) => {
     const gendersName = genders;
@@ -140,9 +140,31 @@ function animalMap(options = {}) {
   return filtered;
 }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+// SCHEDULE FUNCTIONS
+function convertHour(hour) {
+  const converted = hour - 12;
+
+  return converted;
+}
+
+function toHuman({ open, close }) {
+  const humanText = `Open from ${open}am until ${convertHour(close)}pm`;
+
+  return open === close ? 'CLOSED' : humanText;
+}
+
+function schedule(dayName) {
+  const { hours } = data;
+  const openClose = Object.keys(hours).reduce((days, day) => {
+    const daysObj = days;
+    daysObj[day] = toHuman(hours[day]);
+
+    return daysObj;
+  }, {});
+
+  if (!dayName) return openClose;
+}
+console.log(schedule());
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -158,7 +180,7 @@ function animalMap(options = {}) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   animalMap,
   animalsByIds,
