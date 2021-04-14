@@ -107,13 +107,13 @@ function schedule(dayName) {
   return { [dayName]: schedules[dayName] };
 }
 
-// function oldestFromFirstSpecies(id) {
-//  const findEmployee = employees.find((employee) => employee.id === id).responsibleFor[0];
-//  const findAnimal = animals.find((animal) => animal.id === findEmployee);
-//  const oldAge = findAnimal.residents.reduce((acc, item) => ((acc > item.age) ? acc : item.age));
-//  const { name, sex, age } = findAnimal.residents.find((resident) => resident.age === oldAge);
-//  return [name, sex, age];
-// }
+function oldestFromFirstSpecies(id) {
+  const findEmployee = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const firtsAnimal = animals.find((animal) => animal.id === findEmployee);
+  const oldAniml = firtsAnimal.residents.reduce((acc, item) => ((acc > item.age) ? acc : item.age));
+  const { name, sex, age } = firtsAnimal.residents.find((resident) => resident.age === oldAniml);
+  return [name, sex, age];
+}
 
 // a função abaixo foi entendida com ajuda do Zezé e a colega Debora Passos;
 function increasePrices(percentage) {
@@ -139,7 +139,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
