@@ -123,17 +123,20 @@ function oldestFromFirstSpecies(id) {
   // seu código aqui
   //   A função busca por informações do animal mais velho da primeira espécie gerenciada pela pessoa colaboradora do parâmetro
   // Passado o id de um funcionário, encontra a primeira espécie de animal gerenciado pelo funcionário, e retorna um array com nome, sexo e idade do animal mais velho dessa espécie
-  // console.log({ id } = employees);
   const idAnimal = employees.find(({ id: idEmployee }) => idEmployee === id).responsibleFor[0];
   const arrayanimals = animals
     .find((animal) => animal.id === idAnimal).residents
     .sort(({ age: a }, { age: b }) => b - a);
   return Object.values(arrayanimals[0]);
-} console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+}
 //----------------------------------------------------------
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  const { Adult, Senior, Child } = prices;
+  prices.Adult = Math.ceil(Adult * (percentage + 100)) / 100;
+  prices.Senior = Math.ceil(Senior * (percentage + 100)) / 100;
+  prices.Child = Math.ceil(Child * (percentage + 100)) / 100;
+}
+
 //----------------------------------------------------------
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -151,6 +154,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
