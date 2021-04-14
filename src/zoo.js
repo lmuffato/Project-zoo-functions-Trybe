@@ -108,67 +108,72 @@ function entryCalculator(entrants) {
   return calculateTotal(entrants);
 }
 
-const allAnimalsLocations = () => {
-  const obj = {};
-  animals.forEach((animal) => {
-    const { location } = animal;
-    obj[location] = animals
-      .filter((value) => location === value.location)
-      .map((value) => value.name);
-  });
+// const allAnimalsLocations = () => {
+//   const obj = {};
+//   animals.forEach((animal) => {
+//     const { location } = animal;
+//     obj[location] = animals
+//       .filter((value) => location === value.location)
+//       .map((value) => value.name);
+//   });
 
-  return obj;
-};
+//   return obj;
+// };
 
-const getResidents = (specie) => {
-  const { residents } = animals.find((animal) => animal.name === specie);
-  return residents;
-};
+// const getResidents = (specie) => {
+//   const { residents } = animals.find((animal) => animal.name === specie);
+//   return residents;
+// };
 
-const getNamesAnimals = (specie) => getResidents(specie).map(({ name }) => name);
+// // const getNamesAnimals = (specie) => getResidents(specie).map(({ name }) => name);
 
-const getFemalesMales = (specie, sex) => getResidents(specie)
-  .filter((animal) => animal.sex === sex)
-  .map(({ name }) => name);
+// const getFemalesMales = (specie, sex) => getResidents(specie)
+//   .filter((animal) => animal.sex === sex)
+//   .map(({ name }) => name);
 
-const allNamesByRegion = (...parameters) => {
-  const obj = allAnimalsLocations();
-  const locationsNames = Object.values(obj);
+// const allNamesByRegion = (...parameters) => {
+//   const obj = allAnimalsLocations();
+//   const locationsNames = Object.values(obj);
 
-  locationsNames.forEach((location, i) => {
-    const locationName = Object.keys(obj)[i];
-    obj[locationName] = location.map((value) => ({ [value]: parameters[0](value, parameters[1]) }));
-  });
-  return obj;
-};
+//   locationsNames.forEach((location, i) => {
+//     const locationName = Object.keys(obj)[i];
+//     obj[locationName] = location.map((value) => ({ [value]: parameters[0](value, parameters[1]) }));
+//   });
+//   return obj;
+// };
 
-const sortedNames = (object) => {
-  const obj = object;
-  Object.values(obj).forEach((location) => location.forEach((values) => {
-    const animal = Object.keys(values)[0];
-    const sorted = Object.values(values)[0].sort();
-    const currValue = values;
-    currValue[animal] = sorted;
-  }));
-  return obj;
-};
+// console.log(allNamesByRegion());
 
-// eslint-disable-next-line complexity
-function animalMap(options) {
-  if (!options) {
-    return allAnimalsLocations();
-  }
-  const { includeNames, sorted, sex } = options;
-  if (includeNames && sex) {
-    return allNamesByRegion(getFemalesMales, sex);
-  }
-  if (includeNames && sorted) {
-    return sortedNames(allNamesByRegion());
-  }
-  if (includeNames) {
-    return allNamesByRegion();
-  }
-}
+// const sortedNames = (object) => {
+//   const obj = object;
+//   Object.values(obj).forEach((location) => location.forEach((values) => {
+//     const animal = Object.keys(values)[0];
+//     const sorted = Object.values(values)[0].sort();
+//     const currValue = values;
+//     currValue[animal] = sorted;
+//   }));
+//   return obj;
+// };
+
+// // eslint-disable-next-line complexity
+// function animalMap(options) {
+//   if (!options) {
+//     return allAnimalsLocations();
+//   }
+//   const { includeNames, sorted, sex } = options;
+//   if (includeNames && sex && sorted) {
+
+//   }
+//   if (includeNames && sex) {
+//     return allNamesByRegion(getFemalesMales, sex);
+//   }
+//   if (includeNames && sorted) {
+//     return sortedNames(allNamesByRegion());
+//   }
+//   if (includeNames) {
+//     return allNamesByRegion();
+//   }
+// }
 
 // console.log(animalMap({ includeNames: true, sex: 'female' }).NE);
 
@@ -184,16 +189,18 @@ const getAllSchedules = () => {
   return schedules;
 };
 
+const findDay = (object, dayName) => {
+  const day = Object.entries(object).find(([key]) => key === dayName);
+  return [day].reduce((obj, [key, value]) => Object.assign(obj, { [key]: value }), {});
+};
+
 function schedule(dayName) {
   const allSchedules = getAllSchedules();
 
   if (!dayName) {
     return allSchedules;
   }
-
-  const day = Object.entries(allSchedules).find(([key, value]) => key === dayName);
-  console.log(allSchedules);
-  return [day].reduce((obj, [key, value]) => Object.assign(obj, { [key]: value }), {});
+  return findDay(allSchedules, dayName);
 }
 
 function oldestFromFirstSpecies(id) {
@@ -255,7 +262,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
