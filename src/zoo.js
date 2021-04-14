@@ -64,10 +64,7 @@ function animalCount(species) {
 function entryCalculator(entrants) {
   if (!entrants) return 0;
 
-  return Object
-    .entries(entrants)
-    .map(([key, value]) => value * prices[key])
-    .reduce((acc, curr) => acc + curr);
+  return Object.keys(entrants).reduce((acc, curr) => acc + (entrants[curr] * prices[curr]), 0);
 }
 
 /*
@@ -96,8 +93,10 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {
   const especieId = employees.find((emp) => emp.id === id).responsibleFor[0];
   const object = animals.find((animal) => animal.id === especieId);
+
   const { name, sex, age } = object.residents
     .reduce((arr, cur) => (arr.age > cur.age ? arr : cur));
+
   return [name, sex, age];
 }
 
