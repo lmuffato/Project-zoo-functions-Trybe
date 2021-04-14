@@ -100,7 +100,7 @@ function schedule(dayName) {
     }
   });
   if (!dayName) return agendaSemanal;
-  return { [dayName] :agendaSemanal[dayName] };
+  return { [dayName]: agendaSemanal[dayName] };
 }
 
 /* function oldestFromFirstSpecies(id) {
