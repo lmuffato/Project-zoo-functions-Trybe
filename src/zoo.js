@@ -59,9 +59,9 @@ function isManager(id) {
   return hasManager;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  const manager = [`${managers}`];
-  const responsable = [`${responsibleFor}`];
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const manager = managers;
+  const responsable = responsibleFor;
   const newEmployee = {
     id,
     firstName,
@@ -107,10 +107,8 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
-
-  const animalId = employees.find((element) => element.id === id.responsibleFor[0]);
-  const animalResidents = animals.find((element) => element.id === animalId.residents);
+  const animalId = employees.find((element) => element.id === id).responsibleFor[0];
+  const animalResidents = animals.find((element) => element.id === animalId).residents;
   let oldestAnimal = animalResidents[0].age;
   animalResidents.forEach((element) => {
     if (element.age > oldestAnimal) {
