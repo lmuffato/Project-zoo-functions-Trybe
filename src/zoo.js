@@ -53,14 +53,16 @@ function isManager(id) {
   return employees.some((employee) => employee.managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  return {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = {
     id,
     firstName,
     lastName,
     managers,
     responsibleFor,
   };
+
+  return employees.push(newEmployee);
 }
 
 function animalCount(species) {
