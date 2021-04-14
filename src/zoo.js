@@ -90,7 +90,7 @@ function entryCalculator(entrants) {
 // console.log(entryCalculator({Adult:0,Child:0,Senior:0,})) // TESTE 2 -> Retorna 0
 // console.log(entryCalculator()) // TESTE 3 -> Retorna 0
 // console.log(entryCalculator('')) // TESTE 4 -> Retorna 0
-console.log(entryCalculator({})) // TESTE 5 -> Retorna 0
+// console.log(entryCalculator({})) // TESTE 5 -> Retorna 0
 
 // function animalMap(options) {
 //   // seu código aqui
