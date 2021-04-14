@@ -92,13 +92,13 @@ function schedule(dayName) {
   return scheduleList;
 }
 
-/* Source: https://github.com/tryber/sd-010-a-project-zoo-functions/tree/efd72f25f18ee78c1d23c3751414e507c8c74455 */
+/* Source: https://github.com/tryber/sd-010-a-project-zoo-functions/tree/62b89de44c9ab2e141902d1e6a3b2fc9e0d3b9d6 */
 function oldestFromFirstSpecies(id) {
-  const specie = employees.find((emp) => (emp.id === id)).responsibleFor[0];
-
-  const { residents } = animals.find((animal) => animal.id === specie);
-
-  return Object.values(residents.sort((a, b) => b.age - a.age)[0]);
+  const especieId = employees.find((emp) => emp.id === id).responsibleFor[0];
+  const object = animals.find((animal) => animal.id === especieId);
+  const { name, sex, age } = object.residents
+    .reduce((arr, cur) => (arr.age > cur.age ? arr : cur));
+  return [name, sex, age];
 }
 
 /* Source: https://github.com/tryber/sd-08-project-zoo-function/blob/624454bd864d9badf6bdaeabfc2c929e8103720a/src/zoo.js */
