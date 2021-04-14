@@ -61,8 +61,43 @@ function entryCalculator(entrants) {
   }, 0);
 }
 
+// funcoes auxiliares para animalMap
+const animalByName = (animalName) => data.animals.find((animal) => animal.name === animalName);
+
+const speciesToResidentsNames = (animalName, sorted = false, sexFilter) => {
+  let arrayOfResidents = animalByName(animalName).residents;
+  if (sexFilter !== undefined) {
+    arrayOfResidents = arrayOfResidents.filter((resident) => resident.sex === sexFilter);
+  }
+  if (sorted) return arrayOfResidents.map((resident) => resident.name).sort();
+  return arrayOfResidents.map((resident) => resident.name);
+};
+
+const includeNames = (mapObject, sorted = false, sex) => {
+  const regions = Object.keys(mapObject);
+  // Comportamento para os parametro includeNames=true e sorted=true
+  const mapObjectWithNames = {};
+  regions.forEach((region) => {
+    mapObjectWithNames[region] = mapObject[region].map((animal) => {
+      const listOfIndividuals = speciesToResidentsNames(animal, sorted, sex);
+      return { [animal]: listOfIndividuals };
+    });
+  });
+  return mapObjectWithNames;
+};
+
 function animalMap(options) {
-  console.log(options); // seu código aqui
+  const animalMapObject = data.animals.reduce((accum, animal) => {
+    if (Object.keys(accum).includes(animal.location)) {
+      accum[animal.location].push(animal.name);
+    } else {
+      Object.assign(accum, { [animal.location]: [animal.name] });
+    }
+    return accum;
+  }, {});
+
+  if (!options || !options.includeNames) return animalMapObject;
+  return includeNames(animalMapObject, options.sorted, options.sex);
 }
 
 function schedule(dayName) {
