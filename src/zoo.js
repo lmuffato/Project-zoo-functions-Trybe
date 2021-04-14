@@ -81,7 +81,7 @@ function animalCount(specie) {
 // console.log ( animalCount() ) // TESTE 2 -> Retorna um objeto contendo o nome do animale a população
 
 function entryCalculator(entrants) {
-  if (!entrants) { return 0 };
+  if (!entrants) { return 0; }
   return Object.keys(entrants)
     .map((key) => (entrants[key] * prices[key]))
     .reduce((acc, elemento) => acc + elemento);
