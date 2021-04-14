@@ -94,7 +94,7 @@ function animalCount(species) {
 function entryCalculator(entrants = 0) {
   // seu código aqui
   return Object.entries(entrants)
-   .reduce((acum,[chave, valor]) => acum + data.prices[chave] * valor,0);
+    .reduce((acum, [chave, valor]) => acum + data.prices[chave] * valor, 0);
 }
 
 /* function animalMap(options) {
