@@ -118,11 +118,18 @@ function schedule(dayName) {
   });
   return newObject;
 }
-console.log(schedule());
 //----------------------------------------------------------
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  // seu código aqui
+  //   A função busca por informações do animal mais velho da primeira espécie gerenciada pela pessoa colaboradora do parâmetro
+  // Passado o id de um funcionário, encontra a primeira espécie de animal gerenciado pelo funcionário, e retorna um array com nome, sexo e idade do animal mais velho dessa espécie
+  // console.log({ id } = employees);
+  const idAnimal = employees.find(({ id: idEmployee }) => idEmployee === id).responsibleFor[0];
+  const arrayanimals = animals
+    .find((animal) => animal.id === idAnimal).residents
+    .sort(({ age: a }, { age: b }) => b - a);
+  return Object.values(arrayanimals[0]);
+} console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 //----------------------------------------------------------
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -143,7 +150,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
