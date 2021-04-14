@@ -96,7 +96,7 @@ function schedule(dayName) {
     if (index === 6) {
       agendaSemanal[dia] = 'CLOSED';
     } else {
-      agendaSemanal[dia] = `Open from ${abertura}am until ${fechamento}pm`
+      agendaSemanal[dia] = `Open from ${abertura}am until ${fechamento}pm`;
     }
   });
   if (!dayName) return agendaSemanal;
