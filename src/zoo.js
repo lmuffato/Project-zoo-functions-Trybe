@@ -60,6 +60,7 @@ function animalCount(species) {
   return animals.find((animal) => animal.name === species).residents.length;
 }
 
+// feito com auxilio de: Iago Ferreira, Lucas Pedroso, Murilo Gonsalves e Rafael Medeiros
 function entryCalculator(entrants) {
   if (entrants === undefined) return 0;
   const { Adult, Senior, Child } = data.prices;
@@ -73,10 +74,24 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+// feito com auxilio do max rudim, ajudou muito na lógica
+function schedule(dayName) {
+  const semana = {};
+  Object.keys(data.hours).forEach((dia) => {
+    const close = data.hours[dia].close - 12;
+    const { open } = data.hours[dia];
+    if (dia === 'Monday') {
+      semana[dia] = 'CLOSED';
+    } else {
+      semana[dia] = `Open from ${open}am until ${close}pm`;
+    }
+  });
+  if (dayName === undefined) return semana;
+  return { [dayName]: semana[dayName] };
+}
+console.log(schedule('Monday'));
 
+// // feito com auxilio de: Iago Ferreira, Lucas Pedroso, Murilo Gonsalves e Rafael Medeiros
 function oldestFromFirstSpecies(id) {
   const buscaFuncionario = employees.find((employee) => employee.id === id).responsibleFor[0];
   const buscaAnimal = animals.find((animal) => animal.id === buscaFuncionario).residents;
@@ -84,14 +99,14 @@ function oldestFromFirstSpecies(id) {
   return [resultado.name, resultado.sex, resultado.age];
 }
 
-// pesquisdas em https://medium.com/swlh/how-to-round-to-a-certain-number-of-decimal-places-in-javascript-ed74c471c1b8
+// pesquisadas em https://medium.com/swlh/how-to-round-to-a-certain-number-of-decimal-places-in-javascript-ed74c471c1b8
 function increasePrices(percentage) {
-  const Realpercent = (percentage / 100);
+  const porcentagem = (percentage / 100);
   const { prices } = data;
   const { Adult, Senior, Child } = prices;
-  prices.Adult = Math.round((Adult + (Adult * Realpercent)) * 100) / 100;
-  prices.Senior = Math.round((Senior + (Senior * Realpercent)) * 100) / 100;
-  prices.Child = Math.round((Child + (Child * Realpercent)) * 100) / 100;
+  prices.Adult = Math.round((Adult + (Adult * porcentagem)) * 100) / 100;
+  prices.Senior = Math.round((Senior + (Senior * porcentagem)) * 100) / 100;
+  prices.Child = Math.round((Child + (Child * porcentagem)) * 100) / 100;
   return prices;
 }
 
@@ -99,11 +114,9 @@ function increasePrices(percentage) {
 //   // seu código aqui
 // }
 
-// employeeCoverage();
-
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
