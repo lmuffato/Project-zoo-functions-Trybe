@@ -32,3 +32,9 @@ describe('Implemente a função entryCalculator', () => {
     assert.strictEqual(actual, 45.98);
   });
 });
+
+function entryCalculator({ Adult = 0, Child = 0, Senior = 0 } = 0) {
+  const { prices } = data;
+  const totalSum = Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
+  return totalSum;
+}
