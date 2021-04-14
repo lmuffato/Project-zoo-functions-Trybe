@@ -104,21 +104,16 @@ function schedule(dayName) {
   return { [dayName]: agendaSemanal[dayName] };
 }
 
-/* function oldestFromFirstSpecies(id) {
-  const { animals } = data;
-  const { employees } = data;
-  //retorna um array com nome, sexo e idade do animal mais velho dessa espécie'
-  const idAnimais = employees.find((employee) => employee.id === id).responsibleFor[0]
-  //return idAnimais;
-  const animalMonitorado = animals.filter((animal) => animal.id === idAnimais)
-  //return animalMonitorado;
-  return animalMonitorado.map((animal) => animal.residents)
+function oldestFromFirstSpecies(id) {
+  const { animals, employees } = data;
+  const idAnimais = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const animalMonitorado = animals.find((animal) => animal.id === idAnimais).residents;
+  const animaisIdosos = animalMonitorado.reduce((acc, current) => {
+    if (acc.age > current.age) return acc;
+    return current;
+  });
+  return Object.values(animaisIdosos)
 }
-
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992')); */
-// stephanieId ['Vicky', 'female', 12]
-// console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
-// ['Margherita', 'female', 10]
 
 function increasePrices(percentage) {
   const { prices } = data;
@@ -146,7 +141,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
