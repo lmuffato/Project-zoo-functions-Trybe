@@ -75,7 +75,7 @@ function entryCalculator(entrants) {
   return sumPrinces;
 }
 
-function animalMap(options) {}
+// function animalMap(options) {}
 
 const daySchedule = (open, closed) =>
   (closed - open === 0 ? 'CLOSED' : `Open from ${open}am until ${closed - 12}pm`);
@@ -120,16 +120,16 @@ function increasePrices(percentage) {
   });
 }
 
-function employeeCoverage(idOrName) {}
+// function employeeCoverage(idOrName) {}
 
 module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  // employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
