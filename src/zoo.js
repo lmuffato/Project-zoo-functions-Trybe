@@ -180,8 +180,18 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  const employ = id;
-  console.log(employ);
+  let searchedAnimal = { age: 0 };
+  const selectedWorker = employees.find((employ) => employ.id === id);
+  const { responsibleFor } = selectedWorker;
+  const selectedAnimal = animals.find((animal) => animal.id === responsibleFor[0]);
+  const { residents } = selectedAnimal;
+  for (let index = 0; index < residents.length; index += 1) {
+    if (residents[index].age > (searchedAnimal.age)) {
+      searchedAnimal = residents[index];
+    }
+  }
+  const animalInfo = Object.values(searchedAnimal);
+  return animalInfo;
 }
 
 function increasePrices(percentage) {
