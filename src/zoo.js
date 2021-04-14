@@ -96,7 +96,6 @@ function entryCalculator({ Adult = 0, Child = 0, Senior = 0 } = 0) {
   const totalSum = [sumAdult, sumSenior, sumChild];
   return totalSum.reduce(((acumulador, valorAtual) => acumulador + valorAtual), 0);
 }
-entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 });
 //----------------------------------------------------------
 // function animalMap(options) {
 //   // seu código aqui
