@@ -13,7 +13,8 @@ const { animals, employees, hours, prices } = require('./data');
 // const data = require('./data');
 
 // found about .includes at https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
-// Projeto desenvolvido com ajuda das colegas Nathalia Zebral, Debora Passos, Heloisa Hackenhaar, Djaniza Vasques, Bia Zidioti, Maria Luiza, Marilia, Carol Bitencourt, Priscila Scapin, Beatriz Barbosa, Ana Ventura, Pollyana, Wanderson Sales
+// Projeto desenvolvido com ajuda das colegas Nathalia Zebral, Debora Passos, Heloisa Hackenhaar, Djaniza Vasques, Bia Zidioti,
+// Maria Luiza, Marilia, Carol Bitencourt, Priscila Scapin, Beatriz Barbosa, Ana Ventura, Pollyana, Wanderson Sales
 
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.includes(animal.id));
