@@ -27,7 +27,7 @@ function employeeByName(employeeName) {
   if (!employeeName) return {};
 
   return data.employees.find((employee) => employee.firstName === employeeName
-  || employee.lastName === employeeName);
+    || employee.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -43,9 +43,10 @@ function isManager(id) {
     someManager.some((manager) => manager === id)).some((trueManager) => trueManager === true);
 }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+  const addedEmployee = { id, firstName, lastName, managers, responsibleFor };
+  return data.employees.push(addedEmployee);
+}
 
 // function animalCount(species) {
 //   // seu código aqui
@@ -83,7 +84,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   //   employeeCoverage,
-  //   addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   //   oldestFromFirstSpecies,
