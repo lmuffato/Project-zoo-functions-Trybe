@@ -83,12 +83,29 @@ function entryCalculator(entrants) {
 // }
 
 // REQUISITO 10
-// const hourszoo = (open, close) => (
-//   open === 0 && close === 0 ? 'CLOSE' : `Open from ${open}am until ${close - 12}pm`);
+const { hours } = require('./data');
 
-// function schedule(dayName) {
+function hoursZoo(dayWeek) {
+  const openZoo = hours[dayWeek].open;
+  const closeZoo = hours[dayWeek].close;
+  return (openZoo === 0 && closeZoo === 0
+    ? 'CLOSED' : `Open from ${openZoo}am until ${closeZoo - 12}pm`);
+}
 
-// }
+function schedule(dayName) {
+  const openingHours = {};
+  const days = Object.keys(hours);
+  if (dayName === undefined) {
+    days.forEach((day) => {
+      openingHours[day] = hoursZoo(day);
+    });
+    return openingHours;
+  }
+  if (dayName !== undefined) {
+    openingHours[dayName] = hoursZoo(dayName);
+    return openingHours;
+  }
+} // Visitado pull do Iago para entender final do código.
 
 // REQUISITO 11
 function oldestFromFirstSpecies(id) {
@@ -119,7 +136,7 @@ function increasePrices(percentage) {
 module.exports = {
 //   animalMap,
 //  employeeCoverage,
-// schedule,
+  schedule,
   entryCalculator,
   animalCount,
   addEmployee,
