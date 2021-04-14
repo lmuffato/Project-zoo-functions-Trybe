@@ -14,13 +14,15 @@ const { animals } = require('./data');
 
 function animalsByIds(...ids) {
   // seu código aqui
-  let selectedAnimals = [];
+  let selectedAnimals = []; // lanca array vazio
+  // filtra animais por ids recebidos por paramento
   ids.forEach((id) => {
     selectedAnimals = [...selectedAnimals, ...animals.filter((animal) => {
       if (animal.id === id) return true;
       return false;
     })];
   });
+  //  retorna selectedAnimals apos atribuir todos animais filtrados por id
   return selectedAnimals;
 }
 
@@ -52,10 +54,23 @@ function animalsOlderThan(animal, age) {
 //   // seu código aqui
 // }
 
-// function animalCount(species) {
-//   // seu código aqui
-// }
+function animalCount(species) {
+  // seu código aqui
+  // sem parametros deve retornar um objeto com todos os animais e a quantidade de cada especie.
+  // construir o objeto com todos animais
+  // reduce com inicialValue = {}
+  const allAnimals = animals.reduce((previousAnimal, currentAnimal) => {
+    previousAnimal[currentAnimal.name] = currentAnimal.residents.length;
+    return previousAnimal;
+  }, {});
+  // se recebermos o nome da especie , devemos retornar a quantidade de animais dessa especie.
+  if (species) {
+    return allAnimals[species];
+  }
+  return allAnimals;
+}
 
+console.log(animalCount('lions'));
 // function entryCalculator(entrants) {
 //   // seu código aqui
 // }
@@ -83,7 +98,7 @@ function animalsOlderThan(animal, age) {
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   // employeeByName,
