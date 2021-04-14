@@ -82,16 +82,63 @@ function entryCalculator(entrants = {}) {
   const totalSenior = Senior * prices.Senior;
   return parseFloat((totalAdult + totalChild + totalSenior).toPrecision(5));
 }
-// Retirei parseFloat das constantes e deixei só no return,
-// aderindo à ideia (e sugestão) da colega Heloísa Hackenhaar, conforme discutimos em grupo de estudo
-/*
-function animalMap(options) {
-  // seu código aqui
-}
-*/
+// Retirei parseFloat das constantes da função entryCalculator e deixei só no return, aderindo à ideia (e sugestão) da colega Heloísa Hackenhaar
 
-const printSchedule = (day, info) => {
-  const information = info; // objeto
+/* ---> PARA REFERÊNCIAS FUTURAS - Formas alternativas de criar e iterar o objeto
+// Alternativa I - Usando loop for
+const getMap = () => {
+  const map = {};
+  const keys = Object.keys(map);
+  for (let i = 0; i < animals.length; i += 1) {
+    if (!keys.includes(animals[i].location)) {
+      map[animals[i].location] = [];
+    }
+  }
+  return map;
+};
+
+ // Alternativa II - Usando loop forEach
+const getMap = () => {
+  const map = {};
+  const keys = Object.keys(map);
+  animals.forEach((animal) => {
+    if (!keys.includes(animal.location)) {
+      map[animal.location] = [];
+    }
+  });
+  return map;
+};
+*/
+// Alternativa III - Usando reduce
+// Cria um objeto com arrays vazios das regiões
+const getMap = () => {
+  const mapOfAnimals = animals.reduce((map, animal) => {
+    const mapa = map;
+    if (!Object.keys(mapa).includes(animal.location)) {
+      mapa[animal.location] = [];
+      return mapa;
+    }
+    return mapa;
+  }, {});
+  return mapOfAnimals;
+};
+
+// Atribui os nomes das espécies aos arrays das suas respectivas regiões
+const attributeAnimalsSpecies = (objt) => {
+  animals.forEach(({ name, location }) => {
+    objt[location].push(name);
+  });
+  return objt;
+};
+
+function animalMap(options = { includeNames: false, sex: undefined, sorted: false }) {
+  const location = getMap();
+  const { includeNames } = { ...options };
+  if (options === undefined || includeNames === false) return attributeAnimalsSpecies(location);
+}
+
+const printDaySchedule = (day) => {
+  const information = {};
   if (day === 'Monday') {
     information[day] = 'CLOSED';
   } else {
@@ -100,17 +147,33 @@ const printSchedule = (day, info) => {
   return information;
 };
 
+const printFullSchedule = () => {
+  const print = Object.keys(hours).reduce((obj, day) => {
+    const objt = obj;
+    if (day === 'Monday') {
+      objt[day] = 'CLOSED';
+    } else {
+      objt[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+    }
+    return objt;
+  }, {});
+  return print;
+};
+
 function schedule(dayName) {
-  const information = {}; // objeto
+  let result;
   if (dayName === undefined) {
-    Object.keys(hours).forEach((day) => printSchedule(day, information));
+    result = printFullSchedule();
   } else {
-    return printSchedule(dayName, information);
+    result = printDaySchedule(dayName);
   }
-  return information;
+  return result;
 }
-// Ideia de usar o forEach retirada do código da colega Beatriz Estabanez. (Eu estava tentando com o reduce, mas não deu certo).
+
+// Me inspirei na solução da colega Beatriz Estebanez para a função printDaySchedule.
 // https://github.com/tryber/sd-010-a-project-zoo-functions/pull/62/files
+// Refatoração: notei que o teste rodou mais rápido quando separei o requisito em funções menores e mais específicas
+// Por isto, optei por construir a função printFullSchedule em separado da função printDaySchedule, que imprime o horário do dia.
 
 function oldestFromFirstSpecies(id) {
   const soughtId = employees.find((employee) => employee.id === id); // encontra o funcionário
@@ -156,7 +219,7 @@ function employeeCoverage(idOrName) {
     .map((resp) => animals.find((animal) => resp === animal.id).name);
   return { [name]: getAnimal };
 }
-// Linhas 154-155 da função employeeCoverage adaptadas de: https://github.com/tryber/sd-09-project-zoo-functions/pull/48/files
+// O uso da combinação de map e find na função employeeCoverage: https://github.com/tryber/sd-09-project-zoo-functions/pull/48/files
 
 // Referências:
 // http://www.macoratti.net/18/09/js_marr2.htm
@@ -165,7 +228,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
