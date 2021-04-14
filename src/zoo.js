@@ -52,8 +52,6 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   return !!managersId.find((manager) => manager === id);
-  // const employee = employees.find(({ managers }) => managers.includes(id));
-  // return managers; // managers.length === 0;
 }
 
 function addEmployee(
@@ -180,29 +178,6 @@ function animalMap(options) {
 
   return !includeNames ? allAnimalsLocations() : findFunction(options);
 }
-
-// eslint-disable-next-line complexity
-// function animalMap(options) {
-//   if (!options) {
-//     return allAnimalsLocations();
-//   }
-//   const { includeNames, sorted, sex } = options;
-//   if (!includeNames) return allAnimalsLocations();
-//   if (includeNames && sex && sorted) {
-//     return sortedNames(allNamesByRegion(getFemalesMales, sex));
-//   }
-//   if (includeNames && sex) {
-//     return allNamesByRegion(getFemalesMales, sex);
-//   }
-//   if (includeNames && sorted) {
-//     return sortedNames(allNamesByRegion());
-//   }
-//   if (includeNames) {
-//     return allNamesByRegion();
-//   }
-// }
-
-console.log(animalMap({ includeNames: true, sex: 'female', sorted: true }));
 
 const getAllSchedules = () => {
   const schedules = {};
