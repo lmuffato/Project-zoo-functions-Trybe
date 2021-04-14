@@ -88,11 +88,13 @@ function animalCount(species) {
     .residents.length;
 }
 
-/* function entryCalculator(entrants) {
+ function entryCalculator(entrants = 0) {
   // seu código aqui
+  return Object.entries(entrants)
+   .reduce((acum,[chave, valor]) => acum + data.prices[chave] * valor,0);
 }
 
-function animalMap(options) {
+/* function animalMap(options) {
   // seu código aqui
 }
 
@@ -112,7 +114,7 @@ function employeeCoverage(idOrName) {
   // seu código aqui
 } */
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
