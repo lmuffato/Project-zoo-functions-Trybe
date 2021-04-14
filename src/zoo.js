@@ -86,10 +86,6 @@ function entryCalculator(entrants) {
     .map((key) => (entrants[key] * prices[key]))
     .reduce((acc, elemento) => acc + elemento);
 }
-// console.log(entryCalculator({Adult:10,Child:20,Senior:15,})) // TESTE 1 -> Retorna 1294.55
-// console.log(entryCalculator({Adult:0,Child:0,Senior:0,})) // TESTE 2 -> Retorna 0
-// console.log(entryCalculator()) // TESTE 3 -> Retorna 0
-// console.log(entryCalculator('')) // TESTE 4 -> Retorna 0
 
 // function animalMap(options) {
 //   // seu código aqui
