@@ -155,16 +155,23 @@ function toHuman({ open, close }) {
 
 function schedule(dayName) {
   const { hours } = data;
-  const openClose = Object.keys(hours).reduce((days, day) => {
+  const oneDay = {};
+
+  if (dayName) {
+    oneDay[dayName] = toHuman(hours[dayName]);
+
+    return oneDay;
+  }
+
+  const allWeek = Object.keys(hours).reduce((days, day) => {
     const daysObj = days;
     daysObj[day] = toHuman(hours[day]);
 
     return daysObj;
   }, {});
 
-  if (!dayName) return openClose;
+  return allWeek;
 }
-console.log(schedule());
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
