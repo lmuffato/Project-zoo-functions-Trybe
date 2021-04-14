@@ -1,11 +1,9 @@
 {
   "env": {
-    "es2020": true
+      "es2020": true
   },
-  "extends": ["trybe-fundamentals", "airbsn", "prettier"],
-  "plugins": ["prettier"],
+  "extends": "trybe-fundamentals",
   "rules": {
-    "prettier": "error",
     "max-lines": "off",
     "max-params": "off",
     "linebreak-style": "off"

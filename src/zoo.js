@@ -36,8 +36,7 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(thisId) {
   const checkIsManager = data.employees.some((manager) =>
-    manager.managers.includes(thisId),
-  );
+    manager.managers.includes(thisId));
   return checkIsManager;
 }
 
@@ -50,7 +49,7 @@ function addEmployee(
 ) {
   const createObj = { id, firstName, lastName, managers, responsibleFor };
   const addObjEmployee = data.employees.push(createObj);
-  return addEmployee;
+  return addObjEmployee;
 }
 
 function animalCount(species) {
@@ -70,17 +69,16 @@ function entryCalculator(entrants) {
     Child: priceChild,
     Senior: princeSenior,
   } = data.prices;
-  const listPrices = entrants;
+
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-  const sumPrinces =
-    Adult * priceAdult + Child * priceChild + Senior * princeSenior;
+  const sumPrinces = Adult * priceAdult + Child * priceChild + Senior * princeSenior;
   return sumPrinces;
 }
 
 function animalMap(options) {}
 
 const daySchedule = (open, closed) =>
-  closed - open === 0 ? 'CLOSED' : `Open from ${open}am until ${closed - 12}pm`;
+  (closed - open === 0 ? 'CLOSED' : `Open from ${open}am until ${closed - 12}pm`);
 
 function schedule(dayName) {
   const { hours } = data;
@@ -116,12 +114,10 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   const { prices } = data;
-  const toConvert = percentage / 100 + 1 + 0.005;
+  const toConvert = percentage / 100 + 1;
   return Object.keys(data.prices).forEach((key) => {
-    prices[key] = Number(parseFloat(prices[key] * toConvert).toFixed(2));
+    prices[key] = Number(parseFloat(prices[key] * toConvert + 0.005).toFixed(2));
   });
-
-  return values;
 }
 
 function employeeCoverage(idOrName) {}
