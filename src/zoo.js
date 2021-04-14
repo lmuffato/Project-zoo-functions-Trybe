@@ -82,9 +82,61 @@ function entryCalculator(entrants) {
   return hasPeopleCalculation(entrants);
 }
 
-// function animalMap(options) {
-//   // seu código aqui
-// }
+function animalsByLocation(locations = ['NE', 'NW', 'SE', 'SW']) {
+  const output = {};
+
+  locations.forEach((location) => {
+    output[location] = data.animals
+      .filter((species) => species.location === location)
+      .map((spec) => spec.name);
+  });
+
+  return output;
+}
+
+const findSpeciesByName = (speciesName) => data.animals
+  .find(((species) => species.name === speciesName));
+
+const filterResidentsBySex = (specObj, sex = undefined) => {
+  if (sex === undefined) return specObj.residents.map((anim) => anim.name);
+  return specObj.residents.filter((resident) => resident.sex === sex).map((anim) => anim.name);
+};
+
+function addAnimalsNames(regionsList, sorted, sex = undefined) {
+  const output = {};
+  const animalsEntries = Object.entries(regionsList);
+  animalsEntries.forEach((entries) => {
+    const [region, animals] = entries;
+    animals.forEach((spec) => {
+      const specObj = findSpeciesByName(spec);
+      let residents = filterResidentsBySex(specObj, sex);
+      if (sorted === true) residents = residents.sort();
+
+      if (!output[region]) {
+        output[region] = [];
+        output[region].push({ [specObj.name]: residents });
+      } else {
+        output[region].push({ [specObj.name]: residents });
+      }
+    });
+  });
+  return output;
+}
+
+function animalsNamesByLocation(options) {
+  if (options.sex && options.sorted) {
+    return addAnimalsNames(animalsByLocation(), options.sorted, options.sex);
+  }
+  if (options.sorted) return addAnimalsNames(animalsByLocation(), options.sorted);
+  if (options.sex) return addAnimalsNames(animalsByLocation(), false, options.sex);
+  return addAnimalsNames(animalsByLocation());
+}
+
+function animalMap(options) {
+  if (!options || options.includeNames !== true) return animalsByLocation();
+  if (options.includeNames === true) return animalsNamesByLocation(options);
+}
+
 function fullSchedule() {
   const allDays = {};
   Object.keys(data.hours).forEach((weekDay) => {
@@ -176,7 +228,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
