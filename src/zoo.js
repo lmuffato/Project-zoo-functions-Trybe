@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals } = require('./data');
+const { animals, employees, prices } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...args) {
@@ -24,10 +24,18 @@ function animalsByIds(...args) {
 }
 
 function animalsOlderThan(animal, age) {
+  const findeAnimalName = nome => nome.name === animal;
+  const animalsdearch = animals.find(findeAnimalName);
+  const filter = ageAnimals => ageAnimals.age >= age; 
+  return animalsdearch.residents.every(filter);
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (!employeeName) return {};
+
+  return employees.find((nomeOrLast)  => 
+  nomeOrLast.firstName === employeeName 
+  | nomeOrLast.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -35,19 +43,41 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  const idGerent = is => is.id === id; 
+  const confirmGerent = data.employees.filter(idGerent); 
+  return confirmGerent.every((Isgerent) => Isgerent.id === '0e7b460e-acf4-4e17-bcb3-ee472265db83');
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  return employees.push({id: `${id}`,
+  firstName: `${firstName}`,
+  lastName: `${lastName}`,
+  managers: [`${managers}`],
+  responsibleFor: [`${responsibleFor}`],
+});
 }
 
-function animalCount(species) {
-  // seu código aqui
+function animalCount(...species) {
+  if (species.length === 0) {
+    const animals = data.animals.reduce((acumulador, animalCurrent) => {
+      return acumulador.push(animalCurrent)
+    } , []);
+  }
+  const AnimalConting = nome => nome.name === species;
+  const animalNumber = data.animals.find(AnimalConting);
+  //return animalNumber.residents.length;
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (typeof entrants === 0 | Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const { Adult } = entrants;
+  const { Child } = entrants;
+  const { Senior } = entrants;
+  const total = prices.Adult * Adult + prices.Child * Child 
+  + prices.Senior * Senior;
+  return total;
 }
 
 function animalMap(options) {
@@ -63,14 +93,20 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const values = Object.values(prices).map((valor) => {
+    const atualPercentage = valor * percentage / 100;
+    return atualPercentage
+  })
+  prices.Adult += values[0];
+  prices.Senior += values[1];
+  prices.Child += values[2];
 }
 
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
 
-console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce', 'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5'))
+console.log(employeeByName('Emery'));
 
 module.exports = {
   entryCalculator,
