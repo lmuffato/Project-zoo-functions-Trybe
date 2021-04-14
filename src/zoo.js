@@ -72,13 +72,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function animalCount(specie) {
   if (!specie) {
     const animalList = {};
-    animals.map(({ name, residents }) => { animalList[name] = residents.length; });
+    animals.map((animal) => {
+      animalList[animal.name] = animal.residents.length;
+    });
     return animalList;
   }
   return (animals.find((animal) => animal.name === specie)).residents.length;
 }
-// console.log ( animalCount('lions') ) // TESTE 1 -> Retorna 4, que é a população de leões
-// console.log ( animalCount() ) // TESTE 2 -> Retorna um objeto contendo o nome do animale a população
+console.log ( animalCount('lions') ) // TESTE 1 -> Retorna 4, que é a população de leões
+console.log ( animalCount() ) // TESTE 2 -> Retorna um objeto contendo o nome do animale a população
 
 // function entryCalculator(entrants) {
 
