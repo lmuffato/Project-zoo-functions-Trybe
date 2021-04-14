@@ -194,9 +194,15 @@ function oldestFromFirstSpecies(id) {
   return oldestAnimal;
 }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  const { prices } = data;
+  // https://trybecourse.slack.com/archives/C01L16B9XC7/p1618319128014700?thread_ts=1618318862.014000&cid=C01L16B9XC7
+  Object.entries(prices).forEach((actualPrice) => {
+    const [age, price] = actualPrice;
+    const newPrice = price + (price * (percentage / 100));
+    prices[age] = Math.round(newPrice * 100) / 100;
+  }, {});
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -214,6 +220,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
