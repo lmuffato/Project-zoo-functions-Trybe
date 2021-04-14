@@ -41,6 +41,7 @@ function createEmployee(personalInfo, associatedWith) {
     responsibleFor,
   };
 }
+// Questão resolvida com o apoio fundamental do meu amigo Luan Ramalho!
 
 function isManager(id) {
   return data.employees.some(({ managers }, index) => managers[index] === id);
@@ -77,6 +78,7 @@ function entryCalculator(entrants) {
     .map(([ageRange, quant]) => quant * data.prices[ageRange])
     .reduce((acc, value) => acc + value);
 }
+// Questão resolvida com o apoio do PH - TRIBO A, que me fez sentir ir além com essa questão... hahhaaha
 
 // function animalMap(options) {
 //   // seu código aqui
