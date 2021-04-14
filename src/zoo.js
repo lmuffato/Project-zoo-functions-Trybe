@@ -125,7 +125,27 @@ function increasePrices(percentage) {
   return prices;
 }
 
-// function employeeCoverage(idOrName) {}
+const returnEmployeeCoverage = (obj, employee) => {
+  const object = obj;
+  const fullName = `${employee.firstName} ${employee.lastName}`;
+  object[fullName] = employee.responsibleFor
+    .map((idA) => animals
+      .find((animal) => animal.id === idA).name);
+  return object;
+};
+
+function employeeCoverage(idOrName) {
+  if (!idOrName) return employees.reduce(returnEmployeeCoverage, {});
+
+  const findId = idOrName.split('').some((caracter) => !!Number(caracter));
+  if (findId) {
+    const employeeA = employees.find((employee) => idOrName === employee.id);
+    return returnEmployeeCoverage({}, employeeA);
+  }
+  const employeeB = employees
+    .find((employee) => idOrName === employee.firstName || idOrName === employee.lastName);
+  return returnEmployeeCoverage({}, employeeB);
+}
 
 module.exports = {
   entryCalculator,
@@ -134,7 +154,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
