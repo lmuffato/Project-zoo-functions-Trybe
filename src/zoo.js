@@ -9,13 +9,13 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices } = require("./data");
-const data = require("./data");
+const { animals, employees, prices, hours } = require('./data');
+const data = require('./data');
 
 const managersId = [
-  "9e7d4524-363c-416a-8759-8aa7e50c0992",
-  "fdb2543b-5662-46a7-badc-93d960fdc0a8",
-  "0e7b460e-acf4-4e17-bcb3-ee472265db83",
+  '9e7d4524-363c-416a-8759-8aa7e50c0992',
+  'fdb2543b-5662-46a7-badc-93d960fdc0a8',
+  '0e7b460e-acf4-4e17-bcb3-ee472265db83',
 ];
 
 const filterId = (value) =>
@@ -34,9 +34,8 @@ function animalsOlderThan(animal, ageInput) {
 }
 
 const findName = (name) =>
-  employees.find((el, { firstName }, { lastName }) =>
-    el.firstName === name || el.lastName === name ? el : ""
-  );
+  employees.find((el) =>
+    (el.firstName === name || el.lastName === name ? el : ''));
 
 function employeeByName(employeeName) {
   if (employeeName === undefined) return {};
@@ -62,7 +61,7 @@ function addEmployee(
   firstName,
   lastName,
   managers = [],
-  responsibleFor = []
+  responsibleFor = [],
 ) {
   const employee = {
     id,
@@ -96,11 +95,10 @@ function animalCount(species) {
   return residents.length;
 }
 
-const calculateTotal = (entrants) => {
-  return Object.keys(entrants)
+const calculateTotal = (entrants) =>
+  Object.keys(entrants)
     .map((key) => entrants[key] * prices[key])
     .reduce((acc, next) => acc + next, 0);
-};
 
 function entryCalculator(entrants) {
   if (entrants === undefined || entrants === {}) {
@@ -110,13 +108,101 @@ function entryCalculator(entrants) {
   return calculateTotal(entrants);
 }
 
+const allAnimalsLocations = () => {
+  const obj = {};
+  animals.forEach((animal) => {
+    const { location } = animal;
+    obj[location] = animals
+      .filter((value) => location === value.location)
+      .map((value) => value.name);
+  });
+
+  return obj;
+};
+
+const getResidents = (specie) => {
+  const { residents } = animals.find((animal) => animal.name === specie);
+  return residents;
+};
+
+const getNamesAnimals = (specie) => getResidents(specie).map(({ name }) => name);
+
+const getFemalesMales = (specie, sex) => getResidents(specie)
+  .filter((animal) => animal.sex === sex)
+  .map(({ name }) => name);
+
+const allNamesByRegion = (...parameters) => {
+  const obj = allAnimalsLocations();
+  const locationsNames = Object.values(obj);
+  // const values = [
+  //   getNamesAnimals,
+  //   getFemalesMales,
+  // ];
+
+  // const names = values.find((action) => )
+
+  locationsNames.forEach((location, i) => {
+    const locationName = Object.keys(obj)[i];
+    obj[locationName] = location.map((value) => ({ [value]: parameters[0](value, parameters[1]) }));
+  });
+  return obj;
+};
+
+const sortedNames = (object) => {
+  const obj = object;
+  Object.values(obj).forEach((location) => location.forEach((values) => {
+    const animal = Object.keys(values)[0];
+    const sorted = Object.values(values)[0].sort();
+    const currValue = values;
+    currValue[animal] = sorted;
+  }));
+  return obj;
+};
+
+// eslint-disable-next-line complexity
 function animalMap(options) {
-  // seu código aqui
+  if (!options) {
+    return allAnimalsLocations();
+  }
+  const { includeNames, sorted, sex } = options;
+  if (includeNames && sex) {
+    return allNamesByRegion(getFemalesMales, sex);
+  }
+  if (includeNames && sorted) {
+    return sortedNames(allNamesByRegion());
+  }
+  if (includeNames) {
+    return allNamesByRegion();
+  }
 }
 
+// console.log(animalMap({ includeNames: true, sex: 'female' }).NE);
+
+const getAllSchedules = () => {
+  const schedules = {};
+
+  Object.keys(hours).forEach((day) => {
+    const { open, close } = hours[day];
+    const condition = (open === 0 && close === 0);
+    schedules[day] = `Open from ${open}am until ${close - 12}pm`;
+    if (condition) schedules[day] = 'CLOSED';
+  });
+  return schedules;
+};
+
 function schedule(dayName) {
-  // seu código aqui
+  const allSchedules = getAllSchedules();
+
+  if (!dayName) {
+    return allSchedules;
+  }
+
+  const day = Object.entries(allSchedules).find(([key, value]) => key === dayName);
+  console.log(allSchedules);
+  return [day].reduce((obj, [key, value]) => Object.assign(obj, { [key]: value }), {});
 }
+
+console.log(schedule('Tuesday'));
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
