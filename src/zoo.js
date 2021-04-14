@@ -25,10 +25,10 @@ function animalsOlderThan(species, animalAge) {
     .every(({ age }) => (age >= animalAge));
 }
 
-// console.log(animalsOlderThan('lions',15)); // TEST 1 - Expected true
-// console.log(animalsOlderThan('lions',2)); // TEST 2 - Expected false
+// console.log(animalsOlderThan('lions',15)); // TEST 1 - Expected false
+// console.log(animalsOlderThan('lions',2)); // TEST 2 - Expected true
 // console.log(animalsOlderThan('otters',7)); // TEST 4 - Expected true
-// console.log(animalsOlderThan('penguins',10)); // TEST 3 - Expected true
+// console.log(animalsOlderThan('penguins',10)); // TEST 3 - Expected false
 // console.log(animals[0].residents[0].age) // Propriedade age
 
 function employeeByName(employeeName) {
@@ -59,9 +59,15 @@ function isManager(id) {
 // console.log(isManager('')) // TEST 3 - Retorna false, pois é uma string vazia
 // console.log(isManager()) // TEST 4 - Retorna false, pois não há argumento passado par a função
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+  employees.push(
+    {id, firstName, lastName, managers, responsibleFor}
+  );
+}
+// console.log(addEmployee('007','James', 'Bond',
+//             ['0e7b460e-acf4-4e17-bcb3-ee472265db83', 'baa6e93a-f295-44e7-8f70-2bcdc6f6948d'],
+//             ['baa6e93a-f295-44e7-8f70-2bcdc6f6948d', '0938aa23-f153-4937-9f88-4858b24d6bce']),
+//             employees) // TESTE 1 - Retorna o objeto employee com o novo empregado no final da lista
 
 // function animalCount(species) {
 //   // seu código aqui
@@ -99,7 +105,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   //   employeeCoverage,
-  //   addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   //   oldestFromFirstSpecies,
