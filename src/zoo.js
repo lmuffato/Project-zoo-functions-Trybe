@@ -88,11 +88,24 @@ function entryCalculator(entrants) {
 function animalMap(options) {
   // seu código aqui
 }
+*/
 
-function schedule(dayName) {
+function schedule(day) {
   // seu código aqui
+  const horario = (value) => value - 12;
+  const { hours } = data;
+  const weekDays = {};
+  const hourKey = Object.values(hours);
+  const ArrayDays = Object.keys(hours);
+  for (let index = 0; index < ArrayDays.length - 1; index += 1) {
+    const weekDay = ArrayDays[index];
+    const hourEntry = hourKey[index];
+    Object.assign(weekDays, { [weekDay]: `Open from ${hourEntry.open}am until ${horario(hourEntry.close)}pm` });
+  }
+  Object.assign(weekDays, { Monday: 'CLOSED' });
+  return (day !== undefined ? { [day]: weekDays[day] } : weekDays);
 }
-
+/*
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
@@ -107,7 +120,7 @@ function employeeCoverage(idOrName) {
 */
 module.exports = {
   entryCalculator,
-  /* schedule, */
+  schedule,
   animalCount,
   /*  animalMap, */
   animalsByIds,
