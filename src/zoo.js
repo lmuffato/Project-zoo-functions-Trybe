@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...args) {
@@ -37,8 +37,9 @@ function employeeByName(employeeName) {
     name.firstName === employeeName || name.lastName === employeeName);
 }
 
-/* function createEmployee(personalInfo, associatedWith) {
-} */
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
+}
 
 function isManager(id) {
   const idGerent = (is) => is.id === id;
@@ -65,29 +66,54 @@ function animalCount(species) {
 function entryCalculator(entrants) {
   if (!entrants) return 0;
   if (Object.keys(entrants).length === 0) return 0;
-  return prices.Adult;
+
+  
+  return Object.keys(entrants)
+    .reduce((acc, current) =>
+      acc + (entrants[current] * prices[current]), 0);
 }
 
 /* function animalMap(options) {
 } */
 
-/* function schedule(dayName) {
+ /* function schedule(dayName) {
 } */
 
-/* function oldestFromFirstSpecies(id) {
-} */
+ function oldestFromFirstSpecies(id) {
+  const searchFunctionare = (nome) => nome.id === id;
+  const checkSearch = employees.find(searchFunctionare);
+  const animalId = checkSearch.responsibleFor[0];
+  const specieId = (nome) => nome.id === animalId;
+  const animalIdReturn = animals.find(specieId);
+  const residentsAnimals = animalIdReturn.residents
+  const oldAnimal = residentsAnimals.reduce((acc, current) => {
+  return Math.max(acc, current.age); 
+   }, 0);
+   return OlderAnimal;
 
-/* function increasePrices(percentage) {
-} */
+}
+
+ function increasePrices(percentage) {
+   const newAdult = (prices.Adult * percentage) / 100;
+   const newSenior = (prices.Senior * percentage) / 100;
+   const newChild = (prices.Child * percentage) / 100;
+   //parseFloat(newAdult).toFixed(2);
+   //parseFloat(newSenior).toFixed(2);
+   //parseFloat(newChild).toFixed(2);
+   prices.Adult += newAdult;
+   prices.Senior += newSenior;
+   prices.Child += newChild;
+}
 
 /* function employeeCoverage(idOrName) {
 } */
 
-console.log(entryCalculator());
+console.log(increasePrices(20));
+console.log(prices);
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  //schedule,
   animalCount,
   // animalMap,
   animalsByIds,
@@ -96,7 +122,7 @@ module.exports = {
   // addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
-  // increasePrices,
-  // createEmployee,
+  oldestFromFirstSpecies,
+  increasePrices,
+  createEmployee,
 };
