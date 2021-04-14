@@ -54,11 +54,18 @@ function addEmployee(id1, firstName1, lastName1, managers1, responsibleFor1) {
 }
 
 function animalCount(species) {
-  // seu código aqui
+  const { animals } = data;
+  const toLower = species.toLowerCase();
+  return animals.find((acc) => (acc.name === toLower ? console.log(acc.residents.length) : 0));
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  // const {Adult, Child, Senior } = entrants;
+  const { prices } = data;
+  const sumValues = (prices.Adult * entrants.Adult)
+  + (prices.Child * entrants.Child)
+  + (prices.Senior * entrants.Senior);
+  return ((Object.keys(entrants).length) !== 3 || Object.values(entrants) !== '') ? 0 : sumValues;
 }
 
 function animalMap(options) {
