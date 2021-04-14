@@ -95,14 +95,11 @@ const oldestFromFirstSpecies = (thisId) => pipe(
 // 12
 const toFixed = (num, precision) => {
   function round(digit) {
-    const add1 = parseInt(digit, 10) + 1;
-    return add1.toString();
+    return (parseInt(digit, 10) + 1).toString();
   }
   let str = num.toString();
-  const start = str.indexOf('.');
-  const end = start + precision;
-  const roundup = str[end + 1] >= '5';
-  if (roundup) {
+  const end = str.indexOf('.') + precision;
+  if (str[end + 1] >= '5') {
     str = str.substring(0, end) + round(str[end]);
   } else {
     str = str.substring(0, end + 1);
@@ -119,18 +116,15 @@ const employeeCoverage = (idOrName) => {
   function fName({ firstName, lastName }) {
     return `${firstName} ${lastName}`;
   }
-  const obj = {};
-  employees.forEach((employee) => {
-    const key = fName(employee);
-    const value = employee.responsibleFor.map((givenId) =>
-      animals.find(({ id }) => id === givenId).name);
-    obj[key] = value;
-  });
-  if (typeof idOrName === 'undefined') return obj;
-  const employee = employees.find(({ id, firstName, lastName }) =>
-    [id, firstName, lastName].includes(idOrName));
-  const hisFullName = fName(employee);
-  return { [hisFullName]: obj[hisFullName] };
+  const allEmployeesCoverage = employees.reduce((acc, { firstName, lastName, responsibleFor }) => ({
+    ...acc,
+    [fName({ firstName, lastName })]: responsibleFor.map((givenId) =>
+      animals.find(({ id }) => id === givenId).name),
+  }), {});
+  if (typeof idOrName === 'undefined') return allEmployeesCoverage;
+  const hisFullName = fName(employees.find(({ id, firstName, lastName }) =>
+    [id, firstName, lastName].includes(idOrName)));
+  return { [hisFullName]: allEmployeesCoverage[hisFullName] };
 };
 
 module.exports = {
