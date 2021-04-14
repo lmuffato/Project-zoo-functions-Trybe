@@ -77,15 +77,15 @@ function entryCalculator(entrants) {
   return sumPrinces;
 }
 
-function animalMap(options) {
-  const objAnimals = data.animals.reduce((acc, cur) => {
-    acc[cur.name] = cur.location;
-    return acc;
-  }, []);
+// function animalMap(options) {
+//   const objAnimals = data.animals.reduce((acc, cur) => {
+//     acc[cur.name] = cur.location;
+//     return acc;
+//   }, []);
 
-  // const mapObj = data.animals.reduce();
-  // return objAnimals;
-}
+//   // const mapObj = data.animals.reduce();
+//   // return objAnimals;
+// }
 
 // console.log(animalMap());
 
@@ -111,8 +111,14 @@ function oldestFromFirstSpecies(id) {
   return newArrAnimal;
 }
 
-function increasePrices(_percentage) {
-  // seu código aqui
+function increasePrices(percentage) {
+  const { prices } = data;
+  const toConvert = percentage / 100 + 1 + 0.005;
+  return Object.keys(data.prices).forEach((key) => {
+    prices[key] = Number(parseFloat(prices[key] * toConvert).toFixed(2));
+  });
+
+  return values;
 }
 
 // function employeeCoverage(idOrName) {
@@ -132,7 +138,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
