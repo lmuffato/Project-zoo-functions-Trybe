@@ -134,12 +134,6 @@ const getFemalesMales = (specie, sex) => getResidents(specie)
 const allNamesByRegion = (...parameters) => {
   const obj = allAnimalsLocations();
   const locationsNames = Object.values(obj);
-  // const values = [
-  //   getNamesAnimals,
-  //   getFemalesMales,
-  // ];
-
-  // const names = values.find((action) => )
 
   locationsNames.forEach((location, i) => {
     const locationName = Object.keys(obj)[i];
@@ -211,10 +205,13 @@ function oldestFromFirstSpecies(id) {
   return Object.values(animalsNames[animalsNames.length - 1]);
 }
 
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.keys(prices).forEach((price) => {
+    prices[price] = parseFloat((Math
+      .round((prices[price] + (prices[price] * (percentage / 100))) * 100) / 100)
+      .toFixed(2));
+  });
+  return prices;
 }
 
 function employeeCoverage(idOrName) {
