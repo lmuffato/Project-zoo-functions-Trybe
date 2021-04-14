@@ -126,7 +126,7 @@ function increasePrices(percentage) {
   const percentual = (percentage / 100) + 1;
   propriedades.forEach((propriedade) => {
     const valorAlterado = prices[propriedade] * percentual;
-    prices[propriedade] = Math.round(valorAlterado * 100) / 100;// ele tá multiplicando por 100 e dividindo por 100 - para arredondar o valor mais proximo para cima; 
+    prices[propriedade] = Math.round(valorAlterado * 100) / 100;// ele tá multiplicando por 100 e dividindo por 100 - para arredondar o valor mais proximo para cima;
   });
   return prices;
 }
