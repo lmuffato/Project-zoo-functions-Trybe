@@ -195,8 +195,13 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  const employ = percentage;
-  console.slog(employ);
+  const newObj = {};
+  Object.entries(prices).forEach((price) => {
+    const newPrice = ((percentage / 100) * price[1]);
+    Object.assign(newObj, { [price[0]]: Math.round((price[1] + newPrice) * 100) / 100 });
+  });
+  data.prices = newObj;
+  return data.prices;
 }
 
 function employeeCoverage(idOrName) {
