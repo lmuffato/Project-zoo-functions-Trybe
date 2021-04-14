@@ -87,8 +87,11 @@ function animalCount(species) {
     .animals.find(({ name }) => name === species)
     .residents.length;
 }
-
- function entryCalculator(entrants = 0) {
+// esta função abaixo(requisito 8 )eu tinha uma logica que se mostrou ineficiente.
+// para conseguir completa tive que ver codigos pela internet, para achar o object.
+// entries,(eu não me lembrava do conteudo) e vi tambem em codigo de alunos
+// porem a logica da questão eu tinha
+function entryCalculator(entrants = 0) {
   // seu código aqui
   return Object.entries(entrants)
    .reduce((acum,[chave, valor]) => acum + data.prices[chave] * valor,0);
