@@ -103,7 +103,7 @@ function schedule(dayName) {
     if (index === 6) {
       horarioFuncionamento[dia] = 'CLOSED';
     } else {
-      horarioFuncionamento[dia] = `Open from ${abertura}am until ${fechamento}pm`
+      horarioFuncionamento[dia] = `Open from ${abertura}am until ${fechamento}pm`;
     }
   });
   if (!dayName) return horarioFuncionamento;
@@ -115,26 +115,8 @@ function schedule(dayName) {
 } */
 
 /* function increasePrices(percentage) {
-  const resposta = {};
-    const categorias = Object.keys(prices); // Separar as chaves
-  const valores = Object.values(prices); // separar os valores
-    // Aumenta o preço seguindo a fórmula
-  const aumento = valores.map(item => item + ((item / 100) * percentage));
-    // Imaginei que fosse gerar um array de objetos com as categorias e valores novos
-  for (index = 0; index < valores.length; index += 1) {
-    resposta.push = { categorias[index]: aumento[index] };
-  } */
-  
-/*   if (percentage === 50) {
-    return { Adult: 74.99, Senior: 37.49, Child: 31.49 };
-  }
-
-  if (percentage === 30) {
-    return { Adult: 97.49, Senior: 48.74, Child: 40.94 };
-  }
-}
-
-console.log(prices); */
+  // seu código aqui
+} */
 
 /* function employeeCoverage(idOrName) {
   // seu código aqui
