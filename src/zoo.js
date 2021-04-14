@@ -23,12 +23,12 @@ function animalsByIds(...args) {
   return data.animals.filter((index) => args.includes(index.id));
 }
 
-function animalsOlderThan(animal, age) {
+/* function animalsOlderThan(animal, age) {
   const findeAnimalName = (nome) => nome.name === animal;
   const animalsdearch = animals.find(findeAnimalName);
   const filter = (ageAnimals) => ageAnimals.age >= age;
   return animalsdearch.residents.every(filter);
-}
+} */
 
 function employeeByName(employeeName) {
   if (!employeeName) return {};
@@ -67,7 +67,6 @@ function entryCalculator(entrants) {
   if (!entrants) return 0;
   if (Object.keys(entrants).length === 0) return 0;
 
-  
   return Object.keys(entrants)
     .reduce((acc, current) =>
       acc + (entrants[current] * prices[current]), 0);
@@ -76,33 +75,33 @@ function entryCalculator(entrants) {
 /* function animalMap(options) {
 } */
 
- /* function schedule(dayName) {
+/* function schedule(dayName) {
 } */
 
- function oldestFromFirstSpecies(id) {
+/* function oldestFromFirstSpecies(id) {
   const searchFunctionare = (nome) => nome.id === id;
   const checkSearch = employees.find(searchFunctionare);
   const animalId = checkSearch.responsibleFor[0];
   const specieId = (nome) => nome.id === animalId;
   const animalIdReturn = animals.find(specieId);
-  const residentsAnimals = animalIdReturn.residents
+  const residentsAnimals = animalIdReturn.residents;
   const oldAnimal = residentsAnimals.reduce((acc, current) => {
-  return Math.max(acc, current.age); 
-   }, 0);
-   return OlderAnimal;
+    return Math.max(acc, current.age);
+  }, 0);
+  return OlderAnimal;
+} */
 
-}
-
- function increasePrices(percentage) {
-   const newAdult = (prices.Adult * percentage) / 100;
-   const newSenior = (prices.Senior * percentage) / 100;
-   const newChild = (prices.Child * percentage) / 100;
-   //parseFloat(newAdult).toFixed(2);
-   //parseFloat(newSenior).toFixed(2);
-   //parseFloat(newChild).toFixed(2);
-   prices.Adult += newAdult;
-   prices.Senior += newSenior;
-   prices.Child += newChild;
+function increasePrices(percentage) {
+  const newAdult = (prices.Adult * percentage) / 100;
+  const newSenior = (prices.Senior * percentage) / 100;
+  const newChild = (prices.Child * percentage) / 100;
+  parseFloat(newAdult).toFixed(2);
+  parseFloat(newSenior).toFixed(2);
+  parseFloat(newChild).toFixed(2);
+  prices.Adult += newAdult;
+  prices.Senior += newSenior;
+  prices.Child += newChild;
+  return hours;
 }
 
 /* function employeeCoverage(idOrName) {
@@ -113,7 +112,7 @@ console.log(prices);
 
 module.exports = {
   entryCalculator,
-  //schedule,
+  // schedule,
   animalCount,
   // animalMap,
   animalsByIds,
@@ -121,8 +120,8 @@ module.exports = {
   // employeeCoverage,
   // addEmployee,
   isManager,
-  animalsOlderThan,
-  oldestFromFirstSpecies,
+  // animalsOlderThan,
+  // oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
