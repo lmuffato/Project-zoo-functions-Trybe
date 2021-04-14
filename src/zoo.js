@@ -59,7 +59,7 @@ function isManager(id) {
 // console.log(isManager('')) // TEST 3 - Retorna false, pois é uma string vazia
 // console.log(isManager()) // TEST 4 - Retorna false, pois não há argumento passado par a função
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   employees.push(
     { id, firstName, lastName, managers, responsibleFor },
   );
