@@ -95,13 +95,13 @@ function schedule(dayName) {
     const fechamento = hours[dia].close - 12;
     if (index === 6) {
       agendaSemanal[dia] = 'CLOSED';
-    }else {
+    } else {
       agendaSemanal[dia] = `Open from ${abertura}am until ${fechamento}pm`
     }
-  } );
+  });
   if (!dayName) return agendaSemanal;
-  return { [dayName]:agendaSemanal[dayName] }; 
-} 
+  return { [ dayName ]:agendaSemanal[ dayName ] };
+}
 
 /* function oldestFromFirstSpecies(id) {
   // seu código aqui
