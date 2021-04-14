@@ -106,11 +106,17 @@ function schedule(day) {
   Object.assign(wDay, { Monday: 'CLOSED' });
   return (day !== undefined ? { [day]: wDay[day] } : wDay);
 }
-/*
+
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+  const idAnimal = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const { residents } = data.animals.find((animal) => animal.id === idAnimal);
+  const residentAnimal = Object
+  .values(residents.sort((firstAnimal, secondAnimal) => secondAnimal.age - firstAnimal.age)[0]);
+  return residentAnimal;
 }
 
+/*
 function increasePrices(percentage) {
   // seu código aqui
 }
@@ -130,7 +136,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  /*  oldestFromFirstSpecies,
-  increasePrices, */
+  oldestFromFirstSpecies,
+  /* increasePrices, */
   createEmployee,
 };
