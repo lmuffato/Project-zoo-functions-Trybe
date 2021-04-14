@@ -81,10 +81,10 @@ function animalCount(specie) {
 // console.log ( animalCount() ) // TESTE 2 -> Retorna um objeto contendo o nome do animale a população
 
 function entryCalculator(entrants) {
-  if (!entrants) {return 0};
+  if (!entrants) { return 0 };
   return Object.keys(entrants)
-  .map((key) => (entrants[key] * prices[key]))
-  .reduce((acc, elemento)=> acc + elemento);
+    .map((key) => (entrants[key] * prices[key]))
+    .reduce((acc, elemento) => acc + elemento);
 }
 // console.log(entryCalculator({Adult:10,Child:20,Senior:15,})) // TESTE 1 -> Retorna 1294.55
 // console.log(entryCalculator({Adult:0,Child:0,Senior:0,})) // TESTE 2 -> Retorna 0
@@ -112,7 +112,7 @@ function entryCalculator(entrants) {
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   //   schedule,
   animalCount,
   //   animalMap,
