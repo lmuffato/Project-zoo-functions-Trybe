@@ -24,7 +24,7 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  const { employees } = data;
+  // const { employees } = data;
   if (!employeeName) {
     return {};
   }
@@ -45,12 +45,12 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const { employees } = data;
+  // const { employees } = data;
   return employees.some(({ managers }) => managers.indexOf(id) !== -1);// se existe em cada index o id
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const { employees } = data;
+  // const { employees } = data;
   employees.push({
     id,
     firstName,
@@ -126,7 +126,7 @@ function increasePrices(percentage) {
   const percentual = (percentage / 100) + 1;
   propriedades.forEach((propriedade) => {
     const valorAlterado = prices[propriedade] * percentual;
-    prices[propriedade] = Math.round(valorAlterado * 100) / 100; // ele tá multiplicando por 100 e dividindo por 100 - para arredondar o valor mais proximo para cima; 
+    prices[propriedade] = Math.round(valorAlterado * 100) / 100;// ele tá multiplicando por 100 e dividindo por 100 - para arredondar o valor mais proximo para cima; 
   });
   return prices;
 }
