@@ -20,7 +20,7 @@ const obj = {
   frogs: 2,
   snakes: 2,
   elephants: 4,
-  giraffes:6,
+  giraffes: 6,
 };
 
 function animalsByIds(...ids) {
@@ -85,7 +85,7 @@ function animalCount(species) {
   if (!species) return obj;
   return data
     .animals.find(({ name }) => name === species)
-    .residents.length
+    .residents.length;
 }
 
 /* function entryCalculator(entrants) {
