@@ -94,16 +94,17 @@ function schedule(day) {
   // seu código aqui
   const horario = (value) => value - 12;
   const { hours } = data;
-  const weekDays = {};
+  const wDay = {};
   const hourKey = Object.values(hours);
-  const ArrayDays = Object.keys(hours);
-  for (let index = 0; index < ArrayDays.length - 1; index += 1) {
-    const weekDay = ArrayDays[index];
-    const hourEntry = hourKey[index];
-    Object.assign(weekDays, { [weekDay]: `Open from ${hourEntry.open}am until ${horario(hourEntry.close)}pm` });
+  const arrDays = Object.keys(hours);
+  for (let index = 0; index < arrDays.length - 1; index += 1) {
+    const days = arrDays[index];
+    const hour = hourKey[index];
+    Object
+      .assign(wDay, { [days]: `Open from ${hour.open}am until ${horario(hour.close)}pm` });
   }
-  Object.assign(weekDays, { Monday: 'CLOSED' });
-  return (day !== undefined ? { [day]: weekDays[day] } : weekDays);
+  Object.assign(wDay, { Monday: 'CLOSED' });
+  return (day !== undefined ? { [day]: wDay[day] } : wDay);
 }
 /*
 function oldestFromFirstSpecies(id) {
