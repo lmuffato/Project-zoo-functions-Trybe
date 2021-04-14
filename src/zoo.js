@@ -57,11 +57,13 @@ function animalCount(species) {
   return data.animals.find(({ name }) => name === species).residents.length;
 }
 
-/*
-
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (!entrants || entrants === {}) return 0;
+  return Object.keys(entrants).reduce((acc, curr) => (acc + (entrants[curr] * data.prices[curr])
+  ), 0);
 }
+
+/*
 
 function animalMap(options) {
   // seu código aqui
@@ -85,19 +87,13 @@ function employeeCoverage(idOrName) {
 */
 
 module.exports = {
-  /*
   entryCalculator,
-  schedule,
-  */
+  // schedule,
   animalCount,
-  /*
-  animalMap,
-  */
+  // animalMap,
   animalsByIds,
   employeeByName,
-  /*
-  employeeCoverage,
-  */
+  // employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
