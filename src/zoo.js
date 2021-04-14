@@ -91,9 +91,54 @@ function entryCalculator(entrants = {}) {
 
   return totalPrice;
 }
-// function animalMap(options) {
-//   // seu código aqui
-// }
+
+//  ANIMAL MAP FUNCTIONS
+function genderFilter(residents, sex) {
+  const residentsName = residents.reduce((genders, { name, sex: animalGender }) => {
+    const gendersName = genders;
+
+    if (sex === animalGender) gendersName.push(name);
+
+    return gendersName;
+  }, []);
+
+  return residentsName;
+}
+
+function residentsFilter(residents, sorted, sex) {
+  const residentsName = sex ? genderFilter(residents, sex) : residents.map(({ name }) => name);
+
+  if (sorted) residentsName.sort();
+
+  return residentsName;
+}
+
+function namesObject(name, residentsName) {
+  const obj = {};
+  obj[name] = residentsName;
+
+  return obj;
+}
+
+function animalMap(options = {}) {
+  const { animals } = data;
+  const { includeNames, sorted, sex } = options;
+
+  const filtered = animals.reduce((locationFilter, animal) => {
+    const { location, name, residents } = animal;
+    const residentsName = residentsFilter(residents, sorted, sex);
+    const filter = locationFilter;
+
+    if (!filter[location]) filter[location] = [];
+
+    if (includeNames) filter[location].push(namesObject(name, residentsName));
+    else filter[location].push(name);
+
+    return filter;
+  }, {});
+
+  return filtered;
+}
 
 // function schedule(dayName) {
 //   // seu código aqui
@@ -115,7 +160,7 @@ module.exports = {
   entryCalculator,
   // schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
