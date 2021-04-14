@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 // os requisitos foram feitos colaborativamente com as colegas  , Heloisa , Thalia Cecillier, Débora Passos, Djaniza e Bia Zidioti, Ana Ventura, Marília,
 
-const { animals, prices } = require('./data');
+const { animals, prices, hours } = require('./data');
 const { employees } = require('./data');
 // const data = require('./data');
 
@@ -88,18 +88,40 @@ function entryCalculator(entrants) {
 // seu código aqui
 // }
 
-// function schedule(dayName) {
-// seu código aqui
-// }
+// a função abaixo foi entendida e feita com explicações do zezé , o colega Carlos sá !!!
+function schedule(dayName) {
+  const days = Object.keys(hours);
+  const schedules = {};
+  days.forEach((day, index) => {
+    const opening = hours[day].open;
+    const closure = hours[day].close - 12;
+    if (index === 6) {
+      schedules[day] = 'CLOSED';
+    } else {
+      schedules[day] = `Open from ${opening}am until ${closure}pm`;
+    }
+  });
+  if (dayName === undefined || dayName === {}) {
+    return schedules;
+  }
+  return { [dayName]: schedules[dayName] };
+}
 
 // function oldestFromFirstSpecies(id) {
-// seu código aqui
+//  const findEmployee = employees.find((employee) => employee.id === id).responsibleFor[0];
+//  const findAnimal = animals.find((animal) => animal.id === findEmployee);
+//  const oldAge = findAnimal.residents.reduce((acc, item) => ((acc > item.age) ? acc : item.age));
+//  const { name, sex, age } = findAnimal.residents.find((resident) => resident.age === oldAge);
+//  return [name, sex, age];
 // }
 
 // function increasePrices(percentage) {
-// const percent = (1 + (percentage / 100));
-// const keys = objects.keys(prices);
-
+//  const percent = (1 + (percentage / 100));
+//  const keys = Object.keys(prices);
+//  keys.forEach(key => {
+//    prices[key] = keys.value + percent
+//    parsefloat
+//  });
 // }
 
 // function employeeCoverage(idOrName) {
@@ -108,7 +130,7 @@ function entryCalculator(entrants) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
