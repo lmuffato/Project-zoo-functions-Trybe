@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { employees } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -104,14 +105,33 @@ function schedule(dayName) {
 }
 
 /* function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const { animals } = data;
+  const { employees } = data;
+  //retorna um array com nome, sexo e idade do animal mais velho dessa espécie'
+  const idAnimais = employees.find((employee) => employee.id === id).responsibleFor[0]
+  //return idAnimais;
+  const animalMonitorado = animals.filter((animal) => animal.id === idAnimais)
+  //return animalMonitorado;
+  return animalMonitorado.map((animal) => animal.residents)
 }
+
+console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992')); */
+// stephanieId ['Vicky', 'female', 12]
+// console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+// ['Margherita', 'female', 10]
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { prices } = data;
+  const propriedades = Object.keys(prices);
+  const percentual = (percentage / 100) + 1;
+  propriedades.forEach((propriedade) => {
+    const valorAlterado = prices[propriedade] * percentual;
+    prices[propriedade] = Math.round(valorAlterado * 100) / 100; // ele tá multiplicando por 100 e dividindo por 100 - para arredondar o valor mais proximo para cima; 
+  });
+  return prices;
 }
 
-function employeeCoverage(idOrName) {
+/* function employeeCoverage(idOrName) {
   // seu código aqui
 } */
 
@@ -127,6 +147,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
