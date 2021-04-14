@@ -69,14 +69,14 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 //             ['baa6e93a-f295-44e7-8f70-2bcdc6f6948d', '0938aa23-f153-4937-9f88-4858b24d6bce']),
 //             employees) // TESTE 1 - Retorna o objeto employee com o novo empregado no final da lista
 
-function animalCount(species) {
-  if (!species) {
+function animalCount(specie) {
+  if (!specie) {
     return animals.map(({ name, residents }) => ({ [name]: residents.length }));
   }
-  return animals.find((animal) => animal.name = species).residents.length;
+  return (animals.find((animal) => animal.name = specie)).residents.length;
 }
-// console.log ( animalCount('lions') ) // TESTE 1 -> Retorna 4, que é a população de leões
-// console.log ( animalCount() ) // TESTE 2 -> Retorna um objeto contendo o nome do animale a população
+console.log ( animalCount('lions') ) // TESTE 1 -> Retorna 4, que é a população de leões
+console.log ( animalCount() ) // TESTE 2 -> Retorna um objeto contendo o nome do animale a população
 
 // function entryCalculator(entrants) {
 //   // seu código aqui
