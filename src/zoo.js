@@ -48,10 +48,10 @@ const withResidentsNames = (isSorted, isFiltered) => (givenLoc) =>
         [species]: maybeSort(isSorted,
           maybeFilterBySex(isFiltered, residents).map(({ name }) => name)),
       }) ? acc : null), []);
-// https://codeburst.io/javascript-array-distinct-5edc93501dc4
 const onlySpecieName = (givenLoc) => animals
   .filter(({ location }) => location === givenLoc)
   .map(({ name }) => name);
+// https://codeburst.io/javascript-array-distinct-5edc93501dc4
 const template = (callback) =>
   [...new Set(animals.map(({ location }) => location))].reduce((acc, givenLoc) => ({
     ...acc,
