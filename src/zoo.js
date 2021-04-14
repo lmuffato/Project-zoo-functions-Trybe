@@ -70,11 +70,10 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 //             employees) // TESTE 1 - Retorna o objeto employee com o novo empregado no final da lista
 
 function animalCount(species) {
-  if(!species){
-    return animals.map(({name, residents}) => ({ [name]:residents.length }));
+  if (!species) {
+    return animals.map(({ name, residents }) => ({ [name]:residents.length }));
   }
   return animals.find(({ name }) => name = species).residents.length;
-  // return animals.reduce((acumulador, { residents }) => acumulador + residents.length, 0) // Animais totais
 }
 // console.log ( animalCount('lions') ) // TESTE 1 -> Retorna 4, que é a população de leões
 // console.log ( animalCount() ) // TESTE 2 -> Retorna um objeto contendo o nome do animale a população
