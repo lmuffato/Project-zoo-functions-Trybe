@@ -13,10 +13,11 @@ const data = require('./data');
 
 const { animals, employees, prices, hours } = data;
 
+// Requisito 01
 function animalsByIds(...ids) {
   return animals.filter((animal, index) => animal.id === ids[index]);
 }
-
+// Requisito 02
 const filterAnimals = (animal) => [animals.find((eachAnimal) => eachAnimal.name === animal)];
 
 function animalsOlderThan(animalName, animalAge) {
@@ -25,6 +26,7 @@ function animalsOlderThan(animalName, animalAge) {
   return residents.every((eachAnimal) => eachAnimal.age > animalAge);
 }
 
+// Requisito 03
 function employeeByName(employeeName) {
   if (!employeeName) {
     return {};
@@ -33,15 +35,18 @@ function employeeByName(employeeName) {
     eachEmployee.firstName === employeeName || eachEmployee.lastName === employeeName);
 }
 
+// Requisito 04
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
+// Requisito 05
 function isManager(id) {
   const [{ managers }] = employees;
   return managers.some((eachManager) => (eachManager === id));
 }
 
+// Requisito 06
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   return employees.push({
     id,
@@ -52,6 +57,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
+// Requisito 07
 // Para essa função utilizei o repositório do Anderson Nascimento como fonte.
 function animalsListBySpecies() {
   return animals.reduce((acc, { name, residents }) => {
@@ -67,7 +73,7 @@ function animalCount(specie) {
   return animals.find((animal) => animal.name === specie).residents.length;
 }
 
-// Alguém me ajuda a refatorar esse código, não gostei! Hahaha'
+// Requisito 08
 function entryCalculator(entrants) {
   if (entrants === undefined) {
     return 0;
@@ -79,40 +85,7 @@ function entryCalculator(entrants) {
   return totalAdultPrice + totalChildPrice + totalSeniorPrice;
 }
 
-// const locationsNE = animals.filter((animal) => animal.location === 'NE');
-// const locationsNW = animals.filter((animal) => animal.location === 'NW');
-// const locationsSE = animals.filter((animal) => animal.location === 'SE');
-// const locationsSW = animals.filter((animal) => animal.location === 'SW');
-
-// function optionsEmpty(){
-//   return {
-//       NE: locationsNE.map((eachAnimal) => eachAnimal.name),
-//       NW: locationsNW.map((eachAnimal) => eachAnimal.name),
-//       SE: locationsSE.map((eachAnimal) => eachAnimal.name),
-//       SW: locationsSW.map((eachAnimal) => eachAnimal.name),
-//     }
-// }
-
-// function includeNamesOption(){
-//   const [{ residents }] = locationsNE;
-//   let includeNE;
-//   locationsNE.forEach((animal) => {
-//     includeNE = {
-//       [animal.name]: residents.map((resident) => resident.name),
-//     }
-//   })
-//   return includeNE;
-// }
-// console.log(includeNamesOption());
-
-// function animalMap(options) {
-//   if (!options) {
-//     return optionsEmpty();
-//   }
-//   if (options === { includeNames: true }) {
-
-//   }
-// }
+// Requisito 10
 function withoutDay() {
   return {
     Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
@@ -124,6 +97,7 @@ function withoutDay() {
     Monday: 'CLOSED',
   };
 }
+
 // Consultei o código do colega Daniel Ribeiro para me auxiliar na lógica dessa função;
 function getZooHour(day) {
   const openTime = hours[day].open;
@@ -160,6 +134,7 @@ function oldestFromFirstSpecies(employeeId) {
   return Object.values(currentAnimal);
 }
 
+// Requisito 12
 function increasePrices(number) {
   // Para essa função, consultei o conteúdo sobre arredondamento e casas decimais:
   // http://www.javascriptkit.com/javatutors/round.shtml
@@ -170,6 +145,7 @@ function increasePrices(number) {
   });
 }
 
+// Requisito 13
 function getAnimals(animalsIds) {
   return animalsIds.map((ids) => animals
     .find(({ id }) => id === ids).name);
@@ -193,6 +169,9 @@ function employeeCoverage(employeeIdOrName) {
   if (!employeeIdOrName) {
     return buildResponseWithoutParam();
   }
+
+  // Para essa parte da função, consultei o repositório do Anderson Nascimento,
+  // que me deu uma luz de como deixar o código mais limpo.
   const objReturned = employees.filter((eachEmployee) =>
     (eachEmployee.id === employeeIdOrName || eachEmployee.firstName.includes(employeeIdOrName)
    || eachEmployee.lastName.includes(employeeIdOrName)));
