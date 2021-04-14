@@ -77,20 +77,23 @@ function entryCalculator(entrants) {
   return sumPrinces;
 }
 
-// function animalMap(options) {
-//   const objAnimals = data.animals.reduce((acc, cur) => {
-//     acc[cur.name] = cur.location;
-//     return acc;
-//   }, []);
+function animalMap(options) {}
 
-//   // const mapObj = data.animals.reduce();
-//   // return objAnimals;
-// }
+const daySchedule = (open, closed) =>
+  closed - open === 0 ? 'CLOSED' : `Open from ${open}am until ${closed - 12}pm`;
 
-// console.log(animalMap());
+function schedule(dayName) {
+  const { hours } = data;
+  const calendar = Object.fromEntries(
+    Object.entries(hours).map(([key, { open, close: closed }]) => [
+      key,
+      daySchedule(open, closed),
+    ]),
+  );
+  return !dayName ? calendar : { [dayName]: calendar[dayName] };
 
-function schedule(_dayName) {
-  // seu código aqui
+  //  const { open, close } = !dayName ? {open: null, close: null} : hours[dayName]
+  // return !dayName ? calendar : { [dayName]: daySchedule(open, close) };
 }
 
 function oldestFromFirstSpecies(id) {
@@ -121,27 +124,16 @@ function increasePrices(percentage) {
   return values;
 }
 
-// function employeeCoverage(idOrName) {
-//   const employeeObj = data.employees;
-//   const objAnimal = data.animals;
-//   const arrRespon = employeeObj.reduce((acc, cur) => {
-//     acc[`${cur.firstName} ${cur.lastName}`] = objAnimal
-//       .filter(({ id }) => cur.responsibleFor.includes(id))
-//       .map(({ name }) => name);
-//     return acc;
-//   }, {});
-
-//   return arrRespon;
-// }
+function employeeCoverage(idOrName) {}
 
 module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
