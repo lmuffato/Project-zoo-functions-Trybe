@@ -59,7 +59,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-function animalCount(species) {
+/* function animalCount(species) {
   // seu código aqui
 }
 
@@ -86,19 +86,20 @@ function increasePrices(percentage) {
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
+*/
 
 module.exports = {
-  entryCalculator,
-  schedule,
-  animalCount,
-  animalMap,
+//  entryCalculator,
+//  schedule,
+//  animalCount,
+//  animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  //  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
-  oldestFromFirstSpecies,
-  increasePrices,
+  //  oldestFromFirstSpecies,
+  //  increasePrices,
   createEmployee,
 };
