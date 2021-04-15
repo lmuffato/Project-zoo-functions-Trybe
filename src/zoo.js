@@ -1,7 +1,7 @@
 // const data = require('./data');
 const { animals } = require('./data'); // object destructuring
 
-function animalsByIds(ids) { // rest
+function animalsByIds(...ids) { // rest
   if (!ids) { // ! = negação
     return [];
   }
