@@ -62,7 +62,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function animalCount(species) {
   if (species === undefined) {
     const animalObj = {};
-    animals.forEach(({ name, residents }) => { animalObj[name] = residents.length});
+    animals.forEach(({ name, residents }) => { animalObj[name] = residents.length });
     return animalObj;
   }
   return animals.find((value) => species === value.name).residents.length;
@@ -80,9 +80,9 @@ console.log(animalCount('lions'));
 // Por que aqui só volta array? Como mudar isso? É por causa do map? MAP RETORNA ARRAY
 // return animals.map((animalObj) => ({[animalObj.name]: animalObj.residents.length}));
 
-function entryCalculator(entrants) {
-  // seu código aqui
-}
+// function entryCalculator(entrants) {
+//   // seu código aqui
+// }
 
 // function animalMap(options) {
 //   // seu código aqui
