@@ -64,9 +64,9 @@ function schedule(dayName) {
 
   weekDays.forEach((day) => {
     if (day === 'Monday') {
-      weekSchedule[day] = 'Close';
+      weekSchedule[day] = 'CLOSED';
     } else {
-      weekSchedule[day] = `Open of ${hours[day].open}am until ${(hours[day].close) - 12}pm`;
+      weekSchedule[day] = `Open from ${hours[day].open}am until ${(hours[day].close) - 12}pm`;
     }
   });
   if (!dayName) {
@@ -76,6 +76,8 @@ function schedule(dayName) {
     [dayName]: weekSchedule[dayName],
   };
 }
+
+schedule(dayName);
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
