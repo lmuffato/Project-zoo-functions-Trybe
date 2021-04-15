@@ -26,7 +26,7 @@ function employeeByName(employeeName = null) {
   }
   return employees.find((i) => i.firstName === employeeName || i.lastName === employeeName);
 }
-console.log(employeeByName(''));
+// console.log(employeeByName(''));
 
 function createEmployee(personalInfo, associatedWith) {
   const colaborador = {
@@ -39,9 +39,10 @@ function createEmployee(personalInfo, associatedWith) {
   return colaborador;
 }
 
-// function isManager(id) {
-//   // seu código aqui
-// }
+function isManager(id) {
+  return employees.some(({ managers }) => managers.includes(id));
+}
+console.log(isManager('stephanieId'));
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
@@ -84,7 +85,7 @@ module.exports = {
   employeeByName,
   // employeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
