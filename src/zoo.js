@@ -29,7 +29,7 @@ function employeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   const { id, firstName, lastName } = personalInfo;
-  const { managers, responsibleFor } = associatedWith;
+  const { managers, responsibleFor} = associatedWith;
   const newEmployee = {
     id,
     firstName,
@@ -44,17 +44,34 @@ function isManager(id) {
   return data.employees.some((employee) => employee.managers.includes(id));
 }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  data.employees.push(newEmployee);
+}
 
-// function animalCount(species) {
-//   // seu código aqui
-// }
+function animalCount(species) {
+  //requisito construido com ajuda de  grupo de estudo
+  if (species === undefined) {
+    return data.animals.reduce((count, currentAnimal) => {
+      count[currentAnimal.name] = currentAnimal.residents.length;
+      return count;
+    }, {});
+  }
+  return data.animals.find(({ name }) => name === species).residents.length;
+}
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+function entryCalculator(entrants) {
+  if (typeof entrants === 'undefined' || entrants === {}) return 0;
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+  const { Adult: numberAdult, Senior: numberSenior, Child: numberChild } = data.prices;
+  return (numberAdult * Adult) + (numberSenior * Senior) + (numberChild * Child);
+}
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -77,14 +94,14 @@ function isManager(id) {
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
