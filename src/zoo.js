@@ -97,14 +97,13 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  const obj = {};
-  if (!idOrName) {
-    employees.forEach((em) =>
-      Object.assign(obj, { [`${em.firstName} ${em.lastName}`]:
-      getAnimalName(em.responsibleFor) }));
-    return obj;
+  if (idOrName === undefined) {
+    return data.employees.reduce(createObjEmployeeWithAnimals, {});
   }
-  return selectEmployee(idOrName);
+  const { firstName, lastName, responsibleFor } = getEmployee(idOrName);
+  const result = {};
+  result[`${firstName} ${lastName}`] = responsibleFor.reduce(getAnimalName, []);
+  return result;
 }
 
 module.exports = {
