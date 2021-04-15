@@ -13,7 +13,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees } = data;
+const { animals, employees, prices } = data;
 
 function animalsByIds(...ids) {
   const resultArray = [];
