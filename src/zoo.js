@@ -13,6 +13,7 @@ const data = require('./data');
 
 const { animals } = data;
 const { employees } = data;
+const { prices } = data;
 
 function animalsByIds(...ids) {
   const newArray = [];
@@ -88,9 +89,13 @@ function oldestFromFirstSpecies(id) {
   return Object.values(sortByAge[0]);
 }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  const setPercentage = percentage * 0.01;
+  prices.Adult = parseFloat(Math.fround(prices.Adult * (1 + setPercentage)).toFixed(2));
+  prices.Senior = parseFloat(Math.fround(prices.Senior * (1 + setPercentage)).toFixed(2));
+  prices.Child = parseFloat(Math.fround(prices.Child * (1 + setPercentage)).toFixed(2));
+  return prices;
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -108,6 +113,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
