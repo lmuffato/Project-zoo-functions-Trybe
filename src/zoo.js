@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { animals, employees, prices } = require('./data');
-// const data = require('./data');
+const data = require('./data');
 
 function animalsByIds(...ids) {
   return animals.filter((animais) => ids.includes(animais.id));
@@ -96,9 +96,23 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+function schedule(dayName) {
+  let horarioSemanal = {};
+  const dias = Object.keys(data.hours).map((dia, index) => dia);
+  const horarios = Object.values(data.hours).map((horario, index) => horario);
+  horarios.map(({open, close},index) => {
+    const horadioDiario = (day) => {
+      if (day !='Monday') { return `Open from ${open}am until ${close-12}pm`; }
+      return'CLOSED';
+    }
+    horarioSemanal[dias[index]]=horadioDiario(dias[index])
+  });
+  if (!dayName) {return horarioSemanal}
+  return {[dayName]:horarioSemanal[dayName]}
+}
+console.log(schedule()); // TESTE 1 - Retorna o quadro de horarios semanal
+console.log(schedule('Wednesday')); // TESTE 2 - Retorna o horário do dia
+console.log(schedule('Monday')); // TESTE 3 - Retorna CLOSED, por ser domingo
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -114,7 +128,7 @@ function entryCalculator(entrants) {
 
 module.exports = {
   entryCalculator,
-  //   schedule,
+  schedule,
   animalCount,
   //   animalMap,
   animalsByIds,
