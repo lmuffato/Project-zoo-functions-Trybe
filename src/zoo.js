@@ -32,7 +32,8 @@ function employeeByName(employeeName) {
   if (employeeName === 'undefined') {
     return obj;
   }
-  return data.employees.find((na) => na.firstName === employeeName || na.lastName === employeeName); 
+  return data.employees
+  .find((na) => na.firstName === employeeName || na.lastName === employeeName); 
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -106,15 +107,15 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  const prices = data;
   const percent = (1 + (percentage / 100));
   const keys = Object.keys(prices);
-  const prices = data;
   keys.forEach((key) => {
     prices[key] = (Math.round(prices[key] * percent * 100) / 100);
   });
 }
 
-//function employeeCoverage(idOrName) {
+// function employeeCoverage(idOrName) {
 // seu código aqui
 // }
 
