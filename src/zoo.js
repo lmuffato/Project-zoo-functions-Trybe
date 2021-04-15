@@ -1,5 +1,4 @@
-/*
-eslint no-unused-vars: [
+/* eslint no-unused-vars: [
   "error",
   {
     "args": "none",
@@ -13,24 +12,23 @@ const { animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  return list = animals.filter(({ id }, index) => id === ids[index]);
+  const list = animals.filter(({ id }, index) => id === ids[index]);
+  return list;
 }
 
 function animalsOlderThan(animal, age) {
   const verifyAnimalName = animals.find((thisAnimal) =>
     (thisAnimal.name === animal));
- return verifyAnimalName.residents.every(animalAge => (animalAge.age > age));
- };
+  return verifyAnimalName.residents.every((animalAge) => (animalAge.age > age));
+}
 
 function employeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
-  } else {
-  return foundEmployee = data.employees.find((employee) => {
-     if (employee.firstName === employeeName || employee.lastName === employeeName)
-      return employee;
-    });
   }
+  const foundEmployee = data.employees.find((employee) =>
+    (employee.firstName === employeeName || employee.lastName === employeeName));
+  return foundEmployee;
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -38,18 +36,12 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return foundManager = data.employees.some((employeeIsManager) => employeeIsManager.managers.find((managers) =>
-  managers === id));
+  const foundManager = data.employees.some((employeeIsManager) =>
+    employeeIsManager.managers.find((managers) => (managers === id)));
+  return foundManager;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  return {
-    id: id,
-    firstName: firstName,
-    lastName: lastName,
-    managers: [managers],
-    responsibleFor: [responsibleFor],
-  }
 }
 
 function animalCount(species) {
