@@ -29,7 +29,7 @@ function employeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   const { id, firstName, lastName } = personalInfo;
-  const { managers, responsibleFor} = associatedWith;
+  const { managers, responsibleFor } = associatedWith;
   const newEmployee = {
     id,
     firstName,
@@ -56,7 +56,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  //requisito construido com ajuda de  grupo de estudo
   if (species === undefined) {
     return data.animals.reduce((count, currentAnimal) => {
       count[currentAnimal.name] = currentAnimal.residents.length;
