@@ -134,10 +134,10 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  const animalId = data.employees.find((employee) => employee.id === id).responsibleFor[0];
-  const animalVelho = data.animals.find(({ id }) => id === animalId).residents
-    .reduce((acc, actual) => ((acc.age > actual.age) ? acc : actual));
-  return Object.values(animalVelho);
+  const pessoa = data.employees.find((person) => person.id.includes(id)).responsibleFor[0];
+  const animalAchar = data.animals.find((animal) => animal.id.includes(pessoa)).residents
+    .sort((animal1, animal2) => animal2.age - animal1.age)[0];
+  return [animalAchar.name, animalAchar.sex, animalAchar.age];
 }
 
 // function increasePrices(percentage) {
