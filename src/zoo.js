@@ -80,20 +80,12 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 // }
 
 function oldestFromFirstSpecies(id) {
-  const resultArray = [];
+  // O código deste requisito foi refatorado e amplamente melhorado usando por base o código escrito pela colega Marília Cegalla! (https://github.com/tryber/sd-010-a-project-zoo-functions/pull/109/commits/7219cdad993186c2ce0e11edcec7056941c86a05).
   const getEmployee = employees.find((employee) => employee.id === id);
-  const firstSpecieID = (getEmployee.responsibleFor)[0];
-  const getAnimal = animals.filter((animal) => animal.id === firstSpecieID);
-  const [ residents ] = getAnimal;
-  let olderAnimalAge = residents.residents[0].age;
-  const getOlderAnimal = residents.residents.find((residentAnimal) => {
-    if (residentAnimal.age > olderAnimalAge) {
-      olderAnimalAge = residentAnimal.age;
-      return residentAnimal;
-    }
-  });
-  resultArray.push(getOlderAnimal.name, getOlderAnimal.sex, getOlderAnimal.age);
-  return resultArray;
+  const firstSpecieID = getEmployee.responsibleFor[0];
+  const getAnimal = animals.filter((animal) => animal.id === firstSpecieID)[0].residents;
+  const sortByAge = getAnimal.sort((a, b) => (a.age < b.age ? 1 : -1));
+  return Object.values(sortByAge[0]);
 }
 
 // function increasePrices(percentage) {
