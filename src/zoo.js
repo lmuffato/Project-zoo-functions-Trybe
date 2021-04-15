@@ -43,7 +43,7 @@ function isManager(id) {
     someManager.some((manager) => manager === id)).some((trueManager) => trueManager === true);
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const addedEmployee = { id, firstName, lastName, managers, responsibleFor };
   return data.employees.push(addedEmployee);
 }
