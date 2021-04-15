@@ -34,8 +34,8 @@ function employeeByName(employeeName) {
   // const employeeFirst = employees.find((employeeBuscado) =>employeeBuscado.firstName === employeeName);
   // const employeeLast = employees.find((employeeBuscado) =>employeeBuscado.lastName === employeeName);
   if (employeeName === undefined) return {};
-  return employees.find((employeeBuscado) => 
-    employeeBuscado.firstName === employeeName || employeeBuscado.lastName === employeeName);
+  return employees.find((name) => 
+    name.firstName === employeeName || name.lastName === employeeName);
 }
 
 // function createEmployee(personalInfo, associatedWith) {
