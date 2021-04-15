@@ -12,19 +12,15 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  // seu código aqui - ta ok
   return data.animals.filter((specie) => ids.some((id) => id === specie.id) === true);
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui - ok
   return data.animals.find((element) => element.name === animal)
     .residents.every((animals) => animals.age >= age);
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui - ok
-
   if (employeeName === undefined) return {};
   if (employeeName) {
     return data.employees.find((employee) => employeeName === employee
@@ -34,7 +30,6 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
   const { id, firstName, lastName } = personalInfo;
   const { managers, responsibleFor } = associatedWith;
   return {
@@ -47,12 +42,10 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui - ta ok
   return data.employees.some((employee) => employee.managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  // seu código aqui - ta ok
   const employeeNew = {
     id,
     firstName,
@@ -64,7 +57,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  // seu código aqui
   if (species === undefined) {
     return data.animals.reduce((acc, curr) => {
       acc[curr.name] = curr.residents.length;
@@ -90,13 +82,19 @@ function entryCalculator(entrants) {
 
 // function schedule(dayName) {
 //   // seu código aqui
+//   const { Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Monday} = data.hours;
+//   if (!dayName) {
+//     return {
+//     };
+//   }
+//   return data.hours;
 // }
+// console.log(schedule());
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  // seu código aqui ta ok
   const employeeSearch = data.employees.find((employee) => employee.id === id).responsibleFor[0];
   const animalSearch = data.animals.find((animal) => animal.id === employeeSearch);
-  // return animalSearch.residents.reduce((biggerAge) => biggerAge.age > );
   const biggerAge = animalSearch.residents.map((numberAge) => numberAge.age)
     .reduce((acc, curr) => Math.max(acc, curr), []);
   const objectAnimal = animalSearch.residents.find((element) => element.age === biggerAge);
@@ -104,29 +102,29 @@ function oldestFromFirstSpecies(id) {
   return [name, sex, age];
 }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-//   const arr = Object.entries(data.prices);
-//   return arr.map((element) => element[1] * (percentage * 0.01));
-// }
-// console.log(increasePrices(50));
-// console.log(20 * 0.01);
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+const calc = (percentage) => ([key, value]) => [key, value + (value * (percentage * 0.01))];
+const functionRound = ([key, value]) => { data.prices[key] = Math.round(value * 100) / 100; };
+function increasePrices(percentage) {
+  // referencia: https://www.guj.com.br/t/arredondamento-em-javascript/152284/2
+  // referencia: https://github.com/tryber/sd-010-a-project-zoo-functions/pull/118/commits/449908023cb120522258232f6565f6a23c5dbeda
+  // referencia: https://github.com/tryber/sd-010-a-project-zoo-functions/pull/118
+  Object.entries(data.prices)
+    .map(calc(percentage)).forEach(functionRound);
+  return data.prices;
+}
 
 module.exports = {
   entryCalculator,
-  //  schedule,
+  // schedule,
   animalCount,
   //  animalMap,
   animalsByIds,
   employeeByName,
-  //   employeeCoverage,
+  // employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
