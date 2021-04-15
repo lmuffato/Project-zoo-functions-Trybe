@@ -84,8 +84,27 @@ function entryCalculator(entrants) {
 /* function animalMap(options) {
 } */
 
-/* function schedule(dayName) {
-} */
+function schedule(dayName) {
+  temp = {};
+  if (!dayName) {
+    for (const index in hours) {
+      temp[`${index}`] = `Open from ${hours[index].open}am until ${hours[index].close -12}pm`;
+    }
+  temp.Monday = 'CLOSED';
+  return temp;
+  }
+  if (dayName === 'Monday') {
+    const monday = {"Monday": "CLOSED"}
+    return monday
+  }
+  dayOne = {}
+  for (const index in hours) {
+    if (index === dayName) {
+      dayOne[`${index}`] = `Open from ${hours[index].open}am until ${hours[index].close -12}pm`;
+    }
+  return dayOne
+  }
+}
 
 function oldestFromFirstSpecies(id) {
   // Filtra colaborador pelo id
@@ -119,29 +138,26 @@ function increasePrices(percentage) {
 
 /* function employeeCoverage(idOrName) {
   if (!idOrName) {
-      const employeesAndSpecies = employees.reduce((acc, current) => {
-      const nameAndLast = `${current.firstName} ${current.lastName}`;
-      const animalsName = animals.filter((name) => {
-      console.log(current.responsibleFor);
-      const idsForName = name.id === current.responsibleFor;
-      return idsForName;
-    })
-    acc[nameAndLast] = animalsName.name;
-    return acc
-    }, {});
-    return employeesAndSpecies;
+      const nameAndLast = employees.reduce((acc, current) => {
+        acc[`${current.firstName} ${current.lastName}`] = current.responsibleFor;
+      return acc;
+      }, {});
+      const FilterAnimals = nameAndLast.filter((ids) => {
+        return ids === animals.id
+      })
+      return FilterAnimals;
   };
 
-  return employees.find((name) =>
+   return employees.find((name) =>
     name.firstName === employeeName || name.lastName === employeeName);
-} */
+  
+  } */
 
-console.log(oldestFromFirstSpecies('56d43ba3-a5a7-40f6-8dd7-cbb05082383f'));
-// console.log(employees.length);
+console.log(schedule('Monday'));
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
