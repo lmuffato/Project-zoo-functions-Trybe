@@ -20,12 +20,13 @@ function animalsByIds(...ids) {
   });
   return arrayIdAnimal;
 }
-// const ids = [lionId, tigerId];
-// console.log(animalsByIds(ids));
 
-// function animalsOlderThan(animal, age) {
-//   // seu código aqui
-// }
+function animalsOlderThan(animal, ageMin) {
+  const { animals } = data;
+  const animalSelect = animals.find((animalBuscado) => animalBuscado.name === animal);
+  const trueFalse = animalSelect.residents.every((nAnimal) => nAnimal.age >= ageMin);
+  return trueFalse;
+}
 
 // function employeeByName(employeeName) {
 //   // seu código aqui
@@ -81,7 +82,7 @@ module.exports = {
   // employeeCoverage,
   // addEmployee,
   // isManager,
-  // animalsOlderThan,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
