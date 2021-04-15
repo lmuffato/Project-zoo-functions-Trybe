@@ -9,13 +9,14 @@ eslint no-unused-vars: [
 ]
 */
 
-// const { animals } = require('./data');
-// const data = require('./data');
+const { animals } = require('./data');
+const data = require('./data');
 
 function animalsByIds(...ids) {
-  if (ids.length === 0) return ids;
-  if (ids.length === 1) return [data.animals.find((element) => ids[0] === element.id)];
-  return data.animals.filter((element) => ids.includes(element.id));
+  const resultArray = [];
+  ids.forEach((idParam, index) =>
+    (animals[index].id === idParam ? resultArray.push(animals[index]) : resultArray));
+  return resultArray;
 }
 
 // function animalsOlderThan(animal, age) {
@@ -67,17 +68,17 @@ function animalsByIds(...ids) {
 // }
 
 module.exports = {
-  // entryCalculator,
-  // schedule,
-  // animalCount,
-  // animalMap,
+  entryCalculator,
+  schedule,
+  animalCount,
+  animalMap,
   animalsByIds,
-  // employeeByName,
-  // employeeCoverage,
-  // addEmployee,
-  // isManager,
-  // animalsOlderThan,
-  // oldestFromFirstSpecies,
-  // increasePrices,
-  // createEmployee,
+  employeeByName,
+  employeeCoverage,
+  addEmployee,
+  isManager,
+  animalsOlderThan,
+  oldestFromFirstSpecies,
+  increasePrices,
+  createEmployee,
 };
