@@ -108,7 +108,7 @@ function schedule(dayName) {
     horarioSemanal[dias[index]] = horadioDiario(dias[index]);
   });
   if (!dayName) { return horarioSemanal; }
-  return { [dayName] :horarioSemanal[dayName] };
+  return { [dayName]: horarioSemanal[dayName] };
 }
 console.log(schedule()); // TESTE 1 - Retorna o quadro de horarios semanal
 console.log(schedule('Wednesday')); // TESTE 2 - Retorna o horário do dia
