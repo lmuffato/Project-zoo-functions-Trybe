@@ -55,7 +55,6 @@ function entryCalculator(entrants = 0) {
   return number.reduce((accumulator, [key, value]) => accumulator + (value * prices[key]), 0);
 }
 
-
 // function animalMap(options) {
 //   // seu código aqui
 // }
