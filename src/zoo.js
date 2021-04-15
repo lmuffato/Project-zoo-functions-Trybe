@@ -80,7 +80,7 @@ function entryCalculator(entrants = 0) {
 
 // -------- require 09 ---------- Functional but enemy of the Lint ----------- require 09 ------
 
-const animalsByLocation = (...zone) => animals.filter(({ location }) => zone.includes(location));
+/* const animalsByLocation = (...zone) => animals.filter(({ location }) => zone.includes(location));
 
 const animalsNE = animalsByLocation('NE');
 const animalsNW = animalsByLocation('NW');
@@ -99,34 +99,34 @@ const noOptions = {
 const specieReduced = (specie, sorted = false) => {
   if (!sorted) {
     return specie.reduce((acc, crr) => {
-      return [...acc, { [crr.name]: crr.residents.map((a) => a.name) }];
+      return [...acc, { [crr.name]: crr.residents.map(a => a.name) }];
     }, []);
   }
 
   return specie.reduce((acc, crr) => {
-    return [...acc, { [crr.name]: crr.residents.map((a) => a.name).sort() }];
+    return [...acc, { [crr.name]: crr.residents.map(a => a.name).sort() }];
   }, []);
 };
 
 const residentsControl = (specie, sexOption = false, sorted = false) => {
   if (!sorted) {
     return specie.reduce((acc, crr) => {
-      return [...acc, { [crr.name]: (crr.residents.filter((animal) => animal.sex === sexOption).map((a) => a.name)) }];
-    }, [])
+      return [...acc, { [crr.name]: (crr.residents.filter((animal) => animal.sex === sexOption).map(a => a.name)) }];
+    }, []);
   }
 
   return specie.reduce((acc, crr) => {
-    return [...acc, { [crr.name]: (crr.residents.filter((animal) => animal.sex === sexOption).map((a) => a.name)).sort() }];
-  }, [])
+    return [...acc, { [crr.name]: (crr.residents.filter((animal) => animal.sex === sexOption).map(a => a.name)).sort() }];
+  }, []);
 };
 
 const specieResidents = (specie, sorted = false, sex = false) => {
-  if (!!sorted && sex === 'male') return residentsControl(specie, 'male', true);
-  if (!!sorted && sex === 'female') return residentsControl(specie, 'female', true);
-  if (!sorted && sex === 'male') return residentsControl(specie, 'male');
-  if (!sorted && sex === 'female') return residentsControl(specie, 'female');
-  if (!!sorted && !sex) return specieReduced(specie, true);
-  return specieReduced(specie);
+  return !!sorted && sex === 'male' ? residentsControl(specie, 'male', true)
+    : !!sorted && sex === 'female' ? residentsControl(specie, 'female', true)
+    : !sorted && sex === 'male' ? residentsControl(specie, 'male')
+    : !sorted && sex === 'female' ? residentsControl(specie, 'female')
+    : !!sorted && !sex ? specieReduced(specie, true)
+    : specieReduced(specie);
 };
 
 const optionsControl = (option1, option2) => ({
@@ -144,14 +144,14 @@ const maleNamesC = optionsControl(false, 'male');
 const femaleNamesC = optionsControl(false, 'female');
 
 function animalMap(options = {}) {
-  if (!options.includeNames) return noOptions;
-  if (!!options.sorted && options.sex === 'female') return sortedFemaleNamesC;
-  if (!!options.sorted && options.sex === 'male') return sortedMaleNamesC;
-  if (!!options.sorted && !options.sex) return sortedNamesC;
-  if (options.sex === 'male') return maleNamesC;
-  if (options.sex === 'female') return femaleNamesC;
-  return includeNamesC;
-}
+  return !options.includeNames ? noOptions
+    : !!options.sorted && options.sex === 'female' ? sortedFemaleNamesC
+    : !!options.sorted && options.sex === 'male' ? sortedMaleNamesC
+    : !!options.sorted && !options.sex ? sortedNamesC
+    : options.sex === 'male' ? maleNamesC
+    : options.sex === 'female' ? femaleNamesC
+    : includeNamesC;
+} */
 
 // --------------------- require 10 ------------------------
 
@@ -190,8 +190,8 @@ module.exports = {
   animalCount,
   entryCalculator,
   increasePrices,
-  animalMap,
   /* schedule,
+  animalMap,
   employeeCoverage,
   oldestFromFirstSpecies, */
 };
