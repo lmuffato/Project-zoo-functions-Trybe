@@ -28,7 +28,7 @@ function employeeByName(employeeName) {
     return {};
   }
   const searchEmployee = employees.find((employee) => employee.firstName === employeeName
-  || employee.lastName === employeeName);
+    || employee.lastName === employeeName);
   return searchEmployee;
 }
 
@@ -59,13 +59,30 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-// function animalCount(species) {
-//   // seu código aqui
-// }
+function animalCount(species) {
+  if (species === undefined) {
+    const animalObj = {};
+    animals.forEach(({ name, residents }) => { animalObj[name] = residents.length});
+    return animalObj;
+  }
+  return animals.find((value) => species === value.name).residents.length;
+}
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+console.log(animalCount('lions'));
+
+// Requisito resolvido com a ajuda eterna e maravilhosa do Murilo Gonçalves <3
+
+// return animals.find((animal) => species === animal.name).residents.length;
+
+// Daria pra usar template literals? NÃO, POIS RETORNA STRING E O QUE O REQUISITO SOLICITA É O RETORNO DE UM OBJETO
+// `${animalObj[name]}: ${animalObj.residents.length}`;
+
+// Por que aqui só volta array? Como mudar isso? É por causa do map? MAP RETORNA ARRAY
+// return animals.map((animalObj) => ({[animalObj.name]: animalObj.residents.length}));
+
+function entryCalculator(entrants) {
+  // seu código aqui
+}
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -90,7 +107,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
