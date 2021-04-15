@@ -51,7 +51,7 @@ function isManager(id) {
   return idResponsible.managers[0] === '9e7d4524-363c-416a-8759-8aa7e50c0992';
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   employees.push({
     id,
     firstName,
@@ -149,7 +149,7 @@ function schedule(dayName) {
   const daysHours = Object.entries(hours);
   daysHours.forEach((Value) => {
     if (Value[0] !== 'Monday') {
-      objectHours[Value[0]] = `Open from ${Value[1].open}am until ${Value[1].close}pm`;
+      objectHours[Value[0]] = `Open from ${Value[1].open}am until ${Value[1].close - 12}pm`;
     } else {
       objectHours[Value[0]] = 'CLOSED';
     }
