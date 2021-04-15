@@ -57,7 +57,7 @@ function animalCount(species) {
 }
 
 // other way to work.
-/* const howMannyAnimals = animals.reduce((acc, crr) => 
+/* const howMannyAnimals = animals.reduce((acc, crr) =>
     ({ acc, [crr.name]: crr.residents.length }), {});
 */
 
@@ -89,10 +89,6 @@ const animalsSW = animalsByLocation('SW');
 
 const speciesByZone = (zone) => zone.reduce((acc, crr) => [...acc, crr.name], []);
 
-console.log('animalsNE:');
-console.log(animalsNE);
-console.log('------------------------');
-
 const noOptions = {
   NE: speciesByZone(animalsNE),
   NW: speciesByZone(animalsNW),
@@ -100,61 +96,62 @@ const noOptions = {
   SW: speciesByZone(animalsSW),
 };
 
-console.log('noOptions:');
-console.log(noOptions);
-console.log('------------------------');
-
-const specieResidents = (specie, sorted = false) => {
-  if (sorted === true) {
+const specieReduced = (specie, sorted = false) => {
+  if (!sorted) {
     return specie.reduce((acc, crr) => {
-      return [ ...acc, {[crr.name]: crr.residents.map(a => a.name).sort()} ];
-    }, [])
+      return [ ...acc, {[crr.name]: crr.residents.map(a => a.name)} ];
+    }, []);
   }
-
+  
   return specie.reduce((acc, crr) => {
-    return [ ...acc, {[crr.name]: crr.residents.map(a => a.name)} ];
-  }, [])
+    return [ ...acc, {[crr.name]: crr.residents.map(a => a.name).sort()} ];
+  }, []);
 };
 
-console.log('speciesResidents(animalsNE):');
-console.log(specieResidents(animalsNE));
-console.log('------------------------');
-
-console.log('speciesResidents(animalsNE, sorted):');
-console.log(specieResidents(animalsNE, true));
-console.log('------------------------');
-
-const includeNamesC = {
-  NE: specieResidents(animalsNE),
-  NW: specieResidents(animalsNW),
-  SE: specieResidents(animalsSE),
-  SW: specieResidents(animalsSW),
+const residentsControl = (specie, sexOption = false, sorted = false) => {
+  if (!sorted) {
+    return specie.reduce((acc, crr) => {
+      return [ ...acc, {[crr.name]: (crr.residents.filter((animal) => animal.sex === sexOption).map(a => a.name))} ];
+    }, []) 
+  }
+  
+  return specie.reduce((acc, crr) => {
+    return [ ...acc, {[crr.name]: (crr.residents.filter((animal) => animal.sex === sexOption).map(a => a.name)).sort()} ];
+  }, []) 
 };
 
-console.log('includeNamesC:');
-console.log(includeNamesC);
-console.log('------------------------');
-
-const sortedNamesC = {
-  NE: specieResidents(animalsNE, true),
-  NW: specieResidents(animalsNW, true),
-  SE: specieResidents(animalsSE, true),
-  SW: specieResidents(animalsSW, true),
+const specieResidents = (specie, sorted = false, sex = false) => {
+  return !!sorted && sex === 'male' ? residentsControl(specie, 'male', true)
+    : !!sorted && sex === 'female' ? residentsControl(specie, 'female', true)
+    : !sorted && sex === 'male' ? residentsControl(specie, 'male')
+    : !sorted && sex === 'female' ? residentsControl(specie, 'female')
+    : !!sorted && !sex ? specieReduced(specie, true)
+    : specieReduced(specie);
 };
 
-console.log('includeNamesC:');
-console.log(sortedNamesC);
-console.log('------------------------');
+const optionsControl = (option1, option2) => ({
+  NE: specieResidents(animalsNE, option1, option2),
+  NW: specieResidents(animalsNW, option1, option2),
+  SE: specieResidents(animalsSE, option1, option2),
+  SW: specieResidents(animalsSW, option1, option2),
+});
+
+const includeNamesC = optionsControl();
+const sortedNamesC = optionsControl(true);
+const sortedFemaleNamesC = optionsControl(true, 'female');
+const sortedMaleNamesC = optionsControl(true, 'male');
+const maleNamesC = optionsControl(false, 'male');
+const femaleNamesC = optionsControl(false, 'female');
 
 
 function animalMap(options = {}) {
-  if (options.includeNames === true) {
-    if (options.sorted === true) return sortedNamesC;
-
-    return includeNamesC;
-  }
-
-  return noOptions;
+  return !options.includeNames ? noOptions
+    : !!options.sorted && options.sex === 'female' ? sortedFemaleNamesC
+    : !!options.sorted && options.sex === 'male' ? sortedMaleNamesC
+    : !!options.sorted && !options.sex ? sortedNamesC
+    : options.sex === 'male' ? maleNamesC
+    : options.sex === 'female' ? femaleNamesC
+    : includeNamesC;
 }
 
 // --------------------- require 10 ------------------------
