@@ -66,20 +66,25 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  if (!entrants) { return 0; }
+  const sumPrice = (acc, [person, qty]) => acc + data.prices[person] * qty;
+  function entryCalculator(entrants = 0) {
+    return Object.entries(entrants).reduce(sumPrice, 0);
 }
 
 // function animalMap(options) {
-//   // seu código aqui
+// // seu código aqui
 // }
 
 // function schedule(dayName) {
 //   // seu código aqui
 // }
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  const specie = employees.find((emp) => (emp.id === id)).responsibleFor[0];
+  const obj = animals.find((animal) => animal.id === specie);
+  const { name, sex, age } = obj.residents.reduce((arr, curr) => (arr.age > curr.age ? arr : curr));
+  return [name, sex, age];
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -100,7 +105,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
