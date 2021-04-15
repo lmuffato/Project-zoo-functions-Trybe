@@ -8,9 +8,14 @@ function animalsByIds(...ids) { // rest
   return animals.filter(({ id }) => ids.some((a) => id === a));
 }
 
-// function animalsOlderThan(animal, age) {
-//   // seu código aqui
-// }
+function animalsOlderThan(animal, idade) {
+  return animals
+    .find(({ name }) => name === animal)
+    .residents.every(({ age }) => age >= idade);
+}
+
+console.log(animalsOlderThan('lions', 25));
+
 
 // function employeeByName(employeeName) {
 //   // seu código aqui
@@ -66,7 +71,7 @@ module.exports = {
   // employeeCoverage,
   // addEmployee,
   // isManager,
-  // animalsOlderThan,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
