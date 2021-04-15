@@ -96,14 +96,37 @@ function increasePrices(percentage) {
   });
 }
 
+const getAnimalName = (arrayId) => {
+  const array = [];
+  arrayId.forEach((idParam) =>
+    animals.forEach((animal) => {
+      if (animal.id === idParam) {
+        array.push(animal.name);
+      }
+    }));
+  return array;
+};
+
+const selectEmployee = (param) => {
+  const obj = {};
+  employees.forEach((emp) => {
+    if (emp.id === param || emp.lastName === param || emp.firstName === param) {
+      Object.assign(obj, { [`${emp.firstName} ${emp.lastName}`]:
+      getAnimalName(emp.responsibleFor) });
+    }
+  });
+  return obj;
+};
+
 function employeeCoverage(idOrName) {
-  if (idOrName === undefined) {
-    return data.employees.reduce(createObjEmployeeWithAnimals, {});
+  const obj = {};
+  if (!idOrName) {
+    employees.forEach((emp) =>
+      Object.assign(obj, { [`${emp.firstName} ${emp.lastName}`]:
+      getAnimalName(emp.responsibleFor) }));
+    return obj;
   }
-  const { firstName, lastName, responsibleFor } = getEmployee(idOrName);
-  const result = {};
-  result[`${firstName} ${lastName}`] = responsibleFor.reduce(getAnimalName, []);
-  return result;
+  return selectEmployee(idOrName);
 }
 
 module.exports = {
