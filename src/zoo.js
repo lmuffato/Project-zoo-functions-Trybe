@@ -1,20 +1,18 @@
-// /*
-// eslint no-unused-vars: [
-//   "error",
-//   {
-//     "args": "none",
-//     "vars": "local",
-//     "varsIgnorePattern": "data"
-//   }
-// ]
-// */
+const data = require('./data');
+const { animals } = require('./data'); // object destructuring
 
-// const data = require('./data');
+function animalsByIds(...ids) { // rest 
+  if (!ids) { // ! = negação
+    return [];
+  }
+  return animals.filter(({ id }) => ids.some((a) => id === a));
 
-// function animalsByIds(ids) {
-//   // seu código aqui
-// }
+  // function filterAnimals(({ id })) {
+  //   return 
+  // }
+}
 
+console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
 // function animalsOlderThan(animal, age) {
 //   // seu código aqui
 // }
@@ -63,18 +61,18 @@
 //   // seu código aqui
 // }
 
-// module.exports = {
-//   entryCalculator,
-//   schedule,
-//   animalCount,
-//   animalMap,
-//   animalsByIds,
-//   employeeByName,
-//   employeeCoverage,
-//   addEmployee,
-//   isManager,
-//   animalsOlderThan,
-//   oldestFromFirstSpecies,
-//   increasePrices,
-//   createEmployee,
-// };
+module.exports = {
+  // entryCalculator,
+  // schedule,
+  // animalCount,
+  // animalMap,
+  animalsByIds,
+  // employeeByName,
+  // employeeCoverage,
+  // addEmployee,
+  // isManager,
+  // animalsOlderThan,
+  // oldestFromFirstSpecies,
+  // increasePrices,
+  // createEmployee,
+};
