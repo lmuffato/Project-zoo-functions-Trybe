@@ -10,11 +10,12 @@ eslint no-unused-vars: [
 */
 // Este trabalho todo só foi possível graças a pessoas incríveis e dispostas que me ajudaram não
 // somente a completar os exercícios, mas me ensinaram na prática o sentido de TIME.
-// Um eterno obrigado à Marília, Nath Zebral, Ana Ventura, Beatriz Izidioti, Malu, Thalita, Lucas Lara,
-// Rafael e Henrique Lima (que além da ajuda técnica soube dizer as palavras certas num momento bem difícil).
+// Um eterno obrigado à Marília, Nath Zebral, Ana Ventura, Beatriz Izidoti, Malu, Thalita, Lucas Lara,
+// Rafael Medeiros e Henrique Lima (que além da ajuda técnica soube dizer as palavras certas num momento bem difícil).
 
 // FIRST COMMIT <3
 
+const { prices, employees } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -94,26 +95,53 @@ function entryCalculator(entrants) {
 // seu código aqui
 // }
 
-// function oldestFromFirstSpecies(id) {
-// seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  const funcionario = employees.find((employee) => employee.id === id);
+  const anim = funcionario.responsibleFor[0];
+  const infoAnimal = data.animals.filter((bicho) =>
+    bicho.id === anim)[0].residents;
+  const animalAgeComp = infoAnimal.sort((a, b) => (a.age < b.age ? 1 : -1));
+  return Object.values(animalAgeComp[0]);
+}
 
-// function increasePrices(percentage) {
-// seu código aqui
-// }
+function increasePrices(percentage) {
+  prices.Child = parseFloat((prices.Child + Math.round(prices.Child * percentage)
+  / 100.0).toFixed(2));
+  prices.Adult = parseFloat((prices.Adult + Math.round(prices.Adult * percentage)
+  / 100.0).toFixed(2));
+  prices.Senior = parseFloat((prices.Senior + Math.round(prices.Senior * percentage)
+   / 100.0).toFixed(2));
+}
 
+//
 // function employeeCoverage(idOrName) {
-//   const employee = data.employee;
-//   if (!idOrName) {
-//     for (let i =0; i <= employee.lenght === 0; i + 1); {
-//       const objetoFunc = employee.reduce((acc, funcionario) => {
-//         acc[acc.name] = acc.employee.lenght;
-//         return acc;
-//       }, {});
-//     }
+//   const employee = data.employees;
+//   const semparam = employee.reduce(acc, curr) => { return {...acc
+//     [curr]
+//   }
 //   }
 // }
 
+// if (!idOrName) {
+//   for (let i = 0; i <= employee.length === 0; i + 1) {
+//     const func = employee.reduce((acc, funcionario) => {
+//       acc[acc.name] = acc.employee.length;
+//       return acc;
+//     }, {});
+//   }
+// } else {
+//   if (idOrName === data.employees.name || data.employees.lastName || data.employees.id);
+//   return (data.employees.responsibleFor);
+// }
+// }
+// console.log(employeeCoverage());
+// const { firstName: name, lastName: surName, responsibleFor: animais }data.employee = employee;
+//   if (!idOrName) { for (let i =0; i <= employee.lenght === 0; i + 1); {
+//     const objetoFunc = employee.reduce((acc, funcionario) => {
+//       acc[acc.name] = acc.employee.lenght;
+//       return acc;
+//     }, {});
+//
 module.exports = {
   entryCalculator,
   // schedule,
@@ -125,7 +153,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
-  // increasePrices,
+  oldestFromFirstSpecies,
+  increasePrices,
   createEmployee,
 };
