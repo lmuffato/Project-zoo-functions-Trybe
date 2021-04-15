@@ -47,8 +47,17 @@ function isManager(id) {
   return confirmGerent.every((Isgerent) => Isgerent.id === '0e7b460e-acf4-4e17-bcb3-ee472265db83');
 }
 
-/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-} */
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const add = employees.length;
+  employees[add] = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  return employees;
+}
 
 function animalCount(species) {
   if (!species) {
@@ -107,8 +116,8 @@ function increasePrices(percentage) {
 /* function employeeCoverage(idOrName) {
 } */
 
-console.log(increasePrices(20));
-console.log(prices);
+console.log(addEmployee('123123', 'john', 'Doe'));
+console.log(employees.length);
 
 module.exports = {
   entryCalculator,
@@ -118,7 +127,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
