@@ -87,18 +87,22 @@ function entryCalculator(entrants) {
 /* function schedule(dayName) {
 } */
 
-/* function oldestFromFirstSpecies(id) {
-  const searchFunctionare = (nome) => nome.id === id;
-  const checkSearch = employees.find(searchFunctionare);
+function oldestFromFirstSpecies(id) {
+  // Filtra colaborador pelo id
+  const checkSearch = employees.find((nome) => nome.id === id);
+  // pega o primeiro registro de animais
   const animalId = checkSearch.responsibleFor[0];
-  const specieId = (nome) => nome.id === animalId;
-  const animalIdReturn = animals.find(specieId);
-  const residentsAnimals = animalIdReturn.residents;
-  const oldAnimal = residentsAnimals.reduce((acc, current) => {
-    return Math.max(acc, current.age);
+  // pega o primeiro registro e busca pelo animal
+  const animalIdReturn = animals.find((nome) => nome.id === animalId);
+  const olderAnimal = animalIdReturn.residents.reduce((acc, current) => {
+    const max = Math.max(acc, current.age);
+    return max;
   }, 0);
-  return OlderAnimal;
-} */
+  const max = animalIdReturn.residents.find((number) => number.age === olderAnimal);
+
+  const arraAnimal = [max.name, max.sex, max.age];
+  return arraAnimal;
+}
 
 function increasePrices(percentage) {
   const newAdult = (prices.Adult * percentage) / 100;
@@ -114,10 +118,26 @@ function increasePrices(percentage) {
 }
 
 /* function employeeCoverage(idOrName) {
+  if (!idOrName) {
+      const employeesAndSpecies = employees.reduce((acc, current) => {
+      const nameAndLast = `${current.firstName} ${current.lastName}`;
+      const animalsName = animals.filter((name) => {
+      console.log(current.responsibleFor);
+      const idsForName = name.id === current.responsibleFor;
+      return idsForName;
+    })
+    acc[nameAndLast] = animalsName.name;
+    return acc
+    }, {});
+    return employeesAndSpecies;
+  };
+
+  return employees.find((name) =>
+    name.firstName === employeeName || name.lastName === employeeName);
 } */
 
-console.log(addEmployee('123123', 'john', 'Doe'));
-console.log(employees.length);
+console.log(oldestFromFirstSpecies('56d43ba3-a5a7-40f6-8dd7-cbb05082383f'));
+// console.log(employees.length);
 
 module.exports = {
   entryCalculator,
@@ -130,7 +150,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
