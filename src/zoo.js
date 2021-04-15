@@ -78,9 +78,9 @@ function entryCalculator(entrants = 0) {
   return (validCalc(adultQnt, prices.Adult)) + (validCalc(childQnt, prices.Child)) + (validCalc(seniorQnt, prices.Senior));
 } */
 
-// ------------ require 09 ---------- The Cabulous --------------- require 09 ------
+// -------- require 09 ---------- Functional but enemy of the Lint ----------- require 09 ------
 
-const animalsByLocation = (...zone) => animals.filter(({ location }) => zone.includes(location));
+/* const animalsByLocation = (...zone) => animals.filter(({ location }) => zone.includes(location));
 
 const animalsNE = animalsByLocation('NE');
 const animalsNW = animalsByLocation('NW');
@@ -102,7 +102,7 @@ const specieReduced = (specie, sorted = false) => {
       return [ ...acc, {[crr.name]: crr.residents.map(a => a.name)} ];
     }, []);
   }
-  
+
   return specie.reduce((acc, crr) => {
     return [ ...acc, {[crr.name]: crr.residents.map(a => a.name).sort()} ];
   }, []);
@@ -114,7 +114,7 @@ const residentsControl = (specie, sexOption = false, sorted = false) => {
       return [ ...acc, {[crr.name]: (crr.residents.filter((animal) => animal.sex === sexOption).map(a => a.name))} ];
     }, []) 
   }
-  
+
   return specie.reduce((acc, crr) => {
     return [ ...acc, {[crr.name]: (crr.residents.filter((animal) => animal.sex === sexOption).map(a => a.name)).sort()} ];
   }, []) 
@@ -152,7 +152,7 @@ function animalMap(options = {}) {
     : options.sex === 'male' ? maleNamesC
     : options.sex === 'female' ? femaleNamesC
     : includeNamesC;
-}
+} */
 
 // --------------------- require 10 ------------------------
 
