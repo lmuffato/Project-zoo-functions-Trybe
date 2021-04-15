@@ -33,9 +33,7 @@ function employeeByName(employeeName) {
     return obj;
   }
 
-  return data.employees.find((name) => {
-    name.firstName === employeeName || name.lastName === employeeName 
-  });
+  return data.employees.find((name) => name.firstName === employeeName || name.lastName === employeeName); 
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -43,8 +41,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.find((people) => {
-    people.id === id }).managers.length <= 1;
+  return data.employees.find((people) => people.id === id ).managers.length <= 1;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -86,24 +83,19 @@ function entryCalculator(entrants) {
 // }
 
 function schedule(dayName) {
-  // seu código aqui
-  const arrayDays = Object.keys(hours);
-  const openHours = Object.values(hours);
-  const scheduleObj = {};
-  arrayDays.forEach((hour, i) => {
-    scheduleObj[hour] = `Open from ${openHours[i].open}am until ${(openHours[i].close) - 12}pm`;
+  const week = {};
+  Object.keys(data.hours).forEach((dia) => {
+    const close = data.hours[dia].close - 12;
+    const { open } = data.hours[dia];
+    if (dia === 'Monday') {
+      semana[dia] = 'CLOSED';
+    } else {
+      week[dia] = `Open from ${open}am until ${close}pm`;
+    }
   });
-  scheduleObj.Monday = 'CLOSED';
-  if (!dayName) {
-    return scheduleObj;
-  } if (dayName === 'Monday') {
-    return { Monday: 'CLOSED' };
-  }
-  const asArray = Object.entries(scheduleObj);
-  const withDayName = asArray.filter(([key]) => key === dayName);
-  const objFiltered = Object.fromEntries(withDayName);
-  return objFiltered;
-} 
+  if (dayName === undefined) return week;
+  return { [dayName]: week[dayName] };
+}
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
@@ -112,7 +104,6 @@ function oldestFromFirstSpecies(id) {
   const resultado = buscaAnimal.sort((a, b) => b.age - a.age)[0];
   return [resultado.name, resultado.sex, resultado.age];
 }
-
 
 function increasePrices(percentage) {
   // seu código aqui
@@ -138,8 +129,7 @@ module.exports = {
   schedule,
   animalCount,
   // animalMap,
-  employeeCoverage,
+  // employeeCoverage,
   oldestFromFirstSpecies,
   increasePrices,
-  
 };
