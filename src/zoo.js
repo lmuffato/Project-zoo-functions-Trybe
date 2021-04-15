@@ -136,11 +136,23 @@ function increasePrices(percentage) {
   prices.Senior = Math.ceil(Senior * (percentage + 100)) / 100;
   prices.Child = Math.ceil(Child * (percentage + 100)) / 100;
 }
-
 //----------------------------------------------------------
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function employeeCoverage(idOrName) {
+  const newObject = {};
+  employees.forEach(({ firstName, lastName, responsibleFor }) => {
+    const animais = responsibleFor
+      .map((info) => animals
+        .find(({ id }) => id === info).name);
+    newObject[`${firstName} ${lastName}`] = animais;
+  });
+  if (!idOrName) return newObject;
+  const employeeResponsibleFor = employees
+    .find(({ id, firstName, lastName }) =>
+      [id, firstName, lastName]
+        .includes(idOrName));
+  const employeeName = `${employeeResponsibleFor.firstName} ${employeeResponsibleFor.lastName}`;
+  return { [employeeName]: newObject[employeeName] };
+}
 //----------------------------------------------------------
 module.exports = {
   entryCalculator,
@@ -149,7 +161,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
