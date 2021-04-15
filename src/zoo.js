@@ -30,7 +30,7 @@ function employeeByName(employeeName) {
   if (employeeName === 'undefined') {
     return {};
   }
-  return data.employees.find((na) => na.firstName === employeeName || na.lastName === employeeName); 
+  return data.employees.find((n) => n.firstName === employeeName || n.lastName === employeeName); 
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -120,7 +120,7 @@ module.exports = {
   animalsByIds,
   animalsOlderThan,
   employeeByName,
-  createEmployee, 
+createEmployee, 
   isManager,
   addEmployee,
   entryCalculator,
@@ -128,4 +128,4 @@ module.exports = {
   animalCount,
   oldestFromFirstSpecies,
   increasePrices,
- };
+};
