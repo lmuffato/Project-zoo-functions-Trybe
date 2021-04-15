@@ -100,7 +100,7 @@ function schedule(dayName) {
   const horarioSemanal = {};
   const dias = Object.keys(data.hours).map((dia) => dia);
   const horarios = Object.values(data.hours).map((horario) => horario);
-  horarios.map(({ open, close }, index) => {
+  horarios.forEach(({ open, close }, index) => {
     const horadioDiario = (day) => {
       if (day !== 'Monday') { return `Open from ${open}am until ${close - 12}pm`; }
       return 'CLOSED';
