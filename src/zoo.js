@@ -110,17 +110,23 @@ function schedule(dayName) {
   if (!dayName) { return horarioSemanal; }
   return { [dayName]: horarioSemanal[dayName] };
 }
-console.log(schedule()); // TESTE 1 - Retorna o quadro de horarios semanal
-console.log(schedule('Wednesday')); // TESTE 2 - Retorna o horário do dia
-console.log(schedule('Monday')); // TESTE 3 - Retorna CLOSED, por ser domingo
+// console.log(schedule()); // TESTE 1 - Retorna o quadro de horarios semanal
+// console.log(schedule('Wednesday')); // TESTE 2 - Retorna o horário do dia
+// console.log(schedule('Monday')); // TESTE 3 - Retorna CLOSED, por ser domingo
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  if (!percentage) { percentage = 100 };
+  const atualizaPreco = (preco) => {return (preco*( (percentage/100) + 1 ))};
+  const arredondar = (numero) => { return (Math.floor(numero*100)/100) };
+  return Object.keys(prices).map((key) => ({ [key]: arredondar(atualizaPreco(prices[key])) }));
+}
+// console.log(increasePrices(20)) // TESTE 1  -> O preço sobe 20%
+// console.log(increasePrices()) // TESTE 2 -> O preço não tem alteração
+// console.log(increasePrices('')) // TESTE 3 -> O preço não tem alteração
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -138,6 +144,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   //   oldestFromFirstSpecies,
-  //   increasePrices,
+  increasePrices,
   createEmployee,
 };
