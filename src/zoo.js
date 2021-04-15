@@ -77,8 +77,6 @@ function schedule(dayName) {
   };
 }
 
-schedule(dayName);
-
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
