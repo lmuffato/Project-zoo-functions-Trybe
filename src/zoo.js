@@ -10,14 +10,14 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { hours, prices } = require('./data');
+const { animals, employees, hours, prices } = require('./data');
 
 /* ITEM vai receber tudo que vem de DATA.ANIMALS,
 depois vai verificar se o que foi recebido em IDS
 tem algo em comum com o recebido em ITEM,
 tudo isso baseando-se pelo ID. */
 function animalsByIds(...ids) {
-  return data.animals.filter((item) => ids.includes(item.id));
+  return animals.filter((item) => ids.includes(item.id));
 }
 
 /* Vai procurar (FIND) dentro de DATA.ANIMALS o primeiro
@@ -25,7 +25,7 @@ elemento na qual a propriedade NAME é igual ao parâmetro "nomeAnimals".
 Depois vai verificar se TODAS (EVERY) as idades da propriedade AGE
 são maiores que o parâmetro "idade" fornecido pelo teste. */
 function animalsOlderThan(nomeAnimal, idade) {
-  const verificarAnimal = data.animals.find(({ name }) => name === nomeAnimal);
+  const verificarAnimal = animals.find(({ name }) => name === nomeAnimal);
   return verificarAnimal.residents.every(({ age }) => age > idade);
 }
 
@@ -50,7 +50,7 @@ function createEmployee(personalInfo, associatedWith) {
 
 /* Acho que tem um erro no DATA.EMPLOYEES ou no TESTE. Depois preciso rever. */
 function isManager(id) {
-  return data.employees.some(({ managers }) => managers.includes(id));
+  return employees.some(({ managers }) => managers.includes(id));
 }
 
 /* A função vai receber vários parâmetros. Alguns parâmetros
@@ -65,17 +65,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     managers,
     responsibleFor,
   };
-  data.employees.push(adicionaEmpregado);
+  employees.push(adicionaEmpregado);
 }
 
 function animalCount(species) {
   if (!species) {
-    return data.animals.reduce((accumulator, currentValue) => {
+    return animals.reduce((accumulator, currentValue) => {
       accumulator[currentValue.name] = currentValue.residents.length;
       return accumulator;
     }, {});
   }
-  return data.animals.find((animal) => species === animal.name).residents.length;
+  return animals.find((animal) => species === animal.name).residents.length;
 }
 
 /* Recebi a ajuda da aluna Nathi Zebral - turma 10 - tribo A
@@ -110,13 +110,32 @@ function schedule(dayName) {
   return { [dayName]: horarioFuncionamento[dayName] };
 }
 
-/* function oldestFromFirstSpecies(id) {
-  // seu código aqui
-} */
+function oldestFromFirstSpecies(id) {
+  // Procurar na lista de funcionários aquele que tem o id igual o id informado
+  // no teste e, ao mesmo tempo, "pegar" o id da 1a especie que ele cuida.
+  const zooWorker = employees.find((funcionario) => funcionario.id === id).responsibleFor[0];
+  // Depois de encontrar o id da espécie que o funcionário cuida, agora encontrar
+  // a ficha completa dos animais que pertencem a essa espécie.
+  const protegido = animals.find((animal) => animal.id === zooWorker);
+  // Para achar o mais antigo foi feito uma condição dentro de um reduce
+  const antigo = protegido.residents.reduce((acc, cur) => ((acc > cur.age) ? acc : cur.age));
+  // O animal procurado foi encontrado através de uma filtragem dos residentes
+  // onde a idade do animal era igual ao valor da idade mais antiga
+  // encontrada na etapa anterior
+  const { name, sex, age } = protegido.residents.find((resident) => resident.age === antigo);
+  // retornou através de um array o nome, sexo e a idade, que é o formato
+  // de eibição exigido no teste.
+  return [name, sex, age];
+}
 
-/* function increasePrices(percentage) {
-  // seu código aqui
-} */
+// Resolvido com a ajuda do aluno Marcelo Maurício (Tchelo) - Turma 10 - Tribo A
+// Muito Obrigado Tchelo!!!
+function increasePrices(percentage) {
+  const { Adult, Senior, Child } = prices;
+  prices.Adult = parseFloat((Adult + (Math.ceil(Adult * percentage) / 100)).toFixed(2));
+  prices.Child = parseFloat((Child + (Math.ceil(Child * percentage) / 100)).toFixed(2));
+  prices.Senior = parseFloat((Senior + (Math.ceil(Senior * percentage) / 100)).toFixed(2));
+}
 
 /* function employeeCoverage(idOrName) {
   // seu código aqui
@@ -133,7 +152,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
-  // increasePrices,
+  oldestFromFirstSpecies,
+  increasePrices,
   createEmployee,
 };
