@@ -32,8 +32,7 @@ function employeeByName(employeeName) {
   if (employeeName === 'undefined') {
     return obj;
   }
-
-  return data.employees.find((name) => name.firstName === employeeName || name.lastName === employeeName); 
+  return data.employees.find((na) => na.firstName === employeeName || na.lastName === employeeName); 
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -41,7 +40,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.find((people) => people.id === id ).managers.length <= 1;
+  return data.employees.find((people) => people.id === id).managers.length <= 1;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -79,7 +78,7 @@ function entryCalculator(entrants) {
 }
 
 // function animalMap(options) {
-  // seu código aqui
+// seu código aqui
 // }
 
 function schedule(dayName) {
@@ -88,7 +87,7 @@ function schedule(dayName) {
     const close = data.hours[dia].close - 12;
     const { open } = data.hours[dia];
     if (dia === 'Monday') {
-      semana[dia] = 'CLOSED';
+      week[dia] = 'CLOSED';
     } else {
       week[dia] = `Open from ${open}am until ${close}pm`;
     }
@@ -109,14 +108,15 @@ function increasePrices(percentage) {
   // seu código aqui
   const percent = (1 + (percentage / 100));
   const keys = Object.keys(prices);
+  const prices = data;
   keys.forEach((key) => {
     prices[key] = (Math.round(prices[key] * percent * 100) / 100);
   });
 }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+//function employeeCoverage(idOrName) {
+// seu código aqui
+// }
 
 module.exports = {
   animalsByIds,
