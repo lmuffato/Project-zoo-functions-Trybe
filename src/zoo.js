@@ -97,18 +97,18 @@ function entryCalculator(entrants) {
 // }
 
 function schedule(dayName) {
-  let horarioSemanal = {};
-  const dias = Object.keys(data.hours).map((dia, index) => dia);
-  const horarios = Object.values(data.hours).map((horario, index) => horario);
-  horarios.map(({open, close},index) => {
+  const horarioSemanal = {};
+  const dias = Object.keys(data.hours).map((dia) => dia);
+  const horarios = Object.values(data.hours).map((horario) => horario);
+  horarios.map(({ open, close }, index) => {
     const horadioDiario = (day) => {
-      if (day !='Monday') { return `Open from ${open}am until ${close-12}pm`; }
-      return'CLOSED';
-    }
-    horarioSemanal[dias[index]]=horadioDiario(dias[index])
+      if (day !== 'Monday') { return `Open from ${open}am until ${close - 12}pm`; }
+      return 'CLOSED';
+    };
+    horarioSemanal[dias[index]] = horadioDiario(dias[index]);
   });
-  if (!dayName) {return horarioSemanal}
-  return {[dayName]:horarioSemanal[dayName]}
+  if (!dayName) { return horarioSemanal ;}
+  return { [dayName]:horarioSemanal[dayName] };
 }
 console.log(schedule()); // TESTE 1 - Retorna o quadro de horarios semanal
 console.log(schedule('Wednesday')); // TESTE 2 - Retorna o horário do dia
