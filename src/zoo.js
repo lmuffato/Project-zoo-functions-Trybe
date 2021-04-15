@@ -75,7 +75,7 @@ function entryCalculator(entrants) {
 // function animalMap(options) {
 //   // seu código aqui
 // }
-
+// requisito 10 resolvido com ajuda do estudante Adelino Junior
 function schedule(dayName) {
   const days = Object.keys(data.hours);
   const date = {};
@@ -91,9 +91,15 @@ function schedule(dayName) {
   return { [dayName]: date[dayName] };
 }
 
-// function oldestFromFirstSpecies(id) {
-// }
+function oldestFromFirstSpecies(id) {
+  const employee = data.employees.find((person) => person.id === id).responsibleFor[0];
+  const animalBuscado = data.animals.find((animal) => animal.id === employee);
+  const { residents } = animalBuscado;
+  const oldAnimal = residents.sort((a, b) => b.age - a.age)[0];
+  const { name, sex, age } = oldAnimal;
 
+  return [name, sex, age];
+}
 // function increasePrices(percentage) {
 //   // seu código aqui
 // }
@@ -113,7 +119,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
