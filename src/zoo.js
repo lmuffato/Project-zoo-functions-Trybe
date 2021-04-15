@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -77,22 +78,24 @@ function entryCalculator(entrants) {
 // }
 
 function schedule(dayName) {
-  const { hours } = data;
-  const obj = {};
-  createObj(hours, obj);
-  if (!dayName) return obj;
-  return { [dayName]: obj[dayName] };
+  const days = Object.keys(data.hours)
+  const date = {}
+  days.forEach((day) => {
+    const { open, close } = data.hours[day]
+    if (open === 0 && close === 0) {
+      date[day] = `CLOSED`
+    } else {
+    date[day] = `Open from ${open}am until ${close-12}pm`
+    }
+  })
+  if (!dayName) return date;
+  return { [dayName]: date[dayName] };
 }
 
-function oldestFromFirstSpecies(id) {
-  const employee = data.employees.find((person) => person.id === id).responsibleFor[0];
-  const animalSearch = animals.find((animalFound) => animalFound.id === employee);
-  const { residents } = animalSearch;
-  const result = residents.sort((a, b) => b.age - a.age)[0];
-  const { name, sex, age } = result;
+console.log(schedule('Friday'))
 
-  return [name, sex, age];
-}
+// function oldestFromFirstSpecies(id) {
+// }
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -113,7 +116,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  oldestFromFirstSpecies,
+  // oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
