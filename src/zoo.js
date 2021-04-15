@@ -110,6 +110,12 @@ function schedule(dayName) {
   return { [dayName]: horarioFuncionamento[dayName] };
 }
 
+// TRANSPARÊNCIA é uma virtude: Só consegui fazer essa questão após analisar
+// o code-review de vários alunos. A lógica que eu usava não passava no teste
+// portanto eu segui a dica dada na aula ao vivo para entender como os outros
+// alunos estavam fazendo. Também acompanhei as dúvidas deixadas no Slack.
+// Fiz questão de comentar o código para deixar nítido que entendi como ele
+// funciona em cada parte. Preciso estudar mais, foi difícil. Vou parar com 84.62%.
 function oldestFromFirstSpecies(id) {
   // Procurar na lista de funcionários aquele que tem o id igual o id informado
   // no teste e, ao mesmo tempo, "pegar" o id da 1a especie que ele cuida.
