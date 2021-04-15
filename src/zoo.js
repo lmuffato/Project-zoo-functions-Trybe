@@ -32,8 +32,8 @@ function employeeByName(employeeName) {
   if (employeeName === 'undefined') {
     return obj;
   }
-  return data.employees
-  .find((na) => na.firstName === employeeName || na.lastName === employeeName); 
+  return data.employees.find((na) => {
+   na.firstName === employeeName || na.lastName === employeeName}); 
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -123,7 +123,7 @@ module.exports = {
   animalsByIds,
   animalsOlderThan,
   employeeByName,
-  createEmployee, 
+ // createEmployee, 
   isManager,
   addEmployee,
   entryCalculator,
