@@ -83,8 +83,7 @@ function schedule(dayName) {
 
 function increasePrices(percentage) {
   Object.keys(prices).forEach((agePrice) => {
-    prices[agePrice] =
-      (Math.round(prices[agePrice] * percentage) + (prices[agePrice] * 100)) / 100;
+    prices[agePrice] = (Math.round(prices[agePrice] * percentage) + (prices[agePrice] * 100)) / 100;
   });
 }
 
