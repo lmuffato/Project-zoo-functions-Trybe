@@ -11,6 +11,7 @@ eslint no-unused-vars: [
 
 const { animals } = require('./data');
 const data = require('./data');
+const { animals, employees } = data;
 
 function animalsByIds(...ids) {
   const resultArray = [];
