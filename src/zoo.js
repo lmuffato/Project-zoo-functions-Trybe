@@ -60,7 +60,6 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // const {Adult, Child, Senior } = entrants;
   const { prices } = data;
   const sumValues = (prices.Adult * entrants.Adult)
   + (prices.Child * entrants.Child)
@@ -69,19 +68,40 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // seu código aqui
+  // seu codigo aqui
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  const { hours } = data;
+  const dayss = hours[dayName];
+  if (dayss.open - dayss.close === 0) {
+    return console.log('CLOSED');
+  }
+  if (dayName === undefined) {
+    return console.log(hours);
+  }
+  return console.log(`Open from ${dayss.open}am until ${dayss.close}pm`);
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const { animals } = data;
+  const { employees } = data;
+  const responsables = employees.find((resp) => (resp.id === id ? resp.responsibleFor : undefined))
+    .responsibleFor[0];
+  const selected = animals.find((sel) => sel.id === responsables).residents;
+  const oldiest = selected.reduce((old, acc) => (acc.age > old.age ? acc : old));
+  return console.log(oldiest);
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { prices } = data;
+  const index = (parseFloat(percentage) / 100) + 1;
+  let newPrice = 0;
+  Object.keys(prices).forEach((i) => {
+    newPrice = (prices[i] * index).toFixed(2);
+    prices[i] = newPrice;
+  });
+  return prices;
 }
 
 function employeeCoverage(idOrName) {
