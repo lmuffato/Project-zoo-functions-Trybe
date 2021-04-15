@@ -59,8 +59,8 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   if (!entrants || entrants === {}) return 0;
-  return Object.keys(entrants).reduce((acc, curr) => (acc + (entrants[curr] * data.prices[curr])
-  ), 0);
+  return Object.keys(entrants).reduce((acc, curr) =>
+    (acc + (entrants[curr] * data.prices[curr])), 0);
 }
 
 /*
@@ -69,10 +69,20 @@ function animalMap(options) {
   // seu código aqui
 }
 
+*/
+
 function schedule(dayName) {
-  // seu código aqui
+  const openFromTo = {};
+  Object.keys(data.hours).forEach((day) => {
+    if (day !== 'Monday') {
+      openFromTo[day] = `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
+    } else openFromTo[day] = 'CLOSED';
+  });
+  if (!dayName) return openFromTo;
+  return ({ [dayName]: openFromTo[dayName] });
 }
 
+/*
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
@@ -88,7 +98,7 @@ function employeeCoverage(idOrName) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
