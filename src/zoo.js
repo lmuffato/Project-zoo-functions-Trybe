@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 const data = require('./data');
 
-const { animals, employees, hours } = data;
+const { animals, employees, hours, prices } = data;
 
 function animalsByIds(...ids) {
   if (ids === null || ids === undefined) return [];
@@ -81,9 +81,12 @@ function schedule(dayName) {
 //   // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  Object.keys(prices).forEach((agePrice) => {
+    prices[agePrice] =
+      (Math.round(prices[agePrice] * percentage) + (prices[agePrice] * 100)) / 100;
+  });
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -101,6 +104,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
