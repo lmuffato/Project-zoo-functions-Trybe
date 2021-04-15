@@ -50,9 +50,11 @@ function animalCount(species) {
   }, {});
 }
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+function entryCalculator(entrants = 0) {
+  const number = Object.entries(entrants);
+  return number.reduce((accumulator, [key, value]) => accumulator + (value * prices[key]), 0);
+}
+
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -100,7 +102,7 @@ function increasePrices(percentage) {
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   schedule,
   animalCount,
   // animalMap,
@@ -114,3 +116,8 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
+
+// Projeto realizado com ajuda de grupo de estudos e consulta de referências das seguintes colegas:
+// https://github.com/tryber/sd-010-a-project-zoo-functions/blob/anaventura1811-zoo-functions-project/src/zoo.js#L65
+// https://github.com/tryber/sd-010-a-project-zoo-functions/blob/thalitac-zoo-functions-project/src/zoo.js
+// https://github.com/tryber/sd-09-project-zoo-functions/blob/danimuller20-zoo-functions-project/src/zoo.js  (a maga do código <3)
