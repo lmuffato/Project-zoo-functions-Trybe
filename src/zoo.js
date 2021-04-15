@@ -30,7 +30,7 @@ function employeeByName(employeeName) {
   if (employeeName === 'undefined') {
     return {};
   }
-  return data.employees.find((n) => n.firstName === employeeName || n.lastName === employeeName); 
+return data.employees.find((n) => n.firstName === employeeName || n.lastName === employeeName); 
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -117,15 +117,17 @@ function increasePrices(percentage) {
 // }
 
 module.exports = {
-  animalsByIds,
-  animalsOlderThan,
-  employeeByName,
-createEmployee, 
-  isManager,
-  addEmployee,
   entryCalculator,
   schedule,
   animalCount,
+  // animalMap,
+  animalsByIds,
+  employeeByName,
+  // employeeCoverage,
+  addEmployee,
+  isManager,
+  animalsOlderThan,
   oldestFromFirstSpecies,
   increasePrices,
+  createEmployee,
 };
