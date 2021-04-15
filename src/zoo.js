@@ -97,6 +97,7 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
+  const obj = {};
   if (!idOrName) {
     employees.forEach((em) =>
       Object.assign(obj, { [`${em.firstName} ${em.lastName}`]:
