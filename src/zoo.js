@@ -119,8 +119,6 @@ entryCalculator();
 
 function schedule(dayName) {
   const dias = Object.keys(data.hours);
-  // console.log(days);
-  // const agenda = { };
   const agenda = { };
   dias.forEach((dia) => {
     if (dia === 'Monday') {
@@ -135,9 +133,12 @@ function schedule(dayName) {
   return { [dayName]: agenda[dayName] };
 }
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  const animalId = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const animalVelho = data.animals.find(({ id }) => id === animalId).residents
+    .reduce((acc, actual) => ((acc.age > actual.age) ? acc : actual));
+  return Object.values(animalVelho);
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui ********* FAZER
@@ -158,7 +159,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  //   oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   //   increasePrices,
   createEmployee,
 };
