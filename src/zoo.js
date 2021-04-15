@@ -175,7 +175,13 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-// seu código aqui
+  const pricesKeys = Object.keys(data.prices);
+  pricesKeys.forEach((cur) => {
+    const number = parseFloat((data.prices[cur] * ((100 + percentage) / 100)).toFixed(3));
+    const modifiedNumber = Math.floor(number);
+    const aux = Math.ceil((number - modifiedNumber) * 100) / 100;
+    data.prices[cur] = modifiedNumber + aux;
+  });
 }
 
 function employeeCoverage(idOrName) {
