@@ -72,9 +72,28 @@ function animalCount(species) {
   return (getAnimal.residents).length;
 }
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+function entryCalculator(entrants) {
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  let result = 0;
+  const adultPrice = prices.Adult;
+  const seniorPrice = prices.Senior;
+  const childPrice = prices.Child;
+  const { Adult, Senior, Child } = entrants;
+  if (Adult) {
+    result += (adultPrice * Adult);
+  }
+  if (Senior) {
+    result += (seniorPrice * Senior);
+  }
+  if (Child) {
+    result += (childPrice * Child);
+  }
+  return result;
+}
+
+console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -117,7 +136,7 @@ function increasePrices(percentage) {
 // console.log(employeeCoverage());
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
