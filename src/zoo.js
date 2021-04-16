@@ -76,7 +76,7 @@ function entryCalculator(entrants) {
   const { Adult = 0, Senior = 0, Child = 0 } = entrants;
   const tAdults = Adult * prices.Adult;
   const tSeniors = Senior * prices.Senior;
-  const tChilds = Child *prices.Child;
+  const tChilds = Child * prices.Child;
   return tAdults + tSeniors + tChilds;
 }
 console.log(entryCalculator({}));
