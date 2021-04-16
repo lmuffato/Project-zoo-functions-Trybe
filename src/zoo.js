@@ -8,7 +8,7 @@
 ]
 */
 
-const { animals } = require('./data');
+const { animals, hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -76,11 +76,26 @@ function entryCalculator(entrants) {
 
 function animalMap(options) {
 }
-/*
-function schedule(dayName) {
-  // seu código aqui
-}
 */
+function schedule(dayName) {
+  const days = Object.keys(data.hours);
+  const schedules = { };
+
+  days.forEach((day) => {
+    const { open, close } = hours[day];
+
+    if (day === 'Monday') {
+      schedules[day] = 'CLOSED';
+    } else {
+      schedules[day] = `Open from ${open}am until ${close - 12}pm`;
+    }
+  });
+  if (dayName === undefined) {
+    return schedules;
+  }
+  return { [dayName]: schedules[dayName] };
+}
+
 function oldestFromFirstSpecies(id) {
   const arrayMaxi = data.employees.find((employee) => employee.id === id).responsibleFor
     .map((animalID) => {
@@ -107,7 +122,7 @@ function employeeCoverage(idOrName) {
 
 module.exports = {
 //  entryCalculator,
-//  schedule,
+  schedule,
   animalCount,
   //  animalMap,
   animalsByIds,
