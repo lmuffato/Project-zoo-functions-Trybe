@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals } = require('./data');
+const { animals, hours } = require('./data');
 const { employees } = require('./data');
 const { prices } = require('./data');
 // const data = require('./data');
@@ -106,19 +106,78 @@ function entryCalculator(entrants) {
 }
 
 // function animalMap(options) {
-//   // seu código aqui
-//   // a funcao recebe um objeto como parametro
-//   // a funcao retorna um objeto
-//   // esse objeto possui a seguinte entrada:
-//   //                                       chave: string, essa string é a localizaçao
-//   //                                       valor: array
-//   // quando tenho o parametro includeName: true, o valor do objeto é um arru de objetos
+//   //pseudo codigo
 
+//   //1. recupera as regioes que eu quero categorizar OK
+//   //2. uma vez que eu tenho as regioes, eu filtro os animais dessa regiao OK
+//   //3. se nao tiver parametro de opcoes, retorna um array com as especies
+//   //4. se a opcao includeNames estiver habilitada, retorna um array de objetos com as especies e o nome delas
+//   //5. se a opcao sorted estiver habilitada, retorna um array de objetos com as especies e o nome delas Ordenada
+//   //6. se a opcao sex estiver habilitada, retorna um array de objetos com as especies e o nome delas filtrada por sexo
+//   //7. se a opcao sex e sorted estiverem habilitadas retorna um array de objetos com as especies e o nome delas ordenadas e filtrada pr sexo
+//   //8. se nao tiver a opcao includeNames: retorna array de string com as especies
+
+//   // codigo
+//   const locations = retriveAvailableLocations();
+
+//   const { includeNames = false, sex, sorted = false }= options;
+
+//   if (includeNames) {
+//     return retriveAnimalsPerLocationWithName(locations);
+//   }
+
+//   return retriveAnimalsPerLocation(locations);
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
+// function retriveAnimalsPerLocationWithName(locations, sorted, sex) {
+//   const animalsPerLocation = { };
+
+//   locations.forEach((location) => {
+//     const filteredAnimals = animals
+//       .filter((animal) => animal.location === location )
+//       .map((animal) => {
+//         const nameKey = animal.name;
+//         const nameValue = animal.residents
+//         .map((resident) => resident.name);
+//       if (sorted) {
+//         nameValue.sort();
+//       }
+//       return { [nameKey]: nameValue };
+//       });
+
+//     animalsPerLocation[location] = filteredAnimals;
+//   });
+//   return animalsPerLocation;
 // }
+
+// function retriveAnimalsPerLocation(locations) {
+//   const animalsPerLocation = { };
+//   locations.forEach((location) => {
+//     const filteredAnimals = animals
+//       .filter((animal) => animal.location === location )
+//       .map((animal) => animal.name );
+
+//     animalsPerLocation[location] = filteredAnimals;
+//   });
+//   return animalsPerLocation;
+// }
+
+// function retriveAvailableLocations() {
+//   return ['NE', 'NW', 'SE', 'SW'];
+// }
+const getWeek = (dayName) => (acc, [key, value]) => {
+  if (dayName === undefined || dayName === key) {
+    acc[key] = value.open !== 0
+      ? `Open from ${value.open}am until ${value.close - 12}pm`
+      : 'CLOSED';
+  }
+  return acc;
+};
+
+function schedule(dayName) {
+  // seu código aqui
+  return Object.entries(hours).reduce(getWeek(dayName), {});
+}
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -167,7 +226,7 @@ function employeeCoverage(idOrName) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
