@@ -126,7 +126,7 @@ function increasePrices(percentage) {
   const arredondar = (numero) => (Math.floor(numero * 100) / 100);
   return chaves.reduce((valorAnterior, valorAtual, index) => {
     valorAnterior[valorAtual] = arredondar(atualizaPreco(valores[index]));
-    
+    return valorAnterior;
   },
   {});
 }
