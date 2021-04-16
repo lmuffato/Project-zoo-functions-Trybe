@@ -123,16 +123,10 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  const newAdult = (prices.Adult * percentage) / 100;
-  const newSenior = (prices.Senior * percentage) / 100;
-  const newChild = (prices.Child * percentage) / 100;
-  parseFloat(newAdult).toFixed(2);
-  parseFloat(newSenior).toFixed(2);
-  parseFloat(newChild).toFixed(2);
-  prices.Adult += newAdult;
-  prices.Senior += newSenior;
-  prices.Child += newChild;
-  return hours;
+  Object.keys(prices).forEach((value) => {
+    prices[value] = Math.round((prices[value]) * ((percentage / 100) + 1) * 100) / 100;
+  }); // Solução do calculo de porcentagem por Fernando Resende
+  return prices;
 }
 
 /* function employeeCoverage(idOrName) {
@@ -151,8 +145,6 @@ function increasePrices(percentage) {
     name.firstName === employeeName || name.lastName === employeeName);
 
   } */
-
-console.log(schedule('Tuesday'));
 
 module.exports = {
   entryCalculator,
