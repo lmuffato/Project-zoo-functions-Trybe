@@ -11,9 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals } = data;
-const { employees } = data;
-const { prices } = data;
+const { animals, employees, prices, hours } = data;
 
 function animalsByIds(...ids) {
   const newArray = [];
@@ -88,9 +86,34 @@ function entryCalculator(entrants = 0) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+function schedule(dayName) {
+  const resultObj = {};
+  const day = Object.keys(hours);
+  const time = Object.values(hours);
+  if (dayName === undefined) {
+    for (let index = 0; index < day.length; index += 1) {
+      const weekDay = day[index];
+      const closeHourToPM = (time[index].close) - 12;
+      let valueString = `Open from ${time[index].open}am until ${closeHourToPM}pm`;
+      if (time[index].open === 0) {
+        valueString = 'CLOSED';
+      }
+      Object.assign(resultObj, { [weekDay]: valueString });
+    }
+    return resultObj;
+  }
+  for (let index = 0; index < day.length; index += 1) {
+    if (day[index] === dayName) {
+      const weekDay = day[index];
+      const closeHourToPM = (time[index].close) - 12;
+      let valueString = `Open from ${time[index].open}am until ${closeHourToPM}pm`;
+      if (time[index].open === 0) {
+        valueString = 'CLOSED';
+      }
+      return { [weekDay]: valueString };
+    }
+  }
+}
 
 function oldestFromFirstSpecies(id) {
   // O código deste requisito foi refatorado e amplamente melhorado usando por base o código escrito pela colega Marília Cegalla! (https://github.com/tryber/sd-010-a-project-zoo-functions/pull/109/commits/7219cdad993186c2ce0e11edcec7056941c86a05).
@@ -126,7 +149,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
