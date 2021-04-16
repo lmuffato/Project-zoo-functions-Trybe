@@ -8,7 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
-const { animals, employees } = require('./data');
+const { animals, employees, prices } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -42,7 +42,7 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   return employees.some(({ managers }) => managers.includes(id));
 }
-console.log(isManager('stephanieId'));
+// console.log(isManager('stephanieId'));
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   return employees.push(createEmployee({ id, firstName, lastName }, { managers, responsibleFor }));
@@ -58,11 +58,14 @@ function animalCount(species = null) {
   }
   return animals.find((i) => i.name === species).residents.length;
 }
-console.log(animalCount());
+// console.log(animalCount());
 
-// function entryCalculator(entrants = null) {
-
-// }
+function entryCalculator(entrants = {}) {
+  if (entrants === {}) {
+    return 0;
+  }
+  return Object.keys(entrants).reduce((Ac, Corren) => Ac + (prices[Corren] * entrants[Corren]), 0);
+}
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -73,9 +76,8 @@ console.log(animalCount());
 // }
 
 // function oldestFromFirstSpecies(id) {
-//   return employees.find((item) => id.name, animals.age);
+// seu código aqui
 // }
-
 // function increasePrices(percentage) {
 //   // seu código aqui
 // }
@@ -85,7 +87,7 @@ console.log(animalCount());
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
