@@ -87,10 +87,11 @@ function entryCalculator(entrants) {
     .reduce((acc, elemento) => acc + elemento);
 }
 // console.log(entryCalculator({Adult:10,Child:20,Senior:15,})) // TESTE 1 -> Retorna 1294.55
-// console.log(entryCalculator({Adult:0,Child:0,Senior:0,})) // TESTE 2 -> Retorna 0
-// console.log(entryCalculator()) // TESTE 3 -> Retorna 0
-// console.log(entryCalculator('')) // TESTE 4 -> Retorna 0
-// console.log(entryCalculator({})) // TESTE 5 -> Retorna 0
+// console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 })) // TESTE 2 -> Retorna 187.94
+// console.log(entryCalculator({Adult:0,Child:0,Senior:0,})) // TESTE 3 -> Retorna 0
+// console.log(entryCalculator()) // TESTE 4 -> Retorna 0
+// console.log(entryCalculator('')) // TESTE 5 -> Retorna 0
+// console.log(entryCalculator({})) // TESTE 6 -> Retorna 0
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -125,7 +126,6 @@ function increasePrices(percentage) {
   prices.Adult = arredondar(atualizaPreco(Adult));
   prices.Child = arredondar(atualizaPreco(Child));
   prices.Senior = arredondar(atualizaPreco(Senior));
-  return prices;
   // if (!percentage) { return prices; }
   // const chaves = Object.keys(prices);
   // const valores = Object.values(prices);
@@ -135,8 +135,9 @@ function increasePrices(percentage) {
   // },
   // {});
 }
-console.log(increasePrices(50)); // TESTE 1  -> O preço sobe 50%
+// console.log(increasePrices(50)); // TESTE 1  -> O preço sobe 50%
 // console.log(increasePrices()); // TESTE 2 -> O preço não tem alteração
+// console.log(prices); // TESTE 2 -> O preço não tem alteração
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
