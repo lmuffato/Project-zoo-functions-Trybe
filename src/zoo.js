@@ -67,9 +67,18 @@ function animalCount(species) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+const week = (dayName) => (acc, [key, value]) => {
+  if (dayName === undefined || dayName === key) {
+    acc[key] = value.open !== 0
+      ? `Open from ${value.open}am until ${value.close - 12}pm`
+      : 'CLOSED';
+  }
+  return acc;
+};
+
+function schedule(dayName) {
+  return Object.entries(data.hours).reduce(week(dayName), {});
+}
 
 function oldestFromFirstSpecies(id) {
   const animalUnit = data.employees.find((employee) => employee.id === id).responsibleFor[0];
@@ -93,7 +102,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   //   entryCalculator,
-  //   schedule,
+  schedule,
   animalCount,
   //   animalMap,
   animalsByIds,
