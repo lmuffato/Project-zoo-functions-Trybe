@@ -120,10 +120,10 @@ function schedule(dayName) {
   // seu código aqui
   if (!dayName) return semana();
   const { open, close } = data.hours[dayName];
-  const frase = { [dayName]: `Open from ${open}am until ${close - 12}pm` };
+  let frase = { [dayName]: `Open from ${open}am until ${close - 12}pm` };
   if (open !== 0 && close !== 0) return frase;
-  const segunda = '{"Monday": "CLOSED"}';
-  return segunda;
+    frase = { [dayname]: "CLOSED" };
+  return frase;
 }
 
 const animalProcurado = (id) => data.employees.find((employee) => id === employee.id)
