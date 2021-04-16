@@ -101,7 +101,7 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  const { employees} = data; 
+  const { employees} = data;
   const { animals } = data;
   const getEmployee = employees.find((employee) => employee.id === id);
   const firstAnimal = animals.find((animal) => animal.id === getEmployee.responsibleFor[0]);
@@ -119,12 +119,10 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   const { prices } = data;
-  const toConvert = percentage / 100 + 1 + 0.005;
-  return Object.keys(data.prices).forEach((key) => {
-    prices[key] = Number(parseFloat(prices[key] * toConvert).toFixed(2));
+  Object.keys(prices).forEach((item) => {
+    prices[item] = (Math.ceil(prices[item] * (percentage + 100)) / 100);
   });
 }
-console.log(increasePrices(30));
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
