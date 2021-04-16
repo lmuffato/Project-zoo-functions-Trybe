@@ -153,14 +153,31 @@ function oldestFromFirstSpecies(id) {
   const output = [...animal[0], ...animal[1]].filter((element) => element.age === ages).shift();
   return Object.values(output);
 }
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
-
+function increasePrices(percentage) {
+  const roundDecimal = (value) => Math.round(value * 100) / 100;
+  const porcent = 0.01 * percentage;
+  const values = Object.values(prices);
+  const valuesIncreased = [];
+  values.forEach((element) => valuesIncreased
+    .push(roundDecimal((element + (element * porcent)))));
+  const [Adult, Senior, Child] = valuesIncreased;
+  prices.Adult = Adult;
+  prices.Senior = Senior;
+  prices.Child = Child;
+}
+function employeeCoverage(idOrName) {
+  let output;
+  if (idOrName !== undefined) {
+    const name = idOrName;
+    output = employees
+      .filter((element) => element.firstName === name || element.lastName === name)
+      .map((element) => element.responsibleFor);
+    output = output.shift();
+  }
+  return output;
+}
+console.log(employeeCoverage('Sharonda'));
 module.exports = {
   entryCalculator,
   schedule,
@@ -173,6 +190,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };

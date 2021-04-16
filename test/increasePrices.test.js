@@ -1,8 +1,6 @@
 const assert = require('assert');
 const zoo = require('../src/zoo');
 const data = require('../src/data');
-
-
 describe('Implemente a função increasePrices', () => {
   it('Ao passar uma porcentagem, incrementa todos os preços, arrendondados em duas casas decimais', () => {
     zoo.increasePrices(50);
