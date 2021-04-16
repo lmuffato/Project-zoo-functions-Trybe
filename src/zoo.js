@@ -20,7 +20,7 @@ function animalsByIds(...ids) {
 function animalsOlderThan(animal, age) {
   const { animals } = data;
   animals.find((animal2) => (animal2.name === animal))
-    .residents.filter((ages) => console.log(ages.age >= age));
+    .residents.filter((ages) => ages.age >= age);
 }
 
 function employeeByName(employeeName) {
@@ -40,9 +40,9 @@ function isManager(id) {
   const trueOrFalse = employees.find((element) =>
     element.managers.find((ids) => ids === id));
   if (trueOrFalse !== undefined) {
-    return console.log(true);
+    return true;
   }
-  return console.log(false);
+  return false;
 }
 
 function addEmployee(id1, firstName1, lastName1, managers1, responsibleFor1) {
@@ -68,19 +68,19 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // seu codigo aqui
+  return options;
 }
 
 function schedule(dayName) {
   const { hours } = data;
   const dayss = hours[dayName];
   if (dayss.open - dayss.close === 0) {
-    return console.log('CLOSED');
+    return 'CLOSED';
   }
   if (dayName === undefined) {
-    return console.log(hours);
+    return hours;
   }
-  return console.log(`Open from ${dayss.open}am until ${dayss.close}pm`);
+  return `Open from ${dayss.open}am until ${dayss.close}pm`;
 }
 
 function oldestFromFirstSpecies(id) {
@@ -90,7 +90,7 @@ function oldestFromFirstSpecies(id) {
     .responsibleFor[0];
   const selected = animals.find((sel) => sel.id === responsables).residents;
   const oldiest = selected.reduce((old, acc) => (acc.age > old.age ? acc : old));
-  return console.log(oldiest);
+  return oldiest;
 }
 
 function increasePrices(percentage) {
@@ -120,9 +120,8 @@ function employeeCoverage(idOrName) {
   const animalss = names.responsibleFor.map((value) => animals.find(({ id }) => value === id).name);
   const employeeObj = {};
   employeeObj[`${names.firstName} ${names.lastName}`] = animalss;
-  return console.log(employeeObj);
+  return employeeObj;
 }
-employeeCoverage('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1');
 
 module.exports = {
   entryCalculator,
