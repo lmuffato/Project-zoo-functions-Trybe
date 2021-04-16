@@ -84,7 +84,7 @@ function entryCalculator(entrants) {
   if (entrants === undefined || Object.entries(entrants).length === 0) {
     return 0;
   }
-  const { Adult, Senior, Child } = entrants;
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
   const priceAdult = Adult * prices.Adult;
   const priceSenior = Senior * prices.Senior;
   const priceChild = Child * prices.Child;
@@ -93,7 +93,7 @@ function entryCalculator(entrants) {
 }
 
 console.log(entryCalculator({}));
-console.log(entryCalculator({ 'Adult': 1 }));
+console.log(entryCalculator({ Adult: 1 }));
 
 // function animalMap(options) {
 //   // seu código aqui
