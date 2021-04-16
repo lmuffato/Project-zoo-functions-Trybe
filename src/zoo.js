@@ -55,19 +55,8 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(newEmployee);
 }
 
-/* eslint-disable no-param-reassign */
-function animalCount(species) {
-  if (species) {
-    return animals.find((animal) => animal.name === species).residents.length;
-  }
-
-  const allAnimals = animals.reduce((objAnimal, currAnimal) => {
-    objAnimal[currAnimal.name] = currAnimal.residents.length;
-    return objAnimal;
-  }, {});
-  return allAnimals;
+function animalCount() {
 }
-/* eslint-disable no-param-reassign */
 
 function entryCalculator(entrants = 0) {
   if (entrants === 0) return 0;
