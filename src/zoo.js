@@ -166,18 +166,43 @@ function increasePrices(percentage) {
   prices.Senior = Senior;
   prices.Child = Child;
 }
+const allEmployeeCoverage = () => {
+  const output = {};
+  const allEmployeeNames = employees.map((element) => `${element.firstName} ${element.lastName}`);
+  const everyRespAnimalId = employees.map((element) => element.responsibleFor);
+  const everyRespAnimalName = [];
+  everyRespAnimalId.forEach((array) => {
+    const gAn = [];
+    array.forEach((id) => {
+      gAn.push(animals.filter((ani) => ani.id === id).map((element) => element.name).shift());
+    });
+    everyRespAnimalName.push(gAn);
+  });
+  for (let index = 0; index < 8; index += 1) {
+    output[allEmployeeNames[index]] = everyRespAnimalName[index];
+  }
+  return output;
+};
 function employeeCoverage(idOrName) {
-  let output;
+  let output = {};
   if (idOrName !== undefined) {
-    const name = idOrName;
-    output = employees
-      .filter((element) => element.firstName === name || element.lastName === name)
-      .map((element) => element.responsibleFor);
-    output = output.shift();
+    const respAnimalsId = employees
+      .filter((el) => el.firstName === idOrName || el.lastName === idOrName || el.id === idOrName)
+      .map((element) => element.responsibleFor).shift();
+    const empName = employees
+      .filter((el) => el.firstName === idOrName || el.lastName === idOrName || el.id === idOrName)
+      .map((element) => `${element.firstName} ${element.lastName}`).shift();
+    const respAnimalsName = [];
+    respAnimalsId.forEach((id) => {
+      respAnimalsName.push(animals.filter((element) => element.id === id)
+        .map((ani) => ani.name).shift());
+    });
+    output[empName] = respAnimalsName;
+  } else {
+    output = allEmployeeCoverage();
   }
   return output;
 }
-console.log(employeeCoverage('Sharonda'));
 module.exports = {
   entryCalculator,
   schedule,
@@ -185,7 +210,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
