@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees } = data;
+const { animals, employees, hours, prices } = data;
 
 function animalsByIds(...ids) {
   return animals.filter((animal) => ids.find((id) => id === animal.id));
@@ -76,23 +76,50 @@ function entryCalculator(entrants = 0) {
   return (Adult * 49.99) + (Child * 20.99) + (Senior * 24.99);
 }
 
-function animalMap(options) {
+function animalMap() {
   // seu código aqui
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  const dailySchedule = {};
+  const selectedDay = (day) => {
+    if (day === 'Monday') {
+      dailySchedule[day] = 'CLOSED';
+    } else {
+      dailySchedule[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+    }
+  };
+  if (dayName) {
+    selectedDay(dayName);
+  } else {
+    const newObject = Object.keys(hours).forEach((key) => {
+      selectedDay(key);
+    });
+    Object.assign(dailySchedule, newObject);
+  }
+  return dailySchedule;
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const firstSpecie = employees.find((empl) => empl.id === id).responsibleFor[0];
+  const animalsFromThatSpecie = animals.find((animal) => animal.id === firstSpecie).residents;
+  const oldestAnimal = animalsFromThatSpecie.sort((a, b) => b.age - a.age)[0];
+  return Object.values(oldestAnimal);
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const source = {};
+  Object.keys((prices)).forEach((key) => {
+    const priceTimesPercentage = prices[key] * percentage;
+    const pricePlusPercentage = prices[key] + (priceTimesPercentage / 100);
+    const setDecimalPoints = pricePlusPercentage + Number.EPSILON;
+    const biggerRoundedPrice = Math.round(setDecimalPoints * 100);
+    source[key] = biggerRoundedPrice / 100;
+  });
+  Object.assign(prices, source);
 }
 
-function employeeCoverage(idOrName) {
+function employeeCoverage() {
   // seu código aqui
 }
 
