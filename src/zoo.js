@@ -8,7 +8,7 @@
 ]
 */
 
-const { animals, hours } = require('./data');
+const { animals, hours, prices } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -69,14 +69,19 @@ function animalCount(species) {
   }
   return animals.find((animal) => animal.name === species).residents.length;
 }
-/*
+
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (entrants) {
+    return Object.keys(entrants).reduce((sum, key) => (sum += prices[key] * entrants[key]), 0);
+  }
+  return 0;
 }
 
+/*
 function animalMap(options) {
 }
 */
+
 function schedule(dayName) {
   const days = Object.keys(data.hours);
   const schedules = { };
@@ -121,7 +126,7 @@ function employeeCoverage(idOrName) {
 */
 
 module.exports = {
-//  entryCalculator,
+  entryCalculator,
   schedule,
   animalCount,
   //  animalMap,
