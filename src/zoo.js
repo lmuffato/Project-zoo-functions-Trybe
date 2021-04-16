@@ -59,7 +59,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  const { animals } = data; 
+  const { animals } = data;
   if (!species) {
     const arrayVazio = {};
     animals.forEach((animal) => {
