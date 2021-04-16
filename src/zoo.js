@@ -101,19 +101,20 @@ function entryCalculator(entrants = 0) {
     // seu código aqui
   } */
 
-const semana = () => {
-  const semanaDias = Object.keys(data.hours);
-  const retorno = {};
-  for (const key of semanaDias) {
-    const { open, close } = data.hours[key];
-    if (open === 0) {
-      retorno[key] = 'CLOSED';
-    } else {
-      retorno[key] = `Open from ${open}am until ${close - 12}pm`;
-    }
-  }
-  return retorno;
-};
+  const semana = () => {
+    const semanaDias = Object.keys(data.hours);
+    const funcionamento = semanaDias.reduce((acc, key) => {
+      const { open, close } = data.hours[key];
+        const retorno = acc;
+      if (open === 0) {
+        retorno[key] = 'CLOSED';
+      } else {
+        retorno[key] = `Open from ${open}am until ${close - 12}pm`;
+      }
+      return acc;
+    },{});
+    return funcionamento;
+  };
 
 function schedule(dayName) {
   // seu código aqui
@@ -121,7 +122,7 @@ function schedule(dayName) {
   const { open, close } = data.hours[dayName];
   const frase = { [dayName]: `Open from ${open}am until ${close - 12}pm` };
   if (open !== 0 && close !== 0) return frase;
-  return { dayName: 'CLOSED' };
+  return {"Monday": "CLOSED"};
 }
 
 /* function oldestFromFirstSpecies(id) {
