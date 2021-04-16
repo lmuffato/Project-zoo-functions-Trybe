@@ -48,7 +48,7 @@ function isManager(id) {
   const { employees } = data;
   const findEmployee = employees.find((employee) => employee.id === id);
   if (findEmployee.managers.length < 2) return true;
-  return false
+  return false;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -94,23 +94,22 @@ function animalMap(options) {
 
 function schedule(dayName = undefined) {
   // seu código aqui
-  const { hours } = data;
-  const days = Object.keys(hours);
-  const cronogram = {};
-  days.forEach((day) => {
+  const weekSchedule = {};
+  const weekDays = Object.keys(hours);
+
+  weekDays.forEach((day) => {
     if (day === 'Monday') {
-      cronogram[day] = 'CLOSED';
+      weekSchedule[day] = 'CLOSED';
     } else {
-      const { open } = hours[day].open;
-      const close = hours[day].close - 12;
-      cronogram[day] = `Open from ${open}am until ${close}pm`;
+      weekSchedule[day] = `Open from ${hours[day].open}am until ${(hours[day].close) - 12}pm`;
     }
-    return cronogram;
   });
-  if (dayName === undefined) {
-    return cronogram;
+  if (!dayName) {
+    return weekSchedule;
   }
-  return { [dayName]: cronogram[dayName] };
+  return {
+    [dayName]: weekSchedule[dayName],
+  };
 }
 
 function oldestFromFirstSpecies(id) {
