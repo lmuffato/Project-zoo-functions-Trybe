@@ -70,18 +70,26 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   const cronograma = {};
-//   const { hours } = data;
-//   const days = Object.keys(hours);
-//   if (typeof dayName === 'undefined') {
-//     days.forEach((day) => {
-//       if (hours[day].close === 0) cronograma[day] = 'CLOSED';
-//       cronograma[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
-//     });
-//   }
-//   return cronograma;
-// }
+function schedule(dayName) {
+  const cronograma = {};
+  const { hours } = data;
+  const days = Object.keys(hours);
+  if (!dayName) {
+    days.forEach((day) => {
+      const { open, close } = hours[day];
+      const isOpen = open - close !== 0 ? `Open from ${open}am until ${close - 12}pm` : 'CLOSED';
+      cronograma[day] = isOpen;
+    });
+    return cronograma;
+  }
+  const day = days.find((dia) => dia === dayName);
+  if (dayName === 'Monday') {
+    cronograma[day] = 'CLOSED';
+    return cronograma;
+  }
+  cronograma[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+  return cronograma;
+}
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -98,16 +106,16 @@ function increasePrices(percentage) {
 }
 
 // function employeeCoverage(idOrName) {
-//   // const { animals, employees } = data;
-//   // // const resultKeyValue
-//   // if (idOrName === undefined) {
-//   //   employees.map((value) => firstName === idOrName);
-//   // }
+//   const { animals, employees } = data;
+//   const resultKeyValue
+//   if (idOrName === undefined) {
+//     employees.map((value) => firstName === idOrName);
+//   }
 // }
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
