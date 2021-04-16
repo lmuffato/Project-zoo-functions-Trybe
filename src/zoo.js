@@ -148,9 +148,11 @@ function animalMap(options = {}) {
 
 // --------------------- require 10 ------------------------
 
-const agendaControl = () => (acc, [crrDay, crrValues]) => {
-  return ({ ...acc, [crrDay]: crrValues.close - crrValues.open !== 0 ? `Open from ${crrValues.open}am until ${crrValues.close - 12}pm` : 'CLOSED' })
-};
+const agendaControl = () => (acc, [crrDay, crrValues]) => (
+  ({ ...acc, [crrDay]: (crrValues.close - crrValues.open !== 0)
+    ? `Open from ${crrValues.open}am until ${crrValues.close - 12}pm` 
+    : 'CLOSED' })
+);
 
 function schedule(dayName) {
   const agenda = Object.entries(hours);
