@@ -72,8 +72,8 @@ function animalCount(species) {
   return (getAnimal.residents).length;
 }
 
-function entryCalculator(entrants) {
-  if (entrants === undefined || Object.keys(entrants).length === 0) {
+function entryCalculator(entrants = 0) {
+  if (entrants === undefined) {
     return 0;
   }
   let result = 0;
