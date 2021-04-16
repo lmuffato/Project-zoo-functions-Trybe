@@ -125,10 +125,8 @@ function schedule(dayName) {
   return { dayName: 'CLOSED' };
 }
 
-const animalProcurado = (id) => { return data
-    .employees.find((employee) => id === employee.id).responsibleFor
-    .find((animal) => animal);
-};
+const animalProcurado = (id) => data.employees.find((employee) => id === employee.id).responsibleFor.find((animal) => animal);
+
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
