@@ -55,7 +55,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(newEmployee);
 }
 
-function animalCount() {
+function animalCount(species) {
+  if (species) {
+    return animals.find((animal) => animal.name === species).residents.length;
+  }
+
+  const allAnimals = animals.reduce((objAnimal, currAnimal) => {
+    const animal = objAnimal;
+    animal[currAnimal.name] = currAnimal.residents.length;
+    return objAnimal;
+  }, {});
+  return allAnimals;
 }
 
 function entryCalculator(entrants = 0) {
