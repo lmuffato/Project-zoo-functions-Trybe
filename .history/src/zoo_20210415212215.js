@@ -90,26 +90,8 @@ const manhaTarde = (hour) => {
   }
   return `${hour}am`;
 };
-function aberto(open, close) {
-  if (open === 0 || close === 0) {
-    return 'CLOSED';
-  }
-  return `Open from ${amPm(open)} until ${amPm(close)}`;
-}
-
 function schedule(dayName) {
-  if (!dayName) {
-    return {
-      Tuesday: aberto(hours.Tuesday.open, hours.Tuesday.close),
-      Wednesday: aberto(hours.Wednesday.open, hours.Wednesday.close),
-      Thursday: aberto(hours.Thursday.open, hours.Thursday.close),
-      Friday: aberto(hours.Friday.open, hours.Friday.close),
-      Saturday: aberto(hours.Saturday.open, hours.Saturday.close),
-      Sunday: aberto(hours.Sunday.open, hours.Sunday.close),
-      Monday: aberto(hours.Monday.open, hours.Monday.close),
-    };
-  }
-  return { [dayName]: aberto(hours[dayName].open, hours[dayName].close) };
+
 }
 /*
 function oldestFromFirstSpecies(id) {
