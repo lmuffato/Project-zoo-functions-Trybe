@@ -45,9 +45,10 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 //   // seu código aqui
 // }
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+function entryCalculator(entrants = 0) {
+  return Object.entries(entrants).reduce((result, number) =>
+    result + data.prices[number[0]] * number[1], 0);
+}
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -70,7 +71,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   // animalCount,
   // animalMap,
