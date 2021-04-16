@@ -119,7 +119,6 @@ function schedule(dayName) {
 // }
 
 function increasePrices(percentage) {
-  if (!percentage) { return prices; }
   const atualizaPreco = (preco) => ((preco * (1 + percentage / 100)));
   const arredondar = (numero) => (Math.round(numero * 100) / 100);
   const { Adult, Child, Senior } = prices;
@@ -127,7 +126,7 @@ function increasePrices(percentage) {
   prices.Child = arredondar(atualizaPreco(Child));
   prices.Senior = arredondar(atualizaPreco(Senior));
   return prices;
-
+  // if (!percentage) { return prices; }
   // const chaves = Object.keys(prices);
   // const valores = Object.values(prices);
   // return chaves.reduce((valorAnterior, valorAtual, index) => {
@@ -137,7 +136,7 @@ function increasePrices(percentage) {
   // {});
 }
 console.log(increasePrices(50)); // TESTE 1  -> O preço sobe 50%
-console.log(increasePrices()); // TESTE 2 -> O preço não tem alteração
+// console.log(increasePrices()); // TESTE 2 -> O preço não tem alteração
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
