@@ -87,13 +87,48 @@ function entryCalculator(entrants) {
     .map(([entrant, qty]) => qty * data.prices[entrant])
     .reduce(((acc, curr) => acc + curr), 0);
 }
-// function animalMap(options) {
-// seu código aqui
-// }
 
-// function schedule(dayName) {
-// seu código aqui
+function schedule(dayName) {
+  const { hours } = data;
+  const result = Object.entries(hours).reduce((acc, [key, value]) => {
+    const [am, pm] = Object.values(value);
+    acc[key] = key === 'Monday' ? 'CLOSED' : `Open from ${am}am until ${pm % 12}pm`;
+    return acc;
+  }, {});
+  if (dayName) {
+    const day = result[dayName];
+    return {
+      [dayName]: day,
+    };
+  }
+  return result;
+}
+
+//   const week = {};
+//   // const dias = Object.keys(data.hours);
+//   // const hour = Object.values(data.hour);
+//   let resultado = 0;
+//   Object.keys(data.hour).map((elem, i) => {
+//     const funcionamento = (Object.keys(data.hours)[i].open !== 0)
+//       ? `Open from ${Object.keys(data.hours)[i].open}am until ${(Object.keys(data.hour)[i].close - 12)}pm`
+//       : 'CLOSED';
+//     return Object.assign(week, { [elem]: funcionamento });
+//   });
+//   if (dayName !== undefined) {
+//     Object.entries(week).forEach((key) => {
+//       if (dayName === key[0]) {
+//         output = { [key[0]]: key[1] };
+//       }
+//     });
+//   } else {
+//     resultado = week;
+//   }
+//   return resultado;
 // }
+// const dias = Object.keys(data.hours);
+// const hour = Object.values(data.hour);
+// let output;
+// if (!dayName) {
 
 function oldestFromFirstSpecies(id) {
   const funcionario = employees.find((employee) => employee.id === id);
@@ -115,8 +150,8 @@ function increasePrices(percentage) {
 
 //
 // function employeeCoverage(idOrName) {
-//   const employee = data.employees;
-//   const semparam = employee.reduce(acc, curr) => { return {...acc
+//  const employee = data.employees;
+//  const semparam = employee.reduce(acc, curr) => { return {...acc
 //     [curr]
 //   }
 //   }
@@ -144,7 +179,7 @@ function increasePrices(percentage) {
 //
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
