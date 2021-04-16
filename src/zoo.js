@@ -120,20 +120,23 @@ function schedule(dayName) {
 
 function increasePrices(percentage) {
   if (!percentage) { return prices; }
-  const chaves = Object.keys(prices);
-  const valores = Object.values(prices);
   const atualizaPreco = (preco) => ((preco * (1 + percentage / 100)));
   const arredondar = (numero) => (Math.floor(numero * 100) / 100);
-  return chaves.reduce((valorAnterior, valorAtual, index) => {
-    valorAnterior[valorAtual] = arredondar(atualizaPreco(valores[index]));
-    return valorAnterior;
-  },
-  {});
+  const { Adult, Child, Senior } = prices;
+  prices.Adult = arredondar(atualizaPreco(Adult));
+  prices.Child = arredondar(atualizaPreco(Child));
+  prices.Senior = arredondar(atualizaPreco(Senior));
+  return prices;
+  // const chaves = Object.keys(prices);
+  // const valores = Object.values(prices);
+  // return chaves.reduce((valorAnterior, valorAtual, index) => {
+  //   valorAnterior[valorAtual] = arredondar(atualizaPreco(valores[index]));
+  //   return valorAnterior;
+  // },
+  // {});
 }
-console.log(increasePrices(50)); // TESTE 1  -> O preço sobe 50%
-console.log(increasePrices()); // TESTE 2 -> O preço não tem alteração
-// const chaves = Object.keys(prices);
-// const valores = Object.values(prices);
+// console.log(increasePrices(50)); // TESTE 1  -> O preço sobe 50%
+// console.log(increasePrices()); // TESTE 2 -> O preço não tem alteração
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
