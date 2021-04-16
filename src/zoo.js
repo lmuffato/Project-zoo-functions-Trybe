@@ -167,3 +167,4 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
+//  ---------------------- Projeto realidazo com total ajuda dos meus colegas de turma: Rafael Medeiros, Murilo Gonçalves, Lucas Pedroso, Nilson Ribeiro, Tiago Santos, Guilherme Dornelles, dentre tantos outros que me deram dicas e auxiliaram na resolução dos requisitos, dedico esse projeto a eles pelas quais não conseguiria finalizar e entregar no prazo.
