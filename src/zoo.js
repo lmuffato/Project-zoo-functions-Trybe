@@ -102,9 +102,14 @@ function schedule(dayName) {
 // console.log(schedule());
 // console.log(schedule('asdasd'));
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  const animalID = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const oldest = animals.find((animal) => animal.id === (animalID)).residents
+  // source: https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
+    .sort((a, b) => b.age - a.age)[0];
+  const { name, sex, age } = oldest;
+  return [name, sex, age];
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -125,7 +130,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
