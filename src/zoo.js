@@ -11,60 +11,60 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function animalsByIds(ids) {
+/* function animalsByIds(ids) {
   // seu código aqu
-}
+} */
 
-function animalsOlderThan(animal, age) {
+/* function animalsOlderThan(animal, age) {
+  // seu código aqui
+} */
+
+/* function employeeByName(employeeName) {
+  // seu código aqui
+} */
+
+/* function createEmployee(personalInfo, associatedWith) {
+  // seu código aqui
+} */
+
+/* function isManager(id) {
   // seu código aqui
 }
-
-function employeeByName(employeeName) {
+ */
+/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
-}
+} */
 
-function createEmployee(personalInfo, associatedWith) {
+/* function animalCount(species) {
   // seu código aqui
-}
+} */
 
-function isManager(id) {
+/* function entryCalculator(entrants) {
   // seu código aqui
-}
+} */
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+/* function animalMap(options) {
   // seu código aqui
-}
+} */
 
-function animalCount(species) {
+/* function schedule(dayName) {
   // seu código aqui
-}
+} */
 
-function entryCalculator(entrants) {
+/* function oldestFromFirstSpecies(id) {
   // seu código aqui
-}
+} */
 
-function animalMap(options) {
+/* function increasePrices(percentage) {
   // seu código aqui
-}
+} */
 
-function schedule(dayName) {
+/* function employeeCoverage(idOrName) {
   // seu código aqui
-}
-
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
-
-function increasePrices(percentage) {
-  // seu código aqui
-}
-
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+} */
 
 module.exports = {
-  entryCalculator,
+/*   entryCalculator,
   schedule,
   animalCount,
   animalMap,
@@ -76,5 +76,5 @@ module.exports = {
   animalsOlderThan,
   oldestFromFirstSpecies,
   increasePrices,
-  createEmployee,
+  createEmployee, */
 };
