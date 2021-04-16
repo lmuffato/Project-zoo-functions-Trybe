@@ -55,9 +55,19 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(newEmployee);
 }
 
+/* eslint-disable no-param-reassign */
 function animalCount(species) {
-  // seu código aqui
+  if (species) {
+    return animals.find((animal) => animal.name === species).residents.length;
+  }
+
+  const allAnimals = animals.reduce((objAnimal, currAnimal) => {
+    objAnimal[currAnimal.name] = currAnimal.residents.length;
+    return objAnimal;
+  }, {});
+  return allAnimals;
 }
+/* eslint-disable no-param-reassign */
 
 function entryCalculator(entrants) {
   // seu código aqui
