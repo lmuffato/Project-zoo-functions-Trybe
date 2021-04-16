@@ -105,8 +105,20 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const { employees } = data;
+  if (idOrName === undefined || idOrName === '') {
+    return console.log(employees.map((e) => `${e.firstName} ${e.lastName}: ${e.responsibleFor}`));
+  }
+  const name = employees.find((resp) => (resp.id === idOrName));
+  const responsables = employees.find((resp) => (resp.id === idOrName)).responsibleFor;
+  const obj = employees.find((resp) => (resp.id === idOrName));
+  Object.keys(obj).forEach((value, i) => {
+    console.log(value[i].map((e) => e));
+  })
+  console.log(responsables);
+  return console.log(`${name.firstName} ${name.lastName}: ${name.responsibleFor}`);
 }
+employeeCoverage('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1');
 
 module.exports = {
   entryCalculator,
