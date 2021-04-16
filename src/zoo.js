@@ -126,7 +126,7 @@ function schedule(dayName) {
 }
 
 const animalProcurado = (id) => data.employees.find((employee) => id === employee.id)
-.responsibleFor.find((animal) => animal);
+  .responsibleFor.find((animal) => animal);
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
