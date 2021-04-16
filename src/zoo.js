@@ -86,13 +86,24 @@ function schedule(dayName = undefined) {
   return { [dayName]: diaSem[dayName] };
 }
 // console.log(schedule('Tuesday'));
-// function oldestFromFirstSpecies(id) {
-// seu código aqui
-// }
+function animalMaiorIdade(id) {
+  const animal = animals.find((item) => item.id === id);
+  return animal.residents.reduce((agru, valorCor) => {
+    if (agru.age > valorCor.age) return agru;
+    return valorCor;
+  });
+}
+
+function oldestFromFirstSpecies(id) {
+  const especieId = employees.find((pessoa) => pessoa.id === id).responsibleFor[0];
+  return [animalMaiorIdade(especieId).name,
+    animalMaiorIdade(especieId).sex,
+    animalMaiorIdade(especieId).age];
+}
 // function increasePrices(percentage) {
 //   // seu código aqui
 // }
-function animais(ids) {
+function animaisNomes(ids) {
   const names = [];
   ids.forEach((id) => {
     names.push(animals.find((animal) => animal.id === id).name);
@@ -105,14 +116,14 @@ function employeeCoverage(idOrName = undefined) {
   if (idOrName === undefined) {
     employees.forEach((element) => {
       const key = `${element.firstName} ${element.lastName}`;
-      AnimaisFuncio[key] = animais(element.responsibleFor);
+      AnimaisFuncio[key] = animaisNomes(element.responsibleFor);
     });
     return AnimaisFuncio;
   }
   employees.forEach((elemen) => {
     const key = `${elemen.firstName} ${elemen.lastName}`;
     if (elemen.firstName === idOrName || elemen.lastName === idOrName || elemen.id === idOrName) {
-      AnimaisFuncio[key] = animais(elemen.responsibleFor);
+      AnimaisFuncio[key] = animaisNomes(elemen.responsibleFor);
     }
   });
   return AnimaisFuncio;
@@ -129,7 +140,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
