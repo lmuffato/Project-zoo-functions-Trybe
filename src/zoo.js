@@ -69,6 +69,7 @@ function entryCalculator(entrants) {
     return prices[entrant] * entrants[entrant];
   }).reduce((acc, currVal) => acc + currVal);
 }
+
 // function animalMap(options) {
 
 // }
@@ -85,7 +86,7 @@ function schedule(dayName) {
   return { [dayName]: returnedObj[dayName] };
 }
 function oldestFromFirstSpecies(id) {
-  const getAnimalId = data.employees.filter((employee) => employee.id === id)[0].responsibleFor;
+  const getAnimalId = data.employees.filter((employee) => employee.id === id)[0].responsibleFor[0];
   const getResidents = data.animals.find((animal) => animal.id === getAnimalId).residents;
   const setResults = getResidents.reduce((acc, currVal) => {
     if (acc.age > currVal.age) return acc;
@@ -120,7 +121,7 @@ function employeeCoverage(idOrName) {
         || employee.lastName === idOrName);
   return objectBuilder(filtered);
 }
-console.log((employeeCoverage('Nelson')));
+
 module.exports = {
   entryCalculator,
   schedule,
