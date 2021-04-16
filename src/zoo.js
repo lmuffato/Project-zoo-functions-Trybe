@@ -95,9 +95,9 @@ function entryCalculator(entrants = 0) {
   // seu código aqui
   return Object.entries(entrants)
     .reduce((acum, [chave, valor]) => acum + data.prices[chave] * valor, 0);
-  }
+}
 
-  /* function animalMap(options) {
+/* function animalMap(options) {
     // seu código aqui
   } */
 
@@ -105,23 +105,23 @@ const semana = () => {
   const semanaDias = Object.keys(data.hours);
   const retorno = {};
   for (const key of semanaDias) {
-    const { open, close} = data.hours[key];
+    const { open, close } = data.hours[key];
     if (open === 0) {
-      retorno[key] = `CLOSED`; 
+      retorno[key] = 'CLOSED';
     } else {
-      retorno[key] = `Open from ${open}am until ${close - 12}pm`; 
+      retorno[key] = `Open from ${open}am until ${close - 12}pm`;
     }
   }
-    return retorno; 
-} 
+  return retorno;
+};
 
 function schedule(dayName) {
   // seu código aqui
-  if (!dayName)  return semana();
+  if (!dayName) return semana();
   const { open, close } = data.hours[dayName];
-  let frase = { [dayName] : `Open from ${open}am until ${close - 12}pm` };
+  const frase = { [dayName]: `Open from ${open}am until ${close - 12}pm` };
   if (open !== 0 && close !== 0) return frase;
-  return { 'Monday' : 'CLOSED' };
+  return {"Monday": "CLOSED"};
 }
 
 /* function oldestFromFirstSpecies(id) {
