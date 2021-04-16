@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { animals, employees, hours, prices } = require('./data');
+
 //const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -17,15 +18,15 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  const foundAnimal = animals.find(singleAnimal => singleAnimal.name === animal);
-  return foundAnimal.residents.every(animalName => animalName.age >= age);
+  const foundAnimal = animals.find((singleAnimal) => singleAnimal.name === animal);
+  return foundAnimal.residents.every((animalName) => animalName.age >= age);
 }
 
 function employeeByName(employeeName) {
   if (!employeeName) {
     return {};
   }
-  return employees.find(employee =>
+  return employees.find((employee) =>
     employee.firstName === employeeName || employee.lastName === employeeName);
 }
 
@@ -37,7 +38,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return employees.some(employee => employee.managers.find(boss => boss === id));
+  return employees.some((employee) => employee.managers.find(boss => boss === id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -52,7 +53,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   const animalResult = {};
-  animals.forEach(animal => (animalResult[animal.name] = animal.residents.length));
+  animals.forEach((animal) => (animalResult[animal.name] = animal.residents.length));
   if (!species) {
     return animalResult;
   }
@@ -76,7 +77,7 @@ function animalMap(options) {
 function schedule(dayName) {
   const humanReadable = {};
   const hoursArr = Object.entries(hours);
-  hoursArr.forEach(day => humanReadable[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`);
+  hoursArr.forEach((day) => humanReadable[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`);
   humanReadable['Monday'] = 'CLOSED';
   if (!dayName) {
     return humanReadable;
@@ -87,14 +88,14 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  const employe = employees.find(element => element.id === id);
+  const employe = employees.find((element) => element.id === id);
   const animalId = employe.responsibleFor[0];
-  const animal = animals.find(singleAnimal => singleAnimal.id === animalId);
-  const ageStock = animal.residents.map(resident => resident.age);
+  const animal = animals.find((singleAnimal) => singleAnimal.id === animalId);
+  const ageStock = animal.residents.map((resident) => resident.age);
   const a = ageStock.sort((a, b) => b - a)
   console.log(ageStock);
   console.log(a);
-  const b = animal.residents.find(resident => resident.age === a[0]);
+  const b = animal.residents.find((resident) => resident.age === a[0]);
 return Object.values(b);
 
 }
@@ -108,14 +109,14 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   const employerResponsibleAnimals = {};
-  const findEmployer = employees.find(employer => {
+  const findEmployer = employees.find((employer) => {
     employer.firstName === idOrName || employer.lastName === idOrName || employer.id === idOrName
   });
-  const findAnimals = findEmployer.responsibleFor.map(animalId => animals.find(animal => animal.id === animalId));
+  const findAnimals = findEmployer.responsibleFor.map((animalId) => animals.find((animal) => animal.id === animalId));
   if(!idOrName) {
-    return employees.map(employer => {
+    return employees.map((employer) => {
       employerResponsibleAnimals[`${employer.firstName} ${employer.lastName}`] = employer.responsibleFor
-      .map(animalId => animals.find(animal => animal.id === animalId))
+      .map(animalId => animals.find((animal) => animal.id === animalId))
     });
   }
 
