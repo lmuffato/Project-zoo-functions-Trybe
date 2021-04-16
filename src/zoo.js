@@ -17,19 +17,19 @@ function animalsByIds(...ids) {
   // nenhum parametro? retornar array vazio
   // um unico parametro? retornar o objeto do animal referente ao ID apresentado
   // mais de um parametro? retornar array com todas as especies referentes aos IDs
-  const result = ids.map(actualId => (data.animals.find(animal => actualId === animal.id)));
+  const result = ids.map((actualId) => (data.animals.find((animal) => actualId === animal.id)));
   return result;
 }
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
-  const findAnimal = data.animals.find(actualAnimal => (actualAnimal.name === animal));
-  return findAnimal.residents.every(residents => (residents.age > age));
+  const findAnimal = data.animals.find((actualAnimal) => (actualAnimal.name === animal));
+  return findAnimal.residents.every((residents) => (residents.age > age));
 }
 
 function employeeByName(employeeName) {
   // seu código aqui
-  const Employee = data.employees.find(aEmployeeName =>
+  const Employee = data.employees.find((aEmployeeName) =>
     (aEmployeeName.firstName === employeeName || aEmployeeName.lastName === employeeName));
   if (Employee === undefined) {
     return {};
@@ -45,8 +45,8 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
-  const manager = data.employees.find(employeeId =>
-    (employeeId.managers.find(currentValue => (currentValue === id) === id)));
+  const manager = data.employees.find((employeeId) =>
+    (employeeId.managers.find((currentValue) => (currentValue === id) === id)));
   if (manager === undefined) {
     return false;
   }
@@ -76,7 +76,7 @@ function animalCount(species = undefined) {
     });
     return list;
   }
-  return data.animals.find(currentValue => (currentValue.name === species).residents.length);
+  return data.animals.find((currentValue) => (currentValue.name === species).residents.length);
 }
 
 function entryCalculator(entrants) {
@@ -90,7 +90,8 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  options = 0
+  const baz = options;
+  return baz;
 }
 
 function schedule(dayName = undefined) {
@@ -102,7 +103,7 @@ function schedule(dayName = undefined) {
     if (day === 'Monday') {
       cronogram[day] = 'CLOSED';
     } else {
-      const open = hours[day].open;
+      const { open } = hours[day].open;
       const close = hours[day].close - 12;
       cronogram[day] = `Open from ${open}am until ${close}pm`;
     }
@@ -117,10 +118,10 @@ function schedule(dayName = undefined) {
 function oldestFromFirstSpecies(id) {
   // seu código aqui
   const { employees } = data;
-  const employee = employees.find(currentEmployee => (currentEmployee.id === id));
+  const employee = employees.find((currentEmployee) => (currentEmployee.id === id));
   const animalId = employee.responsibleFor[0];
-  const animal = data.animals.find(currentAnimal => (currentAnimal.id === animalId));
-  const ageSorted = animal.residents.sort(function (ageA, ageB) { return ageA.age - ageB.age; });
+  const animal = data.animals.find((currentAnimal) => (currentAnimal.id === animalId));
+  const ageSorted = animal.residents.sort((ageA, ageB) => ageA.age - ageB.age);
   const olderAnimalIndex = ageSorted.length - 1;
   const olderAnimal = ageSorted[olderAnimalIndex];
 
@@ -137,7 +138,8 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  idOrName = 0;
+  const baz = idOrName;
+  return baz;
 }
 
 module.exports = {
