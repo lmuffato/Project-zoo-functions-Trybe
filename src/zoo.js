@@ -72,20 +72,20 @@ function entryCalculator(entrants = {}) {
 // }
 
 function schedule(dayName = undefined) {
-  const diaSemana = {};
+  const diaSem = {};
   Object.keys(hours).forEach((element) => {
     if (hours[element].open === hours[element].close) {
-      diaSemana[element] = 'CLOSED';
+      diaSem[element] = 'CLOSED';
     } else {
-      diaSemana[element] = `Open from ${hours[element].open}m until ${hours[element].close}pm`;
+      diaSem[element] = `Open from ${hours[element].open}am until ${hours[element].close - 12}pm`;
     }
   });
   if (dayName === undefined) {
-    return diaSemana;
+    return diaSem;
   }
-  return diaSemana[dayName];
+  return { [dayName]: diaSem[dayName] };
 }
-console.log(schedule('Monday'));
+console.log(schedule('Tuesday'));
 // function oldestFromFirstSpecies(id) {
 // seu código aqui
 // }
