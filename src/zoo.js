@@ -89,20 +89,22 @@ function entryCalculator(entrants = 0) {
 function schedule(dayName) {
   // O código deste requisito foi refatorado após grandes problemas apontados pelo Lint, utilizando por base o código escrito pelo colega Leonardo Mallmann! 'https://github.com/tryber/sd-010-a-project-zoo-functions/pull/121/commits/c807c2be882d77b41e00caa3f21447bfa883ebb8'.
   const resultObj = {};
+  const week = Object.keys(hours);
+  const day = hours[dayName];
   if (dayName === undefined) {
-    for (key in hours) {
-      resultObj[key] = `Open from ${hours[key].open}am until ${(hours[key].close) - 12}pm`;
-    }
-    resultObj['Monday'] = 'CLOSED';
+    week.forEach((day) => {
+      resultObj[day] = `Open from ${hours[day].open}am until ${(hours[day].close) - 12}pm`;
+      if (hours[day].open === 0) {
+        resultObj[day] = 'CLOSED';
+      }
+    });
     return resultObj;
   }
+  resultObj[dayName] = `Open from ${day.open}am until ${(day.close) - 12}pm`;
   if (dayName === 'Monday') {
-    resultObj['Monday'] = 'CLOSED';
-    return resultObj;
-  } else {
-    resultObj[dayName] = `Open from ${hours[dayName].open}am until ${(hours[dayName].close) - 12}pm`;
-    return resultObj;
+    resultObj[dayName] = 'CLOSED';
   }
+  return resultObj;
 }
 
 function oldestFromFirstSpecies(id) {
