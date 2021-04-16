@@ -85,18 +85,39 @@ function schedule(dayName = undefined) {
   }
   return { [dayName]: diaSem[dayName] };
 }
-console.log(schedule('Tuesday'));
+// console.log(schedule('Tuesday'));
 // function oldestFromFirstSpecies(id) {
 // seu código aqui
 // }
 // function increasePrices(percentage) {
 //   // seu código aqui
 // }
+function animais(ids) {
+  const names = [];
+  ids.forEach((id) => {
+    names.push(animals.find((animal) => animal.id === id).name);
+  });
+  return names;
+}
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
-
+function employeeCoverage(idOrName = undefined) {
+  const AnimaisFuncio = {};
+  if (idOrName === undefined) {
+    employees.forEach((element) => {
+      const key = `${element.firstName} ${element.lastName}`;
+      AnimaisFuncio[key] = animais(element.responsibleFor);
+    });
+    return AnimaisFuncio;
+  }
+  employees.forEach((elemen) => {
+    const key = `${elemen.firstName} ${elemen.lastName}`;
+    if (elemen.firstName === idOrName || elemen.lastName === idOrName || elemen.id === idOrName) {
+      AnimaisFuncio[key] = animais(elemen.responsibleFor);
+    }
+  });
+  return AnimaisFuncio;
+}
+console.log(employeeCoverage('Azevado'));
 module.exports = {
   entryCalculator,
   schedule,
@@ -104,7 +125,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
