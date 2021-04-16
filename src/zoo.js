@@ -48,10 +48,28 @@ function isManager(id) {
 function addEmployee(id1, firstName1, lastName1, managers1, responsibleFor1) {
   const firstPart = { id: id1, fisrtName: firstName1, lastName: lastName1 };
   const secPart = { managers: managers1, responsibleFor: responsibleFor1 };
+  if (managers1 === undefined) {
+    const man = [];
+    secPart.managers = man;
+  }
+  if (responsibleFor1 === undefined) {
+    const res = [];
+    secPart.responsibleFor = res;
+  }
   const newEmployee = createEmployee(firstPart, secPart);
   const { employees } = data;
   employees.push(newEmployee);
+  return employees;
 }
+console.log(addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe',
+  [
+    '546fe3d4-2d81-4bb4-83a7-92d5b7048d17',
+    'a67a36ee-3765-4c74-8e0f-13f881f6588a',
+  ],
+  [
+    'ee6139bf-b526-4653-9e1e-1ca128d0ad2e',
+    '210fcd23-aa7b-4975-91b7-0230ebb27b99',
+  ]));
 
 function animalCount(species) {
   const { animals } = data;
