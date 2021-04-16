@@ -122,7 +122,13 @@ function entryCalculator(entrants) {
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
+//   // encontra funcionario
+//   const employeeObject = employees.find(employee => id === employee.id);
+//   // encontra a id da primeira especie de responsabilidade desse funcionario
+//   const animalID = employeeObject.responsibleFor[0];
+//   const animalsObject = animals.find((id) => id.id === animalID).residents;
 // }
+// oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992');
 
 //* este codigo foi baseado no resultado de pesquisas realizado no slack
 //* thiago Granville - turma 09 */
@@ -138,9 +144,26 @@ function increasePrices(percentage) {
   return prices;
 }
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function employeeCoverage(idOrName) {
+  // sem parametros, retorna uma lista de funcionarios e os animais pelos quais sao responsaveis
+  if (!idOrName) {
+    // firstName, lastName de employees, responsibleFor
+    return employees.reduce((accumulator, employee) => {
+      const animalList = employee.responsibleFor
+        .map((animalId) => animals.find((animal) => animalId === animal.id).name);
+      const key = `${employee.firstName} ${employee.lastName}`;
+      accumulator[key] = animalList;
+      return accumulator;
+    }, {});
+  }
+  const targetEmployee = employees
+    .find((employee) => employee.id === idOrName
+      || employee.firstName === idOrName || employee.lastName === idOrName);
+  const animalList = targetEmployee.responsibleFor
+    .map((animalId) => animals.find((animal) => animalId === animal.id).name);
+  const key = `${targetEmployee.firstName} ${targetEmployee.lastName}`;
+  return { [key]: animalList };
+}
 
 module.exports = {
   entryCalculator,
@@ -149,7 +172,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
