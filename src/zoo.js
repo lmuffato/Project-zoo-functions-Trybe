@@ -22,9 +22,9 @@ function animalsOlderThan(animal, age) {
   const old = animals.find((animal2) => (animal2.name === animal)).residents;
   const trueOrFalse = old.filter((ages) => (ages.age <= age));
   if (trueOrFalse.length > 0) {
-    return console.log(false);
+    return false;
   }
-  return console.log(true);
+  return true;
 }
 
 function employeeByName(employeeName) {
