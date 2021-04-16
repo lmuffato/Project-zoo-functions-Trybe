@@ -9,8 +9,8 @@ eslint no-unused-vars: [
 ]
 */
 
-// const { animals, employees, hours, prices } = require('./data');
-const data = require('./data');
+const { animals, employees, hours, prices } = require('./data');
+//const data = require('./data');
 
 function animalsByIds(...ids) {
   return ids.map((id) => animals.find((singleAnimal) => singleAnimal.id === id));
