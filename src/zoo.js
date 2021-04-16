@@ -85,9 +85,19 @@ function entryCalculator(entrants) {
 // seu código aqui
 // }
 
-// function oldestFromFirstSpecies(id) {
-// seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  const findEmploye = employees.find((employe) => employe.id === id);
+  const findSpecie = findEmploye.responsibleFor[0];
+  const findAnimal = animals.find((animal) => animal.id === findSpecie);
+  const oldest = findAnimal.residents.reduce((firstAnimal, animal) => {
+    if (firstAnimal.age > animal.age) {
+      return firstAnimal;
+    }
+    return animal;
+  });
+  const { name, sex, age } = oldest;
+  return [name, sex, age];
+}
 
 const porcentagem = (percent) => 1 + (percent / 100) + 0.00001;
 
@@ -113,7 +123,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
