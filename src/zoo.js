@@ -122,7 +122,7 @@ function schedule(dayName) {
   const { open, close } = data.hours[dayName];
   let frase = { [dayName]: `Open from ${open}am until ${close - 12}pm` };
   if (open !== 0 && close !== 0) return frase;
-    frase = { [dayname]: "CLOSED" };
+  frase = { [dayName]: 'CLOSED' };
   return frase;
 }
 
