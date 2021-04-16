@@ -111,10 +111,7 @@ function employeeCoverage(idOrName) {
   }
   const name = employees.find((resp) => (resp.id === idOrName));
   const responsables = employees.find((resp) => (resp.id === idOrName)).responsibleFor;
-  const obj = employees.find((resp) => (resp.id === idOrName));
-  Object.keys(obj).forEach((value, i) => {
-    console.log(value[i].map((e) => e));
-  })
+  Object.keys(responsables).forEach((value, i) => value)
   console.log(responsables);
   return console.log(`${name.firstName} ${name.lastName}: ${name.responsibleFor}`);
 }
