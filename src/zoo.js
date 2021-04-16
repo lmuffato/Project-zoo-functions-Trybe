@@ -70,12 +70,7 @@ function entryCalculator(entrants) {
   }).reduce((acc, currVal) => acc + currVal);
 }
 // function animalMap(options) {
-//   const geo = {};
-//   data.animals.map((animal) => {
-//     geo[animal.location] = data.animals.map((names) => names[animal.name]);
-//     return geo;
-//   });
-//   if (!options) return geo;
+
 // }
 
 function schedule(dayName) {
@@ -90,7 +85,7 @@ function schedule(dayName) {
   return { [dayName]: returnedObj[dayName] };
 }
 function oldestFromFirstSpecies(id) {
-  const getAnimalId = data.employees.filter((employee) => employee.id === id)[0].responsibleFor[0];
+  const getAnimalId = data.employees.filter((employee) => employee.id === id)[0].responsibleFor;
   const getResidents = data.animals.find((animal) => animal.id === getAnimalId).residents;
   const setResults = getResidents.reduce((acc, currVal) => {
     if (acc.age > currVal.age) return acc;
@@ -104,10 +99,28 @@ function increasePrices(percentage) {
     (data.prices[price] = Math.round(data.prices[price] * ((percentage / 100) + 1) * 100) / 100);
   });
 }
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
 
+function objectBuilder(employeers) {
+  const employeeObj = {};
+  employeers.map(({ firstName, lastName, responsibleFor }) => {
+    employeeObj[`${firstName} ${lastName}`] = responsibleFor
+      .map((animalId) => data.animals.find(({ id }) => animalId === id).name);
+    return employeeObj;
+  });
+  return employeeObj;
+}
+
+function employeeCoverage(idOrName) {
+  if (!idOrName) {
+    return objectBuilder(data.employees);
+  }
+  const filtered = data.employees
+    .filter((employee) =>
+      employee.id === idOrName || employee.firstName === idOrName
+        || employee.lastName === idOrName);
+  return objectBuilder(filtered);
+}
+console.log((employeeCoverage('Nelson')));
 module.exports = {
   entryCalculator,
   schedule,
@@ -115,7 +128,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
