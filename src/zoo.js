@@ -77,13 +77,10 @@ function entryCalculator(entrants) {
     return 0;
   }
   let result = 0;
-  const adultPrice = prices.Adult;
-  const seniorPrice = prices.Senior;
-  const childPrice = prices.Child;
   const { Adult, Senior, Child } = entrants;
-  if (Adult) { result += (adultPrice * Adult) }
-  if (Senior) { result += (seniorPrice * Senior) }
-  if (Child) { result += (childPrice * Child) }
+  if (Adult) { result += (Adult * prices.Adult) };
+  if (Senior) { result += (Senior * prices.Senior) };
+  if (Child) { result += (Child * prices.Child) };
   return result;
 }
 
