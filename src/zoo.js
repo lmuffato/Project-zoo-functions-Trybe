@@ -119,11 +119,11 @@ function oldestFromFirstSpecies(idEmployee) {
   const employeeId = employees.find((employee) => employee.id === idEmployee);
   const animalList = employeeId.responsibleFor;
   const firstEspecie = animals.filter((animal) => animal.id === animalList[0]);
-  let especieResidents = (firstEspecie.map(({residents}) => residents));
+  let especieResidents = (firstEspecie.map(({ residents }) => residents));
   especieResidents = especieResidents[0];
   const especiesAge = especieResidents.map((animal) => animal.age);
   const maiorIdade = especiesAge.sort((a, b) => b - a);
-  const animalMaisVelho = especieResidents.find(({age})=> age === maiorIdade[0]);
+  const animalMaisVelho = especieResidents.find(({ age }) => age === maiorIdade[0]);
   return Object.values(animalMaisVelho);
 }
 console.log(oldestFromFirstSpecies('b0dc644a-5335-489b-8a2c-4e086c7819a2')); // TESTE 1 -> Retorna [ 'Orval', 'male', 15 ]
