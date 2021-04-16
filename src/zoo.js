@@ -19,8 +19,12 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(animal, age) {
   const { animals } = data;
-  animals.find((animal2) => (animal2.name === animal))
-    .residents.filter((ages) => ages.age >= age);
+  const old = animals.find((animal2) => (animal2.name === animal)).residents;
+  const trueOrFalse = old.filter((ages) => (ages.age <= age));
+  if (trueOrFalse.length > 0) {
+    return console.log(false);
+  }
+  return console.log(true);
 }
 
 function employeeByName(employeeName) {
@@ -61,15 +65,6 @@ function addEmployee(id1, firstName1, lastName1, managers1, responsibleFor1) {
   employees.push(newEmployee);
   return employees;
 }
-console.log(addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe',
-  [
-    '546fe3d4-2d81-4bb4-83a7-92d5b7048d17',
-    'a67a36ee-3765-4c74-8e0f-13f881f6588a',
-  ],
-  [
-    'ee6139bf-b526-4653-9e1e-1ca128d0ad2e',
-    '210fcd23-aa7b-4975-91b7-0230ebb27b99',
-  ]));
 
 function animalCount(species) {
   const { animals } = data;
