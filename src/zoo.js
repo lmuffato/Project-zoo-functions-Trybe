@@ -94,22 +94,19 @@ function animalMap(options) {
 
 function schedule(dayName = undefined) {
   // seu código aqui
-  const weekSchedule = {};
+  const { hours } = data;
   const weekDays = Object.keys(hours);
-
-  weekDays.forEach((day) => {
-    if (day === 'Monday') {
-      weekSchedule[day] = 'CLOSED';
-    } else {
-      weekSchedule[day] = `Open from ${hours[day].open}am until ${(hours[day].close) - 12}pm`;
-    }
-  });
-  if (!dayName) {
-    return weekSchedule;
-  }
-  return {
-    [dayName]: weekSchedule[dayName],
-  };
+  const noParameter = weekDays.reduce((accumulator, day) => {
+    const { open, close } = hours[day];
+    const isOpen = open - close !== 0
+      ? `Open from ${open}am until ${close - 12}pm`
+      : 'CLOSED';
+    return { ...accumulator, ...{ [day]: isOpen } };
+  }, {});
+  if (!dayName) return noParameter;
+  const [date, mensage] = Object.entries(noParameter).find(([_date, _mensage]) =>
+    _date === dayName);
+  return ({ [date]: mensage });
 }
 
 function oldestFromFirstSpecies(id) {
