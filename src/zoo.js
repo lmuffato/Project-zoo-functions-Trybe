@@ -109,16 +109,16 @@ const getSchedule = (day) => {
 };
 
 function schedule(dayName) {
-  const schedule = {};
+  const result = {};
   const days = Object.keys(hours);
   if (dayName === undefined) {
     days.forEach((day) => {
-      schedule[day] = getSchedule(day);
+      result[day] = getSchedule(day);
     });
   } else {
-    schedule[dayName] = getSchedule(dayName);
+    result[dayName] = getSchedule(dayName);
   }
-  return schedule;
+  return result;
 }
 
 console.log(schedule());
