@@ -77,26 +77,31 @@ function entryCalculator(entrants) {
     accumulator + (entrants[currentValue] * prices[currentValue]), 0);
 }
 
-/* function animalMap(options) {
-  // seu código aqui
-}
+// function animalMap(options) {
+// seu código aqui
+// }
 
-function schedule(dayName) {
-  // seu código aqui
-}
+// function schedule(dayName) {
+// seu código aqui
+// }
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// function oldestFromFirstSpecies(id) {
+// seu código aqui
+// }
+
+const porcentagem = (percent) => 1 + (percent / 100) + 0.00001;
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const aumento = porcentagem(percentage);
+  prices.Adult = parseFloat((prices.Adult * aumento).toPrecision(4));
+  prices.Senior = parseFloat((prices.Senior * aumento).toPrecision(4));
+  prices.Child = parseFloat((prices.Child * aumento).toPrecision(4));
 }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
- */
+// function employeeCoverage(idOrName) {
+// seu código aqui
+// }
+
 module.exports = {
   entryCalculator,
   // schedule,
@@ -109,6 +114,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
