@@ -99,15 +99,32 @@ function schedule(dayName) {
   });
   return objetoDays;
 }
-console.log(schedule('Tuesday'));
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  const { employees} = data; 
+  const { animals } = data;
+  const getEmployee = employees.find((employee) => employee.id === id);
+  const firstAnimal = animals.find((animal) => animal.id === getEmployee.responsibleFor[0]);
+  let animalArray = [];
+  let idade = 0;
+  firstAnimal.residents.forEach((animal) => {
+    if (animal.age > idade) {
+      idade = animal.age;
+      animalArray = animal;
+    }
+    return animalArray;
+  });
+  return Object.values(animalArray);
+}
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  const { prices } = data;
+  const toConvert = percentage / 100 + 1 + 0.005;
+  return Object.keys(data.prices).forEach((key) => {
+    prices[key] = Number(parseFloat(prices[key] * toConvert).toFixed(2));
+  });
+}
+console.log(increasePrices(30));
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -124,7 +141,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
-  // increasePrices,
+  oldestFromFirstSpecies,
+  increasePrices,
   createEmployee,
 };
