@@ -1,8 +1,6 @@
 // -------------------- Imports -----------------------
 
-/* const data = require('./data'); */
-const { animals, employees, prices } = require('./data');
-/* const data = require('./data'); */
+const { animals, employees, prices, hours } = require('./data');
 
 // -------------------- require 01 -----------------------
 
@@ -56,11 +54,6 @@ function animalCount(species) {
   return !species ? howMannyAnimals : howMannyAnimals[species];
 }
 
-// other way to work.
-/* const howMannyAnimals = animals.reduce((acc, crr) =>
-    ({ acc, [crr.name]: crr.residents.length }), {});
-*/
-
 // --------------------- require 08 ------------------------
 
 // entrie: { 'Adult': 2, 'Child': 3, 'Senior': 1 }
@@ -71,7 +64,7 @@ function entryCalculator(entrants = 0) {
   return Object.entries(entrants).reduce(priceCalc, 0);
 }
 
-// the way to do this function w/o transform objects in arrays using the prototyped Object functions is:
+// the way to do this function w/o transform objects in arrays (using the prototyped Object functions) is:
 /* function entryCalculator(entrants = 0) {
   const { Adult: adultQnt, Child: childQnt, Senior: seniorQnt } = entrants;
   const validCalc = (a, b) => (!a) ? 0 : a * b;
@@ -155,9 +148,16 @@ function animalMap(options = {}) {
 
 // --------------------- require 10 ------------------------
 
-/* function schedule(dayName) {
-  // seu código aqui
-} */
+const agendaControl = () => (acc, [crrDay, crrValues]) => {
+  return ({ ...acc, [crrDay]: crrValues.close - crrValues.open !== 0 ? `Open from ${crrValues.open}am until ${crrValues.close - 12}pm` : 'CLOSED' })
+};
+
+function schedule(dayName) {
+  const agenda = Object.entries(hours);
+  
+  if (!dayName) return agenda.reduce(agendaControl(dayName), {})
+  return agenda.filter((day) => day[0] === dayName).reduce(agendaControl(dayName), {});
+}
 
 // --------------------- require 11 ------------------------
 
@@ -190,8 +190,8 @@ module.exports = {
   animalCount,
   entryCalculator,
   increasePrices,
-  /* schedule,
-  animalMap,
-  employeeCoverage,
-  oldestFromFirstSpecies, */
+  schedule,
+  //animalMap,
+  //employeeCoverage,
+  //oldestFromFirstSpecies,
 };
