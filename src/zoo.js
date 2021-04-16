@@ -168,3 +168,4 @@ module.exports = {
   createEmployee,
 };
 //  ---------------------- Projeto realidazo com total ajuda dos meus colegas de turma: Rafael Medeiros, Murilo Gonçalves, Lucas Pedroso, Nilson Ribeiro, Tiago Santos, Guilherme Dornelles, dentre tantos outros que me deram dicas e auxiliaram na resolução dos requisitos, dedico esse projeto a eles pelas quais não conseguiria finalizar e entregar no prazo.
+// Também fiquei feliz por poder dizer algumas palavras e motivar algumas pessoas nesse momento complicado, só mostra o quanto o trabalho em equipe e as soft skills tem sido importantíssimas.
