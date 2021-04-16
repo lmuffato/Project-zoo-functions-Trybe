@@ -61,13 +61,13 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 
 function animalCount(species) {
   if (species === undefined) {
-      return animals.reduce((result, animal) => {
-        const animalName = animal.name;
-        const animalCounting = (animal.residents).length;
-        const obj = { [animalName]: animalCounting };
-        return Object.assign(result, obj)
-      }, {})
-  };
+    return animals.reduce((result, animal) => {
+      const animalName = animal.name;
+      const animalCounting = (animal.residents).length;
+      const obj = { [animalName]: animalCounting };
+      return Object.assign(result, obj);
+    }, {});
+  }
   const getAnimal = animals.find((animal) => animal.name === species);
   return (getAnimal.residents).length;
 }
