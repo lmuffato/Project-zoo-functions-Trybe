@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { animals, employees, prices, hours } = require('./data');
-const data = require('./data');
+// const data = require('./data');
 
 function animalsByIds(...ids) {
   const animalsFound = animals.filter((animal) => ids.find((unitId) => animal.id === unitId));
@@ -26,8 +26,8 @@ function employeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-  return employees.find((worker) => worker.
-    firstName === employeeName || worker.lastName === employeeName);
+  return employees.find((worker) => worker
+    .firstName === employeeName || worker.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -70,19 +70,29 @@ function entryCalculator(entrants) {
   if (entrants === undefined) {
     return 0;
   }
-  return Object.entries(entrants).reduce((acc, [key, value]) => acc += (prices[key] * value), 0);
+  return Object.entries(entrants).reduce((acc, [key, value]) => acc + (prices[key] * value), 0);
 }
 
-function animalMap(options) {
+// function animalMap(options) {
+// }
 
+function unitDay(dayName) {
+  const dailySchedule = {};
+  if (dayName === 'Monday') {
+    dailySchedule[dayName] = 'CLOSED';
+    return dailySchedule;
+  }
+  dailySchedule[dayName] = `Open from ${hours[dayName]
+    .open}am until ${hours[dayName].close - 12}pm`;
+  return dailySchedule;
 }
 
 function schedule(dayName) {
   const dailySchedule = {};
-  if(!dayName) {
-    Object.keys(hours).forEach( day => {
+  if (!dayName) {
+    Object.keys(hours).forEach((day) => {
       const { open, close } = hours[day];
-      if(open === 0 && close === 0) {
+      if (open === 0 && close === 0) {
         dailySchedule[day] = 'CLOSED';
         return dailySchedule;
       }
@@ -90,12 +100,7 @@ function schedule(dayName) {
     });
     return dailySchedule;
   }
-  if(dayName === 'Monday') {
-    dailySchedule[dayName] = 'CLOSED';
-    return dailySchedule;
-  }
-  dailySchedule[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
-  return dailySchedule;
+  return unitDay(dayName);
 }
 
 function oldestFromFirstSpecies(id) {
@@ -103,31 +108,30 @@ function oldestFromFirstSpecies(id) {
   const species = animals.find((animal) => animal.id === idSpecies);
   const animal = species.residents.sort((a, b) => b.age - a.age)[0];
   const { name, sex, age } = animal;
-  return [ name, sex, age ];
+  return [name, sex, age];
 }
 
 function increasePrices(percentage) {
-  const { Adult, Child, Senior} = prices;
-  newPriceAdult = Adult + (Math.round(Adult * percentage) / 100);
-  newPriceChild = Child + (Math.round(Child * percentage) / 100);
-  newPriceSenior = Senior + (Math.round(Senior * percentage) / 100);
+  const { Adult, Child, Senior } = prices;
+  const newPriceAdult = Adult + (Math.round(Adult * percentage) / 100);
+  const newPriceChild = Child + (Math.round(Child * percentage) / 100);
+  const newPriceSenior = Senior + (Math.round(Senior * percentage) / 100);
   prices.Adult = parseFloat(newPriceAdult.toFixed(2));
   prices.Child = parseFloat(newPriceChild.toFixed(2));
   prices.Senior = parseFloat(newPriceSenior.toFixed(2));
 }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function employeeCoverage(idOrName) {
+// }
 
 module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  // employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
