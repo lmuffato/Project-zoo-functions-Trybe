@@ -107,6 +107,13 @@ function entryCalculator(entrants) {
 
 // function animalMap(options) {
 //   // seu código aqui
+//   // a funcao recebe um objeto como parametro
+//   // a funcao retorna um objeto
+//   // esse objeto possui a seguinte entrada:
+//   //                                       chave: string, essa string é a localizaçao
+//   //                                       valor: array
+//   // quando tenho o parametro includeName: true, o valor do objeto é um arru de objetos
+
 // }
 
 // function schedule(dayName) {
@@ -117,9 +124,19 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+//* este codigo foi baseado no resultado de pesquisas realizado no slack
+//* thiago Granville - turma 09 */
+function increasePrices(percentage) {
+  // seu código aqui
+  const percent = percentage / 100;
+  const ageEntrant = Object.keys(prices);
+  ageEntrant.forEach((key) => {
+    const increase = prices[key] * percent;
+    prices[key] += increase;
+    prices[key] = Math.round(prices[key] * 100) / 100;
+  });
+  return prices;
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -137,6 +154,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
