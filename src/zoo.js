@@ -70,9 +70,12 @@ function schedule(dayName) {
     menssage(checksDays)).find((weekDay) => weekDay[dayName]);
 }
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(idEmployee) {
+  const searchId = data.employees.find((employee) => employee.id === idEmployee).responsibleFor[0];
+  const searchAnimal = data.animals.find(({ id }) => id === searchId).residents
+    .reduce((result, animal) => ((result.age > animal.age) ? result : animal));
+  return Object.values(searchAnimal);
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -93,7 +96,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
