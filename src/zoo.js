@@ -85,25 +85,24 @@ function entryCalculator(entrants) {
 } */
 
 function schedule(dayName) {
-  temp = {};
+  const temp = {};
   if (!dayName) {
-    for (const index in hours) {
-      temp[`${index}`] = `Open from ${hours[index].open}am until ${hours[index].close -12}pm`;
-    }
-  temp.Monday = 'CLOSED';
-  return temp;
+    Object.entries(hours).forEach(([key, value]) => {
+      temp[`${key}`] = `Open from ${value.open}am until ${value.close - 12}pm`;
+    });
+    temp.Monday = 'CLOSED';
+    return temp;
   }
+
   if (dayName === 'Monday') {
-    const monday = {"Monday": "CLOSED"}
-    return monday
+    const returnMonday = { Monday: 'CLOSED' };
+    return returnMonday;
   }
-  dayOne = {}
-  for (const index in hours) {
-    if (index === dayName) {
-      dayOne[`${index}`] = `Open from ${hours[index].open}am until ${hours[index].close -12}pm`;
-    }
-  return dayOne
-  }
+  const dayOne = {};
+  const num = Object.entries(hours)
+    .find(([key]) => key === dayName);
+  dayOne[num[0]] = `Open from ${num[1].open}am until ${num[1].close - 12}pm`;
+  return dayOne;
 }
 
 function oldestFromFirstSpecies(id) {
@@ -150,10 +149,10 @@ function increasePrices(percentage) {
 
    return employees.find((name) =>
     name.firstName === employeeName || name.lastName === employeeName);
-  
+
   } */
 
-console.log(schedule('Monday'));
+console.log(schedule('Tuesday'));
 
 module.exports = {
   entryCalculator,
