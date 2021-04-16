@@ -90,7 +90,7 @@ function schedule(dayName) {
   // O código deste requisito foi refatorado após grandes problemas apontados pelo Lint, utilizando por base o código escrito pelo colega Leonardo Mallmann! 'https://github.com/tryber/sd-010-a-project-zoo-functions/pull/121/commits/c807c2be882d77b41e00caa3f21447bfa883ebb8'.
   const resultObj = {};
   const week = Object.keys(hours);
-  const day = hours[dayName];
+  const paramDay = hours[dayName];
   if (dayName === undefined) {
     week.forEach((day) => {
       resultObj[day] = `Open from ${hours[day].open}am until ${(hours[day].close) - 12}pm`;
@@ -100,7 +100,7 @@ function schedule(dayName) {
     });
     return resultObj;
   }
-  resultObj[dayName] = `Open from ${day.open}am until ${(day.close) - 12}pm`;
+  resultObj[dayName] = `Open from ${paramDay.open}am until ${(paramDay.close) - 12}pm`;
   if (dayName === 'Monday') {
     resultObj[dayName] = 'CLOSED';
   }
