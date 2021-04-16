@@ -132,6 +132,8 @@ function increasePrices(percentage) {
 }
 console.log(increasePrices(50)); // TESTE 1  -> O preço sobe 50%
 console.log(increasePrices()); // TESTE 2 -> O preço não tem alteração
+// const chaves = Object.keys(prices);
+// const valores = Object.values(prices);
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
