@@ -149,15 +149,17 @@ function animalMap(options = {}) {
 // --------------------- require 10 ------------------------
 
 const agendaControl = () => (acc, [crrDay, crrValues]) => (
-  ({ ...acc, [crrDay]: (crrValues.close - crrValues.open !== 0) ? `Open from ${crrValues.open}am until ${crrValues.close - 12}pm`
-    : 'CLOSED' })
+  ({ ...acc,
+    [crrDay]: (crrValues.close - crrValues.open !== 0)
+      ? `Open from ${crrValues.open}am until ${crrValues.close - 12}pm`
+      : 'CLOSED' })
 );
 
 function schedule(dayName) {
   const agenda = Object.entries(hours);
 
-  if (!dayName) return agenda.reduce(agendaControl(), {})
-  return agenda.filter((day) => day[0] === dayName).reduce(agendaControl(dayName), {});
+  if (!dayName) return agenda.reduce(agendaControl(), {});
+  return agenda.filter((day) => day[0] === dayName).reduce(agendaControl(), {});
 }
 
 // --------------------- require 11 ------------------------
