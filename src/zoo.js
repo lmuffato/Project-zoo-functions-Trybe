@@ -116,18 +116,18 @@ function schedule(dayName) {
 // console.log(schedule('Monday')); // TESTE 3 - Retorna CLOSED, por ser domingo
 
 function oldestFromFirstSpecies(idEmployee) {
-  const employeeId = employees.find((employee) => employee.id===idEmployee);
+  const employeeId = employees.find((employee) => employee.id === idEmployee);
   const animalList = employeeId.responsibleFor;
-  const firstEspecie = animals.filter((animal)=>animal.id === animalList[0]);
-  let especieResidents = (firstEspecie.map(({residents})=> residents));
+  const firstEspecie = animals.filter((animal) => animal.id === animalList[0]);
+  let especieResidents = (firstEspecie.map(({residents}) => residents));
   especieResidents = especieResidents[0];
-  const especiesAge = especieResidents.map((animal)=>animal.age);
+  const especiesAge = especieResidents.map((animal) => animal.age);
   const maiorIdade = especiesAge.sort((a, b) => b - a);
-  const animalMaisVelho = especieResidents.find(({age})=> age===maiorIdade[0])
-  return Object.values(animalMaisVelho)
+  const animalMaisVelho = especieResidents.find(({age})=> age === maiorIdade[0]);
+  return Object.values(animalMaisVelho);
 }
-console.log(oldestFromFirstSpecies('b0dc644a-5335-489b-8a2c-4e086c7819a2')) // TESTE 1 -> Retorna [ 'Orval', 'male', 15 ]
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992')) // TESTE 2 -> Retorna [ 'Vicky', 'female', 12 ]
+console.log(oldestFromFirstSpecies('b0dc644a-5335-489b-8a2c-4e086c7819a2')); // TESTE 1 -> Retorna [ 'Orval', 'male', 15 ]
+console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992')); // TESTE 2 -> Retorna [ 'Vicky', 'female', 12 ]
 
 function increasePrices(percentage) {
   const atualizaPreco = (preco) => ((preco * (1 + percentage / 100)));
