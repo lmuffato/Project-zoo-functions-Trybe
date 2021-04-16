@@ -131,7 +131,7 @@ const animalProcurado = (id) => data.employees.find((employee) => id === employe
 function oldestFromFirstSpecies(id) {
   // seu código aqui
   return Object.values(data.animals.find((animal) => animal.id === animalProcurado(id)).residents
-    .reduce((antes, depois) => antes.age > depois.age ? antes : depois)
+    .reduce((antes, depois) => antes.age > depois.age ? antes : depois));
 }
 
 /* function increasePrices(percentage) {
