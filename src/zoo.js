@@ -80,19 +80,23 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-//   const { Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Monday} = data.hours;
-//   if (!dayName) {
-//     return {
-//     };
-//   }
-//   return data.hours;
-// }
-// console.log(schedule());
+function schedule(dayName) {
+  // referencia: https://github.com/tryber/sd-010-a-project-zoo-functions/pull/125/commits/0925e18c9e84afd23490ac43eb0e443ba226ef2c
+  // referencia: https://github.com/tryber/sd-010-a-project-zoo-functions/pull/125
+  const objectDays = Object.keys(data.hours).reduce((acc, curr) => {
+    const { open, close } = data.hours[curr];
+    const openOrClosed = open - close !== 0 ? `Open from ${open}am until ${close - 12}pm`
+      : 'CLOSED';
+    return { ...acc, ...{ [curr]: openOrClosed } };
+  }, {});
+  if (!dayName) return objectDays;
+  const [day, hours] = Object.entries(objectDays)
+    .find(([dayWeek]) => dayWeek === dayName);
+  return ({ [day]: hours });
+}
+console.log(schedule('Monday'));
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui ta ok
   const employeeSearch = data.employees.find((employee) => employee.id === id).responsibleFor[0];
   const animalSearch = data.animals.find((animal) => animal.id === employeeSearch);
   const biggerAge = animalSearch.residents.map((numberAge) => numberAge.age)
@@ -115,7 +119,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   //  animalMap,
   animalsByIds,
