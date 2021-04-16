@@ -127,6 +127,7 @@ function increasePrices(percentage) {
   prices.Child = arredondar(atualizaPreco(Child));
   prices.Senior = arredondar(atualizaPreco(Senior));
   return prices;
+
   // const chaves = Object.keys(prices);
   // const valores = Object.values(prices);
   // return chaves.reduce((valorAnterior, valorAtual, index) => {
