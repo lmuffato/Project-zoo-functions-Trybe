@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 // Desenvolvido junto com Nathi Zebral, Thalita Cecilier, Heloísa Hackenhaar
 
-const { animals } = require('./data');
+const { animals, hours } = require('./data');
 const data = require('./data');
 const { employees } = require('./data');
 const { prices } = require('./data');
@@ -81,9 +81,17 @@ function entryCalculator(entrants) {
 // seu código aqui
 // }
 
-// function schedule(dayName) {
-// seu código aqui
-// }
+const sentenceReturn = (dia) => ({ [dia[0]]: dia[0] === 'Monday' ? 'CLOSED'
+  : `Open from ${dia[1].open}am until ${dia[1].close - 12}pm` });
+
+function schedule(dayName) {
+  const horario = Object.entries(hours);
+  if (dayName === undefined) {
+    return horario.reduce((accumulator, atual) =>
+      Object.assign(accumulator, sentenceReturn(atual)), {});
+  }
+  return horario.map((list) => sentenceReturn(list)).find((element) => element[dayName]);
+}
 
 function oldestFromFirstSpecies(id) {
   const findEmploye = employees.find((employe) => employe.id === id);
@@ -114,7 +122,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
