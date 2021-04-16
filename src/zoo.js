@@ -59,14 +59,18 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   return employees.push(newEmployee);
 }
 
-// function animalCount(species) {
-//   if (species === undefined) {
-//       return animals.reduce((accumulator, currentAnimal) => {
-//         const objAnimalId = currentAnimal.name;
-//         return accumulator.id = objAnimalId;
-//     }, {})
-//   };
-// }
+function animalCount(species) {
+  if (species === undefined) {
+      return animals.reduce((result, animal) => {
+        const animalName = animal.name;
+        const animalCounting = (animal.residents).length;
+        const obj = { [animalName]: animalCounting };
+        return Object.assign(result, obj)
+      }, {})
+  };
+  const getAnimal = animals.find((animal) => animal.name === species);
+  return (getAnimal.residents).length;
+}
 
 // function entryCalculator(entrants) {
 //   // seu código aqui
@@ -98,13 +102,24 @@ function increasePrices(percentage) {
 }
 
 // function employeeCoverage(idOrName) {
-//   // seu código aqui
+//   if (idOrName === undefined) {
+//     const names = employees.map((employee) => `${employee.firstName} ${employee.lastName}`);
+//     const animalsIDs = employees.map((employee) => employee.responsibleFor);
+//     animalsIDs.forEach((animalArr) => {
+//       const newAnimalArr = animalArr.map((currentID) => (animalsByIds(currentID)).name);
+//       console.log(newAnimalArr);
+//     })
+//     return animalsIDs;
+//   }
+//   // const getAnimal = animals.filter((animal) => animal.id === getMonitoredAnimals).name;
 // }
+
+// console.log(employeeCoverage());
 
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
