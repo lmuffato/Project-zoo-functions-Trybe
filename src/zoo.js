@@ -91,9 +91,13 @@ function schedule(dayName) {
   return cronograma;
 }
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  const { employees } = data;
+  const animalId = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const { residents } = animals.find((animal) => animal.id === animalId);
+  const request = Object.values(residents.sort((a, b) => b.age - a.age)[0]);
+  return request;
+}
 
 function increasePrices(percentage) {
   const multiply = (percentage / 100) + 1;
@@ -124,7 +128,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
