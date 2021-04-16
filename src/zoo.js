@@ -122,16 +122,12 @@ function increasePrices(percentage) {
   if (!percentage) { return prices; }
   const chaves = Object.keys(prices);
   const valores = Object.values(prices);
-  const atualizaPreco = (preco) => {
-     return ((preco * (1 + percentage / 100)));
-    };
-  const arredondar = (numero) => {
-    return (Math.floor(numero * 100) / 100);
-  };
+  const atualizaPreco = (preco) => ((preco * (1 + percentage / 100)));
+  const arredondar = (numero) => (Math.floor(numero * 100) / 100);
   return chaves.reduce((valorAnterior, valorAtual, index) => {
     valorAnterior[valorAtual] = arredondar(atualizaPreco(valores[index]));
     return valorAnterior;
-  }, 
+  },
   {});
 }
 console.log(increasePrices(50)); // TESTE 1  -> O preço sobe 50%
