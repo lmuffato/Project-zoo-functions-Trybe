@@ -87,31 +87,21 @@ function entryCalculator(entrants = 0) {
 // }
 
 function schedule(dayName) {
+  // O código deste requisito foi refatorado após grandes problemas apontados pelo Lint, utilizando por base o código escrito pelo colega Leonardo Mallmann! 'https://github.com/tryber/sd-010-a-project-zoo-functions/pull/121/commits/c807c2be882d77b41e00caa3f21447bfa883ebb8'.
   const resultObj = {};
-  const day = Object.keys(hours);
-  const time = Object.values(hours);
   if (dayName === undefined) {
-    for (let index = 0; index < day.length; index += 1) {
-      const weekDay = day[index];
-      const closeHourToPM = (time[index].close) - 12;
-      let valueString = `Open from ${time[index].open}am until ${closeHourToPM}pm`;
-      if (time[index].open === 0) {
-        valueString = 'CLOSED';
-      }
-      Object.assign(resultObj, { [weekDay]: valueString });
+    for (key in hours) {
+      resultObj[key] = `Open from ${hours[key].open}am until ${(hours[key].close) - 12}pm`;
     }
+    resultObj['Monday'] = 'CLOSED';
     return resultObj;
   }
-  for (let index = 0; index < day.length; index += 1) {
-    if (day[index] === dayName) {
-      const weekDay = day[index];
-      const closeHourToPM = (time[index].close) - 12;
-      let valueString = `Open from ${time[index].open}am until ${closeHourToPM}pm`;
-      if (time[index].open === 0) {
-        valueString = 'CLOSED';
-      }
-      return { [weekDay]: valueString };
-    }
+  if (dayName === 'Monday') {
+    resultObj['Monday'] = 'CLOSED';
+    return resultObj;
+  } else {
+    resultObj[dayName] = `Open from ${hours[dayName].open}am until ${(hours[dayName].close) - 12}pm`;
+    return resultObj;
   }
 }
 
