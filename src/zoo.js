@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees } = data;
+const { animals, employees, prices } = data;
 
 function animalsByIds(...ids) {
   const animalsArray = animals.filter((animal) => ids.includes(animal.id));
@@ -72,9 +72,7 @@ function animalCount(species) {
 
 console.log(animalCount('lions'));
 
-// Requisito resolvido com a ajuda eterna e maravilhosa do Murilo Gonçalves <3
-
-// return animals.find((animal) => species === animal.name).residents.length;
+// Requisito resolvido com a ajuda maravilhosa e eterna do Murilo Gonçalves <3
 
 // Daria pra usar template literals? NÃO, POIS RETORNA STRING E O QUE O REQUISITO SOLICITA É O RETORNO DE UM OBJETO
 // `${animalObj[name]}: ${animalObj.residents.length}`;
@@ -82,9 +80,20 @@ console.log(animalCount('lions'));
 // Por que aqui só volta array? Como mudar isso? É por causa do map? MAP RETORNA ARRAY
 // return animals.map((animalObj) => ({[animalObj.name]: animalObj.residents.length}));
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+function entryCalculator(entrants) {
+  if (entrants === undefined || Object.entries(entrants).length === 0) {
+    return 0;
+  }
+  const { Adult, Senior, Child } = entrants;
+  const priceAdult = Adult * prices.Adult;
+  const priceSenior = Senior * prices.Senior;
+  const priceChild = Child * prices.Child;
+  const totalPrice = priceAdult + priceSenior + priceChild;
+  return totalPrice;
+}
+
+console.log(entryCalculator({}));
+console.log(entryCalculator({ 'Adult': 1 }));
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -107,7 +116,7 @@ console.log(animalCount('lions'));
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
