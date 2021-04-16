@@ -136,7 +136,6 @@ function increasePrices(percentage) {
     (prices.Senior += ((prices.Senior * percentage) / 100) + Number.EPSILON) * 100,
   ) / 100;
 }
-// math.round fonte: stack overflow
 /*
 function employeeCoverage(idOrName) {
   // seu código aqui
