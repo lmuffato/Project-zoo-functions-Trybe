@@ -78,8 +78,8 @@ function entryCalculator(entrants) {
   }
   let result = 0;
   const { Adult, Senior, Child } = entrants;
-  if (Adult) { result += (Adult * prices.Adult) }
-  if (Senior) { result += (Senior * prices.Senior) }
+  if (Adult) { result += (Adult * prices.Adult); }
+  if (Senior) { result += (Senior * prices.Senior); }
   if (Child) { result += (Child * prices.Child); }
   return result;
 }
