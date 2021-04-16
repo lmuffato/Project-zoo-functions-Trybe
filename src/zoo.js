@@ -17,10 +17,10 @@ function animalsByIds(...ids) {
   return animals;
 }
 
-function animalsOlderThan(animal, age) {
+function animalsOlderThan(animal, animalAge) {
   const animalsName = data.animals.find(({ name }) => name === animal);
-  const compareNameAge = animalsName.residents.every(({ animalsAge }) => animalsAge >= age);
-  return compareNameAge;
+  const checksAge = animalsName.residents.every(({ age }) => age >= animalAge);
+  return checksAge;
 }
 
 // function employeeByName(employeeName) {
