@@ -139,7 +139,7 @@ function increasePrices(percentage) {
   // seu código aqui
   for (const key in data.prices) {
     const aumento = Math.ceil(data.prices[key] * (100 + percentage)) / 100;
-    data.prices[key] = aumento;npm 
+    data.prices[key] = aumento;
   }
   return data.prices;
 }
