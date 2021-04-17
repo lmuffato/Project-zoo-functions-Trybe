@@ -181,17 +181,19 @@ function increasePrices(percentage) {
 }
 
 // --------------------- require 13 ------------------------
-// ids.map((id) => animals.find((animal) => animal.id === id))
-empAnimalsControl = (emp) => emp.reduce((acc, crr) => {
+
+const empAnimalsControl = (emp) => emp.reduce((acc, crr) => {
   const { firstName, lastName, responsibleFor } = crr;
   const referSpecie = responsibleFor.map((id) => animals.find((animal) => animal.id === id));
+  // const referSpecie = animals.filter(({ id }) => responsibleFor.includes(id)) - mais funcional.
   const animalsName = referSpecie.map((a) => a.name);
-  return {...acc, 
-    [`${firstName} ${lastName}`]: animalsName};
+  return { ...acc,
+    [`${firstName} ${lastName}`]: animalsName };
 }, {});
 
 function employeeCoverage(idOrName) {
-  const empOne = employees.filter(({ id, firstName, lastName }) => [id, firstName, lastName].includes(idOrName));
+  const empOne = employees.filter(({ id, firstName, lastName }) =>
+    [id, firstName, lastName].includes(idOrName));
 
   if (!idOrName) return empAnimalsControl(employees);
   return empAnimalsControl(empOne);
