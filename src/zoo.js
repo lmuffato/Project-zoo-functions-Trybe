@@ -155,7 +155,7 @@ const agendaControl = () => (acc, [crrDay, crrValues]) => (
       : 'CLOSED' })
 );
 
-function schedule(dayName) {
+function schedule(dayName) { // um salve pra Anderson Silva que saiu do UFC pra me ajudar nessa função
   const agenda = Object.entries(hours);
 
   if (!dayName) return agenda.reduce(agendaControl(), {});
@@ -164,9 +164,13 @@ function schedule(dayName) {
 
 // --------------------- require 11 ------------------------
 
-/* function oldestFromFirstSpecies(id) {
-  // seu código aqui
-} */
+function oldestFromFirstSpecies(idEmp) {
+  const { responsibleFor: speciesOld } = employees.find(({ id }) => idEmp.includes(id));
+  const [referSpecie] = animals.filter(({ id }) => speciesOld[0].includes(id));
+  const oldestAnimal = referSpecie.residents.reduce((acc, crr) => acc.age > crr.age ? acc : crr);
+  return Object.values(oldestAnimal);
+}
+console.log(oldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 // --------------------- require 12 ------------------------
 
@@ -194,7 +198,7 @@ module.exports = {
   entryCalculator,
   increasePrices,
   schedule,
+  oldestFromFirstSpecies,
   // animalMap,
   // employeeCoverage,
-  // oldestFromFirstSpecies,
 };
