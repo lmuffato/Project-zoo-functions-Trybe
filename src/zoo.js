@@ -135,11 +135,16 @@ function oldestFromFirstSpecies(id) {
     .reduce((antes, depois) => ((antes.age > depois.age) ? antes : depois)));
 }
 
-/* function increasePrices(percentage) {
+ function increasePrices(percentage) {
   // seu código aqui
+  for(const key in data.prices) {
+    const aumento = Math.ceil(data.prices[key] * (100 + percentage))/100;
+    data.prices[key] = aumento;
+  }
+  return data.prices;
 }
 
-function employeeCoverage(idOrName) {
+/* function employeeCoverage(idOrName) {
   // seu código aqui
 } */
 module.exports = {
@@ -154,6 +159,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
