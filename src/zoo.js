@@ -167,7 +167,7 @@ function schedule(dayName) { // um salve pra Anderson Silva que saiu do UFC pra 
 function oldestFromFirstSpecies(idEmp) {
   const { responsibleFor: speciesOld } = employees.find(({ id }) => idEmp.includes(id));
   const [referSpecie] = animals.filter(({ id }) => speciesOld[0].includes(id));
-  const oldestAnimal = referSpecie.residents.reduce((acc, crr) => acc.age > crr.age ? acc : crr);
+  const oldestAnimal = referSpecie.residents.reduce((acc, crr) => (acc.age > crr.age ? acc : crr));
   return Object.values(oldestAnimal);
 }
 console.log(oldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
