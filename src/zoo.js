@@ -13,17 +13,22 @@ const data = require('./data');
 
 const { animals, employees, hours, prices } = data;
 
+/* ------------------ Requisito 1 ------------------- */
+// Ajuda de Renzo Sevilha - Turma 10 - Tribo A
 function animalsByIds(...ids) {
   return animals.filter(({ id }) => ids.includes(id));
 }
 // console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce', 'e8481c1d-42ea-4610-8e11-1752cfc05a46'));
 
+/* ------------------- Requisito 2 ------------------ */
 function animalsOlderThan(animal, ageMin) {
   return animals.find((bicho) => bicho.name === animal).residents
     .every(({ age }) => age >= ageMin);
 }
 // console.log(animalsOlderThan('otters', 7));
 
+/* ------------------- Requisito 3 ------------------- */
+// Ajuda de Renzo Sevilha - Turma 10 - Tribo A na estruturação da condicional
 function employeeByName(employeeName) {
   if (employeeName === undefined) return {};
   return employees.find((name) =>
@@ -31,18 +36,21 @@ function employeeByName(employeeName) {
 }
 // console.log(employeeByName('Emery'));
 
+/* ------------------------- Requisito 4 ------------------------- */
 function createEmployee(personalInfo1, associatedWith1) {
   return { ...personalInfo1, ...associatedWith1 };
 }
 
 // console.log(createEmployee(personalInfo, associatedWith));
 
+/* ------------------------ Requisito 5 ------------------------- */
 function isManager(idEmployee) {
   return employees.some(({ managers }) => managers.includes(idEmployee));
 }
 
 // console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
+/* ------------------------- Requisito 6 ----------------------- */
 function addEmployee(id, firstName, lastName, [...managers] = [], [...responsibleFor] = []) {
   employees.push({ id, firstName, lastName, managers, responsibleFor });
   return employees;
@@ -50,6 +58,8 @@ function addEmployee(id, firstName, lastName, [...managers] = [], [...responsibl
 
 // console.log(addEmployee('4141da1c-a6ed-4cf7-90c4-99c657ba4ef3', 'Jane', 'Doe'));
 
+/* -------------------------- Requisito 7 ---------------------- */
+// Ajuda de Sérgio Martins - Turma 10 - Tribo A na lógica sobre o uso do Object.assign
 function animalCount(species) {
   if (species === undefined) {
     return animals.reduce((acc, animal) =>
@@ -60,6 +70,8 @@ function animalCount(species) {
 
 // console.log(animalCount());
 
+/* -------------------------------- Requisito 8 ------------------------- */
+// Ajuda de Renzo Sevilha - Turma 10 - Tribo A na implementação do requisito
 function entryCalculator(entrants = 0) {
   const valuesEntrants = Object.keys(entrants);
   return valuesEntrants.reduce((acc, actual) => acc + entrants[actual] * prices[actual], 0);
@@ -67,10 +79,12 @@ function entryCalculator(entrants = 0) {
 
 // console.log(entryCalculator({}));
 
+/* ----------------------- Requisito 9 -------------------------- */
 /* function animalMap(options) {
   // seu código aqui
 } */
 
+/* ----------------------- Requisito 10 -------------------------- */
 const returnObject = (par) => ({ [par[0]]:
   par[0] === 'Monday' ? 'CLOSED' : `Open from ${par[1].open}am until ${par[1].close - 12}pm` });
 
@@ -84,6 +98,7 @@ function schedule(dayName) {
 
 // console.log(schedule('Tuesday'));
 
+/* ---------------------------- Requsito 11 ------------------------ */
 function oldestFromFirstSpecies(id1) {
   const idAnimal = employees.find((employee) => employee.id === id1).responsibleFor[0];
   const oldAnimal = animals.find(({ id }) => id === idAnimal).residents
@@ -93,6 +108,7 @@ function oldestFromFirstSpecies(id1) {
 
 // console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
+/* ------------------------ Requisito 12 ---------------------- */
 const calcIncrease = (element, percent) => (parseFloat((element
     + element * percent))
 );
@@ -106,9 +122,31 @@ function increasePrices(percentage) {
 /* console.log(increasePrices(50));
 console.log(increasePrices(30)); */
 
-/* function employeeCoverage(idOrName) {
-  // seu código aqui
-} */
+/* ----------------------------- Requisito 13 ------------------------ */
+// Ajuda de André Jacques - Turma 10 - Tribo A na lógica de consulta aos animais
+const consultAnimalsById = (...arr) => (
+  arr.map((id) => animals.find((animal) => animal.id === id)).map((specie) => specie.name)
+);
+
+const returnEmployee = (par) => {
+  const fullName = `${par.firstName} ${par.lastName}`;
+  return { [fullName]: consultAnimalsById(...par.responsibleFor) };
+};
+
+function employeeCoverage(idOrName) {
+  if (idOrName === undefined) {
+    return employees.reduce((acc, act) => Object.assign(acc, returnEmployee(act)), {});
+  }
+  const findEmployee = employees.find((element) => element.id === idOrName
+    || element.firstName === idOrName || element.lastName === idOrName);
+  return { ...returnEmployee(findEmployee) };
+}
+
+// console.log(employeeCoverage());
+
+// console.log(consultAnimalsById('01422318-ca2d-46b8-b66c-3e9e188244ed', '533bebf3-6bbe-41d8-9cdf-46f7d13b62ae'));
+
+// console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   entryCalculator,
@@ -117,7 +155,7 @@ module.exports = {
   /* animalMap, */
   animalsByIds,
   employeeByName,
-  /* employeeCoverage, */
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
