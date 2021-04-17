@@ -170,7 +170,6 @@ function oldestFromFirstSpecies(idEmp) {
   const oldestAnimal = referSpecie.residents.reduce((acc, crr) => (acc.age > crr.age ? acc : crr));
   return Object.values(oldestAnimal);
 }
-console.log(oldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 // --------------------- require 12 ------------------------
 
@@ -182,10 +181,21 @@ function increasePrices(percentage) {
 }
 
 // --------------------- require 13 ------------------------
+// ids.map((id) => animals.find((animal) => animal.id === id))
+empAnimalsControl = (emp) => emp.reduce((acc, crr) => {
+  const { firstName, lastName, responsibleFor } = crr;
+  const referSpecie = responsibleFor.map((id) => animals.find((animal) => animal.id === id));
+  const animalsName = referSpecie.map((a) => a.name);
+  return {...acc, 
+    [`${firstName} ${lastName}`]: animalsName};
+}, {});
 
-/* function employeeCoverage(idOrName) {
-  // seu código aqui
-} */
+function employeeCoverage(idOrName) {
+  const empOne = employees.filter(({ id, firstName, lastName }) => [id, firstName, lastName].includes(idOrName));
+
+  if (!idOrName) return empAnimalsControl(employees);
+  return empAnimalsControl(empOne);
+}
 
 module.exports = {
   animalsByIds,
@@ -199,6 +209,6 @@ module.exports = {
   increasePrices,
   schedule,
   oldestFromFirstSpecies,
+  employeeCoverage,
   // animalMap,
-  // employeeCoverage,
 };
