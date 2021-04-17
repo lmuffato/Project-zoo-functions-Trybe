@@ -135,11 +135,11 @@ function oldestFromFirstSpecies(id) {
     .reduce((antes, depois) => ((antes.age > depois.age) ? antes : depois)));
 }
 
- function increasePrices(percentage) {
+function increasePrices(percentage) {
   // seu código aqui
-  for(const key in data.prices) {
-    const aumento = Math.ceil(data.prices[key] * (100 + percentage))/100;
-    data.prices[key] = aumento;
+  for (const key in data.prices) {
+    const aumento = Math.ceil(data.prices[key] * (100 + percentage)) / 100;
+    data.prices[key] = aumento;npm 
   }
   return data.prices;
 }
