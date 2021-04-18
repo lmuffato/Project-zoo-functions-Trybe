@@ -60,9 +60,10 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     managers,
     responsibleFor,
   };
-
-  if (newEmployee.managers === undefined || newEmployee.responsibleFor === undefined) {
+  if (newEmployee.managers === undefined) {
     newEmployee.managers = [];
+  }
+  if (newEmployee.responsibleFor === undefined) {
     newEmployee.responsibleFor = [];
   }
   employees.push(newEmployee);
