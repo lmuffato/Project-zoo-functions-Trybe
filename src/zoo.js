@@ -13,7 +13,7 @@ const data = require('./data');
 
 const { animals } = data;
 const { employees } = data;
-// const { prices } = data;
+const { prices } = data;
 // const { hours } = data;
 
 function animalsByIds(...ids) {
@@ -51,9 +51,9 @@ function animalCount(species) {
   } return animals.find((animal) => animal.name === species).residents.length;
 }
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+function entryCalculator(entrants = 0) {
+  return Object.keys(entrants).reduce((acc, ent) => acc + entrants[ent] * prices[ent], 0);
+}
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -83,4 +83,5 @@ module.exports = {
   isManager,
   addEmployee,
   animalCount,
+  entryCalculator,
 };
