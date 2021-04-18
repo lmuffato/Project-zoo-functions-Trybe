@@ -137,12 +137,13 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
-  for (const key in data.prices) {
-    const aumento = Math.ceil(data.prices[key] * (100 + percentage)) / 100;
-    data.prices[key] = aumento;
-  }
+  const { Adult, Child, Senior } = data.prices;
+  data.prices.Adult = Math.ceil(Adult * (100 + percentage)) / 100;
+  data.prices.Child = Math.ceil(Child * (100 + percentage)) / 100;
+  data.prices.Senior = Math.ceil(Senior * (100 + percentage)) / 100;
   return data.prices;
 }
+
 
 /* function employeeCoverage(idOrName) {
   // seu código aqui
