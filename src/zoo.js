@@ -115,7 +115,7 @@ function schedule(dayName) {
   const parameter = dayName;
   return scheduleSupport2(parameter);
 }
-schedule('Tuesday');
+schedule('Monday');
 
 function oldestFromFirstSpecies(id) {
   const { animals } = data;
