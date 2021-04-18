@@ -62,7 +62,7 @@ function entryCalculator(entrants = 0) {
 function schedule(dayName) {
   const days = Object.keys(hours);
   const schedules = {};
-  days.forEach((day, index) => {
+  days.forEach((day) => {
     const { open } = hours[day];
     const { close } = hours[day];
     if (day === 'Monday') {
