@@ -14,7 +14,7 @@ const data = require('./data');
 const { animals } = data;
 const { employees } = data;
 const { prices } = data;
-// const { hours } = data;
+const { hours } = data;
 
 function animalsByIds(...ids) {
   return ids.map((id) => animals.find(({ id: animalId }) => animalId === id));
@@ -56,12 +56,26 @@ function entryCalculator(entrants = 0) {
 }
 
 // function animalMap(options) {
-//   // seu código aqui
+//   Algum dia ainda volto aqui e tento entender melhor essa questão e resolver
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+function schedule(dayName) {
+  const days = Object.keys(hours);
+  const schedules = {};
+  days.forEach((day, index) => {
+    const { open } = hours[day];
+    const { close } = hours[day];
+    if (day === 'Monday') {
+      schedules[day] = 'CLOSED';
+    } else {
+      schedules[day] = `Open from ${open}am until ${close - 12}pm`;
+    }
+  });
+  if (dayName === undefined || dayName === {}) {
+    return schedules;
+  }
+  return { [dayName]: schedules[dayName] };
+}
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -84,4 +98,5 @@ module.exports = {
   addEmployee,
   animalCount,
   entryCalculator,
+  schedule,
 };
