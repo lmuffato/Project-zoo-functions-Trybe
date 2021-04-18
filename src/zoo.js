@@ -144,7 +144,6 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
-
 /* function employeeCoverage(idOrName) {
   // seu código aqui
 } */
