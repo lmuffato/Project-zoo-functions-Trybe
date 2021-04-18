@@ -31,8 +31,9 @@ function employeeByName(employeeName) {
   const { employees } = data;
   const thereIs = employees.find((employee) =>
     employee.firstName === employeeName || employee.lastName === employeeName);
-  return (thereIs !== '') ? console.log(thereIs) : {};
+  return (thereIs !== undefined) ? console.log(thereIs) : console.log({});
 }
+employeeByName();
 
 function createEmployee(personalInfo, associatedWith) {
   const newEmployee = { ...personalInfo, ...associatedWith };
@@ -101,7 +102,8 @@ function scheduleSupport2(dayName2) {
   Object.entries(hours).filter(([day, { open, close }]) => {
     if (day === dayName2) {
       if (hours[dayName2].open === 0 && hours[dayName2].close === 0) {
-        return { [day]: closed };
+        const dayKey = String(day);
+        return { [dayKey]: closed };
       }
       return { [day]: `Open from ${open}am until ${close - 12}pm` };
     }
