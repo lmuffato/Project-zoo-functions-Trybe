@@ -13,8 +13,8 @@ const data = require('./data');
 
 const { animals } = data;
 const { employees } = data;
-const { prices } = data;
-const { hours } = data;
+// const { prices } = data;
+// const { hours } = data;
 
 function animalsByIds(...ids) {
   return ids.map((id) => animals.find(({ id: animalId }) => animalId === id));
