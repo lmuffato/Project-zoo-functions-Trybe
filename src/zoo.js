@@ -85,9 +85,12 @@ function oldestFromFirstSpecies(id) {
   return [name, sex, age];
 }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  const currentPrices = Object.keys(prices);
+  currentPrices.forEach((newPrice) => {
+    prices[newPrice] = (Math.round(prices[newPrice] * (1 + percentage / 100) * 100) / 100);
+  });
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -104,4 +107,5 @@ module.exports = {
   entryCalculator,
   schedule,
   oldestFromFirstSpecies,
+  increasePrices,
 };
