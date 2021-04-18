@@ -44,7 +44,9 @@ function isManager(id) {
 function animalCount(species) {
   if (species === undefined) {
     const allSpecies = {};
+    // Usando o forEach para percorrer o array de animais e incluir os nomes das espécies e quantidades no objeto: https://www.w3schools.com/jsref/jsref_foreach.asp
     animals.forEach((animal) => {
+      // Incluindo os animais e suas quantidades no objeto: https://gomakethings.com/how-to-add-a-new-item-to-an-object-at-a-specific-position-with-vanilla-js/#:~:text=Create%20a%20new%20object.,that%20to%20the%20new%20object.
       allSpecies[animal.name] = animal.residents.length;
     });
     return allSpecies;
