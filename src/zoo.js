@@ -110,26 +110,18 @@ function scheduleSupport() {
   });
   return hours;
 }
-function scheduleSupport2(dayName2) {
+function schedule(dayName) {
   const { hours } = data;
   const closed = 'CLOSED';
-  Object.entries(hours).filter(([day, { open, close }]) => {
-    if (day === dayName2) {
-      if (hours[dayName2].open === 0 && hours[dayName2].close === 0) {
-        const dayKey = String(day);
-        return { [dayKey]: closed };
-      }
-      return { [day]: `Open from ${open}am until ${close - 12}pm` };
-    }
-    return 'Insira um dia da semana!';
-  });
-}
-function schedule(dayName) {
-  if (dayName === undefined || dayName === '') {
+  if (dayName === undefined) {
     return scheduleSupport();
   }
-  const parameter = dayName;
-  return scheduleSupport2(parameter);
+  if (dayName === 'Monday') {
+    return { [dayName]: closed };
+  }
+  const aboutDay = Object.entries(hours).filter(([day, { open, close }]) => day === dayName)[0];
+  const an = { [aboutDay[0]]: `Open from ${aboutDay[1].open}am until ${aboutDay[1].close - 12}pm` };
+  return an;
 }
 
 function oldestFromFirstSpecies(id) {
