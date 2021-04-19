@@ -61,21 +61,21 @@ function isManager(id) {
 // }
 
 const getSpecies = () => {
-  const countedSpecies =  animals.reduce((previusValue, currentValue) => {
-    previusValue[currentValue.name] = currentValue.residents.length;
-    return previusValue;
-  }, {});
-  
-  return countedSpecies;
-}
+  const counted = {};
+  animals.forEach((animal) => {
+    counted[animal.name] = Object.entries(animal.residents).length;
+  });
+
+  return counted;
+};
 
 function animalCount(species) {
   const listedAnimals = getSpecies();
-  
-  if(!species) {
+
+  if (!species) {
     return getSpecies();
   }
-  
+
   return listedAnimals[species];
 }
 
