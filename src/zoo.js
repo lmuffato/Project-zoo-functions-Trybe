@@ -17,14 +17,14 @@ const { animals } = data;
 function animalsByIds(...identificação) {
   return animals.filter(({ id }) => identificação.includes(id));
 }
-/* 2. IMPLEMENTE A FUNÇÃO animalsOlderThan 
+
+/* 2. IMPLEMENTE A FUNÇÃO animalsOlderThan
 function animalsOlderThan(animal, idadeMinima) {
-  
 }*/
 
 /* function employeeByName(employeeName) {
   // seu código aqui
-} 
+}
 
 /* function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
@@ -72,12 +72,12 @@ module.exports = {
   animalCount,
   animalMap, */
   animalsByIds,
-  /*  employeeByName,
+  /* employeeByName,
   employeeCoverage,
   addEmployee,
-  isManager, 
+  isManager,
   animalsOlderThan,
-  /*oldestFromFirstSpecies,
+  /* oldestFromFirstSpecies,
   increasePrices,
   createEmployee, */
 };
