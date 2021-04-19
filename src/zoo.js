@@ -30,7 +30,7 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(pessoaInfo, associatedWithh) {
-  return {...pessoaInfo, ...associatedWithh}
+  return { ...pessoaInfo, ...associatedWithh };
 }
 
 /* function isManager(id) {
