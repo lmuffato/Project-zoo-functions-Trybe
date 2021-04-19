@@ -29,11 +29,13 @@ function animalsOlderThan(animal, age) {
 
 function employeeByName(employeeName) {
   const { employees } = data;
+  if (employeeName === undefined) {
+    return {};
+  }
   const thereIs = employees.find((employee) =>
     employee.firstName === employeeName || employee.lastName === employeeName);
-  return (thereIs !== undefined) ? console.log(thereIs) : console.log({});
+  return thereIs;
 }
-employeeByName();
 
 function createEmployee(personalInfo, associatedWith) {
   const newEmployee = { ...personalInfo, ...associatedWith };
@@ -51,7 +53,7 @@ function isManager(id) {
 }
 
 function addEmployee(id1, firstName1, lastName1, managers1, responsibleFor1) {
-  const firstPart = { id: id1, fisrtName: firstName1, lastName: lastName1 };
+  const firstPart = { id: id1, firstName: firstName1, lastName: lastName1 };
   const secPart = { managers: managers1, responsibleFor: responsibleFor1 };
   if (managers1 === undefined) {
     const man = [];
@@ -69,16 +71,28 @@ function addEmployee(id1, firstName1, lastName1, managers1, responsibleFor1) {
 
 function animalCount(species) {
   const { animals } = data;
-  const toLower = species.toLowerCase();
-  return animals.find((acc) => (acc.name === toLower ? console.log(acc.residents.length) : 0));
+  const toLower = species;
+  if (toLower === undefined) {
+    const animal = {};
+    Object.keys(animals).forEach((key) => {
+      const { residents } = animals[key];
+      const newKey = animals.map((value) => value.name)[key];
+      animal[newKey] = Object.entries(residents).length;
+    });
+    return animal;
+  }
+  const res = animals.find((acc) => (acc.name === toLower ? acc : 0)).residents;
+  return Object.entries(res).length;
 }
 
 function entryCalculator(entrants) {
   const { prices } = data;
-  const sumValues = (prices.Adult * entrants.Adult)
-  + (prices.Child * entrants.Child)
-  + (prices.Senior * entrants.Senior);
-  return ((Object.keys(entrants).length) !== 3 || Object.values(entrants) !== '') ? 0 : sumValues;
+  if (entrants === undefined) {
+    return 0;
+  }
+  const sumValues = Object.entries(entrants).reduce((acc, [key, value]) =>
+    acc + (prices[key] * value), 0);
+  return sumValues;
 }
 
 function animalMap(options) {
@@ -125,7 +139,7 @@ function oldestFromFirstSpecies(id) {
     .responsibleFor[0];
   const selected = animals.find((sel) => sel.id === responsables).residents;
   const oldiest = selected.reduce((old, acc) => (acc.age > old.age ? acc : old));
-  return oldiest;
+  return Object.values(oldiest);
 }
 
 function increasePrices(percentage) {
@@ -133,7 +147,7 @@ function increasePrices(percentage) {
   const index = (parseFloat(percentage) / 100) + 1;
   let newPrice = 0;
   Object.keys(prices).forEach((i) => {
-    newPrice = (prices[i] * index).toFixed(2);
+    newPrice = Math.ceil((prices[i] * index) * 100) / 100;
     prices[i] = newPrice;
   });
   return prices;
@@ -144,16 +158,18 @@ function employeeCoverage(idOrName) {
   const { animals } = data;
   const obj = {};
   if (idOrName === undefined || idOrName === '') {
-    return employees.forEach(({ firstName, lastName, responsibleFor }) => {
+    employees.forEach(({ firstName, lastName, responsibleFor }) => {
       const Name = `${firstName} ${lastName}`;
       const animal = responsibleFor.map((animalId) =>
         animals.find(({ id }) => animalId === id).name);
       obj[Name] = animal;
     });
+    return obj;
   }
-  const names = employees.find((resp) => (resp.id === idOrName));
-  const animalss = names.responsibleFor.map((value) => animals.find(({ id }) => value === id).name);
   const employeeObj = {};
+  const names = employees.find((r) =>
+    (r.id === idOrName || r.firstName === idOrName || r.lastName === idOrName));
+  const animalss = names.responsibleFor.map((value) => animals.find(({ id }) => value === id).name);
   employeeObj[`${names.firstName} ${names.lastName}`] = animalss;
   return employeeObj;
 }
