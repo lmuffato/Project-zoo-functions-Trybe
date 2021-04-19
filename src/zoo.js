@@ -60,24 +60,24 @@ function isManager(id) {
 //   // seu código aqui
 // }
 
-// const getSpecies = () => {
-//   const countedSpecies = {};
+const getSpecies = () => {
+  const countedSpecies =  animals.reduce((previusValue, currentValue) => {
+    previusValue[currentValue.name] = currentValue.residents.length;
+    return previusValue;
+  }, {});
+  
+  return countedSpecies;
+}
 
-//   for (let i in animals) {
-//     countedSpecies[animals[i].name] = animals[i].residents.length;
-//   }
-
-//  return console.log(countedSpecies);
-// }
-
-// function animalCount(species) {
-//   if(!species) {
-//     return (getSpecies());
-//   }
-
-//   const countedSpecies = getSpecies();
-//   return countedSpecies[`${species}`];
-// }
+function animalCount(species) {
+  const listedAnimals = getSpecies();
+  
+  if(!species) {
+    return getSpecies();
+  }
+  
+  return listedAnimals[species];
+}
 
 // function entryCalculator(entrants) {
 //   // seu código aqui
@@ -106,7 +106,7 @@ function isManager(id) {
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
