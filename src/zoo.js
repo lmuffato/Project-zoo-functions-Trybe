@@ -98,6 +98,7 @@ function entryCalculator(entrants) {
 function animalMap(options) {
   return options;
 }
+
 function scheduleSupport() {
   const { hours } = data;
   const closed = 'CLOSED';
@@ -119,10 +120,12 @@ function schedule(dayName) {
   if (dayName === 'Monday') {
     return { [dayName]: closed };
   }
-  const aboutDay = Object.entries(hours).filter(([day, { open, close }]) => day === dayName)[0];
+  const aboutDay = Object.entries(hours).filter(([day]) => day === dayName)[0];
+  console.log(aboutDay);
   const an = { [aboutDay[0]]: `Open from ${aboutDay[1].open}am until ${aboutDay[1].close - 12}pm` };
   return an;
 }
+schedule('Tuesday');
 
 function oldestFromFirstSpecies(id) {
   const { animals } = data;
