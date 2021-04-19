@@ -33,14 +33,14 @@ function createEmployee(pessoaInfo, associatedWithh) {
   return { ...pessoaInfo, ...associatedWithh };
 }
 /* Requisito 5 */
-const isManager = ((pessoaADM) => {
-  return employees.some(({ managers }) => managers.includes(pessoaADM));
-});
+const isManager = ((pessoaADM) => employees.some(({ managers }) => managers.includes(pessoaADM)));
+
+
 /* Requisito 6 */
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const novofun = { id, firstName, lastName, managers, responsibleFor, };
-  return employees.push(novofun)
-  }
+  const novofun = { id, firstName, lastName, managers, responsibleFor };
+  return employees.push(novofun);
+}
 
 /* function animalCount(species) {
   // seu código aqui
