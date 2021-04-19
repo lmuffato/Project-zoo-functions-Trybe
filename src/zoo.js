@@ -18,9 +18,9 @@ function animalsByIds(...identificação) {
   return animals.filter(({ id }) => identificação.includes(id));
 }
 
-/* 2. IMPLEMENTE A FUNÇÃO animalsOlderThan
-function animalsOlderThan(animal, idadeMinima) {
-}*/
+/* function animalsOlderThan(animal, idadeMinima) {
+  // seu código aqui
+} */
 
 /* function employeeByName(employeeName) {
   // seu código aqui
