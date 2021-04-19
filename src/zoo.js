@@ -35,7 +35,6 @@ function createEmployee(pessoaInfo, associatedWithh) {
 /* Requisito 5 */
 const isManager = ((pessoaADM) => employees.some(({ managers }) => managers.includes(pessoaADM)));
 
-
 /* Requisito 6 */
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const novofun = { id, firstName, lastName, managers, responsibleFor };
