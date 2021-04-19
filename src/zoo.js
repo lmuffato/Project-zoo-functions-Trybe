@@ -14,17 +14,17 @@ const data = require('./data');
 const { animals } = data;
 
 /* 1. IMPLEMENTE A FUNÇÃO animalsByIds */
-function animalsByIds(identificação) {
+function animalsByIds(...identificação) {
   return animals.filter(({ id }) => identificação.includes(id));
 }
-
-/* function animalsOlderThan(animal, age) {
-  // seu código aqui
-} */
+/* 2. IMPLEMENTE A FUNÇÃO animalsOlderThan 
+function animalsOlderThan(animal, idadeMinima) {
+  
+}*/
 
 /* function employeeByName(employeeName) {
   // seu código aqui
-} */
+} 
 
 /* function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
@@ -75,9 +75,9 @@ module.exports = {
   /*  employeeByName,
   employeeCoverage,
   addEmployee,
-  isManager,
+  isManager, 
   animalsOlderThan,
-  oldestFromFirstSpecies,
+  /*oldestFromFirstSpecies,
   increasePrices,
   createEmployee, */
 };
