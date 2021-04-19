@@ -28,18 +28,19 @@ function employeeByName(employeeName) {
   return employees.find((name) =>
     name.firstName === employeeName || name.lastName === employeeName);
 }
-
+/* Requisito 4 */
 function createEmployee(pessoaInfo, associatedWithh) {
   return { ...pessoaInfo, ...associatedWithh };
 }
-
-/* function isManager(id) {
-  // seu código aqui
-}
- */
-/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-} */
+/* Requisito 5 */
+const isManager = ((pessoaADM) => {
+  return employees.some(({ managers }) => managers.includes(pessoaADM));
+});
+/* Requisito 6 */
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const novofun = { id, firstName, lastName, managers, responsibleFor, };
+  return employees.push(novofun)
+  }
 
 /* function animalCount(species) {
   // seu código aqui
@@ -76,9 +77,9 @@ module.exports = {
   animalMap, */
   animalsByIds,
   employeeByName,
-  /* employeeCoverage,
+  /* employeeCoverage, */
   addEmployee,
-  isManager, */
+  isManager,
   animalsOlderThan,
   /* oldestFromFirstSpecies,
   increasePrices, */
