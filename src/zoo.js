@@ -125,7 +125,6 @@ function schedule(dayName) {
   const an = { [aboutDay[0]]: `Open from ${aboutDay[1].open}am until ${aboutDay[1].close - 12}pm` };
   return an;
 }
-schedule('Tuesday');
 
 function oldestFromFirstSpecies(id) {
   const { animals } = data;
