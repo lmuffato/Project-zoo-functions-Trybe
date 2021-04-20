@@ -41,12 +41,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return employees.push(novofun);
 }
 /* Requisito 7 - Obtive ajuda do Anderson Silva amigo da turma 10. */
-const animalCount = (species) => {
-  if (species === undefined) return animals.map(({ name, habitantes }) =>
-    ({ [name]: habitantes.length })).reduce((acc, cur) =>
-      Object.assign(acc, cur), {});
-  return animals.find(({ name }) => name === species).residents.length;
+function animalCount(species) {
+  if (species === undefined) {
+    return animals.reduce((acc, animal) =>
+      Object.assign(acc, { [animal.name]: animal.residents.length }), {});
+  }
+  return animals.find((animal) => animal.name === species).residents.length;
 }
+
+console.log(animalCount());
 
 /* Requisito 8 - Obtive ajuda do Anderson Silva amigo da turma 10. */
 const entryCalculator = ((entrants = 0) => {
