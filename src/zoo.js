@@ -80,9 +80,10 @@ function oldestFromFirstSpecies(identificacao) {
   return Object.values(animal);
 }
 /* Requisito 12 */
-function increasePrices(percnt) {
-  Object.keys(prices)
-    .forEach((age) => prices[age] = (Math.round(prices[age] * (1 + percnt / 100) * 100) / 100));
+function increasePrices(percentage) {
+  Object.keys(prices).forEach((idade) => {
+  prices[idade] = (Math.round(prices[idade] * (1 + percentage / 100) * 100) / 100);
+  });
 }
 
 /* function employeeCoverage(idOrName) {
