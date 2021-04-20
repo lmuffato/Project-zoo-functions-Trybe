@@ -70,7 +70,7 @@ function schedule(dayName) {
   const daysHour = Object.entries(hours);
   return dayName === undefined ? daysHour.reduce((acc, curr) =>
     Object.assign(acc, horary(curr)), {}) : daysHour.map((each) => horary(each))
-      .find((onlyOne) => onlyOne[dayName]);
+    .find((onlyOne) => onlyOne[dayName]);
 }
 
 /* function oldestFromFirstSpecies(id) {
