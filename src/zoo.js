@@ -80,6 +80,8 @@ function entryCalculator(entrants) {
 
 function animalMap(options) {
   // seu código aqui
+  const result = options;
+  return result;
 }
 
 // Ok
