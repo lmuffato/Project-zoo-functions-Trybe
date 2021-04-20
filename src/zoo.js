@@ -79,16 +79,33 @@ function oldestFromFirstSpecies(identificacao) {
     .reduce((idadeAcc, idadeCurr) => ((idadeAcc.age > idadeCurr.age) ? idadeAcc : idadeCurr));
   return Object.values(animal);
 }
-/* Requisito 12 */
+  /* Requisito 12 utilizei o codigo do colega de turma Mathues Martins para melhor 
+  entendimento pois minha logica estava complicada de explicar pois dei muitas 
+  até obter o mesmo resultado. */
 function increasePrices(percentage) {
   Object.keys(prices).forEach((idade) => {
     prices[idade] = (Math.round(prices[idade] * (1 + percentage / 100) * 100) / 100);
   });
 }
 
-/* function employeeCoverage(idOrName) {
-  // seu código aqui
-} */
+const encontraBicho = (...entrada) => (
+  entrada.map((id) => animals.find((bicho) => bicho.id === id))
+    .map((grupo) => grupo.name));
+
+const encontraEmployee = (pessoa) => {
+  const nomeFull = `${pessoa.firstName} ${pessoa.lastName}`;
+  return { [nomeFull]: encontraBicho(...pessoa.responsibleFor) };
+};
+
+function employeeCoverage(idOrName) {
+  if (idOrName === undefined) {
+    return employees.reduce((acc, curr) => Object.assign(acc, encontraEmployee(curr)), {});
+  }
+  const zelador = employees.find((pess) => pess.id === idOrName
+  || pess.firstName === idOrName
+  || pess.lastName === idOrName);
+  return { ...encontraEmployee(zelador) };
+}
 
 module.exports = {
   entryCalculator,
@@ -97,7 +114,7 @@ module.exports = {
   /* animalMap, */
   animalsByIds,
   employeeByName,
-  /* employeeCoverage, */
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
