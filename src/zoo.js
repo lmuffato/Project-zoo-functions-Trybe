@@ -74,7 +74,7 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(identificacao) {
-  const identficaAnimal = employees.find((func) => func.id === identificacao).responsibleFor;
+  const identficaAnimal = employees.find((func) => func.id === identificacao).responsibleFor[0];
   const animal = animals.find(({ id }) => id === identficaAnimal).residents;
   animal.reduce((idadeAcc, idadeCurr) => ((idadeAcc.age > idadeCurr.age) ? idadeAcc : idadeCurr));
   return Object.entries(animal);
