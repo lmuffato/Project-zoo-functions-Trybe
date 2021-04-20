@@ -79,7 +79,7 @@ function oldestFromFirstSpecies(identificacao) {
     .reduce((idadeAcc, idadeCurr) => ((idadeAcc.age > idadeCurr.age) ? idadeAcc : idadeCurr));
   return Object.values(animal);
 }
-
+/* Requisito 12 */
 function increasePrices(percentage) {
   Object.keys(prices).forEach((idade) => {
   return prices[idade] = (Math.round(prices[idade] * (1 + percentage / 100) * 100) / 100);
