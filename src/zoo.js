@@ -77,12 +77,14 @@ function oldestFromFirstSpecies(identificacao) {
   const identficaAnimal = employees.find((func) => func.id === identificacao).responsibleFor[0];
   const animal = animals.find(({ id }) => id === identficaAnimal).residents
     .reduce((idadeAcc, idadeCurr) => ((idadeAcc.age > idadeCurr.age) ? idadeAcc : idadeCurr));
-  return Object.entries(animal);
+  return Object.values(animal);
 }
 
-/* function increasePrices(percentage) {
-  // seu código aqui
-} */
+function increasePrices(percentage) {
+  Object.keys(prices).forEach((idade) => {
+  return prices[idade] = (Math.round(prices[idade] * (1 + percentage / 100) * 100) / 100);
+  });
+}
 
 /* function employeeCoverage(idOrName) {
   // seu código aqui
@@ -100,6 +102,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  /* increasePrices, */
+  increasePrices,
   createEmployee,
 };
