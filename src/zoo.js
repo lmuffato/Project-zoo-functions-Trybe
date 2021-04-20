@@ -144,9 +144,57 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
-/* function employeeCoverage(idOrName) {
+const responsaTodos = (name) => {
+  const array = data.animals;
+  retornar = [];
+  for (let index = 0; index < name.length; index++) {
+    const element = name[index];
+    for (let i = 0; i < array.length; i++) {
+      const element2 = array[i];
+      if (element == element2.id) {
+        retornar.push(element2.name);
+      }
+    }
+  }
+  return retornar;
+}
+
+const semParametro = () => {
+  const expected = {}
+  const array= data.employees;
+  for (let index = 0; index < array.length; index++) {
+    const element = array[index];
+    expected[`${element.firstName} ${element.lastName}`] = responsaTodos(element.responsibleFor); 
+  }       
+  return expected;          
+  }
+
+function responsa(y){
+  let retorno = [];
+  const array = data.animals.length;
+  for (let i = 0; i < y.length; i++) {
+    for (let index = 0; index < array ; index++) {
+      if(y[i] == data.animals[index].id){
+        retorno.push(data.animals[index].name);
+      }
+    }
+  }
+  return retorno;
+}
+
+const comParametro = (idOrName) => {
+  const {firstName : x, responsibleFor: y, lastName : z} = data.employees
+    .find(({ id, firstName, lastName }) => idOrName === id || idOrName === firstName || idOrName === lastName)
+  const firstLast = `${x} ${z}`;
+  return {[firstLast]: responsa(y)};     
+}
+
+function employeeCoverage(idOrName) {
   // seu código aqui
-} */
+  if(idOrName) return comParametro(idOrName);
+  return semParametro();
+}
+
 module.exports = {
   entryCalculator,
   schedule,
@@ -154,7 +202,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
