@@ -120,11 +120,12 @@ function schedule(dayName) {
   if (dayName === 'Monday') {
     return { [dayName]: closed };
   }
-  const aboutDay = Object.entries(hours).filter(([day]) => day === dayName)[0];
-  console.log(aboutDay);
-  const an = { [aboutDay[0]]: `Open from ${aboutDay[1].open}am until ${aboutDay[1].close - 12}pm` };
-  return an;
+  const aboutDay = Object.entries(hours).find(([day]) => day === dayName);
+  const open1 = aboutDay[1].open;
+  const close1 = aboutDay[1].close - 12;
+  return { [aboutDay[0]]: `Open from ${open1}am until ${close1}pm` };
 }
+console.log(schedule('Tuesday'));
 
 function oldestFromFirstSpecies(id) {
   const { animals } = data;
