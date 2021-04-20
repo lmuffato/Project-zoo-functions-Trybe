@@ -82,7 +82,7 @@ function oldestFromFirstSpecies(identificacao) {
 /* Requisito 12 */
 function increasePrices(percentage) {
   Object.keys(prices).forEach((idade) => {
-  prices[idade] = (Math.round(prices[idade] * (1 + percentage / 100) * 100) / 100);
+    prices[idade] = (Math.round(prices[idade] * (1 + percentage / 100) * 100) / 100);
   });
 }
 
