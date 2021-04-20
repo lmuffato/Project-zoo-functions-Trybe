@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees } = data;
+const { animals, employees, prices, hours } = data;
 
 /* Requisito 1 */
 function animalsByIds(...identificação) {
@@ -40,22 +40,31 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   const novofun = { id, firstName, lastName, managers, responsibleFor };
   return employees.push(novofun);
 }
+/* Requisito 7 - Obtive ajuda do Anderson Silva amigo da turma 10. */
+const animalCount = ((species) => species === undefined ? animals.reduce((acc, bicho) =>
+  Object.assign(acc, { [bicho.name]: bicho.residents.length }), {}) : animals.find((animal) => animal.name === species).residents.length);
 
-/* function animalCount(species) {
-  // seu código aqui
-} */
-
-/* function entryCalculator(entrants) {
-  // seu código aqui
-} */
+/* Requisito 8 - Obtive ajuda do Anderson Silva amigo da turma 10. */
+const entryCalculator = ((entrants = 0) => {
+  const newArrOfCategories = Object.keys(entrants);
+  return newArrOfCategories.reduce((acc, categories) =>
+  acc + entrants[categories] * prices[categories], 0);  
+});
 
 /* function animalMap(options) {
   // seu código aqui
 } */
 
-/* function schedule(dayName) {
-  // seu código aqui
-} */
+/* Requisito 10 - Obtive ajuda do Anderson Silva amigo da turma 10. */
+const horary = (all) => ({ [all[0]]: all[0] === 'Monday' ? 'CLOSED' :
+  `Open from ${all[1].open}am until ${all[1].close - 12}pm` });
+
+function schedule(dayName) {
+  const daysHour = Object.entries(hours);
+  return dayName === undefined ? daysHour.reduce((acc, curr) =>
+    Object.assign(acc, horary(curr)), {}) :
+      daysHour.map((each) => horary(each)).find((onlyOne) => onlyOne[dayName]);
+}
 
 /* function oldestFromFirstSpecies(id) {
   // seu código aqui
@@ -70,10 +79,10 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 } */
 
 module.exports = {
-  /* entryCalculator,
+  entryCalculator,
   schedule,
   animalCount,
-  animalMap, */
+  /* animalMap, */
   animalsByIds,
   employeeByName,
   /* employeeCoverage, */
