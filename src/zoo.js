@@ -12,10 +12,14 @@ eslint no-unused-vars: [
 const { animals } = require('./data');
 const data = require('./data');
 
-const arr = (...s) => s.map((element) => animals.filter(({ id }) => id === element));
+const arr = (array) => {
+  const result = [];
+  array.forEach((element) => {
+  result.push(animals.filter(({id}) => id === element)[0])});
+  return result;
+};
 
-const animalsByIds = (...ids) => (ids ? arr(...ids) : []);
-// animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce', '533bebf3-6bbe-41d8-9cdf-46f7d13b62ae');
+const animalsByIds = (...ids) => (ids ? arr(ids) : []);
 
 // function animalsOlderThan(animal, age) {
 //   // seu código aqui
