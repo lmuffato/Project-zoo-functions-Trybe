@@ -41,12 +41,12 @@ const entryCalculator = (entrants) => {
 const maybeSort = (bool, arr) => (bool ? arr.sort() : arr);
 const maybeFilterBySex = (sexOption, arrOfObjs) =>
   (sexOption ? arrOfObjs.filter(({ sex }) => sex === sexOption) : arrOfObjs);
-const withResidentsNames = (isSorted, isFiltered) => (givenLoc) =>
+const withResidentsNames = (isSorted, maybeSexOption) => (givenLoc) =>
   animals.filter(({ location }) => location === givenLoc)
     .reduce((acc, { name: species, residents }) =>
       (acc.push({
         [species]: maybeSort(isSorted,
-          maybeFilterBySex(isFiltered, residents).map(({ name }) => name)),
+          maybeFilterBySex(maybeSexOption, residents).map(({ name }) => name)),
       }) ? acc : null), []);
 const onlySpecieName = (givenLoc) => animals
   .filter(({ location }) => location === givenLoc)
@@ -58,10 +58,8 @@ const template = (callback) =>
     [givenLoc]: callback(givenLoc),
   }),
   {});
-const animalMap = ({ includeNames = false, sorted = false, sex = false } = {}) => {
-  if (!includeNames) return template(onlySpecieName);
-  return template(withResidentsNames(sorted, sex));
-};
+const animalMap = ({ includeNames = false, sorted = false, sex = false } = {}) =>
+  (includeNames ? template(withResidentsNames(sorted, sex)) : template(onlySpecieName));
 // 10
 const format24HoursToAmPm = (hour) => (hour > 12 ? `${hour - 12}pm` : `${hour}am`);
 const message = (open, close) => {
