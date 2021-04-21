@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { employees, animals } = require('./data');
+const { employees, animals, prices } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -87,9 +87,18 @@ function animalCount(species) {
   return specie.residents.length;
 }
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+function entryCalculator(entrants) {
+  if (entrants === undefined || entrants.length === 0) {
+    return 0;
+  }
+  let sumAllEntrants = 0;
+  // Como retornar as propriedades de um objeto em um array: https://riptutorial.com/javascript/example/9824/convert-object-s-values-to-array#:~:text=You%20can%20convert%20its%20values,obj%5Bkey%5D%3B%20%7D)%3B%20console.
+  const entrantsType = Object.keys(entrants);
+  entrantsType.forEach((property) => {
+    sumAllEntrants += prices[property] * entrants[property];
+  });
+  return sumAllEntrants;
+}
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -97,6 +106,7 @@ function animalCount(species) {
 
 // function schedule(dayName) {
 //   // seu código aqui
+//   return `Open from ${}am until ${}pm`
 // }
 
 // function oldestFromFirstSpecies(id) {
@@ -109,10 +119,16 @@ function animalCount(species) {
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
+
+// array.forEach(employees.responsibleFor => {
+//   if (employees.responsibleFor[position] === animals.id) {
+//     employees.responsibleFor[position] = animals.id
+//   }
+// });
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
