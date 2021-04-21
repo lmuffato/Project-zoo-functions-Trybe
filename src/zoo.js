@@ -20,8 +20,8 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  const findedAnimal = animals.find((specie) => (specie.name === animal));
-  return findedAnimal.residents.every((resident) => (resident.age >= age));
+  const foundAnimal = animals.find((specie) => (specie.name === animal));
+  return foundAnimal.residents.every((resident) => (resident.age >= age));
 }
 
 function employeeByName(name) {
@@ -125,9 +125,15 @@ function schedule(dayName) {
   return scheduleOfWeek;
 }
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  const manager = employees.find((employee) => (id === employee.id));
+  const foundAnimal = animals
+    .find((specie) => (specie.id === manager.responsibleFor[0]
+      || specie.name === manager.responsibleFor[0]));
+  const oldestAnimal = foundAnimal.residents
+    .sort((animal1, animal2) => animal2.age - animal1.age)[0];
+  return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -154,7 +160,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
