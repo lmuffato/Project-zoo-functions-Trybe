@@ -98,7 +98,8 @@ function increasePrices(percentage) {
   const options = Object.keys(data.prices);
   const toChange = 1 + (percentage / 100);
   const price = data.prices;
-  options.forEach((options) => (price[options] = (Math.round((price[options] * toChange) * 100)) / 100));
+  const math = Math.round;
+  options.forEach((option) => (price[option] = (math((price[option] * toChange) * 100)) / 100));
 }
 
 // function employeeCoverage(idOrName) {
@@ -108,11 +109,11 @@ function increasePrices(percentage) {
 module.exports = {
   entryCalculator,
   schedule,
-  animalCount,
-  animalMap,
+  // animalCount,
+  // animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  // employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
