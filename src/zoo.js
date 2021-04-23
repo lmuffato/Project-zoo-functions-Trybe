@@ -46,19 +46,22 @@ const retorno = (employeeName) => employees
 
 const employeeByName = (employeeName) => (employeeName ? retorno(employeeName) : {});
 
-console.log(employeeByName('Nelson'));
+// console.log(employeeByName('Nelson'));
 
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
+const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
+// console.log(createEmployee({oi: "tudo bem"}, {i:['oioi'], o:['aiai']}));
 
-// function isManager(id) {
-//   // seu código aqui
-// }
+const isManager = (id) => employees.some(({ managers }) => managers
+  .find((element) => element === id));
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+// isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83');
+
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  employees[employees.length] = { id, firstName, lastName, managers, responsibleFor };
+}
+
+// addEmployee(1, 2, 3);
+// console.log(employees);
 
 // function animalCount(species) {
 //   // seu código aqui
@@ -96,10 +99,10 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
-  // isManager,
+  addEmployee,
+  isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
