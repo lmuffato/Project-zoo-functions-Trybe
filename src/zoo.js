@@ -21,6 +21,8 @@ const arr = (array) => {
 
 const animalsByIds = (...ids) => (ids ? arr(ids) : []);
 
+// console.log(animalsByIds("0938aa23-f153-4937-9f88-4858b24d6bce"))
+
 // const animalsOlderThan = (animal, age) => {
 //   let count = 0;
 //   animals
@@ -63,9 +65,26 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // addEmployee(1, 2, 3);
 // console.log(employees);
 
-// function animalCount(species) {
-//   // seu código aqui
-// }
+const listOfAnimals = () => {
+  let auxiliar = '';
+  const result = {};
+  animals
+    .filter(({ name, residents }) => {
+      (auxiliar = { [name]: residents.length });
+      return Object.assign(result, auxiliar);
+    });
+  return result;
+};
+
+const animalCount = (species) => {
+  if (species) {
+    const animal = animals.find(({ name }) => species === name);
+    return animal.residents.length;
+  }
+  return listOfAnimals();
+};
+
+// console.log(animalCount());
 
 // function entryCalculator(entrants) {
 //   // seu código aqui
@@ -94,7 +113,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
