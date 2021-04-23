@@ -9,6 +9,8 @@ eslint no-unused-vars: [
 ]
 */
 
+// Tive ajuda do meu marido para entender melhor as HOFs e conseguir desenvolver o projeto
+
 const { employees, animals, prices, hours } = require('./data');
 // const data = require('./data');
 
@@ -104,6 +106,7 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
+// Essa função foi criada para corrigir a refatoração sugerida pelo lint. Ela faz parte da função schedule dos exercícios.
 function generateText(day) {
   if (hours[day].close > 12) {
     hours[day].close -= 12;
@@ -135,9 +138,19 @@ function oldestFromFirstSpecies(id) {
   return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+// Como usar o forEach em um objeto: https://www.horadecodar.com.br/2021/02/09/como-percorrer-um-objeto-em-javascript/
+// Como arredondar número decimal para 2 casas: http://www.javascriptkit.com/javatutors/formatnumber.shtml
+// Como arredondar um número decimal: https://medium.com/swlh/how-to-round-to-a-certain-number-of-decimal-places-in-javascript-ed74c471c1b8
+// Como fazer que o retorno do Math.round + .toFixed seja um número e não uma string:
+// https://stackoverflow.com/questions/2283566/how-can-i-round-a-number-in-javascript-tofixed-returns-a-string
+function increasePrices(percentage) {
+  let increase = 0;
+  const value = Object.keys(prices);
+  value.forEach((price) => {
+    increase = prices[price] + ((prices[price] * percentage) / 100);
+    prices[price] = +(Math.round(increase * 100) / 100).toFixed(2);
+  });
+}
 
 // Referências usadas para a função abaixo:
 // Como usar o forEach: https://www.w3schools.com/jsref/jsref_foreach.asp e o map: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/map
@@ -175,6 +188,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
