@@ -89,9 +89,9 @@ const animalCount = (species) => {
 const entryCalculator = (entrants) => {
   let total = 0;
   if (entrants) {
-  const entries = Object.entries(entrants);
-  entries.forEach((element) => { total += prices[element[0]] * element[1]; });
-  };
+    const entries = Object.entries(entrants);
+    entries.forEach((element) => { total += prices[element[0]] * element[1]; });
+  }
   return total;
 };
 
