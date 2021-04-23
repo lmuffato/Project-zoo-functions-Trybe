@@ -21,10 +21,21 @@ function employeeByName(employeeName) {
   return employees.find((empregado) => (
     (empregado.firstName === employeeName || empregado.lastName === employeeName)));
 }
-
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
+// seu código aqui
+function createEmployee({ id, firstName, lastName }, { managers, responsibleFor }) {
+  // const ident = personalInfo.id;
+  // const primeiroNome = personalInfo.firstName;
+  // const ultimoNome = personalInfo.lastName;
+  // const gerentes = associatedWith.managers;
+  // const responsavel = associatedWith.responsibleFor;
+  return {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+}
 
 // function isManager(id) {
 //   // seu código aqui
@@ -75,5 +86,5 @@ module.exports = {
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
