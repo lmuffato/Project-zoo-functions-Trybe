@@ -55,8 +55,8 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function entryCalculator(entrants = 0) {
   const pricesData = data.prices;
   const pricesCategories = Object.keys(pricesData);
-  const priceCat = entrants[priceCategory];
   const totalPrice = pricesCategories.reduce((accumulator, priceCategory) => {
+    const priceCat = entrants[priceCategory];
     const priceToAdd = priceCat ? priceCat * pricesData[priceCategory] : 0;
     const priceToPay = accumulator + priceToAdd;
     return priceToPay;
@@ -95,10 +95,10 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  const pricesOptions = Object.keys(data.prices);
-  const priceToChange = 1 + (percentage / 100);
-  pricesOptions.forEach((priceOption) =>
-    (data.prices[priceOption] = (Math.round((data.prices[priceOption] * priceToChange) * 100)) / 100));
+  const options = Object.keys(data.prices);
+  const toChange = 1 + (percentage / 100);
+  const price = data.prices;
+  options.forEach((options) => (price[options] = (Math.round((price[options] * toChange) * 100)) / 100));
 }
 
 // function employeeCoverage(idOrName) {
