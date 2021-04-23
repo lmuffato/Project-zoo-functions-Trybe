@@ -1,5 +1,5 @@
 // const data = require('./data');
-const { animals } = require('./data'); // object destructuring
+const { animals, employees } = require('./data'); // object destructuring
 
 function animalsByIds(...ids) { // rest
   if (!ids) { // ! = negação
@@ -14,9 +14,14 @@ function animalsOlderThan(animal, idade) {
     .residents.every(({ age }) => age >= idade);
 }
 
-// function employeeByName(employeeName) {
-//   // seu código aqui
-// }
+function employeeByName(employeeName) {
+  if (!employeeName) {
+    return {};
+  }
+  return employees.find((empregado) => {
+    return (empregado.firstName === employeeName || empregado.lastName === employeeName);
+  });
+}
 
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
@@ -64,7 +69,7 @@ module.exports = {
   // animalCount,
   // animalMap,
   animalsByIds,
-  // employeeByName,
+  employeeByName,
   // employeeCoverage,
   // addEmployee,
   // isManager,
