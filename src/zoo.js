@@ -107,22 +107,25 @@ function increasePrices(percentage) {
   return prices;
 }
 
-// function employeeCoverage(idOrName) {
-//   const responsibleAnimal = {};
-//   const findEmployer = employees.find((employer) =>
-//     employer.firstName === idOrName || employer.lastName === idOrName || employer.id === idOrName);
-//   const findAnimals = findEmployer.responsibleFor.map((animalId) => animals
-//     .filter((animal) => animal.id === animalId));
-//   if (!idOrName) {
-//     employees.forEach((worker) => {
-//       responsibleAnimal[`${worker.firstName} ${worker.lastName}`] = worker.responsibleFor
-//         .map((animalId) => (animals.find((animal) => animal.id === animalId)).name);
-//     });
-//     return responsibleAnimal;
-//   }
-//   responsibleAnimal[`${findEmployer.firstName} ${findEmployer.lastName}`] = findAnimals.name;
-//   return responsibleAnimal;
-// }
+function employeeCoverage(idOrName) {
+  const responsibleAnimal = {};
+  if (idOrName) {
+    const findEmployer = employees.find(({ firstName, lastName, id }) =>
+      firstName === idOrName || lastName === idOrName || id === idOrName);
+    const findAnimals = findEmployer.responsibleFor.map((animalId) => animals
+      .find((animal) => (animal.id === animalId)).name);
+    responsibleAnimal[`${findEmployer.firstName} ${findEmployer.lastName}`] = findAnimals;
+    return responsibleAnimal;
+  }
+  employees.forEach((worker) => {
+    responsibleAnimal[`${worker.firstName} ${worker.lastName}`] = worker.responsibleFor
+      .map((animalId) => (animals.find((animal) => animal.id === animalId)).name);
+  });
+  return responsibleAnimal;
+}
+
+console.log(employeeCoverage());
+console.log(employeeCoverage('Nelson'));
 
 module.exports = {
   entryCalculator,
@@ -131,7 +134,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
