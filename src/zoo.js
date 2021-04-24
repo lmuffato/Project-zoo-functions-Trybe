@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees, prices } = data;
+const { animals, employees, prices, hours } = data;
 
 function animalsByIds(...ids) {
   const someAnimals = animals.filter((animalId) => ids.includes(animalId.id));
@@ -60,18 +60,27 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants = 0) {
+  // {Adult: 2, Child: 3, Senior: 1};
   // referência do código do Andy
   const totalValue = Object.keys(entrants);
+  // totalValue = ['Adult', 'Child', 'Senior'];
   return totalValue.reduce((acc, actual) => acc + entrants[actual] * prices[actual], 0);
 }
 
-// function animalMap(options) {
-//   // seu código aqui
-// }
+function animalMap(options) {
+  // seu código aqui
+}
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+const NewObject = (op) => ({ [op[0]]:
+  op[0] === 'Monday' ? 'CLOSED' : `Open from ${op[1].open}am until ${op[1].close - 12}pm` });
+
+function schedule(dayName) {
+  const consultHour = Object.entries(hours);
+  if (dayName === undefined) {
+    return consultHour.reduce((acc, actualHour) => Object.assign(acc, NewObject(actualHour)), {});
+  }
+  return consultHour.map((singleHour) => NewObject(singleHour)).find((actual) => actual[dayName]);
+}
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -87,9 +96,9 @@ function entryCalculator(entrants = 0) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
