@@ -81,14 +81,17 @@ function schedule(dayName) {
   hoursArr.forEach((day) => {
     humanReadable[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
   });
+  humanReadable.Monday = 'CLOSED';
   const readableSimple = {};
   readableSimple[dayName] = humanReadable[dayName];
-  humanReadable.Monday = 'CLOSED';
   if (!dayName) {
     return humanReadable;
   }
   return readableSimple;
 }
+
+console.log(schedule());
+console.log(schedule('Monday'));
 
 function oldestFromFirstSpecies(id) {
   const employe = employees.find((element) => element.id === id);
@@ -123,9 +126,6 @@ function employeeCoverage(idOrName) {
   });
   return responsibleAnimal;
 }
-
-console.log(employeeCoverage());
-console.log(employeeCoverage('Nelson'));
 
 module.exports = {
   entryCalculator,
