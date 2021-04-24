@@ -82,19 +82,57 @@ function entryCalculator({ Adult = 0, Child = 0, Senior = 0 } = 0) {
   return Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
 }
 
-const byLocation = {
-  NE: animals.filter(({ location }) => location === 'NE')
-    .map((animal) => animal.name),
-  NW: animals.filter(({ location }) => location === 'NW')
-    .map((animal) => animal.name),
-  SE: animals.filter(({ location }) => location === 'SE')
-    .map((animal) => animal.name),
-  SW: animals.filter(({ location }) => location === 'SW')
-    .map((animal) => animal.name),
+const animalsByLocation = (locations) => {
+  const result = {};
+  locations.forEach((location) => {
+    const filterResult = animals.filter((animal) => animal.location === location)
+      .map((animal) => animal.name);
+    result[location] = filterResult;
+  });
+  return result;
+};
+
+const filteredWithParams = (locations, sorted, sex) => {
+  const result = {};
+  locations.forEach((location) => {
+    const filterResult = animals.filter((animal) => animal.location === location).map((animal) => {
+      let resultKey;
+      let resultValue;
+      if (sex) {
+        resultKey = animal.name;
+        resultValue = animal.residents
+          .filter((resident) => resident.sex === sex).map((resident) => resident.name);
+      } else {
+        resultKey = animal.name;
+        resultValue = animal.residents.map((resident) => resident.name);
+      } if (sorted === true) {
+        return { [resultKey]: resultValue.sort() };
+      } return { [resultKey]: resultValue };
+    });
+    result[location] = filterResult;
+  }); return result;
+};
+
+const firstStep = (options) => {
+  if (options && options.sorted) {
+    const { sorted } = options;
+    return sorted;
+  }
+  if (options && options.sex) {
+    const { sex } = options;
+    return sex;
+  }
 };
 
 function animalMap(options) {
-
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+  firstStep(options);
+  if (options && options.includeNames === true) {
+    const { sex } = options;
+    const { sorted } = options;
+    return filteredWithParams(locations, sorted, sex);
+  }
+  return animalsByLocation(locations);
 }
 
 function schedule(dayName) {
