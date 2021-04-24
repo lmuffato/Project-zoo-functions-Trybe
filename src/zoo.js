@@ -82,18 +82,19 @@ function entryCalculator({ Adult = 0, Child = 0, Senior = 0 } = 0) {
   return Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
 }
 
-function animalMap(options) {
-  // Observações técnicas
+const byLocation = {
+  NE: animals.filter(({ location }) => location === 'NE')
+    .map((animal) => animal.name),
+  NW: animals.filter(({ location }) => location === 'NW')
+    .map((animal) => animal.name),
+  SE: animals.filter(({ location }) => location === 'SE')
+    .map((animal) => animal.name),
+  SW: animals.filter(({ location }) => location === 'SW')
+    .map((animal) => animal.name),
+};
 
-  // Analise o teste unitário para entender os retornos que são esperados para esta função
-  // O que será avaliado
-  
-  // Sem parâmetros, retorna animais categorizados por localização
-  // Com a opção includeNames: true especificada, retorna nomes de animais
-  // Com a opção sorted: true especificada, retorna nomes de animais ordenados
-  // Com a opção sex: 'female' ou sex: 'male' especificada, retorna somente nomes de animais macho/fêmea
-  // Com a opção sex: 'female' ou sex: 'male' especificada e a opção sorted: true especificada, retorna somente nomes de animais macho/fêmea com os nomes dos animais ordenados
-  // Só retorna informações ordenadas e com sexo se a opção includeNames: true for especificada
+function animalMap(options) {
+
 }
 
 function schedule(dayName) {
