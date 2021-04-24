@@ -100,11 +100,27 @@ const entryCalculator = (entrants) => {
 // console.log(Object.entries(inconstant))
 // console.log(Object.keys(inconstant).length)
 
-const animalMap = (...options) => {
-  const [oi, gata, linda] = [...options];
-  console.log(linda);
+const withNoParams = () => {
+  const ne = animals.filter(({ location }) => (location === 'NE'));
+  const nw = animals.filter(({ location }) => (location === 'NW'));
+  const se = animals.filter(({ location }) => (location === 'SE'));
+  const sw = animals.filter(({ location }) => (location === 'SW'));
+  const neAnimals = ne.map(({ name }) => name);
+  const nwAnimals = nw.map(({ name }) => name);
+  const seAnimals = se.map(({ name }) => name);
+  const swAnimals = sw.map(({ name }) => name);
+  return { NE: neAnimals, NW: nwAnimals, SE: seAnimals, SW: swAnimals };
 };
-animalMap('oi', 'xuxu', 'vc é gata em');
+
+const animalMap = (options) => {
+  if (!options) { return console.log(withNoParams()); }
+  let sex, sorted, names;
+  const chooseOptions = Object.entries(options);
+  chooseOptions.forEach((element) => {
+    if (element[0] === 'includeNames' ) console.log('oi');
+  });
+};
+animalMap({k:'oi', includeNames:'tudo ', v:'bom?'});
 
 // function schedule(dayName) {
 //   // seu código aqui
