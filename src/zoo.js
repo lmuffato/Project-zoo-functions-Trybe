@@ -100,9 +100,11 @@ const entryCalculator = (entrants) => {
 // console.log(Object.entries(inconstant))
 // console.log(Object.keys(inconstant).length)
 
-// function animalMap(options) {
-//   // seu código aqui
-// }
+const animalMap = (...options) => {
+  const [oi, gata, linda] = [...options];
+  console.log(linda);
+};
+animalMap('oi', 'xuxu', 'vc é gata em');
 
 // function schedule(dayName) {
 //   // seu código aqui
