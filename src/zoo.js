@@ -43,9 +43,11 @@ function isManager(id) {
 
 // Source: consulta ao repositório do Alex Silveira = https://github.com/tryber/sd-010-a-project-zoo-functions/pull/139/commits
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, [...managers] = [], [...responsibleFor] = []) {
+  return employees.push({ id, firstName, lastName, managers, responsibleFor });
+}
+
+// Source: consulta ao repositório do Alex Silveira = https://github.com/tryber/sd-010-a-project-zoo-functions/pull/139/commits
 
 // function animalCount(species) {
 //   // seu código aqui
@@ -83,7 +85,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
