@@ -112,7 +112,23 @@ const withNoParams = () => {
   return { NE: neAnimals, NW: nwAnimals, SE: seAnimals, SW: swAnimals };
 };
 
-const arrayAnimals = (isSorted) => {
+const arrayBySex = (sex, isSorted) => {
+  const arrayAnimalsName = [];
+  let namesList;
+  const animalArr = animals.map(({ name }) => name);
+  animalArr.forEach((animal) => {
+    namesList = (animals.filter((element) => element.name === animal)
+      .map(({ residents }) => residents)[0]
+      .filter(({ sex: sexo }) => sexo === sex))
+      .map(({ name }) => name);
+    if (isSorted) arrayAnimalsName.push({ [animal]: namesList.sort() });
+    arrayAnimalsName.push({ [animal]: namesList });
+  });
+  return arrayAnimalsName;
+};
+
+const arrayAnimals = (isSorted, sex) => {
+  if (sex) { return arrayBySex(sex, isSorted); }
   const arrayAnimalsName = [];
   let namesList;
   const animalArr = animals.map(({ name }) => name);
@@ -132,8 +148,8 @@ const arrayAnimals = (isSorted) => {
 // console.log(b);
 // console.log(c);
 
-const nameIsIncluded = (isSorted) => {
-  const animalsByName = arrayAnimals(isSorted);
+const nameIsIncluded = (isSorted, sex) => {
+  const animalsByName = arrayAnimals(isSorted, sex);
   const nameIncludes = withNoParams();
   const locations = ['NE', 'NW', 'SE', 'SW'];
   locations.forEach((location) => {
@@ -167,7 +183,8 @@ const firstValidator = (options) => {
 const animalMap = (options) => {
   if (!options) { return withNoParams(); }
   const [sex, sorted, names] = firstValidator(options);
-  if (names) { return nameIsIncluded(sorted); }
+  if (names) { return nameIsIncluded(sorted, sex); }
+  return withNoParams();
 };
 
 // const sortedArray = ['oi', 'a', 'adedonha', 'adelina', 'adeilio', 'jir', 'chiquita', 'bueno']
