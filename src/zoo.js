@@ -238,9 +238,15 @@ const oldestFromFirstSpecies = (id) => {
 
 // oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992');
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+const increasePrices = (percentage) => {
+  Object.entries(prices).forEach((element) => {
+    const porcentageConverted = percentage / 100;
+    prices[element[0]] = Math.round((element[1] + (element[1] * porcentageConverted)) * 100) / 100; // usei como referência : https://medium.com/swlh/how-to-round-to-a-certain-number-of-decimal-places-in-javascript-ed74c471c1b8
+  });
+  return prices;
+};
+
+// increasePrices(50);
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -258,6 +264,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
