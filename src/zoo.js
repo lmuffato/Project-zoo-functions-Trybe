@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 
 const arr = (array) => {
   const result = [];
@@ -191,9 +191,38 @@ const animalMap = (options) => {
 //   .sort();
 // console.log(sortedArray);
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+const daysNameList = () => {
+  let result = {};
+  const keys = Object.keys(hours);
+  const values = Object.values(hours);
+  values.forEach(({ open, close }, index) => {
+    result = Object.assign(result, { [keys[index]]: `Open from ${open}am until ${close - 12}pm` });
+  });
+  Object.entries(result).forEach((element) => { // For in não queria funcionar dai esse site me deu a ideia : https://www.30secondsofcode.org/blog/s/eslint-refactor-for-in
+    if (element[1].includes('from 0am')) {
+      result[element[0]] = 'CLOSED';
+    }
+  });
+  return (result);
+};
+
+const scheduleWhithParam = (dayName, list) => {
+  let finalValue = '';
+  Object.entries(list)
+    .forEach((element) => {
+      if (element[0] === dayName) {
+        finalValue = { [element[0]]: element[1] };
+      }
+    });
+  return finalValue;
+};
+
+const schedule = (dayName) => {
+  const result = daysNameList();
+  if (dayName) { return scheduleWhithParam(dayName, result); }
+  return result;
+};
+schedule('Monday');
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -209,7 +238,7 @@ const animalMap = (options) => {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   animalMap,
   animalsByIds,
