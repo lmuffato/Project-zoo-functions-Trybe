@@ -112,15 +112,67 @@ const withNoParams = () => {
   return { NE: neAnimals, NW: nwAnimals, SE: seAnimals, SW: swAnimals };
 };
 
-const animalMap = (options) => {
-  if (!options) { return console.log(withNoParams()); }
-  let sex, sorted, names;
+const arrayAnimals = (isSorted) => {
+  const arrayAnimalsName = [];
+  let namesList;
+  const animalArr = animals.map(({ name }) => name);
+  animalArr.forEach((animal) => {
+    namesList = (animals.filter((element) => element.name === animal)
+      .map(({ residents }) => residents)[0]
+      .map(({ name }) => name));
+    if (isSorted) arrayAnimalsName.push({ [animal]: namesList.sort() });
+    arrayAnimalsName.push({ [animal]: namesList });
+  });
+  return arrayAnimalsName;
+};
+
+// const b = a.map(({residents}) => residents)[0]
+// const c = b.map(({name}) => name)
+
+// console.log(b);
+// console.log(c);
+
+const nameIsIncluded = (isSorted) => {
+  const animalsByName = arrayAnimals(isSorted);
+  const nameIncludes = withNoParams();
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+  locations.forEach((location) => {
+    animalsByName.forEach((animal) => {
+      const validator = Object.keys(animal)[0];
+      nameIncludes[location].forEach((element, i) => {
+        if (element === validator) nameIncludes[location][i] = animal;
+      });
+    });
+  });
+  return nameIncludes;
+};
+
+const firstValidator = (options) => {
+  let sex;
+  let sorted;
+  let names;
   const chooseOptions = Object.entries(options);
   chooseOptions.forEach((element) => {
-    if (element[0] === 'includeNames' ) console.log('oi');
+    if (element[0] === 'includeNames') {
+      [, names] = element;
+    } else if (element[0] === 'sorted') {
+      [, sorted] = element;
+    } else if (element[0] === 'sex') {
+      [, sex] = element;
+    }
   });
+  return [sex, sorted, names];
 };
-animalMap({k:'oi', includeNames:'tudo ', v:'bom?'});
+
+const animalMap = (options) => {
+  if (!options) { return withNoParams(); }
+  const [sex, sorted, names] = firstValidator(options);
+  if (names) { return nameIsIncluded(sorted); }
+};
+
+// const sortedArray = ['oi', 'a', 'adedonha', 'adelina', 'adeilio', 'jir', 'chiquita', 'bueno']
+//   .sort();
+// console.log(sortedArray);
 
 // function schedule(dayName) {
 //   // seu código aqui
@@ -142,7 +194,7 @@ module.exports = {
   entryCalculator,
   // schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   // employeeCoverage,
