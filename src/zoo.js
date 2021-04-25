@@ -106,9 +106,25 @@ function increasePrices(percentage) {
   prices.Senior = Math.round(newNumber(prices.Senior, calculate) * 100) / 100;
 }
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+// referênciado e explicado à mim por Andy, voltarei e refatorarei este código
+
+const consultAnimalsById = (...arr) => (
+  arr.map((id) => animals.find((animal) => animal.id === id)).map((specie) => specie.name)
+);
+
+const returnEmployee = (par) => {
+  const fullName = `${par.firstName} ${par.lastName}`;
+  return { [fullName]: consultAnimalsById(...par.responsibleFor) };
+};
+
+function employeeCoverage(idOrName) {
+  if (idOrName === undefined) {
+    return employees.reduce((acc, act) => Object.assign(acc, returnEmployee(act)), {});
+  }
+  const findEmployee = employees.find((element) => element.id === idOrName
+      || element.firstName === idOrName || element.lastName === idOrName);
+  return { ...returnEmployee(findEmployee) };
+}
 
 module.exports = {
   entryCalculator,
@@ -117,7 +133,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
