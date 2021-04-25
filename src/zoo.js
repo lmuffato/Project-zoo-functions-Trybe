@@ -71,6 +71,7 @@ function entryCalculator(entrants = 0) {
 //   // seu código aqui
 // }
 
+// referência de código e ajuda de Andy
 const NewObject = (op) => ({ [op[0]]:
   op[0] === 'Monday' ? 'CLOSED' : `Open from ${op[1].open}am until ${op[1].close - 12}pm` });
 
@@ -81,14 +82,29 @@ function schedule(dayName) {
   }
   return consultHour.map((singleHour) => NewObject(singleHour)).find((actual) => actual[dayName]);
 }
+// referência de código e ajuda de Andy
+function oldestFromFirstSpecies(id) {
+  const animalID = employees.find((person) => person.id === id).responsibleFor[0];
+  const animal = animals.find((actualAnimal) => actualAnimal.id === animalID);
+  const olderAnimal = animal.residents
+    .reduce((acc, oldAnimal) => (acc.age < oldAnimal.age ? oldAnimal : acc));
+  return Object.values(olderAnimal);
+}
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+const newNumber = (number, percent) => parseFloat(number + number * percent);
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  // referência de código e ajuda de Andy
+  // refatorar para highOrder function
+  // const actualPrices = Object.values(prices);
+  // console.log(actualPrices);
+  // const calculate = percentage / 100;
+  // return actualPrices.reduce((acc, newprice) => (acc + newprice * calculate), {});
+  const calculate = percentage / 100;
+  prices.Adult = Math.round(newNumber(prices.Adult, calculate) * 100) / 100;
+  prices.Child = Math.round(newNumber(prices.Child, calculate) * 100) / 100;
+  prices.Senior = Math.round(newNumber(prices.Senior, calculate) * 100) / 100;
+}
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -105,7 +121,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
-  // increasePrices,
+  oldestFromFirstSpecies,
+  increasePrices,
   createEmployee,
 };
