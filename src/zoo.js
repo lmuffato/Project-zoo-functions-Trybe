@@ -248,9 +248,8 @@ const increasePrices = (percentage) => {
 
 // increasePrices(50);
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+// const employeeCoverage = (idOrName) =>{
+// };
 
 module.exports = {
   entryCalculator,
