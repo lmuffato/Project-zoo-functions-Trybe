@@ -1,5 +1,5 @@
 // const data = require('./data');
-const { animals, employees } = require('./data'); // object destructuring
+const { animals, employees, prices } = require('./data'); // object destructuring
 
 function animalsByIds(...ids) { // rest
   if (!ids) { // ! = negação
@@ -22,7 +22,7 @@ function employeeByName(employeeName) {
     (empregado.firstName === employeeName || empregado.lastName === employeeName)));
 }
 // seu código aqui
-function createEmployee({ id, firstName, lastName }, { managers, responsibleFor }) {
+function createEmployee({ id, firstName, lastName }, { managers, responsibleFor }) { // parâmetros substituidos por objetos
   // const ident = personalInfo.id;
   // const primeiroNome = personalInfo.firstName;
   // const ultimoNome = personalInfo.lastName;
@@ -63,9 +63,19 @@ function animalCount(species) {
 
 // Source: consulta ao repositório = https://github.com/tryber/sd-010-a-project-zoo-functions/pull/137/commits
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+function entryCalculator(entrants) {
+  if (entrants === undefined || entrants.length === 0) {
+    return 0; // retorna zero se nenhum argumento for passado ou objeto for vazio
+  }
+  let somaDasEntradas = 0; // declaração variável para somar as entradas
+  const tiposVisitantes = Object.keys(entrants); // acessar as propriedades do objeto (adult, child, senior)
+  tiposVisitantes.forEach((tipoVisitante) => {
+    somaDasEntradas += prices[tipoVisitante] * entrants[tipoVisitante]; // retorna preço total dado numero adult, child, senior
+  });
+  return somaDasEntradas;
+}
+
+// Source: consulta ao repositório = https://github.com/tryber/sd-010-a-project-zoo-functions/pull/137/commits
 
 // function animalMap(options) {
 //   // seu código aqui
@@ -88,7 +98,7 @@ function animalCount(species) {
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
