@@ -90,9 +90,6 @@ function schedule(dayName) {
   return readableSimple;
 }
 
-console.log(schedule());
-console.log(schedule('Monday'));
-
 function oldestFromFirstSpecies(id) {
   const employe = employees.find((element) => element.id === id);
   const animalId = employe.responsibleFor[0];
