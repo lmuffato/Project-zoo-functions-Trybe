@@ -101,7 +101,7 @@ function increasePrices(percentage) {
   const math = Math.round;
   options.forEach((option) => {
     return (price[option] = (math((price[option] * toChange) * 100)) / 100);
-  })
+  });
 }
 
 // function employeeCoverage(idOrName) {
