@@ -89,9 +89,16 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  let aumentoPreco = 0; // var que recebe aumento
+  const valor = Object.keys(prices); // adult: x, child: y, senior: z;
+  valor.forEach((preço) => { // para cada elemento em valor (adult, child, senior), execute - arrow function = ONDE
+    aumentoPreco = prices[preço] + ((prices[preço] * percentage) / 100); // aumento do preço, convertendo parâmetro para porcentagem
+    prices[preço] = +(Math.round(aumentoPreco * 100) / 100).toFixed(2); // arredondando preço para duas casas decimais
+  });
+}
+
+// Source: consulta ao repositório = https://github.com/tryber/sd-010-a-project-zoo-functions/pull/137/commits
 
 // function employeeCoverage(idOrName) {
 //   // seu código aqui
@@ -109,6 +116,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
