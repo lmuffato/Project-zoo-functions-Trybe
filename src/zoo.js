@@ -49,8 +49,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push(newEmployee);
 }
 
-// function animalCount(species) {
-// }
+function animalCount(species) {
+  if (species === undefined) {
+    const animals = {};
+    data.animals
+      .forEach((animal) => {
+        animals[animal.name] = animal.residents.length;
+      });
+    return animals;
+  }
+  const { residents } = data.animals.find((animal) => animal.name === species);
+  return residents.length;
+}
 
 function entryCalculator(entrants = 0) {
   const pricesData = data.prices;
@@ -134,7 +144,7 @@ function employeeCoverage(idOrName) {
 module.exports = {
   entryCalculator,
   schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
