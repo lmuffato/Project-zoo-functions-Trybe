@@ -108,7 +108,7 @@ function increasePrices(percentage) {
 function employeeCoverage(idOrName) {
   const object = {};
   if (idOrName) {
-    Object.assign(object, animalOwner(data.employees
+    Object.assign(object, responsavelPorAnimal(data.employees
       .find((value) => (
         (value.id === idOrName)
         || (value.firstName === idOrName)
@@ -117,7 +117,7 @@ function employeeCoverage(idOrName) {
     return object;
   }
   data.employees.forEach((valueEach) => {
-    Object.assign(object, animalOwner(valueEach));
+    Object.assign(object, responsavelPorAnimal(valueEach));
   });s
   return object;
 }
