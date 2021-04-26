@@ -105,10 +105,19 @@ function increasePrices(percentage) {
   });
 }
 
+const animalOwner = (employeeInfo) => {
+  const object = {};
+  const key = `${employeeInfo.firstName} ${employeeInfo.lastName}`;
+  object[key] = employeeInfo.responsibleFor
+    .map((id) => data.animals
+      .find((animal) => animal.id === id).name);
+  return object;
+};
+
 function employeeCoverage(idOrName) {
   const object = {};
   if (idOrName) {
-    Object.assign(object, responsavelPorAnimal(data.employees
+    Object.assign(object, animalOwner(data.employees
       .find((value) => (
         (value.id === idOrName)
         || (value.firstName === idOrName)
@@ -117,8 +126,8 @@ function employeeCoverage(idOrName) {
     return object;
   }
   data.employees.forEach((valueEach) => {
-    Object.assign(object, responsavelPorAnimal(valueEach));
-  });s
+    Object.assign(object, animalOwner(valueEach));
+  });
   return object;
 }
 
