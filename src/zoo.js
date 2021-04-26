@@ -99,7 +99,9 @@ function increasePrices(percentage) {
   const toChange = 1 + (percentage / 100);
   const price = data.prices;
   const math = Math.round;
-  options.forEach((option) => (price[option] = (math((price[option] * toChange) * 100)) / 100));
+  options.forEach((option) => {
+    return (price[option] = (math((price[option] * toChange) * 100)) / 100);
+  })
 }
 
 // function employeeCoverage(idOrName) {
