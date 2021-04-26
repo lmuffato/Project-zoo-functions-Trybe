@@ -52,7 +52,7 @@ function addEmployee(id, firstName, lastName, [...managers] = [], [...responsibl
 function animalCount(species) {
   if (species === undefined) { // sem parâmetros
     const allSpecies = {}; // retorna um objeto
-    animals.forEach((animal) => { 
+    animals.forEach((animal) => { // iterar sobre todos os elementos
       allSpecies[animal.name] = animal.residents.length; // com animais e suas quantidades
     });
     return allSpecies;
@@ -61,7 +61,7 @@ function animalCount(species) {
   return especie.residents.length; // retorna apenas a quantidade
 }
 
-// Consulta ao repositório: https://github.com/tryber/sd-010-a-project-zoo-functions/pull/137/commits
+// Source: consulta ao repositório = https://github.com/tryber/sd-010-a-project-zoo-functions/pull/137/commits
 
 // function entryCalculator(entrants) {
 //   // seu código aqui
