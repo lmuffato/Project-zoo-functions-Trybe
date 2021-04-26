@@ -100,7 +100,8 @@ function increasePrices(percentage) {
   const price = data.prices;
   const math = Math.round;
   options.forEach((option) => {
-    return (price[option] = (math((price[option] * toChange) * 100)) / 100);
+    (price[option] = (math((price[option] * toChange) * 100)) / 100);
+    return price[option];
   });
 }
 
