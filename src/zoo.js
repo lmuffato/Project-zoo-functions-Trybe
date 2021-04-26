@@ -1,5 +1,5 @@
 // const data = require('./data');
-const { animals, employees, prices } = require('./data'); // object destructuring
+const { animals, employees, prices, hours } = require('./data'); // object destructuring
 
 function animalsByIds(...ids) { // rest
   if (!ids) { // ! = negação
@@ -8,11 +8,15 @@ function animalsByIds(...ids) { // rest
   return animals.filter(({ id }) => ids.some((a) => id === a));
 }
 
+// Source: tive auxílio do colega André Jaques!
+
 function animalsOlderThan(animal, idade) {
   return animals
     .find(({ name }) => name === animal)
     .residents.every(({ age }) => age >= idade);
 }
+
+// Source: tive auxílio do colega André Jaques!
 
 function employeeByName(employeeName) {
   if (!employeeName) {
@@ -21,7 +25,8 @@ function employeeByName(employeeName) {
   return employees.find((empregado) => (
     (empregado.firstName === employeeName || empregado.lastName === employeeName)));
 }
-// seu código aqui
+// Source: tive auxílio do colega Lucas Paz!
+
 function createEmployee({ id, firstName, lastName }, { managers, responsibleFor }) { // parâmetros substituidos por objetos
   // const ident = personalInfo.id;
   // const primeiroNome = personalInfo.firstName;
@@ -36,6 +41,8 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
     responsibleFor,
   };
 }
+
+// Source: tive auxílio do colega Lucas Paz!
 
 function isManager(id) {
   return employees.some(((funcionario) => funcionario.managers.includes(id)));
@@ -81,9 +88,29 @@ function entryCalculator(entrants) {
 //   // seu código aqui
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
-// }
+function criarTexto(dia) { // função gera texto de horário de abertura e fechamento, converte hora para formato 12h
+  if (hours[dia].close > 12) { // se o horário de fechamento do dia passar de 12(h) / ou seja, entrar em formato 24h
+    hours[dia].close -= 12; // converte o horário para o formato 12h
+  }
+  if (hours[dia].open === 0) { // se não tiver horário de abertura no dia
+    return 'CLOSED';
+  }
+  return `Open from ${hours[dia].open}am until ${hours[dia].close}pm`; // texto a retornar com os horários do dia
+}
+
+function schedule(dayName) {
+  const horarioSemanal = {}; // obj vazio para receber os valores
+  const dias = Object.keys(hours); // acessar as chaves do obj hour / recupera os dias da semana
+  dias.forEach((dia) => { // para cada dia da semana
+    if (dayName === undefined || dayName === dia) { // sem parâmetros retorna cronograma completo, se receber retorna cronograma do dia
+      horarioSemanal[dia] = criarTexto(dia); // obj vazio que recebe os valores recebe resultado da função criarTexto
+    }
+  });
+  console.log(horarioSemanal);
+  return horarioSemanal;
+}
+
+// Source: consulta ao repositório = https://github.com/tryber/sd-010-a-project-zoo-functions/pull/137/commits
 
 // function oldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -106,7 +133,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
