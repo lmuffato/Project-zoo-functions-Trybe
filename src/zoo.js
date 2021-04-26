@@ -48,6 +48,7 @@ function addEmployee(id, firstName, lastName, [...managers] = [], [...responsibl
 }
 
 // Source: consulta ao repositório do Alex Silveira = https://github.com/tryber/sd-010-a-project-zoo-functions/pull/139/commits
+// teste evaluator
 
 // function animalCount(species) {
 //   // seu código aqui
