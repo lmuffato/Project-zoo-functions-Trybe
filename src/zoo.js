@@ -248,8 +248,24 @@ const increasePrices = (percentage) => {
 
 // increasePrices(50);
 
-// const employeeCoverage = (idOrName) =>{
-// };
+const thisFunctionWthNoParams = () => {
+  let result = {};
+  employees.forEach(({ firstName, lastName, responsibleFor }) => {
+    const fullName = `${firstName} ${lastName}`;
+    const auxiliar = responsibleFor
+      .filter((elementId) => (animals.find(({ id }) => elementId === id).name));
+    const animalsArrays = auxiliar.map((element) => animals
+      .filter(({ id }) => id === element)[0].name);
+    result = Object.assign(result, { [fullName]: animalsArrays });
+  });
+  return (result);
+};
+
+const employeeCoverage = (idOrName) => {
+  if (!idOrName) { return thisFunctionWthNoParams(); }
+};
+
+console.log(employeeCoverage());
 
 module.exports = {
   entryCalculator,
@@ -258,7 +274,7 @@ module.exports = {
   animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
