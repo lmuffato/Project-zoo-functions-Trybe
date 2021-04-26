@@ -263,9 +263,19 @@ const thisFunctionWthNoParams = () => {
 
 const employeeCoverage = (idOrName) => {
   if (!idOrName) { return thisFunctionWthNoParams(); }
+  let ret;
+  const list = thisFunctionWthNoParams();
+  const nome = employees.find((element) => element.id === idOrName || element
+    .firstName === idOrName || element.lastName === idOrName);
+  Object.entries(list).forEach((element) => {
+    if (element[0].includes(nome.firstName)) {
+      ret = { [element[0]]: element[1] };
+    }
+  });
+  return ret;
 };
 
-console.log(employeeCoverage());
+// console.log(employeeCoverage('Elser'));
 
 module.exports = {
   entryCalculator,
