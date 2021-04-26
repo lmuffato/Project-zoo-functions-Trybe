@@ -48,11 +48,20 @@ function addEmployee(id, firstName, lastName, [...managers] = [], [...responsibl
 }
 
 // Source: consulta ao repositório do Alex Silveira = https://github.com/tryber/sd-010-a-project-zoo-functions/pull/139/commits
-// teste evaluator
 
-// function animalCount(species) {
-//   // seu código aqui
-// }
+function animalCount(species) {
+  if (species === undefined) { // sem parâmetros
+    const allSpecies = {}; // retorna um objeto
+    animals.forEach((animal) => { 
+      allSpecies[animal.name] = animal.residents.length; // com animais e suas quantidades
+    });
+    return allSpecies;
+  }
+  const especie = animals.find((animal) => (species === animal.name)); // com o nome de uma espécie
+  return especie.residents.length; // retorna apenas a quantidade
+}
+
+// Consulta ao repositório: https://github.com/tryber/sd-010-a-project-zoo-functions/pull/137/commits
 
 // function entryCalculator(entrants) {
 //   // seu código aqui
@@ -81,7 +90,7 @@ function addEmployee(id, firstName, lastName, [...managers] = [], [...responsibl
 module.exports = {
   // entryCalculator,
   // schedule,
-  // animalCount,
+  animalCount,
   // animalMap,
   animalsByIds,
   employeeByName,
