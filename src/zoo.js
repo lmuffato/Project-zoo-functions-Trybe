@@ -45,8 +45,8 @@ function employeeByName(employeeName) {
   return firstName;
 }
 
-function createEmployee(personalInfo, associatedWith){
-  return {...personalInfo, ...associatedWith}
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
@@ -56,9 +56,17 @@ function isManager(id) {
   return verifyManager;
 }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+
+  return employees.push(newEmployee);
+}
 
 const getSpecies = () => {
   const counted = {};
@@ -111,7 +119,7 @@ module.exports = {
   animalsByIds,
   employeeByName,
   // employeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   animalsOlderThan,
   // oldestFromFirstSpecies,
