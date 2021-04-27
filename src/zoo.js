@@ -45,9 +45,9 @@ function employeeByName(employeeName) {
   return firstName;
 }
 
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
+function createEmployee(personalInfo, associatedWith){
+  return {...personalInfo, ...associatedWith}
+}
 
 function isManager(id) {
   const managersArray = employees.map((employee) => employee.managers);
@@ -116,5 +116,5 @@ module.exports = {
   animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
