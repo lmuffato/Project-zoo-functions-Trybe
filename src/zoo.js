@@ -17,10 +17,10 @@ const { employees, animals } = require('./data');
 //   return foundAnimals;
 // }
 
-// function animalsOlderThan(animal, age) {
-//   return animals.find((dataAnimal) => dataAnimal.name === animal)
-//     .residents.every((dataAge) => dataAge.age >= age);
-// }
+function animalsOlderThan(animal, age) {
+  return animals.find((dataAnimal) => dataAnimal.name === animal)
+    .residents.every((dataAge) => dataAge.age >= age);
+}
 
 function employeeByName(name) {
   const employee = employees
@@ -89,7 +89,7 @@ module.exports = {
   // employeeCoverage,
   // addEmployee,
   isManager,
-  // animalsOlderThan,
+  animalsOlderThan,
   // oldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
