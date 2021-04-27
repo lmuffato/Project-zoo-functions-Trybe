@@ -135,9 +135,27 @@ function increasePrices(percentage) {
 
 // Source: consulta ao repositório = https://github.com/tryber/sd-010-a-project-zoo-functions/pull/137/commits
 
-// function employeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function employeeCoverage(idOrName) {
+  let managers = []; // array vazio
+  if (idOrName === undefined) { // sem parâmetro, retorna lista de funcionários e os animais pelos quais são responsáveis
+    managers = employees; // o array employess corresponde à condição acima, sendo assim, employees é atribuido ao array vazio managers
+  } else { // caso o parâmetro seja preenchido
+    const manager = employees.find((employee) => (idOrName === employee.id // o find vai percorrer o obj employee e retornar o primeiro elemento que satisfaça a condição esperada
+      || idOrName === employee.firstName || idOrName === employee.lastName)); // no caso, a condição é, se o parâmetro for igual ao id do employee OU igual ao primeiro nome do employee OU igual ao último nome
+    managers.push(manager); // sendo assim, o push é utilizado para transferir o resultado do find para o array vazio managers
+  } // o objetivo das linhas 147 até 154 é retornar os animais pelos quais o funcionário é responsável
+  const managerOfSpecies = {}; // é declarado um obj vazio
+  managers.forEach((manager) => { // o forEach vai iterar sobre os elementos do array managers
+    const speciesName = manager.responsibleFor.map((specieId) => { // em cada elemento, a HOF map é utilizada para percorrer a propriedade responsibleFor de manager ONDE
+      const animal = animals.find((object) => (object.id === specieId)); // o resultado do .map (um array) vai passar pelo .find para achar o primeiro resultado que satisfaça à condição na qual o parâmetro specieId, definido na linha acima, resgata para recuperar os animais através do acesso aos ids
+      return animal.name; // através do id, recupera-se a propriedade name do animal e a retorna para o speciesName
+    }); // a linha abaixo recupera as propriedades firstname e lastname dos manager e as concatena num template literals
+    managerOfSpecies[`${manager.firstName} ${manager.lastName}`] = speciesName; // atribui-se ao obj vazio managerOfSpecies o resultado de speciesName
+  });
+  return managerOfSpecies;
+}
+
+// Source: consulta ao repositório = https://github.com/tryber/sd-010-a-project-zoo-functions/pull/137/commits
 
 module.exports = {
   entryCalculator,
@@ -146,7 +164,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
