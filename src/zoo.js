@@ -61,10 +61,22 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   // seu código aqui
+  // se não for dado a espécie, retornando a quantidade de todos os animais em um objeto
+  if (species === undefined) {
+    return data.animals.reduce((acc, animal) => {
+      acc[animal.name] = animal.residents.length;
+      return acc;
+    }, {});
+  }
+  // dado uma espécie, retornando a quantidade dele
+  else {
+    return data.animals.find(({ name }) => name.includes(species)).residents.length;
+  }
 }
 
 function entryCalculator(entrants) {
   // seu código aqui
+  
 }
 
 function animalMap(options) {
