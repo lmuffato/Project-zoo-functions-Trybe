@@ -112,9 +112,17 @@ function schedule(dayName) {
 
 // Source: consulta ao repositório = https://github.com/tryber/sd-010-a-project-zoo-functions/pull/137/commits
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function oldestFromFirstSpecies(id) {
+  const animalID = employees.find((person) => person.id === id).responsibleFor[0]; // função para armazenar o primeiro animal gerenciado pela pessoa colaboradora identificada através de id
+  // find percorre e encontra o primeiro item que satisfaz
+  const animal = animals.find((actualAnimal) => actualAnimal.id === animalID); // percorre animals e compara o id de cada animal com o valor resgatado em const animalID
+  const olderAnimal = animal.residents // acessa animal armazenado na const animal e acessa a propriedade residents
+    .reduce((acc, actualValue) => (acc.age < actualValue.age ? actualValue : acc)); // o reduce é aplicado no array residents
+    // em cada elemento é acessada a idade do acc e compara com a idade do actualValue, caso a idade de actualValue seja maior retorna o actualValue, caso seja menor retorna acc;
+  return Object.values(olderAnimal); // retorna um array com os valores encontrados em olderAnimal
+}
+
+// Source: consulta ao repositório do Alex Silveira = https://github.com/tryber/sd-010-a-project-zoo-functions/pull/139/commits
 
 function increasePrices(percentage) {
   let aumentoPreco = 0; // var que recebe aumento
@@ -142,7 +150,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
