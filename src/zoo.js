@@ -93,12 +93,47 @@ function entryCalculator(entrants) {
   }
 }
 
-function animalMap(options) {
+function animalMap(options = {}) {
   // seu código aqui
+  // constante das regiẽes
+  const { includeNames = false, sorted = false, sex = false } = options;
+  const regionList= {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };    
+  // sem parâmetro ou includeNames = false
+  if (includeNames === false){
+    data.animals.forEach((animal) => regionList[animal.location].push(animal.name));
+    return regionList;
+  }
+  // includeNames = true
+  else{
+    data.animals.forEach((animal) => {
+      // criando um objeto para receber a lista
+      const residentslist = {};
+      // recebendo os animais no objeto criado, diferenciando por sexo se tiver sido especificado
+      residentslist[animal.name] = animal.residents.reduce((acc, resident) => {
+        if (sex === false || sex === resident.sex) {
+          acc.push(resident.name);
+        }
+        return acc;
+      }, []);
+      // organizando os animais no objeto se tiver sido pedido
+      if (sorted === true){
+        residentslist[animal.name].sort();
+      }
+      // jogando o objeto na lista principal após fazer as mudanças necessárias no objeto
+      regionList[animal.location].push(residentslist);
+    });
+    return regionList;
+  };
 }
 
 function schedule(dayName) {
   // seu código aqui
+  
 }
 
 function oldestFromFirstSpecies(id) {
