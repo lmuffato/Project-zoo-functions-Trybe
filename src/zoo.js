@@ -145,7 +145,7 @@ function schedule(dayName) {
   };
   // condição de nao ter dado nome do dia
   if (dayName === undefined){
-    return schedulelist
+    return schedulelist;
   }
   // caso seja passado um dia específico
   else{
@@ -155,14 +155,39 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+  // procurando o empregado
+  const employee = data.employees.find((employee) => employee.id === id);
+  // procurando a primeira espécie
+  const firstEspecie = employee.responsibleFor[0];
+  // procurando a espécie em data
+  const animal = data.animals.find((animal) => animal.id === firstEspecie);
+  // pegando a lista de animais da espécie
+  const residentAnimals = animal.residents;
+  // criando o loop para encontrar o mais velho
+  let highestAge = 0;
+  let currentAnimal;
+  residentAnimals.forEach((resident) => {
+    if (resident.age > highestAge){
+      highestAge = resident.age
+      currentAnimal = resident
+    }
+  })
+  return Object.values(currentAnimal)
 }
 
 function increasePrices(percentage) {
   // seu código aqui
+  // pegando os preços de data
+  const { Adult, Child, Senior } = data.prices;
+  // fazendo as alterações
+  data.prices.Adult = Math.ceil(Adult * (100 + percentage)) / 100;
+  data.prices.Child = Math.ceil(Child * (100 + percentage)) / 100;
+  data.prices.Senior = Math.ceil(Senior * (100 + percentage)) / 100
 }
 
 function employeeCoverage(idOrName) {
   // seu código aqui
+
 }
 
 module.exports = {
