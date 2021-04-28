@@ -73,29 +73,37 @@ function animalCount(species) {
   return animalCountObject[species];
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
+function entryCalculator(entrants = 0) {
+  if (entrants === undefined || entrants.length === 0) {
+    return 0;
+  }
+  let sumEntrants = 0;
+  const entrantsType = Object.keys(entrants);
+  entrantsType.forEach((property) => {
+    sumEntrants += prices[property] * entrants[property];
+  });
+  return sumEntrants;
 }
 
-function animalMap(options) {
+// function animalMap(options) {
   // seu código aqui
-}
+// }
 
-function schedule(dayName) {
-  // seu código aqui
-}
+// function schedule(dayName) {
+//   // seu código aqui
+// }
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// function oldestFromFirstSpecies(id) {
+//   // seu código aqui
+// }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function increasePrices(percentage) {
+//   // seu código aqui
+// }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function employeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
   entryCalculator,
