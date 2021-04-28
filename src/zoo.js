@@ -53,18 +53,24 @@ function addEmployee(
   responsibleFor = [],
   ) {
   const criaObjeto = { 
-    id, 
+    id,
     firstName, 
     lastName, 
-    managers, 
-    responsibleFor 
+    managers,
+    responsibleFor,
   };
   const addObjEmployee = data.employees.push(createObj);
   return addObjEmployee;
 }
 
 function animalCount(species) {
-  // seu código aqui
+  const animalCountObject = {};
+  data.animals.forEach((animal) => {
+    animalCountObject[animal.name] = animal.residents.length;
+  });
+
+  if (!species) return animalCountObject;
+  return animalCountObject[species];
 }
 
 function entryCalculator(entrants) {
