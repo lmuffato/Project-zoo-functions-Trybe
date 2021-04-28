@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees } = require('./data');
+const { animals, employees, prices } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -87,12 +87,23 @@ function animalCount(species) {
   return listedAnimals[species];
 }
 
-// function entryCalculator(entrants) {
-//   // seu código aqui
-// }
+// parametro é um objeto - 3 idades  (detructuring?)
+// fazer um condicionamento de acordo com idades
+// percorrer objeto de preçoes, linkar com os condicionamentos
+// retorno numérico: preço total da entrada
+
+function entryCalculator(entries = 0) {
+  if (entries === {}) return 0;
+
+  const visistors = Object.entries(entries);
+  const sumAll = visistors.map((person) => (prices[person[0]] * person[1]))
+    .reduce((acc, currentValue) => acc + currentValue, 0);
+
+  return sumAll;
+}
 
 // function animalMap(options) {
-//   // seu código aqui
+//   // seu código aquiS
 // }
 
 // function schedule(dayName) {
@@ -112,7 +123,7 @@ function animalCount(species) {
 // }
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
