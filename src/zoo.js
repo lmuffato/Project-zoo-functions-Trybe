@@ -87,15 +87,11 @@ function animalCount(species) {
   return listedAnimals[species];
 }
 
-// parametro é um objeto - 3 idades  (detructuring?)
-// fazer um condicionamento de acordo com idades
-// percorrer objeto de preçoes, linkar com os condicionamentos
-// retorno numérico: preço total da entrada
-
 function entryCalculator(entries = 0) {
   if (entries === {}) return 0;
 
   const visistors = Object.entries(entries);
+
   const sumAll = visistors.map((person) => (prices[person[0]] * person[1]))
     .reduce((acc, currentValue) => acc + currentValue, 0);
 
@@ -106,13 +102,49 @@ function entryCalculator(entries = 0) {
 //   // seu código aquiS
 // }
 
-// function schedule(dayName) {
-//   // seu código aqui
+// const defaultSchedule = () => {
+//   const weekDays = Object.entries(hours);
+//   const open = {};
+
+//   weekDays.forEach((eachDay) => {
+//     if(eachDay[1].open === 0 ) {
+//       return open[eachDay[0]] = `CLOSED`;
+//     }
+//     open[eachDay[0]] = `Open from ${eachDay[1].open}am until ${eachDay[1].close}pm`
+//   });
+
+//   return open;
 // }
 
-// function oldestFromFirstSpecies(id) {
-//   // seu código aqui
+// function schedule(dayName) {
+//   const weekDays = Object.entries(defaultSchedule());
+
+//   if(!dayName) {
+//     return weekDays;
 // }
+
+//   const daySchedule = {};
+//   daySchedule[dayName] = defaultSchedule()[dayName];
+//   return daySchedule;
+
+// }
+
+function getOldest(idAnimal) {
+  const getAnimal = animals.find((animal) => animal.id === idAnimal);
+  const { residents } = getAnimal;
+  const oldest = residents.reduce((accumulator, { age }) => {
+    if (age > accumulator) return age;
+    return accumulator;
+  }, 0);
+
+  return Object.values(residents.find(({ age }) => age === oldest));
+}
+
+function oldestFromFirstSpecies(id) {
+  const FirstResponsible = employees.find((employee) => employee.id === id).responsibleFor[0];
+
+  return getOldest(FirstResponsible);
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -133,7 +165,7 @@ module.exports = {
   addEmployee,
   isManager,
   animalsOlderThan,
-  // oldestFromFirstSpecies,
+  oldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
