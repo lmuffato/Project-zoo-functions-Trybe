@@ -59,7 +59,7 @@ function addEmployee(
     managers,
     responsibleFor,
   };
-  const addObjEmployee = data.employees.push(createObj);
+  const addObjEmployee = data.employees.push(criaObjeto);
   return addObjEmployee;
 }
 
