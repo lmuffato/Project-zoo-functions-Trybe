@@ -13,13 +13,11 @@ const { hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  // seu código aqui
   // procurando is e retornando o id ou vazio
   return (ids !== []) ? ids.map((id) => data.animals.find((animal) => animal.id === id)) : ids;
 }
 
 function animalsOlderThan(animal, ageParameter) {
-  // seu código aqui
   // procurando a espécie
   const animalspecies = data.animals.find(({ name }) => name === animal);
   // comparando
@@ -27,7 +25,6 @@ function animalsOlderThan(animal, ageParameter) {
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
   // procurando empregado
   const employee = data.employees.find(({ firstName, lastName }) =>
     firstName === employeeName || lastName === employeeName);
@@ -36,19 +33,16 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
   // dando spread no conteúdo
   return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
-  // seu código aqui
   // procurando as tags manager nos employees
   return data.employees.some(({ managers }) => managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  // seu código aqui
   // criando o objeto
   const employee = {
     id,
@@ -62,7 +56,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  // seu código aqui
   // se não for dado a espécie, retornando a quantidade de todos os animais em um objeto
   if (species === undefined) {
     return data.animals.reduce((acc, animal) => {
@@ -75,7 +68,6 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
   // caso não seja dado nenhum argumento
   if (entrants === undefined) {
     return 0;
@@ -90,9 +82,23 @@ function entryCalculator(entrants) {
   return Adult * data.prices.Adult + Child * data.prices.Child + Senior * data.prices.Senior;
 }
 
+function animalMapPartTwo(sex, sorted, regionList) {
+  data.animals.forEach((animal) => {
+    const residentslist = {};
+    residentslist[animal.name] = animal.residents.reduce((acc, resident) => {
+      if (sex === false || sex === resident.sex) {
+        acc.push(resident.name);
+      }
+      return acc;
+    }, []);
+    if (sorted === true) {
+      residentslist[animal.name].sort();
+    }
+    regionList[animal.location].push(residentslist);
+  });
+}
+
 function animalMap(options = {}) {
-  // seu código aqui
-  // constante das regiẽes
   const { includeNames = false, sorted = false, sex = false } = options;
   const regionList = {
     NE: [],
@@ -100,34 +106,22 @@ function animalMap(options = {}) {
     SE: [],
     SW: [],
   };
-    // sem parâmetro ou includeNames = false
   if (includeNames === false) {
     data.animals.forEach((animal) => regionList[animal.location].push(animal.name));
     return regionList;
   }
-  // includeNames = true
-  data.animals.forEach((animal) => {
-    // criando um objeto para receber a lista
-    const residentslist = {};
-    // recebendo os animais no objeto criado, diferenciando por sexo se tiver sido especificado
-    residentslist[animal.name] = animal.residents.reduce((acc, resident) => {
-      if (sex === false || sex === resident.sex) {
-        acc.push(resident.name);
-      }
-      return acc;
-    }, []);
-    // organizando os animais no objeto se tiver sido pedido
-    if (sorted === true) {
-      residentslist[animal.name].sort();
-    }
-    // jogando o objeto na lista principal após fazer as mudanças necessárias no objeto
-    regionList[animal.location].push(residentslist);
-  });
+  animalMapPartTwo(sex, sorted, regionList);
   return regionList;
 }
+// L86 constante das regiẽes
+// L93 sem parâmetro ou includeNames = false
+// L97 includeNames = true
+// L98 criando um objeto para receber a lista
+// L99 recebendo os animais no objeto criado, diferenciando por sexo se tiver sido especificado
+// L105 organizando os animais no objeto se tiver sido pedido
+// L108 jogando o objeto na lista principal após fazer as mudanças necessárias no objeto
 
 function schedule(dayName) {
-  // seu código aqui
   // criando a agenda
   const schedulelist = {
     Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
