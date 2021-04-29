@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+const { animals } = data;
 
 function animalsByIds(...ids) {
   // seu código aqui
@@ -98,7 +99,7 @@ function employeeCoverage(idOrName) {
       const acumulator = { ...acm };
       const ide = item.responsibleFor;
       const list = [];
-      ide.forEach((id) => list.push(data.animals.find((subId) => subId.id === id).name));
+      ide.forEach((id) => list.push(animals.find((subId) => subId.id === id).name));
       acumulator[`${item.firstName} ${item.lastName}`] = list;
       return acumulator;
     }, {});
@@ -110,7 +111,7 @@ function oldestFromFirstSpecies(id) {
   // seu código aqui
   const empregado = data.employees.find((element) => element.id === id);
   const Idanimal = empregado.responsibleFor[0];
-  const animal = data.animals.find((singleAnimal) => singleAnimal.id === Idanimal);
+  const animal = animals.find((singleAnimal) => singleAnimal.id === Idanimal);
   const menos = animal.residents.map((resident) => resident.age).sort((a, b) => b - a);
   const all = animal.residents.find((resident) => resident.age === menos[0]);
   return Object.values(all);
