@@ -67,11 +67,17 @@ function entryCalculator(entrants) {
 function animalMap(options) {
   // seu código aqui
 }
+*/
 
 function schedule(dayName) {
-  // seu código aqui
+  let workDay;
+  if (dayName) workDay = { [dayName]: data.hours[dayName] };
+  else workDay = data.hours;
+  return Object.entries(workDay)
+    .reduce((agenda, day) => Object.assign(agenda, { [day[0]]: (day[1].open !== 0)
+      ? `Open from ${day[1].open}am until ${day[1].close - 12}pm` : 'CLOSED' }), {});
 }
-*/
+// uso de reduce visto no plantão
 
 function oldestFromFirstSpecies(id) {
   const helper = data.employees.find((person) => person.id === id).responsibleFor[0];
@@ -95,7 +101,7 @@ function employeeCoverage(idOrName) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
