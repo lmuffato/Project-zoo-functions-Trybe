@@ -55,7 +55,7 @@ module.exports = {
 //  entryCalculator,
 //  schedule,
 //  animalCount,
- // animalMap,
+// animalMap,
   animalsByIds,
 //  employeeByName,
 //  employeeCoverage,
