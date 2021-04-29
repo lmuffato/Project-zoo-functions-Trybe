@@ -95,14 +95,14 @@ function employeeCoverage(idOrName) {
   // seu código aqui
   const responsibleAnimal = {};
   if (idOrName) {
-    const findEmployer = employees.find(({ firstName, lastName, id }) =>
+    const findEmployer = data.employees.find(({ firstName, lastName, id }) =>
       firstName === idOrName || lastName === idOrName || id === idOrName);
     const findAnimals = findEmployer.responsibleFor.map((animalId) => animals
       .find((animal) => (animal.id === animalId)).name);
     responsibleAnimal[`${findEmployer.firstName} ${findEmployer.lastName}`] = findAnimals;
     return responsibleAnimal;
   }
-  employees.forEach((worker) => {
+  data.employees.forEach((worker) => {
     responsibleAnimal[`${worker.firstName} ${worker.lastName}`] = worker.responsibleFor
       .map((animalId) => (animals.find((animal) => animal.id === animalId)).name);
   });
