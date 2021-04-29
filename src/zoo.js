@@ -13,7 +13,7 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   // seu código aqui
-  let ani = [];
+  const ani = [];
   data.animals.forEach((el, i) => {
     if (el.id === ids[i]) {
       ani.push(el);
@@ -62,17 +62,17 @@ function employeeCoverage(idOrName) {
 */
 
 module.exports = {
-  //entryCalculator,
-  //schedule,
-  //animalCount,
-  //animalMap,
+  //  entryCalculator,
+  //  schedule,
+  //  animalCount,
+  //  animalMap,
   animalsByIds,
-  //employeeByName,
-  //employeeCoverage,
-  //addEmployee,
-  //isManager,
-  //animalsOlderThan,
-  //oldestFromFirstSpecies,
-  //increasePrices,
-  //createEmployee,
+  //  employeeByName,
+  //  employeeCoverage,
+  //  addEmployee,
+  //  isManager,
+  //  animalsOlderThan,
+  //  oldestFromFirstSpecies,
+  //  increasePrices,
+  //  createEmployee,
 };
