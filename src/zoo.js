@@ -90,8 +90,8 @@ function animalMap(options) {
 function schedule(dayName) {
   // seu código aqui
   const val = {};
-  const hoursArr = Object.entries(hours);
-  hoursArr.forEach((day) => {
+  const horas = Object.entries(data.hours);
+  horas.forEach((day) => {
     val[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
   });
   val.Monday = 'CLOSED';
@@ -142,7 +142,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   entryCalculator,
-  //  schedule,
+  schedule,
   animalCount,
   //  animalMap,
   animalsByIds,
