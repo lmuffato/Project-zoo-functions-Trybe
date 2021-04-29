@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { animals, employees } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -102,8 +103,23 @@ function increasePrices(percentage) {
   data.prices.Senior = Math.ceil(Senior * ((percentage) + 100)) / 100;
 }
 
-//  function employeeCoverage(idOrName) {
-//  }
+function employeeCoverage(idOrName) {
+  const allEmp = {};
+  if (!idOrName) {
+    const empAndAnimal = employees.map(employee => employee.responsibleFor
+    .map(animalEmp => animals
+    .find(animal => animal.id === animalEmp).name));
+    employees.forEach(({ firstName, lastName }, index) => {
+      allEmp[`${firstName} ${lastName}`] = empAndAnimal[index];
+    });
+    return allEmp;
+  }
+  const aEmp = employees.find(employee => employee.id === idOrName ||
+  employee.firstName === idOrName ||
+  employee.lastName === idOrName);
+  return { [`${aEmp.firstName} ${aEmp.lastName}`]: aEmp.responsibleFor.map(animalEmp => animals
+    .find(animal => animal.id === animalEmp).name) };
+}
 
 module.exports = {
   entryCalculator,
@@ -112,7 +128,7 @@ module.exports = {
   //  animalMap,
   animalsByIds,
   employeeByName,
-  //  employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
