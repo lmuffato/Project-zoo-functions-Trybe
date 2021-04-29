@@ -81,11 +81,10 @@ function entryCalculator(entrants = 0) {
 }
 
 //  function animalMap(options) {
- 
-//  }
+//}
 
  function schedule(dayName) {
-  const schedules = {};
+const schedules = {};
   const days = Object.keys(hours);
   days.forEach((day) => {
     const { open } = hours[day];
@@ -106,14 +105,15 @@ function oldestFromFirstSpecies(id) {
   const manager = employees.find((employee) => (id === employee.id));
   const foundAnimal = animals.find((specie) => (specie.id === manager.responsibleFor[0]
       || specie.name === manager.responsibleFor[0]));
-  const oldestAnimal = foundAnimal.residents.sort((animal1, animal2) => animal2.age - animal1.age)[0];
+  const oldestAnimal = foundAnimal.residents
+  .sort((animal1, animal2) => animal2.age - animal1.age)[0];
   return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
 
 function increasePrices(percentage) {
   let aumentoPreco = 0;
-  const valor = Object.keys(prices); 
-  valor.forEach((preço) => { 
+  const valor = Object.keys(prices);
+  valor.forEach((preço) => {
     aumentoPreco = prices[preço] + ((prices[preço] * percentage) / 100);
     prices[preço] = +(Math.round(aumentoPreco * 100) / 100).toFixed(2);
   });
@@ -127,10 +127,10 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  animalMap,
+  //animalMap,
   animalsByIds,
   employeeByName,
-  employeeCoverage,
+  //employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
