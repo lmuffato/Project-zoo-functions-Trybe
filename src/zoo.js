@@ -119,7 +119,7 @@ function increasePrices(percentage) {
   });
 }
 
- function employeeCoverage(idOrName) {
+function employeeCoverage(idOrName) {
   let managers = [];
   if (idOrName === undefined) {
     managers = employees;
@@ -137,7 +137,7 @@ function increasePrices(percentage) {
     managerOfSpecies[`${manager.firstName} ${manager.lastName}`] = speciesName;
   });
 
-  return managerOfSpecies; 
+  return managerOfSpecies;
 }
 
 module.exports = {
