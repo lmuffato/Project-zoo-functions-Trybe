@@ -45,32 +45,27 @@ function isManager(id) {
   return employees.some((worker) => worker.managers.includes(id));
 }
 
-function addEmployee(
-  id,
-  firstName,
-  lastName,
-  managers = [],
-  responsibleFor = [],
-  ) {
-  const criaObjeto = { 
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = {
     id,
-    firstName, 
-    lastName, 
+    firstName,
+    lastName,
     managers,
     responsibleFor,
   };
-  const addObjEmployee = data.employees.push(criaObjeto);
-  return addObjEmployee;
+  employees.push(newEmployee);
 }
 
 function animalCount(species) {
-  const animalCountObject = {};
-  data.animals.forEach((animal) => {
-    animalCountObject[animal.name] = animal.residents.length;
-  });
-
-  if (!species) return animalCountObject;
-  return animalCountObject[species];
+  if (species === undefined) {
+    const allSpecies = {};
+      animals.forEach((animal) => {
+      allSpecies[animal.name] = animal.residents.length;
+    });
+    return allSpecies;
+  }
+  const specie = animals.find((animal) => (species === animal.name));
+  return specie.residents.length;
 }
 
 function entryCalculator(entrants = 0) {
