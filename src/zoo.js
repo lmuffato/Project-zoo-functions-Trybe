@@ -98,11 +98,11 @@ function employeeCoverage(idOrName) {
 */
 function increasePrices(percentage) {
   // seu código aqui
-  const { Adult, Child, Senior } = prices;
-  prices.Child = (Math.round(Child * (1 + percentage / 100) * 100)) / 100;
-  prices.Adult = (Math.round(Adult * (1 + percentage / 100) * 100)) / 100;
-  prices.Senior = (Math.round(Senior * (1 + percentage / 100) * 100)) / 100;
-  return prices;
+  const { Adult, Child, Senior } = data.prices;
+  data.prices.Child = (Math.round(Child * (1 + percentage / 100) * 100)) / 100;
+  data.prices.Adult = (Math.round(Adult * (1 + percentage / 100) * 100)) / 100;
+  data.prices.Senior = (Math.round(Senior * (1 + percentage / 100) * 100)) / 100;
+  return data.prices;
 }
 
 module.exports = {
