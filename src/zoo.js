@@ -92,12 +92,18 @@ function schedule(dayName) {
 */
 function employeeCoverage(idOrName) {
   // seu código aqui
-   if (!idOrName) {
-    return employees.reduce((acurance, valor) => Object.assign(acurance, returnEmployee(valor)), {});
+  const { employees } = data;
+  if (idOrName === undefined) {
+    const tudo = employees.reduce((acm, item) => {
+      const acumulator = { ...acm };
+      const ide = item.responsibleFor;
+      const list = [];
+      ide.forEach((id) => list.push(animals.find((subId) => subId.id === id).name));
+      acumulator[`${item.firstName} ${item.lastName}`] = list;
+      return acumulator;
+    }, {});
+    return tudo;
   }
-  const findEmployee = employees.find((element) => element.id === idOrName
-    || element.firstName === idOrName || element.lastName === idOrName);
-  return { ...returnEmployee(findEmployee) };
 }
 
 function oldestFromFirstSpecies(id) {
