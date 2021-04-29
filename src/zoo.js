@@ -102,16 +102,16 @@ function entryCalculator(entries = 0) {
 //   // seu código aquiS
 // }
 
-function setSchedule ({ open, close }) {
-  function amPm (number) {
-    return number > 12 ? `${(number-12)}pm` : `${number}am`;
+function setSchedule({ open, close }) {
+  function amPm(number) {
+    return number > 12 ? `${(number - 12)}pm` : `${number}am`;
   }
-  
-  return (open === close) ? 'CLOSED' : `Open from ${amPm(open)} until ${amPm(close)}`
+
+  return (open === close) ? 'CLOSED' : `Open from ${amPm(open)} until ${amPm(close)}`;
 }
 
 const defaultSchedule = () => {
-  const weekDays = Object.keys(hours)
+  const weekDays = Object.keys(hours);
 
   const workdays = weekDays.reduce((acc, currentDay) => {
     acc[currentDay] = setSchedule(hours[currentDay]);
@@ -119,10 +119,10 @@ const defaultSchedule = () => {
   }, {});
 
   return workdays;
-}
+};
 
 function schedule(dayName) {
-  if(!dayName) {
+  if (!dayName) {
     return defaultSchedule();
   }
 
@@ -150,11 +150,18 @@ function oldestFromFirstSpecies(id) {
 }
 
 // function increasePrices(percentage) {
-//   // seu código aqui
+// // valor entrada: inteiro
+//  inteiro de entrada >  decial percentual
+// decimal de entrada produto com as atuais values da keys
+// resultam novas values
+// ALTERAM as keys do data
 // }
 
 // function employeeCoverage(idOrName) {
-//   // seu código aqui
+// funcao com parametros variaveis (spread/desctruturin?)
+// parametros id, firstNAme ou LastName
+// sem parametro retorna a listagem toda > funcao auxiliar
+// chamada funcao auxiliar caso parametro vazio
 // }
 
 module.exports = {
