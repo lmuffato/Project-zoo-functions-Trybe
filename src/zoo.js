@@ -81,10 +81,10 @@ function entryCalculator(entrants) {
   entrants.forEach((entrant) => {
     if (entrant.Adult !== undefined) {
       valor += entrant.Adult * Adult;
-    } 
+    }
     if (entrant.Child !== undefined) {
       valor += entrant.Child * Child;
-    } 
+    }
     if (entrant.Senior !== undefined) {
       valor += entrant.Senior * Senior;
     }
