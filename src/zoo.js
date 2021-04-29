@@ -80,7 +80,7 @@ module.exports = {
   employeeByName,
   //  employeeCoverage,
   //  addEmployee,
-  //  isManager,
+  isManager,
   animalsOlderThan,
   //  oldestFromFirstSpecies,
   //  increasePrices,
