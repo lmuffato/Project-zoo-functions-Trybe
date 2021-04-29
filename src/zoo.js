@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 // const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -102,36 +102,39 @@ function entryCalculator(entries = 0) {
 //   // seu código aquiS
 // }
 
-// const defaultSchedule = () => {
-//   const weekDays = Object.entries(hours);
-//   const open = {};
+function setSchedule ({ open, close }) {
+  function amPm (number) {
+    return number > 12 ? `${(number-12)}pm` : `${number}am`;
+  }
+  
+  return (open === close) ? 'CLOSED' : `Open from ${amPm(open)} until ${amPm(close)}`
+}
 
-//   weekDays.forEach((eachDay) => {
-//     if(eachDay[1].open === 0 ) {
-//       return open[eachDay[0]] = `CLOSED`;
-//     }
-//     open[eachDay[0]] = `Open from ${eachDay[1].open}am until ${eachDay[1].close}pm`
-//   });
+const defaultSchedule = () => {
+  const weekDays = Object.keys(hours)
 
-//   return open;
-// }
+  const workdays = weekDays.reduce((acc, currentDay) => {
+    acc[currentDay] = setSchedule(hours[currentDay]);
+    return acc;
+  }, {});
 
-// function schedule(dayName) {
-//   const weekDays = Object.entries(defaultSchedule());
+  return workdays;
+}
 
-//   if(!dayName) {
-//     return weekDays;
-// }
+function schedule(dayName) {
+  if(!dayName) {
+    return defaultSchedule();
+  }
 
-//   const daySchedule = {};
-//   daySchedule[dayName] = defaultSchedule()[dayName];
-//   return daySchedule;
-
-// }
+  const daySchedule = {};
+  daySchedule[dayName] = defaultSchedule()[dayName];
+  return daySchedule;
+}
 
 function getOldest(idAnimal) {
   const getAnimal = animals.find((animal) => animal.id === idAnimal);
   const { residents } = getAnimal;
+
   const oldest = residents.reduce((accumulator, { age }) => {
     if (age > accumulator) return age;
     return accumulator;
@@ -156,7 +159,7 @@ function oldestFromFirstSpecies(id) {
 
 module.exports = {
   entryCalculator,
-  // schedule,
+  schedule,
   animalCount,
   // animalMap,
   animalsByIds,
