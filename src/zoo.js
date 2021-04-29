@@ -16,7 +16,7 @@ function animalsByIds(...ids) {
   let ani = [];
   data.animals.forEach((el, i) => {
     if (el.id === ids[i]) {
-      ani = ani.push(el.id);
+      ani.push(el);
     }
   });
   return ani;
