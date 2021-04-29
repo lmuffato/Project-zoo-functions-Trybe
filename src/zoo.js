@@ -16,13 +16,15 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  const container = data.animals.find((animalS) => animalS.name === animal)
+  const container = data.animals.find((animalS) => animalS.name === animal);
   return container.residents.every((animalResident) => animalResident.age > age);
 }
 
 function employeeByName(employeeName) {
   if (!employeeName) return {};
-  return data.employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
+  return data.employees.find((employee) => {
+    employee.firstName === employeeName || employee.lastName === employeeName
+  });
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -40,42 +42,75 @@ function isManager(id) {
   return data.employees.some((employee) => employee.managers.includes(id));
 }
 
-/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const addNewEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor 
+  };
+  return data.employees.push(addNewEmployee);
 }
 
 function animalCount(species) {
+  if (!species) {
+    return data.animals.reduce((accumulator, animal) => {
+    accumulator[animal.name] = animal.residents.length;
+    return accumulator;
+    }, {});
+  }
+  return data.animals.find((animal) => animal.name === species).residents.length
 }
 
 function entryCalculator(entrants) {
+  return (!entrants || Object.keys(entrants).length === 0) ? 0 :
+  Object.keys(entrants).reduce((accumulator, option) => {
+    accumulator += data.prices[option] * entrants[option];
+    return accumulator;
+  }, 0);
 }
 
-function animalMap(options) {
-}
+//  function animalMap(options) {
+//  }
 
 function schedule(dayName) {
+  const obj = {};
+  Object.keys(data.hours).forEach((day) => {
+    if (day !== 'Monday') {
+      obj[day] = `Open from ${data.hours[day].open}am until ${(data.hours[day].close) - 12}pm`
+    } else {
+      obj[day] = 'CLOSED';
+    }
+  });
+  return dayName ? { [dayName] : obj[dayName] } : obj;
 }
 
-function oldestFromFirstSpecies(id) {
-}
+//  function oldestFromFirstSpecies(id) {
+//  }
 
 function increasePrices(percentage) {
+  const { Adult, Child, Senior } = data.prices;
+  data.prices.Adult = Math.ceil(Adult * ((percentage) + 100)) / 100;
+  data.prices.Child = Math.ceil(Child * ((percentage) + 100)) / 100;
+  data.prices.Senior = Math.ceil(Senior * ((percentage) + 100)) / 100;
 }
 
-function employeeCoverage(idOrName) {
-}
-*/
+//  function employeeCoverage(idOrName) {
+//  }
+
 module.exports = {
-//  entryCalculator,
-//  schedule,
-//  animalCount,
-// animalMap,
+  entryCalculator,
+  schedule,
+  animalCount,
+  //  animalMap,
   animalsByIds,
   employeeByName,
-//  employeeCoverage,
-//  addEmployee,
+  //  employeeCoverage,
+  addEmployee,
   isManager,
   animalsOlderThan,
-//  oldestFromFirstSpecies,
-//  increasePrices,
+  //  oldestFromFirstSpecies,
+  increasePrices,
   createEmployee,
 };
