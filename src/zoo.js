@@ -22,7 +22,7 @@ function animalsOlderThan(animal, age) {
 
 function employeeByName(emplName) {
   if (!employeeName) return {};
-  const name = data.employees.find((emp) => emp.firstName === emplName || emp.lastName === emplName)
+  const name = data.employees.find((emp) => emp.firstName === emplName || emp.lastName === emplName);
   return name;
 }
 
@@ -55,19 +55,19 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function animalCount(species) {
   if (!species) {
     return data.animals.reduce((accumulator, animal) => {
-    accumulator[animal.name] = animal.residents.length;
-    return accumulator;
+      accumulator[animal.name] = animal.residents.length;
+      return accumulator;
     }, {});
   }
-  return data.animals.find((animal) => animal.name === species).residents.length
+  return data.animals.find((animal) => animal.name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
   return (!entrants || Object.keys(entrants).length === 0) ? 0 :
-  Object.keys(entrants).reduce((accumulator, option) => {
-    accumulator += data.prices[option] * entrants[option];
-    return accumulator;
-  }, 0);
+    Object.keys(entrants).reduce((accumulator, option) => {
+      accumulator += data.prices[option] * entrants[option];
+      return accumulator;
+    }, 0);
 }
 
 //  function animalMap(options) {
@@ -77,12 +77,12 @@ function schedule(dayName) {
   const obj = {};
   Object.keys(data.hours).forEach((day) => {
     if (day !== 'Monday') {
-      obj[day] = `Open from ${data.hours[day].open}am until ${(data.hours[day].close) - 12}pm`
+      obj[day] = `Open from ${data.hours[day].open}am until ${(data.hours[day].close) - 12}pm`;
     } else {
       obj[day] = 'CLOSED';
     }
   });
-  return dayName ? { [dayName] : obj[dayName] } : obj;
+  return dayName? { [dayName] : obj[dayName] } : obj;
 }
 
 //  function oldestFromFirstSpecies(id) {
