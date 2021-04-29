@@ -79,10 +79,10 @@ function entryCalculator(entrants) {
   const { Adult, Child, Senior } = data.prices;
   let valor = 0;
   entrants.forEach((entrant) => {
-    if( entrant.Adult !== undefined ) {
+    if ( entrant.Adult !== undefined ){
       valor += entrant.Adult * Adult
     }
-    else if(entrant.Child !== undefined ) {
+    else if (entrant.Child !== undefined ){
       valor += entrant.Child * Child 
     }
     else {
