@@ -18,8 +18,11 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  return animals.find((dataAnimal) => dataAnimal.name === animal)
-    .residents.every((dataAge) => dataAge.age >= age);
+  const foundAnimal = animals.find((specie) => (specie.name === animal));
+  return foundAnimal.residents.every((resident) => (resident.age));
+
+  // return animals.find((specie) => specie.name === animal)
+  // .residents.every((dataAge) => dataAge.age >= age);
 }
 
 function employeeByName(name) {
@@ -102,8 +105,9 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   const manager = employees.find((employee) => (id === employee.id));
-  const foundAnimal = animals.find((animals.id === manager.responsibleFor[0]
-    || animals.name === manager.responsibleFor[0]));
+  const foundAnimal = animals
+    .find((specie) => (specie.id === manager.responsibleFor[0]
+      || specie.name === manager.responsibleFor[0]));
   const oldestAnimal = foundAnimal.residents
     .sort((animal1, animal2) => animal2.age - animal1.age)[0];
   return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
