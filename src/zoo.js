@@ -69,10 +69,19 @@ function animalCount(species) {
   const animal = data.animals.find(({ name }) => name === species).residents.length;
   return animal;
 }
-/*
+
 function entryCalculator(entrants) {
   // seu código aqui
+  const { Adult, Child, Senior } = data.prices;
+  let valor = 0;
+  entrants.forEach((entrant) => {
+    entrant.Adult !== undefined ? valor += entrant.Adult * Adult : valor += 0;
+    entrant.Child !== undefined ?  valor += entrant.Child * Child : valor += 0;
+    entrant.Senior !== undefined ? valor += entrant.Senior * Senior : valor += 0;
+  });
+  return valor;
 }
+/*
 function animalMap(options) {
   // seu código aqui
 }
@@ -91,7 +100,7 @@ function employeeCoverage(idOrName) {
 */
 
 module.exports = {
-  //  entryCalculator,
+  entryCalculator,
   //  schedule,
   animalCount,
   //  animalMap,
