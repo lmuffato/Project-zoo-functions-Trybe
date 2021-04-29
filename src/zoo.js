@@ -84,7 +84,7 @@ function entryCalculator(entrants) {
     } else if (entrant.Child !== undefined) {
       valor += entrant.Child * Child;
     } else {
-      valor += entrant.Senior * Senior; 
+      valor += entrant.Senior * Senior;
     }
   });
   return valor;
