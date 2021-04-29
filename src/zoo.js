@@ -86,11 +86,23 @@ function entryCalculator(entrants) {
 function animalMap(options) {
   // seu código aqui
 }
+*/
 function schedule(dayName) {
   // seu código aqui
+  const val = {};
+  const hoursArr = Object.entries(hours);
+  hoursArr.forEach((day) => {
+    val[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
+  });
+  val.Monday = 'CLOSED';
+  const final = {};
+  final[dayName] = val[dayName];
+  if (!dayName) {
+    return val;
+  }
+  return final;
 }
 
-*/
 function employeeCoverage(idOrName) {
   // seu código aqui
   const responsibleAnimal = {};
