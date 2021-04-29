@@ -76,14 +76,11 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   // seu código aqui
-  if (!entrants || Object.entries(entrants).length === 0) return 0;
-  const { prices } = data;
-  return Object
-    .entries(entrants)
-    .map(([key, value]) => value * prices[key])
-    .reduce((acc, cValue) => acc + cValue);
+  if (!entrants || Object.keys(entrants).length === 0) { return 0; }
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const all = Adult * prices.Adult + Senior * prices.Senior + Child * prices.Child;
+  return all;
 }
-
 /*
 function animalMap(options) {
   // seu código aqui
@@ -94,13 +91,19 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
-function increasePrices(percentage) {
-  // seu código aqui
-}
+
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
 */
+function increasePrices(percentage) {
+  // seu código aqui
+  const { Adult, Child, Senior } = prices;
+  prices.Child = (Math.round(Child * (1 + percentage / 100) * 100)) / 100;
+  prices.Adult = (Math.round(Adult * (1 + percentage / 100) * 100)) / 100;
+  prices.Senior = (Math.round(Senior * (1 + percentage / 100) * 100)) / 100;
+  return prices;
+}
 
 module.exports = {
   entryCalculator,
@@ -114,6 +117,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   //  oldestFromFirstSpecies,
-  //  increasePrices,
+  increasePrices,
   createEmployee,
 };
