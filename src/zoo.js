@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { employees, animals } = require('./data'); // bringing back for coverage function
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -93,20 +94,42 @@ function increasePrices(percentage) {
   });
 }
 
-/*
-function employeeCoverage(idOrName) {
-  // seu código aqui
+function noParameter() {
+  const fullName = employees.map(({ firstName, lastName }) => `${firstName} ${lastName}`);
+  const arrOfAnimals = employees.map(({ responsibleFor }) => responsibleFor).map((arrayId) =>
+    arrayId.map((id) => animals.find((animal) => animal.id === id).name));
+
+  const arrKeyValue = [];
+  fullName.forEach((func, index) => {
+    arrKeyValue.push([func, arrOfAnimals[index]]);
+  });
+
+  return Object.fromEntries(arrKeyValue);
 }
-*/
+
+function checkIdFirstNameOrLastName(idOrName) {
+  const idFirstOrLastName = employees.find(({ id, firstName, lastName }) =>
+    id === idOrName || firstName === idOrName || lastName === idOrName);
+
+  const arrAnimals = idFirstOrLastName.responsibleFor.map((responsibleAnimal) =>
+    animals.find(({ id: animalId }) => animalId === responsibleAnimal).name);
+
+  return { [`${idFirstOrLastName.firstName} ${idFirstOrLastName.lastName}`]: arrAnimals };
+}
+
+function employeeCoverage(idOrName) {
+  if (!idOrName) return noParameter();
+  return checkIdFirstNameOrLastName(idOrName);
+}
 
 module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  // animalMap,
+  // animalMap, D=
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
