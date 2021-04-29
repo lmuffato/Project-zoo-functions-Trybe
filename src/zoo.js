@@ -20,6 +20,7 @@ function animalsOlderThan(animal, age) {
   return especie.residents.every((obj) => obj.age > age);
 }
 
+/*
 function employeeByName(employeeName) {
   // seu código aqui
 }
@@ -63,19 +64,20 @@ function increasePrices(percentage) {
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
+*/
 
 module.exports = {
-  entryCalculator,
-  schedule,
-  animalCount,
-  animalMap,
+  // entryCalculator,
+  // schedule,
+  // animalCount,
+  // animalMap,
   animalsByIds,
-  employeeByName,
-  employeeCoverage,
-  addEmployee,
-  isManager,
+  // employeeByName,
+  // employeeCoverage,
+  // addEmployee,
+  // isManager,
   animalsOlderThan,
-  oldestFromFirstSpecies,
-  increasePrices,
-  createEmployee,
+  // oldestFromFirstSpecies,
+  // increasePrices,
+  // createEmployee,
 };
