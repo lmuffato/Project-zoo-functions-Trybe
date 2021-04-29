@@ -78,7 +78,7 @@ function entryCalculator(entrants) {
   // seu código aqui
   if (!entrants || Object.keys(entrants).length === 0) { return 0; }
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-  const all = Adult * prices.Adult + Senior * prices.Senior + Child * prices.Child;
+  const all = Adult * data.prices.Adult + Senior * data.prices.Senior + Child * data.prices.Child;
   return all;
 }
 /*
