@@ -93,18 +93,20 @@ function schedule(dayName) {
 */
 function employeeCoverage(idOrName) {
   // seu código aqui
-  const { employees } = data;
-  if (idOrName === undefined) {
-    const tudo = employees.reduce((acm, item) => {
-      const acumulator = { ...acm };
-      const ide = item.responsibleFor;
-      const list = [];
-      ide.forEach((id) => list.push(animals.find((subId) => subId.id === id).name));
-      acumulator[`${item.firstName} ${item.lastName}`] = list;
-      return acumulator;
-    }, {});
-    return tudo;
+  const responsibleAnimal = {};
+  if (idOrName) {
+    const findEmployer = employees.find(({ firstName, lastName, id }) =>
+      firstName === idOrName || lastName === idOrName || id === idOrName);
+    const findAnimals = findEmployer.responsibleFor.map((animalId) => animals
+      .find((animal) => (animal.id === animalId)).name);
+    responsibleAnimal[`${findEmployer.firstName} ${findEmployer.lastName}`] = findAnimals;
+    return responsibleAnimal;
   }
+  employees.forEach((worker) => {
+    responsibleAnimal[`${worker.firstName} ${worker.lastName}`] = worker.responsibleFor
+      .map((animalId) => (animals.find((animal) => animal.id === animalId)).name);
+  });
+  return responsibleAnimal;
 }
 
 function oldestFromFirstSpecies(id) {
