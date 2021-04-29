@@ -76,21 +76,14 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   // seu código aqui
-  const { Adult, Child, Senior } = data.prices;
-  let valor = 0;
-  entrants.forEach((entrant) => {
-    if (entrant.Adult !== undefined) {
-      valor += entrant.Adult * Adult;
-    }
-    if (entrant.Child !== undefined) {
-      valor += entrant.Child * Child;
-    }
-    if (entrant.Senior !== undefined) {
-      valor += entrant.Senior * Senior;
-    }
-  });
-  return valor;
+  if (!entrants || Object.entries(entrants).length === 0) return 0;
+  const { prices } = data;
+  return Object
+    .entries(entrants)
+    .map(([key, value]) => value * prices[key])
+    .reduce((acc, cValue) => acc + cValue);
 }
+
 /*
 function animalMap(options) {
   // seu código aqui
