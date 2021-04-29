@@ -57,11 +57,13 @@ function animalCount(species) {
   return countAnimalSpecies[species];
 }
 
-/*
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (!entrants) return 0;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  return (data.prices.Adult * Adult) + (data.prices.Child * Child) + (data.prices.Senior * Senior);
 }
 
+/*
 function animalMap(options) {
   // seu código aqui
 }
@@ -84,7 +86,7 @@ function employeeCoverage(idOrName) {
 */
 
 module.exports = {
-  // entryCalculator,
+  entryCalculator,
   // schedule,
   animalCount,
   // animalMap,
