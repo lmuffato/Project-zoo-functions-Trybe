@@ -150,19 +150,46 @@ function oldestFromFirstSpecies(id) {
 }
 
 // function increasePrices(percentage) {
-// // valor entrada: inteiro
-//  inteiro de entrada >  decial percentual
-// decimal de entrada produto com as atuais values da keys
-// resultam novas values
-// ALTERAM as keys do data
+//   const tax = () => (percentage / 100 + 1);
+
+//   const newPrices = Object.entries(prices)
+//     .reduce((acc, currentValue) => {
+//     acc[currentValue[0]] = (parseFloat((currentValue[1] * tax()).toPrecision(4)));
+//     return acc;
+//   }, {});
+
+//   return newPrices;
+//   // return final (assigment newprices com o prices original)
 // }
 
-// function employeeCoverage(idOrName) {
-// funcao com parametros variaveis (spread/desctruturin?)
-// parametros id, firstNAme ou LastName
-// sem parametro retorna a listagem toda > funcao auxiliar
-// chamada funcao auxiliar caso parametro vazio
-// }
+// console.log(increasePrices(50));
+
+const getCoverages = () => {
+  const nameNspecies = employees.reduce((acc, currentEmploy) => {
+    const names = [];
+
+    const caredSpecies = currentEmploy.responsibleFor;
+    caredSpecies.forEach((each) => names.push(animals.find((it) => it.id === each).name));
+    acc[`${currentEmploy.firstName} ${currentEmploy.lastName}`] = names;
+    return acc;
+  }, {});
+
+  return nameNspecies;
+};
+
+function employeeCoverage(idOrName) {
+  if (!idOrName) {
+    return getCoverages();
+  }
+
+  const finded = employees.find((employee) => Object.values(employee).includes(idOrName));
+  const caredSpecies = finded.responsibleFor;
+
+  const names = [];
+  caredSpecies.forEach((each) => names.push(animals.find((it) => it.id === each).name));
+
+  return { [`${finded.firstName} ${finded.lastName}`]: names };
+}
 
 module.exports = {
   entryCalculator,
@@ -171,7 +198,7 @@ module.exports = {
   // animalMap,
   animalsByIds,
   employeeByName,
-  // employeeCoverage,
+  employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
