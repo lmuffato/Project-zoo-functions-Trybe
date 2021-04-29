@@ -59,7 +59,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function animalCount(species) {
   if (species === undefined) {
     const allSpecies = {};
-      animals.forEach((animal) => {
+    animals.forEach((animal) => {
       allSpecies[animal.name] = animal.residents.length;
     });
     return allSpecies;
@@ -81,10 +81,10 @@ function entryCalculator(entrants = 0) {
 }
 
 //  function animalMap(options) {
-//}
+//  }
 
- function schedule(dayName) {
-const schedules = {};
+function schedule(dayName) {
+  const schedules = {};
   const days = Object.keys(hours);
   days.forEach((day) => {
     const { open } = hours[day];
@@ -99,14 +99,14 @@ const schedules = {};
     return schedules;
   }
   return { [dayName]: schedules[dayName] };
- }
+}
 
 function oldestFromFirstSpecies(id) {
   const manager = employees.find((employee) => (id === employee.id));
   const foundAnimal = animals.find((specie) => (specie.id === manager.responsibleFor[0]
       || specie.name === manager.responsibleFor[0]));
   const oldestAnimal = foundAnimal.residents
-  .sort((animal1, animal2) => animal2.age - animal1.age)[0];
+    .sort((animal1, animal2) => animal2.age - animal1.age)[0];
   return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
 
@@ -127,10 +127,10 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  //animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
-  //employeeCoverage,
+  // employeeCoverage,
   addEmployee,
   isManager,
   animalsOlderThan,
