@@ -13,13 +13,13 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   // seu código aqui
-  const ani = [];
-  data.animals.forEach(function(el, i){
+  let ani = [];
+  data.animals.forEach((el, i) => { 
     if (el.id === ids[i]) {
       ani = ani.push(el.id);
     }
   });
-  return ani
+  return ani;
 }
 
 function animalsOlderThan(animal, age) {
