@@ -28,12 +28,10 @@ function animalsOlderThan(animal, age) {
   return ani.residents.every((arr) => arr.age > age);
 }
 
-function employeeByName(employeeName) {
+function employeeByName(emp) {
   // seu código aqui
-  let pessoa = data.employees.find(
-    (trab) => trab.firstName === employeeName || trab.lastName === employeeName
-  );
-  if (!employeeName) pessoa = {};
+  let pessoa = data.employees.find((trab) => trab.firstName === emp || trab.lastName === emp);
+  if (!emp) pessoa = {};
   return pessoa;
 }
 
