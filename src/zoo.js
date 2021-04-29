@@ -149,20 +149,18 @@ function oldestFromFirstSpecies(id) {
   return getOldest(FirstResponsible);
 }
 
-// function increasePrices(percentage) {
-//   const tax = () => (percentage / 100 + 1);
+function increasePrices(percentage) {
+  const tax = () => (percentage / 100 + 1);
+  const increase = (value) => (Math.round(value * tax() * 100) / 100);
 
-//   const newPrices = Object.entries(prices)
-//     .reduce((acc, currentValue) => {
-//     acc[currentValue[0]] = (parseFloat((currentValue[1] * tax()).toPrecision(4)));
-//     return acc;
-//   }, {});
+  const newPrices = Object.entries(prices)
+    .reduce((acc, currentValue) => {
+      acc[currentValue[0]] = (parseFloat((increase(currentValue[1])).toPrecision(4)));
+      return acc;
+    }, {});
 
-//   return newPrices;
-//   // return final (assigment newprices com o prices original)
-// }
-
-// console.log(increasePrices(50));
+  return Object.assign(prices, newPrices);
+}
 
 const getCoverages = () => {
   const nameNspecies = employees.reduce((acc, currentEmploy) => {
@@ -203,6 +201,6 @@ module.exports = {
   isManager,
   animalsOlderThan,
   oldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
