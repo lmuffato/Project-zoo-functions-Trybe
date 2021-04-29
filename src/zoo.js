@@ -35,10 +35,12 @@ function employeeByName(emp) {
   return pessoa;
 }
 
-/*
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  return { ...personalInfo, ...associatedWith};
 }
+
+/*
 function isManager(id) {
   // seu código aqui
 }
@@ -81,5 +83,5 @@ module.exports = {
   animalsOlderThan,
   //  oldestFromFirstSpecies,
   //  increasePrices,
-  //  createEmployee,
+  createEmployee,
 };
