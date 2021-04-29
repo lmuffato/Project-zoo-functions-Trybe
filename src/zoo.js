@@ -13,13 +13,12 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   // seu código aqui
-  const ani = []
+  const ani = [];
   data.animals.forEach(function(el, i){
-    console.log(el)
-    if(el.id === ids[i]) {
-      animais = ani.push(el.id);
+    if (el.id === ids[i]) {
+      ani = ani.push(el.id);
     }
-  });  
+  });
   return ani
 }
 
