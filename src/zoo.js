@@ -62,18 +62,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   // seu código aqui
-  if (!species) {
-    let especie = 0;
-    data.animals.forEach((animalSpecie) => {
-      if (animalSpecie.name === species) {
-        especie = animalSpecie.residents.length;
-      }
-    });
-    return especie;
+  if (species === undefined) {
+    // o codigo da função seguinte foi baseado em: https://github.com/eslint/eslint/issues/8581
+    const obj = animals.reduce((acumu, ani) => {
+      const acumula = { ...acumu };
+      acumula[ani.name] = ani.residents.length;
+      return acumula;
+    }, {});
+    return obj;
   }
-  const animalsList = data.animals.map((animal) => ({ [animal.name]: animal.residents.length }));
-  const animalToObj = animalsList.reduce((obj, item) => Object.assign(obj, item), {});
-  return animalToObj;
+  const arr = animals.find((item) => item.name === species);
+  return arr.residents.length;
 }
 
 function entryCalculator(entrants) {
